@@ -1,1 +1,90 @@
-<p>register-client works!</p>
+<div class="container-fluid">
+
+  <form class="text-center p-3" action="registerClient">
+
+    <p id="createAccountTittle" class="h4 p-4">Crear cuenta de usuario</p>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCoffee" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput name="name" type="text" class="form-control " placeholder="Nombre">
+    </div>
+
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCoffee" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="text" id="lastName" class="form-control" placeholder="Apellido">
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCoffee" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="email" id="email" class="form-control" placeholder="Correo electronico">
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCoffee" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="password" id="password" class="form-control" placeholder="Contraseña">
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCoffee" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="password" id="passwordConfirm" class="form-control" placeholder="Confirmar contraseña">
+    </div>
+
+
+    <div id="gender" class="mb-4">
+      <div class="form-check-inline">
+        <h5>Genero</h5>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="male">Hombre
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="female">Mujer
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="other">Otro
+        </label>
+      </div>
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCoffee" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+        <input mdbInput placeholder="Fecha de nacimiento" name="dateBirthday" type="date" class="form-control">
+    </div>
+
+
+    <div class="container p-5 w-75 col-md-12">
+      <button id="acceptRegister" class="btn btn-info btn-block" type="submit">Registrar</button>
+    </div>
+
+  </form>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-register-client',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterClientComponent implements OnInit {
 
+  faCoffee = faCoffee;
   constructor() { }
+
 
   ngOnInit(): void {
   }

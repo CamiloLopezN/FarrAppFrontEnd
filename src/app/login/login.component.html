@@ -1,4 +1,3 @@
-<p>login works!</p>
 <div class="pt-5 pb-5 pl-4 pr-4">
   <div class="text-center">
     <img src="assets/icons/UserIcon.png" class="rounded mx-auto d-block" alt="User Icon" id="ImageUser">
@@ -27,7 +26,7 @@
         </div>
       </div>
       <input type="email" class="form-control color-gray" id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="client.e_mail" email
+             placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
              pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
     </div>
 
@@ -55,7 +54,7 @@
         </div>
       </div>
       <input type="password" class="form-control color-gray" id="exampleInputPassword1" placeholder="Contraseña"
-             #pass="ngModel" name="pass" [(ngModel)]="client.password" required>
+             #pass="ngModel" name="pass" [(ngModel)]="password" required>
     </div>
     <div class="text-center mt-5" id="Login">
       <button type="submit" class="btn btn-primary" [disabled]="!formUser.form.valid">Iniciar sesión</button>

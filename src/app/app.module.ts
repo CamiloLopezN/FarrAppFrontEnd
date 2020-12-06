@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterClientComponent } from './client/register-client/register-client.component';
+import { ProfileClientComponent } from './client/profile-client/profile-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    RegisterClientComponent
+    RegisterClientComponent,
+    ProfileClientComponent
   ],
   imports: [
     BrowserModule,

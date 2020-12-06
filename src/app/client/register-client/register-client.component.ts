@@ -27,9 +27,11 @@ export class RegisterClientComponent implements OnInit {
 
 
   constructor() {
+
   }
 
   onSubmit(): void {
+    this.client = new Client();
     this.client.nameC = this.nameClient;
     this.client.lastName = this.lastName;
     this.client.birthdate = this.birthdate;

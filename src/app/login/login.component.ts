@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faExclamationCircle} from '@fortawesome/free-solid-svg-icons/';
 import {Router} from '@angular/router';
-import {Client, ClientLogin} from '../model/client';
+import {ClientLogin} from '../model/client';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   faUnlock = faUnlock;
   faExclamation = faExclamationCircle;
   client: ClientLogin;
-  e_mail  = '';
+  // tslint:disable-next-line:variable-name
+  e_mail = '';
   password = '';
   isPass = true;
   isUserMail = true;
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (!this.isEmailExist()) {
       this.isUserMail = false;
       this.isPass = true;
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
   isEmailExist(): boolean {
     return this.e_mail === 'josedaza@gmail.com';
   }
+
 
   isEmailExistTwo(): boolean {
     return this.emailRetrieve === 'josedaza@gmail.com';

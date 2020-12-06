@@ -7,18 +7,22 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterClientComponent } from './client/register-client/register-client.component';
 import {LoginComponent} from './login/login.component';
+import {HeaderComponent} from "./header/header.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     RegisterClientComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

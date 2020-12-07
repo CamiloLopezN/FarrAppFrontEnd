@@ -7,13 +7,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterClientComponent } from './client/register-client/register-client.component';
 import { ProfileClientComponent } from './client/profile-client/profile-client.component';
+import {HeaderComponent} from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     RegisterClientComponent,
-    ProfileClientComponent
+    ProfileClientComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,33 +1,51 @@
 <div class="text-center pt-5 pb-5 pl-4 pr-4">
-  <h4 class="text-white float-left">
+  <h4 class="text-white text-left">
     MI PERFIL
   </h4>
-  <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
-  <div class="text-left mt-5">
-    <div class="border-profile mb-4">
-      <h4 class="profile-font ml-5">
-        Nombre y apellido
-      </h4>
+  <div *ngIf="!isRemove">
+    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
+    <div class="text-left mt-5">
+      <div class="border-profile mb-4">
+        <h4 class="profile-font ml-5">
+          {{client.name}} {{client.lastname}}
+        </h4>
+      </div>
+      <div class="border-profile mb-4">
+        <h4 class="profile-font ml-5">
+          {{client.e_mail}}
+        </h4>
+      </div>
+      <div class="border-profile mb-4">
+        <h4 class="profile-font ml-5">
+          {{client.gender}}
+        </h4>
+      </div>
+      <div class="border-profile mb-4">
+        <h4 class="profile-font ml-5">
+          {{client.birthdate}}
+        </h4>
+      </div>
     </div>
-    <div class="border-profile mb-4">
-      <h4 class="profile-font ml-5">
-        Email
-      </h4>
-    </div>
-    <div class="border-profile mb-4">
-      <h4 class="profile-font ml-5">
-        Género
-      </h4>
-    </div>
-    <div class="border-profile mb-4">
-      <h4 class="profile-font ml-5">
-        Fecha de nacimiento
-      </h4>
+    <div class="d-flex justify-content-around mt-5">
+      <button type="button" class="btn btn-danger" (click)="changeView()">Eliminar cuenta</button>
+      <button type="button" class="btn btn-primary">Editar</button>
+      <button type="button" class="btn btn-success">Regresar</button>
     </div>
   </div>
-  <div class="d-flex justify-content-around mt-5">
-    <button type="button" class="btn btn-danger">Eliminar cuenta</button>
-    <button type="button" class="btn btn-primary">Editar</button>
-    <button type="button" class="btn btn-success">Regresar</button>
+
+  <div *ngIf="isRemove">
+    <div class="text-center">
+      <fa-icon [icon]="faExclamationTriangle" class="fa-9x text-warning"></fa-icon>
+      <h4 id="h4-1">
+        ¿Está seguro que desea eliminar su cuenta?
+      </h4>
+      <h3 id="h3-1">
+        Esta acción no se podra revertir.
+      </h3>
+      <div class="d-flex justify-content-around mt-5">
+        <button type="button" class="btn btn-primary" (click)="changeView()">Regresar</button>
+        <button type="button" class="btn btn-danger" (click)="removeUser()">Eliminar</button>
+      </div>
+    </div>
   </div>
 </div>

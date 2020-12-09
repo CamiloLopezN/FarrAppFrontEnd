@@ -63,17 +63,20 @@
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="male">Hombre
+          <input type="radio" class="form-check-input" name="male" value="Male"
+                 #maleGender="ngModel" name="maleGender" [(ngModel)]="gender" required>Hombre
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="female">Mujer
+          <input type="radio" class="form-check-input" name="female" value="Female"
+                 #femaleGender="ngModel" name="femaleGender" [(ngModel)]="gender" required>Mujer
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="other">Otro
+          <input type="radio" class="form-check-input" name="other" value="Other"
+                 #otherGender="ngModel" name="otherGender" [(ngModel)]="gender" required>Otro
         </label>
       </div>
     </div>
@@ -90,7 +93,8 @@
 
 
     <div class="container p-5 w-75 col-md-12">
-      <button id="acceptRegister" class="btn btn-primary" type="submit">Registrar</button>
+      <button id="acceptRegister" class="btn btn-primary" type="submit"
+              [disabled]="!formClient.form.valid">Registrar</button>
     </div>
 
   </form>

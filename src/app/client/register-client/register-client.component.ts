@@ -35,10 +35,10 @@ export class RegisterClientComponent implements OnInit {
     this.client.nameC = this.nameClient;
     this.client.lastName = this.lastName;
     this.client.birthdate = this.birthdate;
-   // this.client.gender = this.gender;
+    this.client.gender = this.gender;
     this.client.e_mail = this.email;
     this.client.password = this.password;
-    console.log(this.client.e_mail);
+    console.log(this.client);
   }
 
   ngOnInit(): void {

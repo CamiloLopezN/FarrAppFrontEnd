@@ -28,6 +28,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
           },
@@ -127,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "farrap-frontend"
+  "defaultProject": "farrap-frontend",
+  "cli": {
+    "analytics": "41a2a959-7107-44ad-ae9a-149e8f6ee79c"
+  }
 }

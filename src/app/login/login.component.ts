@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faExclamationCircle} from '@fortawesome/free-solid-svg-icons/';
 import {Router} from '@angular/router';
 import {ClientLogin} from '../model/client';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,11 @@ export class LoginComponent implements OnInit {
   emailRetrieve: string;
   isUserEmailRetrieve = true;
 
+  errorMessage: string;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {
   }
 
@@ -33,17 +37,34 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.isEmailExist()) {
-      this.isUserMail = false;
-      this.isPass = true;
-    } else if (!this.isPassOk()) {
-      this.isUserMail = true;
-      this.isPass = false;
-    } else {
-      this.isUserMail = true;
-      this.isPass = true;
-      this.redirect();
-    }
+    this.client = {
+      e_mail: this.e_mail,
+      password: this.password
+    };
+    console.log(this.client);
+    this.authService.login(this.client).subscribe(() => {
+        this.isPass = true;
+        this.isUserMail = true;
+        this.redirect();
+      },
+      error => {
+        this.errorMessage = error.error.message;
+        if (error.error === 'Error la contraseña es incorrecta') {
+          this.isUserMail = true;
+          this.isPass = false;
+        } else if (error.error === 'Error el correo ingresado no existe') {
+          this.isUserMail = false;
+          this.isPass = true;
+        } else {
+          this.isUserMail = true;
+          this.isPass = true;
+        }
+      }
+    );
+  }
+
+  isUndefined(): boolean {
+    return this.errorMessage === undefined;
   }
 
   isEmpty(): boolean {

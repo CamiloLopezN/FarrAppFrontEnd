@@ -1,5 +1,53 @@
-<nav class="navbar navbar-dark pl-3 pt-4 pb-4">
+<nav class="navbar navbar-expand-lg navbar-dark pl-3 pt-4 pb-4">
   <a class="navbar-brand" id="FarrAppHeader">
     FarrApp
   </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <div class="row align-items-center ">
+        <div class="col-1 ml-3">
+          <fa-icon [icon]="faHome"></fa-icon>
+        </div>
+        <div class="col-5">
+          <a class="nav-item nav-link active" href="#">
+            INICIO <span class="sr-only">(current)</span></a>
+        </div>
+      </div>
+
+      <div class="row align-items-center" *ngIf="!isLogged">
+        <div class="col-1 ml-3">
+          <fa-icon [icon]="faUserPlus"></fa-icon>
+        </div>
+        <div class="col-5">
+          <a class="nav-item nav-link active" [routerLink]="['/client/register']">
+            CREAR CUENTA <span class="sr-only">(current)</span></a>
+        </div>
+      </div>
+
+      <div class="row align-items-center" *ngIf="!isLogged">
+        <div class="col-1 ml-3">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        <div class="col-5">
+          <a class="nav-item nav-link active" [routerLink]="['/login']">
+            INICIAR SESIÓN <span class="sr-only">(current)</span></a>
+        </div>
+      </div>
+
+      <div class="row align-items-center" *ngIf="isLogged">
+        <div class="col-1 ml-3">
+          <fa-icon [icon]="faSignOutAlt"></fa-icon>
+        </div>
+        <div class="col-5">
+          <a class="nav-item nav-link active" (click)="logOut()" style="cursor:pointer;">
+            CERRAR SESIÓN <span class="sr-only">(current)</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </nav>

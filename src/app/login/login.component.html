@@ -16,7 +16,13 @@
     <div class="mb-2" *ngIf="email.valid && email.touched &&!isUserMail">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          El correo electrónico que ingresó no coincide con ninguna cuenta.
+          {{errorMessage}}
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="email.valid && email.touched &&isUserMail &&errorMessage &&isPass">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
         </span>
     </div>
     <div class="input-group mt-1 mb-4">
@@ -39,7 +45,7 @@
     <div class="mb-2" *ngIf="pass.valid && pass.touched &&!isPass">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          La contraseña que ingresaste es incorrecta
+          {{errorMessage}}
         </span>
     </div>
 

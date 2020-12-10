@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
+import {NotificationService} from './notification.service';
 
 const helper = new JwtHelperService();
 
@@ -16,7 +17,7 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService) {
     this.checkToken();
   }
 
@@ -40,7 +41,7 @@ export class AuthService {
     const userToken = localStorage.getItem('token');
     const isExpired = helper.isTokenExpired(userToken);
 
-    isExpired ? this.logout() : this.loggedIn.next(true);
+    isExpired ? this.logoutExpired() : this.loggedIn.next(true);
   }
 
   login(client: ClientLogin): Observable<any> {
@@ -61,5 +62,12 @@ export class AuthService {
   logoutSession(): void {
     this.logout();
     this.router.navigate(['/login']);
+    this.notifyS.logOut();
+  }
+
+  logoutExpired(): void{
+    this.logout();
+    this.router.navigate(['/login']);
+    this.notifyS.logOutExpired();
   }
 }

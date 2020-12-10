@@ -26,6 +26,7 @@ export class RegisterClientComponent implements OnInit {
   email: string;
   password: string;
   passwordCon: string;
+  birthdateFormat: string;
 
 
   constructor(private router: Router) {
@@ -42,7 +43,6 @@ export class RegisterClientComponent implements OnInit {
     this.client.passwordCon = this.passwordCon;
     console.log(this.client);
   }
-
 
   ngOnInit(): void {
   }

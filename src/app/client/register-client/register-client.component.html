@@ -121,7 +121,7 @@
           <fa-icon [icon]="faCalendarDay" class="fa-lg"></fa-icon>
         </div>
       </div>
-      <input mdbInput placeholder="Fecha de nacimiento" type="date" class="form-control"
+      <input mdbInput placeholder="Fecha de nacimiento" type="date"  datepicker_format="DD-MM-YYYY" class="form-control"
              #birthdateClient="ngModel" name="bithdateClient" [(ngModel)]="birthdate" required>
     </div>
 

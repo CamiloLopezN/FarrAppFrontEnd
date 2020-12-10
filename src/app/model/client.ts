@@ -1,4 +1,4 @@
-export class Client {
+export class ClientRegistration {
   nameC: string;
   lastName: string;
   birthdate: string;
@@ -6,4 +6,9 @@ export class Client {
   e_mail: string;
   password: string;
   passwordCon: string;
+}
+
+export interface ClientLogin {
+  e_mail: string;
+  password: string;
 }

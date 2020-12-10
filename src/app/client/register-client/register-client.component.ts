@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Client} from '../../model/client';
+import {ClientRegistration} from '../../model/client';
 import {Router} from '@angular/router';
 
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {faCalendarDay} from '@fortawesome/free-solid-svg-icons';
 import {faIdCard} from '@fortawesome/free-solid-svg-icons';
 import {faLock, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/';
+import {ClientServiceService} from '../../services/client-service.service';
 
 @Component({
   selector: 'app-register-client',
@@ -13,7 +14,7 @@ import {faLock, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/'
   styleUrls: ['./register-client.component.css']
 })
 export class RegisterClientComponent implements OnInit {
-  client: Client;
+  client: ClientRegistration;
   faLock = faLock;
   faUser = faUser;
   faCalendarDay = faCalendarDay;
@@ -26,22 +27,33 @@ export class RegisterClientComponent implements OnInit {
   email: string;
   password: string;
   passwordCon: string;
-  birthdateFormat: string;
+  errorMessage: string;
 
 
-  constructor(private router: Router) {
-    this.client = new Client();
+  constructor(private router: Router, private clientServiceService: ClientServiceService) {
   }
 
   onSubmit(): void {
-    this.client.nameC = this.nameClient;
-    this.client.lastName = this.lastName;
-    this.client.birthdate = this.birthdate;
-    this.client.gender = this.gender;
-    this.client.e_mail = this.email;
-    this.client.password = this.password;
-    this.client.passwordCon = this.passwordCon;
-    console.log(this.client);
+
+    this.client = {
+      nameC: this.nameClient,
+      lastName: this.lastName,
+      birthdate: this.birthdate,
+      gender: this.gender,
+      e_mail: this.email,
+      password: this.password,
+      passwordCon: this.passwordCon,
+    };
+    this.clientServiceService.register(this.client).subscribe(() => {
+        this.redirect();
+      },
+      error => {
+        this.errorMessage = error.error.message;
+        console.log('ERRORSITO');
+      }
+    );
+
+
   }
 
   ngOnInit(): void {

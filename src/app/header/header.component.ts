@@ -27,13 +27,14 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(): void {
-    this.authService.logout();
-    this.router.navigate(['']);
+    this.authService.logoutSession();
   }
 
   viewProfile(): void {
     this.clientS.getUser().subscribe((res) => {
       this.router.navigate(['client/' + res.search._id]);
+    }, () => {
+      this.authService.logoutSession();
     });
   }
 }

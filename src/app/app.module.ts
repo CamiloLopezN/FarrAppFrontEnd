@@ -9,12 +9,14 @@ import {RegisterClientComponent} from './client/register-client/register-client.
 import {HeaderComponent} from './header/header.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import { MainPanelComponent } from './main-panel/main-panel.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {MainPanelComponent} from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
-import { EditClientComponent } from './client/edit-client/edit-client.component';
+import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InterceptorService} from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,13 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

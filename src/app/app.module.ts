@@ -13,11 +13,11 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MainPanelComponent} from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
-import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from './services/interceptor.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
+import {EditClientComponent} from './client/edit-client/edit-client.component';
 
 @NgModule({
   declarations: [

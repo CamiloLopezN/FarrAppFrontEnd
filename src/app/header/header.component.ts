@@ -32,18 +32,11 @@ export class HeaderComponent implements OnInit {
   }
 
   viewProfile(): void {
-    this.clientS.getUser().subscribe((res) => {
-      this.router.navigate(['client/' + res.search._id]);
-    }, () => {
-      this.authService.logoutExpired();
-    });
+    this.router.navigate(['client']);
+
   }
 
   edit(): void {
-    this.clientS.getUser().subscribe((res) => {
-      this.router.navigate(['client/' + res.search._id + '/edit']);
-    }, () => {
-      this.authService.logoutExpired();
-    });
+    this.router.navigate(['client/edit']);
   }
 }

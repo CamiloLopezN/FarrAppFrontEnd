@@ -37,9 +37,10 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
-  private checkToken(): void {
+  public checkToken(): void {
     const userToken = localStorage.getItem('token');
     const isExpired = helper.isTokenExpired(userToken);
+    console.log('is Expired' + isExpired);
 
     isExpired ? this.logoutExpired() : this.loggedIn.next(true);
   }
@@ -65,7 +66,7 @@ export class AuthService {
     this.notifyS.logOut();
   }
 
-  logoutExpired(): void{
+  logoutExpired(): void {
     this.logout();
     this.router.navigate(['/login']);
     this.notifyS.logOutExpired();

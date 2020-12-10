@@ -17,6 +17,7 @@ import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from './services/interceptor.service';
+import {SimpleNotificationsModule} from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {InterceptorService} from './services/interceptor.service';
     FontAwesomeModule,
     HttpClientModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot()
   ],
   providers: [DatePipe,
     {

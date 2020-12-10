@@ -1,0 +1,27 @@
+.profile-font {
+  font-family: Raleway, serif;
+  font-style: normal;
+  font-weight: 295;
+  font-size: 20px;
+  color: white;
+}
+
+.border-profile {
+  border-bottom: 3px solid #252427;
+}
+
+#h4-1{
+  color: #FAFAFA;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+#h3-1{
+  color: #FAFAFA;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.color-gray{
+  background: #D1D1D1;
+}

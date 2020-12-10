@@ -53,6 +53,16 @@
 
       <div class="row align-items-center" *ngIf="isLogged">
         <div class="col-1 ml-3">
+          <fa-icon [icon]="faUserEdit"></fa-icon>
+        </div>
+        <div class="col-5">
+          <a class="nav-item nav-link active" (click)="edit()" style="cursor: pointer" data-toggle="collapse" data-target=".navbar-collapse.show">
+            EDITAR PERFIL<span class="sr-only">(current)</span></a>
+        </div>
+      </div>
+
+      <div class="row align-items-center" *ngIf="isLogged">
+        <div class="col-1 ml-3">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
         </div>
         <div class="col-5">

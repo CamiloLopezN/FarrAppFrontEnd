@@ -15,3 +15,12 @@ export interface ClientLogin {
   password: string;
 
 }
+
+export interface ClientResponse {
+
+  name: string;
+  lastname: string;
+  birthdate: string;
+  gender: string;
+
+}

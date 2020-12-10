@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {faHome, faUserPlus, faUser, faSignOutAlt} from '@fortawesome/free-solid-svg-icons/';
+import {ClientService} from '../services/client.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   faUser = faUser;
   faSignOutAlt = faSignOutAlt;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private clientS: ClientService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,6 +28,12 @@ export class HeaderComponent implements OnInit {
 
   logOut(): void {
     this.authService.logout();
+    this.router.navigate(['']);
   }
 
+  viewProfile(): void {
+    this.clientS.getUser().subscribe((res) => {
+      this.router.navigate(['client/' + res.search._id]);
+    });
+  }
 }

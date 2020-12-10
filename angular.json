@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "farrap-frontend"
+  "defaultProject": "farrap-frontend",
+  "cli": {
+    "analytics": "41a2a959-7107-44ad-ae9a-149e8f6ee79c"
+  }
 }

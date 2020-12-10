@@ -2,17 +2,21 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {RegisterClientComponent} from './client/register-client/register-client.component';
-import {ProfileClientComponent} from './client/profile-client/profile-client.component';
+import {MainPanelComponent} from './main-panel/main-panel.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   {
-    path: 'login', component: LoginComponent
+    path: '', component: MainPanelComponent
   },
   {
-    path: 'client/register', component: RegisterClientComponent
+    path: 'mainPanel', component: MainPanelComponent
   },
   {
-    path: 'client/:id', component: ProfileClientComponent
+    path: 'login', canActivate: [AuthGuard], component: LoginComponent
+  },
+  {
+    path: 'client/register', canActivate: [AuthGuard], component: RegisterClientComponent
   }
 ];
 

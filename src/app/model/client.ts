@@ -5,4 +5,5 @@ export class Client {
   gender: string;
   e_mail: string;
   password: string;
+  passwordCon: string;
 }

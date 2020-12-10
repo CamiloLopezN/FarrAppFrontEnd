@@ -35,4 +35,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesEditClient(): void {
+    this.nService.success('Estado del cliente', 'Cliente editado correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ClientService} from '../../services/client.service';
 import {DatePipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-edit-client',
@@ -20,7 +21,8 @@ export class EditClientComponent implements OnInit {
     private _router: Router,
     private clientS: ClientService,
     private datePipe: DatePipe,
-    private authService: AuthService
+    private authService: AuthService,
+    private ns: NotificationService
   ) {
     this.client = {
       id: '',
@@ -61,7 +63,8 @@ export class EditClientComponent implements OnInit {
     console.log(this.client.birthdate);
     this.clientS.editUser(this.client).subscribe(() => {
       this._router.navigate(['/client/' + this.client.id]);
-    }, () => {
+      this.ns.succesEditClient();
+    }, (error) => {
       this.authService.logoutExpired();
     });
   }

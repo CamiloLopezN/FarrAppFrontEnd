@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { MainPanelComponent } from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
+import { EditClientComponent } from './client/edit-client/edit-client.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {DatePipe} from '@angular/common';
     LoginComponent,
     HeaderComponent,
     MainPanelComponent,
-    ProfileClientComponent
+    ProfileClientComponent,
+    EditClientComponent
   ],
   imports: [
     BrowserModule,

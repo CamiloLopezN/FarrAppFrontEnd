@@ -1,1 +1,141 @@
-<p> Login works!</p>
+<div class="pt-5 pb-5 pl-4 pr-4">
+  <div class="text-center">
+    <img src="assets/icons/UserIcon.png" class="rounded mx-auto d-block" alt="User Icon" id="ImageUser">
+    <h4 id="LoginTitle" class="m-5">
+      INICIO DE SESIÓN
+    </h4>
+  </div>
+
+  <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-login">
+    <div class="mb-2" *ngIf="!email.valid && email.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          El correo electrónico es inválido
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="email.valid && email.touched &&!isUserMail">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="email.valid && email.touched &&isUserMail &&errorMessage &&isPass">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
+        </span>
+    </div>
+    <div class="input-group mt-1 mb-4">
+      <div class="input-group-prepend">
+        <div class="input-group-text" style="background: #2B2A30">
+          <fa-icon [icon]="faUserCircle" style="color: #D1D1D1" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input type="email" class="form-control color-gray" id="exampleInputEmail1" aria-describedby="emailHelp"
+             placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+    </div>
+
+    <div class="mb-2" *ngIf="!pass.valid && pass.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          Debe ingresar una contraseña
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="pass.valid && pass.touched &&!isPass">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
+        </span>
+    </div>
+
+    <div class="input-group mb-5">
+      <div class="input-group-prepend">
+        <div class="input-group-text" style="background: #2B2A30">
+          <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
+                   class="fa-lg" *ngIf="!isEmpty()"></fa-icon>
+          <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
+                   *ngIf="isEmpty()"
+          ></fa-icon>
+        </div>
+      </div>
+      <input type="password" class="form-control color-gray" id="exampleInputPassword1" placeholder="Contraseña"
+             #pass="ngModel" name="pass" [(ngModel)]="password" required>
+    </div>
+    <div class="text-center mt-5" id="Login">
+      <button type="submit" class="btn btn-primary" [disabled]="!formUser.form.valid">Iniciar sesión</button>
+      <p id="PassRemember" class="mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">
+        ¿Olvidó su contraseña?
+      </p>
+    </div>
+    <div class="text-center mt-4">
+      <button type="submit" [routerLink]="['/client/register']" class="btn btn-success">Crear cuenta nueva</button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="ralewayFont modal-title" id="exampleModalLabel">Recupera tu cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body">
+        Introduce tu correo electrónico, te enviaremos un correo con los pasos necesarios para recuperar tu cuenta.
+      </div>
+      <form #formRetrieve="ngForm" (ngSubmit)="retrievePass()">
+        <div class="form-group ml-3 mr-3">
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                 placeholder="Correo electrónico" #emailR="ngModel" name="emailR" [(ngModel)]="emailRetrieve" email
+                 pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+          <small id="emailHelp" class="form-text text-danger" *ngIf="!emailR.valid && emailR.touched">El correo
+            electrónico es inválido.</small>
+        </div>
+        <div class="modal-footer ralewayFont">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetEmailRetrieve()">Cerrar
+          </button>
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exclamationModal"
+                  data-dismiss="modal" [disabled]="!formRetrieve.form.valid" (click)="retrievePass()">Recuperar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exclamationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="ralewayFont modal-title" id="exampleModalLabel">Recupera tu cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="isUserEmailRetrieve" class="text-center">
+        <fa-icon [icon]="faExclamation" class="fa-9x text-success"></fa-icon>
+        <div class="ralewayFont modal-body">
+          ¡Hemos enviado a tu correo instrucciones para que puedas recuperar tu contraseña!
+        </div>
+      </div>
+      <div *ngIf="!isUserEmailRetrieve" class="text-center">
+        <fa-icon [icon]="faExclamation" class="fa-9x text-danger"></fa-icon>
+        <div class="ralewayFont modal-body">
+          El correo electrónico que ingresó no coincide con ninguna cuenta.
+        </div>
+      </div>
+      <div class="modal-footer ralewayFont">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                data-dismiss="modal" *ngIf="!isUserEmailRetrieve">Regresar
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetEmailRetrieve()">Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

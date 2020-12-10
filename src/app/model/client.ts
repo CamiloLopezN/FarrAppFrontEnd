@@ -1,11 +1,10 @@
 export class ClientRegistration {
-  nameC: string;
-  lastName: string;
+  name: string;
+  lastname: string;
   birthdate: string;
   gender: string;
   e_mail: string;
   password: string;
-  passwordCon: string;
 }
 
 export interface ClientLogin {

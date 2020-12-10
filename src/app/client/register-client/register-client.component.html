@@ -97,19 +97,19 @@
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="male" value="Male"
+          <input type="radio" class="form-check-input" name="male" value="Masculino"
                  #maleGender="ngModel" name="maleGender" [(ngModel)]="gender" required>Hombre
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="female" value="Female"
+          <input type="radio" class="form-check-input" name="female" value="Femenino"
                  #femaleGender="ngModel" name="femaleGender" [(ngModel)]="gender" required>Mujer
         </label>
       </div>
       <div class="form-check-inline">
         <label class="form-check-label">
-          <input type="radio" class="form-check-input" name="other" value="Other"
+          <input type="radio" class="form-check-input" name="other" value="Otro"
                  #otherGender="ngModel" name="otherGender" [(ngModel)]="gender" required>Otro
         </label>
       </div>
@@ -121,7 +121,7 @@
           <fa-icon [icon]="faCalendarDay" class="fa-lg"></fa-icon>
         </div>
       </div>
-      <input mdbInput placeholder="Fecha de nacimiento" type="date"  datepicker_format="DD-MM-YYYY" class="form-control"
+      <input mdbInput placeholder="Fecha de nacimiento" type="date"  datepicker_format="dd-MM-yyyy" class="form-control"
              #birthdateClient="ngModel" name="bithdateClient" [(ngModel)]="birthdate" required>
     </div>
 

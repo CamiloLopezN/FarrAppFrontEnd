@@ -28,10 +28,10 @@ export class ClientServiceService {
 
 
   register(client: ClientRegistration): Observable<any> {
-    return this.httpClient.post<ClientRegistration>(`${environment.backend}/api/client/`, client)
+    console.log(client);
+    return this.httpClient.post<any>(`${environment.backend}/api/client/`, client)
       .pipe(
-        map((res: ClientRegistration) => {
-          this.router.navigate(['login']);
+        map((res: any) => {
           return res;
         })
       );

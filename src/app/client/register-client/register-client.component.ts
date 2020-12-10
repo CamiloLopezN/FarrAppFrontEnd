@@ -36,20 +36,19 @@ export class RegisterClientComponent implements OnInit {
   onSubmit(): void {
 
     this.client = {
-      nameC: this.nameClient,
-      lastName: this.lastName,
+      name: this.nameClient,
+      lastname: this.lastName,
       birthdate: this.birthdate,
       gender: this.gender,
       e_mail: this.email,
-      password: this.password,
-      passwordCon: this.passwordCon,
+      password: this.password
     };
-    this.clientServiceService.register(this.client).subscribe(() => {
-        this.redirect();
+    this.clientServiceService.register(this.client).subscribe((res) => {
+      this.router.navigate(['login']);
       },
       error => {
         this.errorMessage = error.error.message;
-        console.log('ERRORSITO');
+        console.log(error);
       }
     );
 

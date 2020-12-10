@@ -14,6 +14,7 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
 import { EditClientComponent } from './client/edit-client/edit-client.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditClientComponent } from './client/edit-client/edit-client.component'
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxSpinnerModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

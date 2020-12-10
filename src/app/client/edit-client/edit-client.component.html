@@ -4,31 +4,61 @@
   </h4>
   <div>
     <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
-    <div class="text-left mt-3">
-      <form  #formEdit="ngForm" (ngSubmit)="edit()" id="form-edit">
+    <form #formEdit="ngForm" (ngSubmit)="edit()" id="form-edit">
+      <div class="text-left mt-3">
         <div class="row">
           <div class="col">
             <div class="form-group">
               <label for="nombre" class="text-white">Nombre</label>
-              <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name" [(ngModel)]="client.name">
+              <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name"
+                     [(ngModel)]="client.name" required>
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
+                este campo vacío.</small>
             </div>
           </div>
           <div class="col">
             <div class="form-group">
               <label for="apellido" class="text-white">Apellido</label>
-              <input type="text" class="form-control color-gray" id="apellido" #lastName="ngModel" name="lastName" [(ngModel)]="client.lastname">
+              <input type="text" class="form-control color-gray" id="apellido" #lastName="ngModel" name="lastName"
+                     [(ngModel)]="client.lastname" required>
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!lastName.valid && lastName.touched">No puedes
+                dejar este campo vacío.</small>
             </div>
           </div>
         </div>
         <div class="form-group">
           <label for="birthDate" class="text-white">Fecha de nacimiento</label>
-          <input type="date" class="form-control color-gray" id="birthDate">
+          <input type="date" class="form-control color-gray" id="birthDate" #fromDate="ngModel"
+                 [(ngModel)]="client.birthdate" name="fromDate">
         </div>
-      </form>
-    </div>
-    <div class="d-flex justify-content-around mt-5">
-      <button type="button" class="btn btn-primary">Guardar</button>
-      <button type="button" class="btn btn-success" (click)="return()">Regresar</button>
-    </div>
+        <div class="form-group">
+          <label for="genre" class="text-white">Género</label>
+          <div id="genre" class="text-center">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="man" value="Masculino"
+                     #maleGender="ngModel" name="maleGender" [(ngModel)]="client.gender" required
+              >
+              <label class="form-check-label text-white" for="man">Hombre</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="woman" value="Femenino"
+                     #femaleGender="ngModel" name="femaleGender" [(ngModel)]="client.gender"
+              >
+              <label class="form-check-label text-white" for="woman">Mujer</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="other" value="Otro"
+                     #otherGender="ngModel" name="otherGender" [(ngModel)]="client.gender"
+              >
+              <label class="form-check-label text-white" for="other">Otro</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-around mt-5">
+        <button type="button" class="btn btn-primary" [disabled]="!formEdit.form.valid" (click)="save()">Guardar</button>
+        <button type="button" class="btn btn-success" (click)="return()">Regresar</button>
+      </div>
+    </form>
   </div>
 </div>

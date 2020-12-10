@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
+import {ClientResponse} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,19 @@ export class ClientService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.get<any>(`${environment.backend}/api/client/profile`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  editUser(client: ClientResponse): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.put<any>(`${environment.backend}/api/client/`, client,{headers})
       .pipe(
         map((res: any) => {
           return res;

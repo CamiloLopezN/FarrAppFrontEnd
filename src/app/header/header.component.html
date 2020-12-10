@@ -13,7 +13,8 @@
           <fa-icon [icon]="faHome"></fa-icon>
         </div>
         <div class="col-5">
-          <a class="nav-item nav-link active" href="#">
+          <a class="nav-item nav-link active" data-toggle="collapse" data-target=".navbar-collapse.show"
+             [routerLink]="['']">
             INICIO <span class="sr-only">(current)</span></a>
         </div>
       </div>
@@ -23,7 +24,8 @@
           <fa-icon [icon]="faUserPlus"></fa-icon>
         </div>
         <div class="col-5">
-          <a class="nav-item nav-link active" [routerLink]="['/client/register']">
+          <a class="nav-item nav-link active" data-toggle="collapse" data-target=".navbar-collapse.show"
+             [routerLink]="['/client/register']">
             CREAR CUENTA <span class="sr-only">(current)</span></a>
         </div>
       </div>
@@ -33,8 +35,19 @@
           <fa-icon [icon]="faUser"></fa-icon>
         </div>
         <div class="col-5">
-          <a class="nav-item nav-link active" [routerLink]="['/login']">
+          <a class="nav-item nav-link active" data-toggle="collapse" data-target=".navbar-collapse.show"
+             [routerLink]="['/login']">
             INICIAR SESIÓN <span class="sr-only">(current)</span></a>
+        </div>
+      </div>
+
+      <div class="row align-items-center" *ngIf="isLogged">
+        <div class="col-1 ml-3">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        <div class="col-5">
+          <a class="nav-item nav-link active" (click)="viewProfile()" style="cursor: pointer" data-toggle="collapse" data-target=".navbar-collapse.show">
+            VER PERFIL<span class="sr-only">(current)</span></a>
         </div>
       </div>
 
@@ -43,7 +56,7 @@
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
         </div>
         <div class="col-5">
-          <a class="nav-item nav-link active" (click)="logOut()" style="cursor:pointer;">
+          <a class="nav-item nav-link active" (click)="logOut()" style="cursor:pointer;" data-toggle="collapse" data-target=".navbar-collapse.show">
             CERRAR SESIÓN <span class="sr-only">(current)</span></a>
         </div>
       </div>

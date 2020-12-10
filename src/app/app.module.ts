@@ -11,6 +11,8 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { MainPanelComponent } from './main-panel/main-panel.component';
+import {ProfileClientComponent} from './client/profile-client/profile-client.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     RegisterClientComponent,
     LoginComponent,
     HeaderComponent,
-    MainPanelComponent
+    MainPanelComponent,
+    ProfileClientComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Client} from '../../../models/client';
-import {ClientServiceService} from '../../services/client-service.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
+import {ClientService} from '../../services/client.service';
+import {ClientResponse} from '../../model/client';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-profile-client',
@@ -11,15 +12,22 @@ import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclama
 })
 export class ProfileClientComponent implements OnInit {
 
-  public client: Client;
+  public client: ClientResponse;
   public isRemove: boolean;
   public faExclamationTriangle = faExclamationTriangle;
 
   constructor(
-    private _clientService: ClientServiceService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private clientS: ClientService,
+    private datePipe: DatePipe
   ) {
+    this.client = {
+      name: '',
+      lastname: '',
+      birthdate: '',
+      gender: ''
+    };
   }
 
   ngOnInit(): void {
@@ -27,20 +35,18 @@ export class ProfileClientComponent implements OnInit {
   }
 
   getUser(): void {
-    this._route.params.forEach((params: Params) => {
-      const id = params.id;
-      this._clientService.getUser(id).subscribe(
-        response => {
-          this.client = response;
-        }, error => {
-          console.log(error as any);
-        }
-      );
+    this.clientS.getUser().subscribe((res) => {
+      this.client = {
+        name: res.search.name,
+        lastname: res.search.lastname,
+        birthdate: this.datePipe.transform(res.search.birthdate, 'dd-MM-YYYY'),
+        gender: res.search.gender
+      };
+
     });
   }
 
   removeUser(): void {
-    this._clientService.removeUser(this.client.id);
     this._router.navigate(['/login']);
   }
 

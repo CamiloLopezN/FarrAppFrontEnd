@@ -1,1 +1,34 @@
-<p>edit-client works!</p>
+<div class="text-center pt-5 pb-5 pl-4 pr-4">
+  <h4 class="text-white text-left">
+    EDITAR
+  </h4>
+  <div>
+    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
+    <div class="text-left mt-3">
+      <form  #formEdit="ngForm" (ngSubmit)="edit()" id="form-edit">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="nombre" class="text-white">Nombre</label>
+              <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name" [(ngModel)]="client.name">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="apellido" class="text-white">Apellido</label>
+              <input type="text" class="form-control color-gray" id="apellido" #lastName="ngModel" name="lastName" [(ngModel)]="client.lastname">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="birthDate" class="text-white">Fecha de nacimiento</label>
+          <input type="date" class="form-control color-gray" id="birthDate">
+        </div>
+      </form>
+    </div>
+    <div class="d-flex justify-content-around mt-5">
+      <button type="button" class="btn btn-primary">Guardar</button>
+      <button type="button" class="btn btn-success" (click)="return()">Regresar</button>
+    </div>
+  </div>
+</div>

@@ -23,6 +23,7 @@ export class ProfileClientComponent implements OnInit {
     private datePipe: DatePipe
   ) {
     this.client = {
+      id: '',
       name: '',
       lastname: '',
       birthdate: '',
@@ -37,6 +38,7 @@ export class ProfileClientComponent implements OnInit {
   getUser(): void {
     this.clientS.getUser().subscribe((res) => {
       this.client = {
+        id: res.search._id,
         name: res.search.name,
         lastname: res.search.lastname,
         birthdate: this.datePipe.transform(res.search.birthdate, 'dd-MM-YYYY'),
@@ -52,5 +54,9 @@ export class ProfileClientComponent implements OnInit {
 
   changeView(): void {
     this.isRemove = !this.isRemove;
+  }
+
+  edit(): void {
+    this._router.navigate(['/client/' + this.client.id + '/edit']);
   }
 }

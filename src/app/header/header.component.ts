@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import {faHome, faUserPlus, faUser, faSignOutAlt} from '@fortawesome/free-solid-svg-icons/';
+import {faHome, faUserPlus, faUser, faSignOutAlt, faUserEdit} from '@fortawesome/free-solid-svg-icons/';
 import {ClientService} from '../services/client.service';
 import {Router} from '@angular/router';
 
@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   faUserPlus = faUserPlus;
   faUser = faUser;
   faSignOutAlt = faSignOutAlt;
+  faUserEdit = faUserEdit;
 
   constructor(private authService: AuthService, private clientS: ClientService, private router: Router) {
   }
@@ -33,6 +34,14 @@ export class HeaderComponent implements OnInit {
   viewProfile(): void {
     this.clientS.getUser().subscribe((res) => {
       this.router.navigate(['client/' + res.search._id]);
+    }, () => {
+      this.authService.logoutSession();
+    });
+  }
+
+  edit(): void {
+    this.clientS.getUser().subscribe((res) => {
+      this.router.navigate(['client/' + res.search._id + '/edit']);
     }, () => {
       this.authService.logoutSession();
     });

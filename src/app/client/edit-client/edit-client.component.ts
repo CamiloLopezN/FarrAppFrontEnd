@@ -55,18 +55,14 @@ export class EditClientComponent implements OnInit {
     this._router.navigate(['/client/' + this.client.id]);
   }
 
-  edit(): void {
-
-  }
-
   save(): void {
     const vBirth = this.client.birthdate.split('-');
     this.client.birthdate = vBirth[2] + '-' + vBirth[1] + '-' + vBirth[0];
     console.log(this.client.birthdate);
     this.clientS.editUser(this.client).subscribe(() => {
       this._router.navigate(['/client/' + this.client.id]);
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.authService.logoutExpired();
     });
   }
 }

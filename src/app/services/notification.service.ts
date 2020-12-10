@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {NotificationsService} from 'angular2-notifications';
 
 @Injectable({
@@ -6,9 +6,10 @@ import {NotificationsService} from 'angular2-notifications';
 })
 export class NotificationService {
 
-  constructor(private nService : NotificationsService) { }
+  constructor(private nService: NotificationsService) {
+  }
 
-  sucessLogin(): void{
+  sucessLogin(): void {
     this.nService.success('Estado de cuenta', 'Ha iniciado sesión con éxito', {
       timeOut: 3000,
       showProgressBar: true,
@@ -17,8 +18,8 @@ export class NotificationService {
     });
   }
 
-  logOut(): void{
-    this.nService.error('Estado de cuenta', 'Su sesión se ha cerrado', {
+  logOut(): void {
+    this.nService.error('Estado de cuenta', 'Ha salido de la sesión.', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -26,4 +27,12 @@ export class NotificationService {
     });
   }
 
+  logOutExpired(): void {
+    this.nService.warn('Estado de cuenta', 'Su sesión ha expirado', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

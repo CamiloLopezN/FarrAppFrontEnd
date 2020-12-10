@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     this.clientS.getUser().subscribe((res) => {
       this.router.navigate(['client/' + res.search._id]);
     }, () => {
-      this.authService.logoutSession();
+      this.authService.logoutExpired();
     });
   }
 
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     this.clientS.getUser().subscribe((res) => {
       this.router.navigate(['client/' + res.search._id + '/edit']);
     }, () => {
-      this.authService.logoutSession();
+      this.authService.logoutExpired();
     });
   }
 }

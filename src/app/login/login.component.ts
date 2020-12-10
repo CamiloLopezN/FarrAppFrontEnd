@@ -3,6 +3,7 @@ import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faExclamationCirc
 import {Router} from '@angular/router';
 import {ClientLogin} from '../model/client';
 import {AuthService} from '../services/auth.service';
+import {NotificationService} from '../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private notifyS: NotificationService
   ) {
   }
 
@@ -45,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.client).subscribe(() => {
         this.isPass = true;
         this.isUserMail = true;
+        this.notifyS.sucessLogin();
         this.redirect();
       },
       error => {

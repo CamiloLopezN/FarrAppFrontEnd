@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Directive, OnInit} from '@angular/core';
 import {ClientRegistration} from '../../model/client';
 import {Router} from '@angular/router';
-
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {faCalendarDay} from '@fortawesome/free-solid-svg-icons';
 import {faIdCard} from '@fortawesome/free-solid-svg-icons';
@@ -13,7 +12,10 @@ import {ClientServiceService} from '../../services/client-service.service';
   templateUrl: './register-client.component.html',
   styleUrls: ['./register-client.component.css']
 })
+
+
 export class RegisterClientComponent implements OnInit {
+
   client: ClientRegistration;
   faLock = faLock;
   faUser = faUser;
@@ -44,7 +46,7 @@ export class RegisterClientComponent implements OnInit {
       password: this.password
     };
     this.clientServiceService.register(this.client).subscribe((res) => {
-      this.router.navigate(['login']);
+        this.router.navigate(['login']);
       },
       error => {
         this.errorMessage = error.error.message;
@@ -67,6 +69,10 @@ export class RegisterClientComponent implements OnInit {
     return this.password === this.passwordCon;
   }
 
+  isDifferentTo(): boolean {
+    return this.password === 'Passw0rd' || this.password === 'Password123';
+  }
+
   isExistEmail(): boolean {
     return this.email === 'cami@gmail.com';
   }
@@ -74,5 +80,14 @@ export class RegisterClientComponent implements OnInit {
 
   isInvalid(): boolean {
     return !this.isEqual();
+  }
+
+  isValidPassLenght(): boolean {
+    return this.password?.length < 8;
+  }
+
+
+  isEmpty(): boolean {
+    return this.password?.length === 0;
   }
 }

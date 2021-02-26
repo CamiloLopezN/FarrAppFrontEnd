@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import {faHome, faUserPlus, faUser, faSignOutAlt, faUserEdit} from '@fortawesome/free-solid-svg-icons/';
+import {faHome, faUserPlus, faUser, faSignOutAlt, faGlassCheers, faSignInAlt, faKey} from '@fortawesome/free-solid-svg-icons/';
+import {faFacebook, faInstagram, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {ClientService} from '../services/client.service';
 import {Router} from '@angular/router';
 
@@ -16,7 +17,13 @@ export class HeaderComponent implements OnInit {
   faUserPlus = faUserPlus;
   faUser = faUser;
   faSignOutAlt = faSignOutAlt;
-  faUserEdit = faUserEdit;
+  faSignInAlt = faSignInAlt;
+  faGlassCheers = faGlassCheers;
+  faKey = faKey;
+
+  faFacebook = faFacebook;
+  faTwitter = faTwitter;
+  faInstagram = faInstagram;
 
   constructor(private authService: AuthService, private clientS: ClientService, private router: Router) {
   }

@@ -4,6 +4,7 @@ import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclama
 import {ClientService} from '../../services/client.service';
 import {ClientResponse} from '../../model/client';
 import {DatePipe} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile-client',
@@ -20,7 +21,8 @@ export class ProfileClientComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private clientS: ClientService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private authS: AuthService
   ) {
     this.client = {
       id: '',
@@ -37,15 +39,18 @@ export class ProfileClientComponent implements OnInit {
 
   getUser(): void {
     this.clientS.getUser().subscribe((res) => {
-      this.client = {
-        id: res.search._id,
-        name: res.search.name,
-        lastname: res.search.lastname,
-        birthdate: this.datePipe.transform(res.search.birthdate, 'dd-MM-YYYY'),
-        gender: res.search.gender
-      };
-
-    });
+        this.client = {
+          id: res.search._id,
+          name: res.search.name,
+          lastname: res.search.lastname,
+          birthdate: this.datePipe.transform(res.search.birthdate, 'dd-MM-YYYY'),
+          gender: res.search.gender
+        };
+      },
+      () => {
+        this.authS.logoutExpired();
+      }
+    );
   }
 
   removeUser(): void {
@@ -57,6 +62,6 @@ export class ProfileClientComponent implements OnInit {
   }
 
   edit(): void {
-    this._router.navigate(['/client/' + this.client.id + '/edit']);
+    this._router.navigate(['client/edit']);
   }
 }

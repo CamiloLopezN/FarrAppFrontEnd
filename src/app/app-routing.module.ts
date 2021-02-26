@@ -6,6 +6,7 @@ import {MainPanelComponent} from './main-panel/main-panel.component';
 import {AuthGuard} from './auth.guard';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
+import {InitSesionGuard} from './init-sesion.guard';
 
 const routes: Routes = [
   {
@@ -21,9 +22,9 @@ const routes: Routes = [
     path: 'client/register', canActivate: [AuthGuard], component: RegisterClientComponent
   },
   {
-    path: 'client/:id', component: ProfileClientComponent
+    path: 'client', canActivate: [InitSesionGuard], component: ProfileClientComponent
   }, {
-    path: 'client/:id/edit', component: EditClientComponent
+    path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
   }
 ];
 

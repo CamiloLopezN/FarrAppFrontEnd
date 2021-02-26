@@ -39,14 +39,18 @@ export class EditClientComponent implements OnInit {
 
   getUser(): void {
     this.clientS.getUser().subscribe((res) => {
-      this.client = {
-        id: res.search._id,
-        name: res.search.name,
-        lastname: res.search.lastname,
-        birthdate: this.datePipe.transform(res.search.birthdate, 'yyyy-MM-dd'),
-        gender: res.search.gender
-      };
-    });
+        this.client = {
+          id: res.search._id,
+          name: res.search.name,
+          lastname: res.search.lastname,
+          birthdate: this.datePipe.transform(res.search.birthdate, 'yyyy-MM-dd'),
+          gender: res.search.gender
+        };
+      },
+      () => {
+        this.authService.logoutExpired();
+      }
+    );
   }
 
   changeView(): void {
@@ -54,7 +58,7 @@ export class EditClientComponent implements OnInit {
   }
 
   return(): void {
-    this._router.navigate(['/client/' + this.client.id]);
+    this._router.navigate(['/client']);
   }
 
   save(): void {
@@ -62,9 +66,9 @@ export class EditClientComponent implements OnInit {
     this.client.birthdate = vBirth[2] + '-' + vBirth[1] + '-' + vBirth[0];
     console.log(this.client.birthdate);
     this.clientS.editUser(this.client).subscribe(() => {
-      this._router.navigate(['/client/' + this.client.id]);
+      this._router.navigate(['/client']);
       this.ns.succesEditClient();
-    }, (error) => {
+    }, () => {
       this.authService.logoutExpired();
     });
   }

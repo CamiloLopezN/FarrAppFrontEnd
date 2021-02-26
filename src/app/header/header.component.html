@@ -2,75 +2,74 @@
   <a class="navbar-brand" id="FarrAppHeader">
     FarrApp
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <div class="row align-items-center ">
-        <div class="col-1 ml-3">
+  <div class="dropdown show ml-auto" data-placement="bottom" title="Cuenta">
+    <a class="btn-lg dropdown-toggle rounded-circle" href="#" role="button"
+       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right border-card animate slideIn" aria-labelledby="dropdownMenuLink">
+
+      <a class="dropdown-item" [routerLink]="['/mainPanel']" [routerLinkActive]="['activado']">
+        <div class="icon d-inline p-1 rounded-circle">
           <fa-icon [icon]="faHome"></fa-icon>
         </div>
-        <div class="col-5">
-          <a class="nav-item nav-link active" data-toggle="collapse" data-target=".navbar-collapse.show"
-             [routerLink]="['']">
-            INICIO <span class="sr-only">(current)</span></a>
-        </div>
-      </div>
+        Inicio
+      </a>
 
-      <div class="row align-items-center" *ngIf="!isLogged">
-        <div class="col-1 ml-3">
-          <fa-icon [icon]="faUserPlus"></fa-icon>
+      <a class="dropdown-item" [routerLink]="['/login']" *ngIf="!isLogged" [routerLinkActive]="['activado']">
+        <div class="icon d-inline rounded-circle" style="padding: 4px 5px;">
+          <fa-icon [icon]="faSignInAlt"></fa-icon>
         </div>
-        <div class="col-5">
-          <a class="nav-item nav-link active" data-toggle="collapse" data-target=".navbar-collapse.show"
-             [routerLink]="['/client/register']">
-            CREAR CUENTA <span class="sr-only">(current)</span></a>
-        </div>
-      </div>
+        Iniciar sesión
+      </a>
 
-      <div class="row align-items-center" *ngIf="!isLogged">
-        <div class="col-1 ml-3">
+      <a class="dropdown-item" [routerLink]="['/client/register']" *ngIf="!isLogged" [routerLinkActive]="['activado']">
+        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
         </div>
-        <div class="col-5">
-          <a class="nav-item nav-link active" data-toggle="collapse" data-target=".navbar-collapse.show"
-             [routerLink]="['/login']">
-            INICIAR SESIÓN <span class="sr-only">(current)</span></a>
-        </div>
-      </div>
+        Registrarse
+      </a>
 
-      <div class="row align-items-center" *ngIf="isLogged">
-        <div class="col-1 ml-3">
+      <a class="dropdown-item" [routerLink]="['/admin']">
+        <div class="icon d-inline rounded-circle event-icon" style="padding: 4px 3px;">
+          <fa-icon [icon]="faGlassCheers"></fa-icon>
+        </div>
+        Eventos
+      </a>
+
+      <a class="dropdown-item" [routerLink]="['/client']" [routerLinkActive]="['activado']" *ngIf="isLogged">
+        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
         </div>
-        <div class="col-5">
-          <a class="nav-item nav-link active" (click)="viewProfile()" style="cursor: pointer" data-toggle="collapse" data-target=".navbar-collapse.show">
-            VER PERFIL<span class="sr-only">(current)</span></a>
-        </div>
-      </div>
+        Perfil
+      </a>
 
-      <div class="row align-items-center" *ngIf="isLogged">
-        <div class="col-1 ml-3">
-          <fa-icon [icon]="faUserEdit"></fa-icon>
+      <a class="dropdown-item" [routerLink]="['/client/security']" [routerLinkActive]="['activado']" *ngIf="isLogged">
+        <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
+          <fa-icon [icon]="faKey"></fa-icon>
         </div>
-        <div class="col-5">
-          <a class="nav-item nav-link active" (click)="edit()" style="cursor: pointer" data-toggle="collapse" data-target=".navbar-collapse.show">
-            EDITAR PERFIL<span class="sr-only">(current)</span></a>
-        </div>
-      </div>
+        Seguridad
+      </a>
 
-      <div class="row align-items-center" *ngIf="isLogged">
-        <div class="col-1 ml-3">
+      <div class="dropdown-divider" style="border: 2px solid #2b2a30;" *ngIf="isLogged"></div>
+
+      <a class="dropdown-item" (click)="logOut()" style="cursor: pointer" *ngIf="isLogged">
+        <div class="icon d-inline rounded-circle" style="padding: 4px 5px;">
           <fa-icon [icon]="faSignOutAlt"></fa-icon>
         </div>
-        <div class="col-5">
-          <a class="nav-item nav-link active" (click)="logOut()" style="cursor:pointer;" data-toggle="collapse" data-target=".navbar-collapse.show">
-            CERRAR SESIÓN <span class="sr-only">(current)</span></a>
-        </div>
+        Cerrar sesión
+      </a>
+      <div class="dropdown-divider" style="border: 2px solid #2b2a30;"></div>
+      <div class="text-center mt-3 h3">
+        <a class="iconRedSocial" href="https://www.facebook.com" target="_blank">
+          <fa-icon [icon]="faFacebook"></fa-icon>
+        </a>
+        <a class="iconRedSocial m-5" href="https://twitter.com/home" target="_blank">
+          <fa-icon [icon]="faTwitter"></fa-icon>
+        </a>
+        <a class="iconRedSocial" href="https://www.instagram.com/" target="_blank">
+          <fa-icon [icon]="faInstagram"></fa-icon>
+        </a>
       </div>
-
     </div>
   </div>
 </nav>

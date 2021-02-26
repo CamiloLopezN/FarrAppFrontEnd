@@ -7,6 +7,7 @@ import {AuthGuard} from './auth.guard';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {InitSesionGuard} from './init-sesion.guard';
+import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
     path: 'client', canActivate: [InitSesionGuard], component: ProfileClientComponent
   }, {
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
+  },
+  {
+    path: 'company', component: ProfileCompanyComponent
   }
 ];
 

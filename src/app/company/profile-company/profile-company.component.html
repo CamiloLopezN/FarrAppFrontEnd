@@ -1,0 +1,52 @@
+<div class="text-center pt-5 pb-5 pl-4 pr-4">
+  <h4 class="text-white text-left">
+    MI PERFIL
+  </h4>
+  <div>
+    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
+    <div class="text-left mt-5">
+      <div class="border-profile mb-4">
+        <label class="text-white ml-4">
+          <strong>
+            Nombre de la empresa
+          </strong></label>
+        <h4 class="profile-font ml-5">
+          {{company.name}}
+        </h4>
+      </div>
+      <div class="border-profile mb-4">
+        <label class="text-white ml-4">
+          <strong>
+            Dirección
+          </strong>
+        </label>
+        <h4 class="profile-font ml-5">
+          {{company.address}}
+        </h4>
+      </div>
+      <div class="border-profile mb-4">
+        <label class="text-white ml-4">
+          <strong>
+            Número de contacto
+          </strong></label>
+        <h4 class="profile-font ml-5">
+          {{company.contact_number}}
+        </h4>
+      </div>
+      <div class="border-profile mb-4">
+        <label class="text-white ml-4">
+          <strong>
+            NIT
+          </strong></label>
+        <h4 class="profile-font ml-5">
+          {{company.nit}}
+        </h4>
+      </div>
+    </div>
+    <div class="d-flex justify-content-around mt-5">
+      <button type="button" class="btn btn-danger">Eliminar cuenta</button>
+      <button type="button" class="btn btn-primary" (click)="edit()">Editar</button>
+      <button type="button" class="btn btn-success" [routerLink]="['']">Regresar</button>
+    </div>
+  </div>
+</div>

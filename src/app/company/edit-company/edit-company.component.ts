@@ -2,30 +2,31 @@ import {Component, OnInit} from '@angular/core';
 import {CompanyResponse} from '../../model/comapany';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {NotificationService} from '../../services/notification.service';
 import {CompanyService} from '../../services/company.service';
 
 @Component({
-  selector: 'app-profile-company',
-  templateUrl: './profile-company.component.html',
-  styleUrls: ['./profile-company.component.css']
+  selector: 'app-edit-company',
+  templateUrl: './edit-company.component.html',
+  styleUrls: ['./edit-company.component.css']
 })
-export class ProfileCompanyComponent implements OnInit {
+export class EditCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
 
+
   constructor(
-    // tslint:disable-next-line:variable-name
     private _route: ActivatedRoute,
-    // tslint:disable-next-line:variable-name
     private _router: Router,
     private companyS: CompanyService,
-    private authS: AuthService
+    private authService: AuthService,
+    private ns: NotificationService
   ) {
     this.company = {
-      address: '',
+      nit: '',
       contact_number: '',
-      name: '',
-      nit: ''
+      address: '',
+      name: ''
     };
   }
 
@@ -33,8 +34,8 @@ export class ProfileCompanyComponent implements OnInit {
     this.getCompany();
   }
 
-  edit(): void {
-    this._router.navigate(['company/edit']);
+  save() {
+
   }
 
   private getCompany(): void {
@@ -46,17 +47,7 @@ export class ProfileCompanyComponent implements OnInit {
     };
   }
 
-  /*this.companyS.getCompany().subscribe((res) => {
-      this.company = {
-        nit: res.nit,
-        name: res.name,
-        contact_number: res.contact_number,
-        address: res.address
-      };
-    },
-    () => {
-      this.authS.logoutExpired();
-    }
-  );
-}*/
+  return() {
+    this._router.navigate(['/company']);
+  }
 }

@@ -8,6 +8,7 @@ import {ProfileClientComponent} from './client/profile-client/profile-client.com
 import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {InitSesionGuard} from './init-sesion.guard';
 import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
+import {EditCompanyComponent} from './company/edit-company/edit-company.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
   },
   {
     path: 'company', component: ProfileCompanyComponent
+  },
+  {
+    path: 'company/edit', component: EditCompanyComponent
   }
 ];
 

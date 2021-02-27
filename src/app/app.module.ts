@@ -19,6 +19,7 @@ import {InterceptorService} from './services/interceptor.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
 import { ProfileCompanyComponent } from './company/profile-company/profile-company.component';
+import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProfileCompanyComponent } from './company/profile-company/profile-compa
     MainPanelComponent,
     ProfileClientComponent,
     EditClientComponent,
-    ProfileCompanyComponent
+    ProfileCompanyComponent,
+    EditCompanyComponent
   ],
   imports: [
     BrowserModule,

@@ -21,9 +21,16 @@ export class InitSesionGuard implements CanActivate {
       this.isLogged = isLogged;
     });
 
+    let rol = this.authService.getRole();
+    if (rol != 'client') {
+      this.router.navigate(['']);
+      return false;
+    }
+
     if (this.isLogged) {
       return true;
     }
+
     this.router.navigate(['login']);
     return false;
 

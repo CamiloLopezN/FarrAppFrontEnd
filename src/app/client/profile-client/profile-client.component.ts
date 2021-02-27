@@ -25,7 +25,6 @@ export class ProfileClientComponent implements OnInit {
     private authS: AuthService
   ) {
     this.client = {
-      id: '',
       name: '',
       lastname: '',
       birthdate: '',
@@ -39,11 +38,13 @@ export class ProfileClientComponent implements OnInit {
 
   getUser(): void {
     this.clientS.getUser().subscribe((res) => {
+        const bdate = res.dateConverter.split('-');
+        // tslint:disable-next-line:radix
+        const date = new Date(Number.parseInt(bdate[2]), Number.parseInt(bdate[1]), Number.parseInt(bdate[0]));
         this.client = {
-          id: res.search._id,
           name: res.search.name,
           lastname: res.search.lastname,
-          birthdate: this.datePipe.transform(res.search.birthdate, 'dd-MM-YYYY'),
+          birthdate: this.datePipe.transform(date, 'yyyy-MM-dd'),
           gender: res.search.gender
         };
       },

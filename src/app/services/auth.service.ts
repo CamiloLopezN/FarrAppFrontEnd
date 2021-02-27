@@ -25,6 +25,10 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  getRole(): string {
+    return helper.decodeToken(localStorage.getItem('token')).role[0].name;
+  }
+
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }

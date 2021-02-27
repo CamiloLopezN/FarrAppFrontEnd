@@ -50,7 +50,6 @@ export class RegisterClientComponent implements OnInit {
       },
       error => {
         this.errorMessage = error.error.message;
-        console.log(error);
       }
     );
 
@@ -74,7 +73,7 @@ export class RegisterClientComponent implements OnInit {
   }
 
   isExistEmail(): boolean {
-    return this.email === 'cami@gmail.com';
+    return this.errorMessage === 'El correo electronico ingresado ya existe';
   }
 
 
@@ -90,4 +89,39 @@ export class RegisterClientComponent implements OnInit {
   isEmpty(): boolean {
     return this.password?.length === 0;
   }
+
+
+  contentSpaces(): boolean {
+    if (/\s/.test(this.password?.toString())){
+      return true;
+    } else {
+      return  false;
+    }
+  }
+
+  contentUpper() {
+    if (/[A-Z]/.test(this.password?.toString())){
+      return false;
+    } else {
+      return  true;
+    }
+  }
+
+  contentLower() {
+    if (/[a-z]/.test(this.password?.toString())){
+      return false;
+    } else {
+      return  true;
+    }
+  }
+
+  contentDigits() {
+    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())){
+      return false;
+    } else {
+      return  true;
+    }
+  }
+
+
 }

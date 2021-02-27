@@ -33,7 +33,7 @@
         </span>
     </div>
 
-    <div class="mb-2" *ngIf="emailClient.touched && isExistEmail()">
+    <div class="mb-2" *ngIf="emailClient.dirty && isExistEmail()">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
           ¡Hay una cuenta enlazada a este correo!
@@ -60,27 +60,40 @@
     </div>
 
 
-    <div class="mb-2" *ngIf="false">
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentUpper()">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Debe contener minimo 2 digitos!
+          ¡Se requieren mayusculas!
         </span>
     </div>
 
-    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty()">
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentLower()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren minusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentDigits()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Debe contener 2 digitos!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && contentSpaces()">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
           ¡No se aceptan espacios!
         </span>
     </div>
 
-    <div class="mb-2" *ngIf="passwordClient.dirty && isValidPassLenght()">
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && isValidPassLenght()">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
           ¡Se requiere minimo 8 caracteres!
         </span>
     </div>
-
 
 
     <div class="input-group mb-4 mr-sm-2">
@@ -94,13 +107,13 @@
              pattern="[a-zA-Z0-9]*" required>
     </div>
 
-    <div class="mb-2" *ngIf="!passwordConfirm.valid && passwordConfirm.touched">
+    <div class="mb-2" *ngIf="!passwordConfirm.valid && passwordConfirm.dirty && !isEmpty()">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
             ¡Debes confirmar la contraseña!
         </span>
     </div>
-    <div class="mb-2" *ngIf="!isEqual() &&  passwordConfirm.touched">
+    <div class="mb-2" *ngIf="!isEqual() &&  passwordConfirm.dirty ">
         <span style="color: #D1D1D1">
           <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
             Intenta que coincidan las contraseñas

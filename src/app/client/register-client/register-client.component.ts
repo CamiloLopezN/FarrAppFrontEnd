@@ -52,8 +52,6 @@ export class RegisterClientComponent implements OnInit {
         this.errorMessage = error.error.message;
       }
     );
-
-
   }
 
   ngOnInit(): void {

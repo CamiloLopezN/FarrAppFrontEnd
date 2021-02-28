@@ -33,11 +33,15 @@
         </span>
     </div>
 
-    <div class="mb-2" *ngIf="emailClient.dirty && isExistEmail()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Hay una cuenta enlazada a este correo!
-        </span>
+    <div class="mb-2" *ngIf="emailClient.valid  && isExistEmail()">
+      <div class="window-notice" id="window-notice">
+        <div class="content">
+          <div class="content-text">¡Hay una cuenta enlazada a este correo, presiona el botón para iniciar sesión!
+          <div class="content-buttons"><a class="nav-item nav-link active" [routerLink]="['/login']">
+            Aceptar <span class="sr-only">(current)</span></a></div>
+        </div>
+      </div>
+    </div>
     </div>
 
     <div class="input-group mb-4 mr-sm-2">

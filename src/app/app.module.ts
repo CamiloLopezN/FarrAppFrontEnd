@@ -21,6 +21,7 @@ import {EditClientComponent} from './client/edit-client/edit-client.component';
 import { ProfileCompanyComponent } from './company/profile-company/profile-company.component';
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     EditClientComponent,
     ProfileCompanyComponent,
     EditCompanyComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    ProfileAdminComponent
   ],
   imports: [
     BrowserModule,

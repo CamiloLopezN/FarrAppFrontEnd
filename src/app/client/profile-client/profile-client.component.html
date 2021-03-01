@@ -34,9 +34,41 @@
       </div>
     </div>
     <div class="d-flex justify-content-around mt-5">
-      <button type="button" class="btn btn-danger">Eliminar cuenta</button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta
+      </button>
       <button type="button" class="btn btn-primary" (click)="edit()">Editar</button>
       <button type="button" class="btn btn-success" [routerLink]="['']">Regresar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="ralewayFont modal-title" id="exampleModalLabel">Eliminación de cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="text-center">
+        <fa-icon [icon]="faExclamationTriangle" class="fa-9x text-warning"></fa-icon>
+        <div class="ralewayFont modal-body">
+          <h5>
+            ¿Está seguro que desea eliminar su cuenta?
+          </h5>
+          <h6 style="opacity: 50%">
+            Está acción no se podra revertir
+          </h6>
+        </div>
+      </div>
+      <div class="modal-footer ralewayFont">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confimationModal"
+                data-dismiss="modal" (click)="sendReqRemove()">Aceptar
+        </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
+        </button>
+      </div>
     </div>
   </div>
 </div>

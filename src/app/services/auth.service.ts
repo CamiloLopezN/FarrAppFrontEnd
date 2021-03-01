@@ -81,4 +81,10 @@ export class AuthService {
     this.router.navigate(['/login']);
     this.notifyS.logOutExpired();
   }
+
+  logoutSessionDesact(): void {
+    this.logout();
+    this.router.navigate(['/login']);
+    this.notifyS.logOutDesact();
+  }
 }

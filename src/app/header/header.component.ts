@@ -13,6 +13,11 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   isLogged: boolean;
+  rol: string;
+  isAdmin: boolean;
+  isClient: boolean;
+  isCompany: boolean;
+
   faHome = faHome;
   faUserPlus = faUserPlus;
   faUser = faUser;
@@ -32,15 +37,13 @@ export class HeaderComponent implements OnInit {
     this.authService.isLogged.subscribe(isLogged => {
       this.isLogged = isLogged;
     });
+    this.authService.roled.subscribe(rol => {
+      this.rol = rol;
+    });
   }
 
   logOut(): void {
     this.authService.logoutSession();
-  }
-
-  viewProfile(): void {
-    this.router.navigate(['client']);
-
   }
 
   edit(): void {

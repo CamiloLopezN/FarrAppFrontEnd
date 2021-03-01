@@ -36,14 +36,46 @@
         Eventos
       </a>
 
-      <a class="dropdown-item" [routerLink]="['/client']" [routerLinkActive]="['activado']" *ngIf="isLogged">
+      <a class="dropdown-item" [routerLink]="['client']" [routerLinkActive]="['activado']" *ngIf="isLogged && rol=='client'">
         <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
         </div>
         Perfil
       </a>
 
-      <a class="dropdown-item" [routerLink]="['/client/security']" [routerLinkActive]="['activado']" *ngIf="isLogged">
+      <a class="dropdown-item" [routerLink]="['company']" [routerLinkActive]="['activado']"
+         *ngIf="isLogged && rol=='company'">
+        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        Perfil
+      </a>
+
+      <a class="dropdown-item" [routerLinkActive]="['activado']" *ngIf="isLogged && rol=='superadmin'">
+        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        Perfil
+      </a>
+
+      <a class="dropdown-item" [routerLink]="['/client/security']" [routerLinkActive]="['activado']"
+         *ngIf="isLogged && rol=='client'">
+        <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
+          <fa-icon [icon]="faKey"></fa-icon>
+        </div>
+        Seguridad
+      </a>
+
+      <a class="dropdown-item" [routerLink]="['/company/security']" [routerLinkActive]="['activado']"
+         *ngIf="isLogged && rol=='company'">
+        <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
+          <fa-icon [icon]="faKey"></fa-icon>
+        </div>
+        Seguridad
+      </a>
+
+      <a class="dropdown-item" [routerLink]="['/admin/security']" [routerLinkActive]="['activado']"
+         *ngIf="isLogged && rol=='superadmin'">
         <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
           <fa-icon [icon]="faKey"></fa-icon>
         </div>

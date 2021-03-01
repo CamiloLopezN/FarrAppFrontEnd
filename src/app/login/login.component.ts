@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
   emailRetrieve: string;
   isUserEmailRetrieve = true;
 
+  rol;
+
   errorMessage: string;
 
   constructor(
@@ -48,7 +50,14 @@ export class LoginComponent implements OnInit {
         this.isPass = true;
         this.isUserMail = true;
         this.notifyS.sucessLogin();
-        this.redirect();
+        this.authService.roled.subscribe(rol =>
+          this.rol = rol
+        );
+        if (this.rol == 'superAdmin') {
+          this.redirectAdmin();
+        } else {
+          this.redirect();
+        }
       },
       error => {
         this.errorMessage = error.error.message;
@@ -82,7 +91,6 @@ export class LoginComponent implements OnInit {
     return this.e_mail === 'josedaza@gmail.com';
   }
 
-
   isEmailExistTwo(): boolean {
     return this.emailRetrieve === 'josedaza@gmail.com';
   }
@@ -92,9 +100,13 @@ export class LoginComponent implements OnInit {
 
   }
 
+  redirectAdmin(): void {
+    this.router.navigate(['admin/dashboard']);
+
+  }
+
   retrievePass(): void {
     this.isUserEmailRetrieve = this.isEmailExistTwo();
-    console.log('Email enviado');
   }
 
   resetEmailRetrieve(): void {

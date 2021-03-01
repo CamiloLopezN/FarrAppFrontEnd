@@ -6,7 +6,7 @@ import {AuthService} from './services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CompanySesionGuard implements CanActivate {
+export class AdminSesionGuard implements CanActivate {
   isLogged: boolean;
   rol: string;
 
@@ -23,7 +23,7 @@ export class CompanySesionGuard implements CanActivate {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
-    if (this.rol != 'company') {
+    if (this.rol != 'superAdmin') {
       this.router.navigate(['']);
       return false;
     }
@@ -35,5 +35,4 @@ export class CompanySesionGuard implements CanActivate {
     this.router.navigate(['login']);
     return false;
   }
-
 }

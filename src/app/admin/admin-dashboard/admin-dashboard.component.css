@@ -1,0 +1,14 @@
+.testp {
+  font-style: inherit;
+  background: #252427;
+}
+
+.dropdown-divider {
+  border: 2px solid #2b2a30;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.holi :hover{
+  background-color: #3a3b3c;
+}

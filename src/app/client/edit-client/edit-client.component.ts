@@ -25,7 +25,6 @@ export class EditClientComponent implements OnInit {
     private ns: NotificationService
   ) {
     this.client = {
-      id: '',
       name: '',
       lastname: '',
       birthdate: '',
@@ -39,11 +38,13 @@ export class EditClientComponent implements OnInit {
 
   getUser(): void {
     this.clientS.getUser().subscribe((res) => {
+        const bdate = res.dateConverter.split('-');
+        // tslint:disable-next-line:radix
+        const date = new Date(Number.parseInt(bdate[2]), Number.parseInt(bdate[1]), Number.parseInt(bdate[0]));
         this.client = {
-          id: res.search._id,
           name: res.search.name,
           lastname: res.search.lastname,
-          birthdate: this.datePipe.transform(res.search.birthdate, 'yyyy-MM-dd'),
+          birthdate: this.datePipe.transform(date, 'yyyy-MM-dd'),
           gender: res.search.gender
         };
       },
@@ -64,7 +65,7 @@ export class EditClientComponent implements OnInit {
   save(): void {
     const vBirth = this.client.birthdate.split('-');
     this.client.birthdate = vBirth[2] + '-' + vBirth[1] + '-' + vBirth[0];
-    console.log(this.client.birthdate);
+    console.log(this.client);
     this.clientS.editUser(this.client).subscribe(() => {
       this._router.navigate(['/client']);
       this.ns.succesEditClient();

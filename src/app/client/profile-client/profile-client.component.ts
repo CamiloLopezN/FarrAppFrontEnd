@@ -54,15 +54,20 @@ export class ProfileClientComponent implements OnInit {
     );
   }
 
-  removeUser(): void {
-    this._router.navigate(['/login']);
-  }
-
   changeView(): void {
     this.isRemove = !this.isRemove;
   }
 
   edit(): void {
     this._router.navigate(['client/edit']);
+  }
+
+  sendReqRemove(): void {
+    this.clientS.removeUser().subscribe(() => {
+        this.authS.logoutSessionDesact();
+      },
+      () => {
+        this.authS.logoutExpired();
+      });
   }
 }

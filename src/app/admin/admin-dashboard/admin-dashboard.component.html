@@ -1,0 +1,28 @@
+<div class="text-white p-3">
+  <h2>
+    ¡Bienvenido!
+  </h2>
+  <div class="pl-5 pr-5">
+    <div class="text-center h4 testp mt-5 pt-3 pb-3" style="border-radius: 10px">
+        <a class="text-white" [routerLink]="['admin/profile']">
+          <fa-icon [icon]="faUserEdit" class="d-block fa-2x"></fa-icon>
+          Perfil
+        </a>
+      <div class="dropdown-divider"></div>
+      <a class="text-white" [routerLink]="['admin/client']">
+        <fa-icon [icon]="faUser" class="d-block fa-2x"></fa-icon>
+        Usuarios
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="text-white" [routerLink]="['admin/client/register']">
+        <fa-icon [icon]="faUserPlus" class="d-block fa-2x"></fa-icon>
+        Crear usuario
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="text-white" [routerLink]="['admin/company']">
+        <fa-icon [icon]="faUsers" class="d-block fa-2x"></fa-icon>
+        Empresas
+      </a>
+    </div>
+  </div>
+</div>

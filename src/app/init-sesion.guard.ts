@@ -17,7 +17,6 @@ export class InitSesionGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    this.authService.checkToken();
     this.authService.isLogged.subscribe(isLogged => {
       this.isLogged = isLogged;
     });

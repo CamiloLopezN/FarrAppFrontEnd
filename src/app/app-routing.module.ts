@@ -12,6 +12,7 @@ import {EditCompanyComponent} from './company/edit-company/edit-company.componen
 import {CompanySesionGuard} from './company-sesion.guard';
 import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
 import {AdminSesionGuard} from './admin-sesion.guard';
+import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,9 @@ const routes: Routes = [
   {
     path: 'admin/dashboard', canActivate: [AdminSesionGuard], component: AdminDashboardComponent
   },
-
+  {
+    path: 'admin/profile', canActivate: [AdminSesionGuard], component: ProfileAdminComponent
+  }
 ];
 
 @NgModule({

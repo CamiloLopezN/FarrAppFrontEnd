@@ -18,7 +18,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService) {
-    this.checkToken();
+    //this.checkToken();
   }
 
   get isLogged(): Observable<boolean> {

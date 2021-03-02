@@ -37,7 +37,7 @@
       <div class="window-notice" id="window-notice">
         <div class="content">
           <div class="content-text">¡Hay una cuenta enlazada a este correo, presiona el botón para iniciar sesión!
-            <div class="content-buttons"><a class="nav-item nav-link active" [routerLink]="['/login']">
+            <div class="content-buttons"><a class="nav-item nav-link active" [routerLink]="['/D']">
               Aceptar <span class="sr-only">(current)</span></a></div>
           </div>
         </div>
@@ -141,7 +141,7 @@
         </div>
       </div>
       <input mdbInput  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-             type = "number"
+             type = "text"
              maxlength = "10" id="contact_Number" class="form-control" placeholder="Numero de contacto"
              #contact_Number="ngModel" name="contact_Number" [(ngModel)]="contactNumber"   required  >
     </div>

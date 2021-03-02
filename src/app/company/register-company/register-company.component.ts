@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {faLocationArrow, faPhone, faUser} from '@fortawesome/free-solid-svg-icons';
 import {faIdCard} from '@fortawesome/free-solid-svg-icons';
@@ -39,6 +39,7 @@ export class RegisterCompanyComponent implements OnInit {
   constructor(private router: Router, private companyService: CompanyService) {
 
   }
+
   ngOnInit(): void {
   }
 
@@ -53,13 +54,16 @@ export class RegisterCompanyComponent implements OnInit {
     };
     this.companyService.register(this.company).subscribe((res) => {
         this.router.navigate(['login']);
+        console.log(res);
+        this.co
       },
       error => {
-      console.log(error.error)
+        console.log(error.error);
         this.errorMessage = error.error.message;
       }
     );
   }
+
   redirect(): void {
     this.router.navigate(['']);
   }
@@ -93,40 +97,40 @@ export class RegisterCompanyComponent implements OnInit {
 
 
   contentSpaces(): boolean {
-    if (/\s/.test(this.password?.toString())){
+    if (/\s/.test(this.password?.toString())) {
       return true;
     } else {
-      return  false;
+      return false;
     }
   }
 
   contentUpper() {
-    if (/[A-Z]/.test(this.password?.toString())){
+    if (/[A-Z]/.test(this.password?.toString())) {
       return false;
     } else {
-      return  true;
+      return true;
     }
   }
 
   contentLower() {
-    if (/[a-z]/.test(this.password?.toString())){
+    if (/[a-z]/.test(this.password?.toString())) {
       return false;
     } else {
-      return  true;
+      return true;
     }
   }
 
   contentDigits() {
-    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())){
+    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())) {
       return false;
     } else {
-      return  true;
+      return true;
     }
   }
 
 
   isMaxLength() {
-    console.log("CONTACT: " + this.contactNumber?.length);
+    console.log('CONTACT: ' + this.contactNumber?.length);
     return this.contactNumber?.length < 10;
   }
 

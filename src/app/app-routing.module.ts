@@ -10,6 +10,7 @@ import {InitSesionGuard} from './init-sesion.guard';
 import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
 import {EditCompanyComponent} from './company/edit-company/edit-company.component';
 import {CompanySesionGuard} from './company-sesion.guard';
+import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 
 const routes: Routes = [
   {
@@ -33,9 +34,11 @@ const routes: Routes = [
     path: 'company', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
   },
   {
-    path: 'company/edit', canActivate: [CompanySesionGuard],component: EditCompanyComponent
-  }
-];
+    path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent
+  },
+  {
+    path: 'company/register', component: RegisterCompanyComponent
+  }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -8,6 +8,7 @@ import {faAt} from '@fortawesome/free-solid-svg-icons/faAt';
 import {faSlideshare} from '@fortawesome/free-brands-svg-icons';
 import {CompanyRegistration} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-register-company',
@@ -36,7 +37,7 @@ export class RegisterCompanyComponent implements OnInit {
   nit: string;
   errorMessage: string;
 
-  constructor(private router: Router, private companyService: CompanyService) {
+  constructor(private router: Router, private companyService: CompanyService, private  notificationService: NotificationService) {
 
   }
 
@@ -55,11 +56,16 @@ export class RegisterCompanyComponent implements OnInit {
     this.companyService.register(this.company).subscribe((res) => {
         this.router.navigate(['login']);
         console.log(res);
-        this.co
       },
       error => {
-        console.log(error.error);
         this.errorMessage = error.error.message;
+        if (this.isExistEmail()) {
+          this.notificationService.emailExist();
+        } else if (this.isExistName()) {
+          this.notificationService.nameExist();
+        } else if (this.isExistNit()) {
+          this.notificationService.nitExist();
+        }
       }
     );
   }
@@ -81,6 +87,13 @@ export class RegisterCompanyComponent implements OnInit {
     return this.errorMessage === 'El correo electronico ingresado ya existe';
   }
 
+  isExistNit(): boolean {
+    return this.errorMessage === 'Ya existe una empresa registrada con ese identificador de NIT';
+  }
+
+  isExistName(): boolean {
+    return this.errorMessage === 'Ya existe una empresa registrada con ese nombre';
+  }
 
   isInvalid(): boolean {
     return !this.isEqual();

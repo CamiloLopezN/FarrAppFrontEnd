@@ -33,17 +33,6 @@
         </span>
     </div>
 
-    <div class="mb-2" *ngIf="emailCompany.valid  && isExistEmail()">
-      <div class="window-notice" id="window-notice">
-        <div class="content">
-          <div class="content-text">¡Hay una cuenta enlazada a este correo, presiona el botón para iniciar sesión!
-            <div class="content-buttons"><a class="nav-item nav-link active" [routerLink]="['/D']">
-              Aceptar <span class="sr-only">(current)</span></a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="input-group mb-4 mr-sm-2">
       <div class="input-group-prepend">
         <div class="input-group-text">

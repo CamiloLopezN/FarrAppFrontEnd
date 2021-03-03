@@ -1,0 +1,14 @@
+
+.holi {
+  background: #252427;
+  padding-left: 10%;
+  padding-right: 10%;
+  cursor: pointer;
+}
+
+
+.holi :hover {
+  background: #4c4444;
+  transition: 0.2s !important;
+}
+

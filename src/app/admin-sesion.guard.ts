@@ -6,7 +6,7 @@ import {AuthService} from './services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class InitSesionGuard implements CanActivate {
+export class AdminSesionGuard implements CanActivate {
   isLogged: boolean;
   rol: string;
 
@@ -23,7 +23,7 @@ export class InitSesionGuard implements CanActivate {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
-    if (this.rol != 'client') {
+    if (this.rol != 'superAdmin') {
       this.router.navigate(['']);
       return false;
     }
@@ -34,7 +34,5 @@ export class InitSesionGuard implements CanActivate {
 
     this.router.navigate(['login']);
     return false;
-
   }
-
 }

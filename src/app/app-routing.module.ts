@@ -9,6 +9,12 @@ import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {InitSesionGuard} from './init-sesion.guard';
 import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
 import {EditCompanyComponent} from './company/edit-company/edit-company.component';
+import {CompanySesionGuard} from './company-sesion.guard';
+import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import {AdminSesionGuard} from './admin-sesion.guard';
+import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
+import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
+import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
 
 const routes: Routes = [
   {
@@ -21,7 +27,7 @@ const routes: Routes = [
     path: 'login', canActivate: [AuthGuard], component: LoginComponent
   },
   {
-    path: 'client/register', canActivate: [AuthGuard], component: RegisterClientComponent
+    path: 'client/register', component: RegisterClientComponent
   },
   {
     path: 'client', canActivate: [InitSesionGuard], component: ProfileClientComponent
@@ -29,10 +35,23 @@ const routes: Routes = [
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
   },
   {
-    path: 'company', component: ProfileCompanyComponent
+    path: 'company', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
   },
   {
-    path: 'company/edit', component: EditCompanyComponent
+    path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent
+  },
+  {
+    path: 'admin/dashboard', canActivate: [AdminSesionGuard], component: AdminDashboardComponent
+  },
+  {
+    path: 'admin/profile', canActivate: [AdminSesionGuard], component: ProfileAdminComponent
+  }
+  ,
+  {
+    path: 'admin/client', canActivate: [AdminSesionGuard], component: ClientsAdminComponent
+  },
+  {
+    path: 'admin/client/:id', component: ClientProfileComponent
   }
 ];
 

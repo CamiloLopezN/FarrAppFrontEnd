@@ -59,6 +59,7 @@ export class SecurityClientComponent implements OnInit {
     console.log(this.client);
     this.clientService.changePass(this.client).subscribe((res) => {
         this.router.navigate(['login']);
+        this.notifyS.succesChangePass();
       },
       error => {
         this.errorMessage = error.error.message;

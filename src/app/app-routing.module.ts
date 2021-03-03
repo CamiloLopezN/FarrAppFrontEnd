@@ -16,6 +16,7 @@ import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.compone
 import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
 import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
 import {SecurityClientComponent} from './client/security-client/security-client.component';
+import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,9 @@ const routes: Routes = [
   },
   {
     path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent
+  },
+  {
+    path: 'company/register', component: RegisterCompanyComponent
   },
   {
     path: 'admin/dashboard', canActivate: [AdminSesionGuard], component: AdminDashboardComponent

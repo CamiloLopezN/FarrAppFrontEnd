@@ -25,6 +25,7 @@ import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.compone
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
 import {SecurityClientComponent} from './client/security-client/security-client.component';
+import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {SecurityClientComponent} from './client/security-client/security-client.
     ProfileAdminComponent,
     ClientsAdminComponent,
     ClientProfileComponent,
-    SecurityClientComponent
+    SecurityClientComponent,
+    RegisterCompanyComponent
   ],
   imports: [
     BrowserModule,

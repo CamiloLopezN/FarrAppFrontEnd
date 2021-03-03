@@ -72,4 +72,29 @@ export class NotificationService {
   }
 
 
+  succesChangePass(): void {
+    this.nService.success('Estado del cliente', '¡Contraseña cambiada correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+  logOutDesact(): void {
+    this.nService.error('Estado de cuenta', 'Su cuenta está en proceso desactivación.', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesCreateCompany(): void {
+    this.nService.success('Estado de la compañia', '¡Se ha registrado tu petición correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

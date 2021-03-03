@@ -1,0 +1,11 @@
+#content_div_one_photo {
+}
+
+#padre {
+  position: relative;    /* para poder posicionar el texto de forma absoluta */
+  display: inline-block; /* para que solo ocupe el ancho de la imagen */
+}
+
+.card-title {
+  bottom: 0;             /* posicionada en la esquina inferior derecha */
+}

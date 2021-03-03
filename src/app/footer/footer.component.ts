@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {faFacebook} from '@fortawesome/free-brands-svg-icons/faFacebook';
 import {faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {faInstagram} from '@fortawesome/free-brands-svg-icons';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class FooterComponent implements OnInit {
   faTwitter = faTwitter;
   faInstagram = faInstagram;
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }

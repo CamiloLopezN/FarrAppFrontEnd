@@ -18,9 +18,6 @@ import {ClientProfileComponent} from './admin/client-profile/client-profile.comp
 
 const routes: Routes = [
   {
-    path: '', component: MainPanelComponent
-  },
-  {
     path: 'mainPanel', component: MainPanelComponent
   },
   {
@@ -52,7 +49,9 @@ const routes: Routes = [
   },
   {
     path: 'admin/client/:id', component: ClientProfileComponent
-  }
+  },
+  {path: '', redirectTo: 'mainPanel', pathMatch: 'full'},
+  {path: '**', component: MainPanelComponent}
 ];
 
 @NgModule({

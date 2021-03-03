@@ -53,4 +53,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+  succesChangePass(): void {
+    this.nService.success('Estado del cliente', '¡Contraseña cambiada correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
 }

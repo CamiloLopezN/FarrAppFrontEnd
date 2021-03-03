@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {ClientRegistration, ClientResponse} from '../model/client';
+import {ClientAccount, ClientRegistration, ClientResponse} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,32 @@ export class ClientService {
       );
   }
 
+  getUserSecurity(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/client/account`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  changePass(client: ClientAccount): Observable<any> {
+    console.log(client);
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.put<any>(`${environment.backend}/api/client/account`, client, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
   register(client: ClientRegistration): Observable<any> {
     console.log(client);
     return this.http.post<any>(`${environment.backend}/api/client/`, client)

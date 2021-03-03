@@ -13,6 +13,7 @@ import {CompanySesionGuard} from './company-sesion.guard';
 import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
 import {AdminSesionGuard} from './admin-sesion.guard';
 import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
+import {SecurityClientComponent} from './client/security-client/security-client.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,9 @@ const routes: Routes = [
     path: 'client', canActivate: [InitSesionGuard], component: ProfileClientComponent
   }, {
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
+  },
+  {
+    path: 'client/security', canActivate: [InitSesionGuard], component: SecurityClientComponent
   },
   {
     path: 'company', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent

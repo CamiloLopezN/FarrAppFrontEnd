@@ -4,14 +4,18 @@ import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {ClientResponse} from '../model/client';
+import {ClientAccount} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
+
   constructor(private http: HttpClient) {
   }
+
+
 
   getUser(): Observable<any> {
     const headers = new HttpHeaders({
@@ -19,6 +23,34 @@ export class ClientService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.get<any>(`${environment.backend}/api/client/profile`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+
+  getUserSecurity(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/client/account`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  changePass(client: ClientAccount): Observable<any> {
+    console.log(client);
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.put<any>(`${environment.backend}/api/client/account`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;

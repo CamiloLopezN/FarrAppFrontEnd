@@ -22,6 +22,7 @@ import { ProfileCompanyComponent } from './company/profile-company/profile-compa
 import { EditCompanyComponent } from './company/edit-company/edit-company.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
+import { SecurityClientComponent } from './client/security-client/security-client.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
     ProfileCompanyComponent,
     EditCompanyComponent,
     AdminDashboardComponent,
-    ProfileAdminComponent
+    ProfileAdminComponent,
+    SecurityClientComponent
   ],
   imports: [
     BrowserModule,

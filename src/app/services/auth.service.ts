@@ -16,6 +16,7 @@ const helper = new JwtHelperService();
 export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
+  private role = new BehaviorSubject<string>('norole');
 
   constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService) {
     this.checkToken();
@@ -25,8 +26,8 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  getRole(): string {
-    return helper.decodeToken(localStorage.getItem('token')).role[0].name;
+  get roled(): Observable<string> {
+    return this.role.asObservable();
   }
 
   saveToken(token: string): void {
@@ -44,24 +45,29 @@ export class AuthService {
   public checkToken(): void {
     const userToken = localStorage.getItem('token');
     const isExpired = helper.isTokenExpired(userToken);
-    console.log('is Expired' + isExpired);
 
-    isExpired ? this.logoutExpired() : this.loggedIn.next(true);
+    isExpired ? this.logoutExpired() : this.changeLogAndRole();
   }
 
   login(client: ClientLogin): Observable<any> {
     return this.httpClient.post(`${environment.backend}/api/client/signin`, client).pipe(
       map((res: any) => {
         this.saveToken(res.token);
-        this.loggedIn.next(true);
+        this.changeLogAndRole();
         return res;
       })
     );
   }
 
+  changeLogAndRole(): void {
+    this.loggedIn.next(true);
+    this.role.next(helper.decodeToken(localStorage.getItem('token')).role[0].name);
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     this.loggedIn.next(false);
+    this.role.next('norole');
   }
 
   logoutSession(): void {
@@ -74,5 +80,11 @@ export class AuthService {
     this.logout();
     this.router.navigate(['/login']);
     this.notifyS.logOutExpired();
+  }
+
+  logoutSessionDesact(): void {
+    this.logout();
+    this.router.navigate(['/login']);
+    this.notifyS.logOutDesact();
   }
 }

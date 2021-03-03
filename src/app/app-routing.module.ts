@@ -9,6 +9,10 @@ import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {InitSesionGuard} from './init-sesion.guard';
 import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
 import {EditCompanyComponent} from './company/edit-company/edit-company.component';
+import {CompanySesionGuard} from './company-sesion.guard';
+import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import {AdminSesionGuard} from './admin-sesion.guard';
+import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
 
 const routes: Routes = [
   {
@@ -29,10 +33,16 @@ const routes: Routes = [
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
   },
   {
-    path: 'company', component: ProfileCompanyComponent
+    path: 'company', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
   },
   {
-    path: 'company/edit', component: EditCompanyComponent
+    path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent
+  },
+  {
+    path: 'admin/dashboard', canActivate: [AdminSesionGuard], component: AdminDashboardComponent
+  },
+  {
+    path: 'admin/profile', canActivate: [AdminSesionGuard], component: ProfileAdminComponent
   }
 ];
 

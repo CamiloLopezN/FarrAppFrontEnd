@@ -14,7 +14,6 @@ export interface ClientLogin {
 
 export interface ClientResponse {
 
-  id: string;
   name: string;
   lastname: string;
   birthdate: string;

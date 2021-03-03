@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
@@ -10,9 +10,10 @@ import {ClientResponse} from '../model/client';
 })
 export class ClientService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getUser(): Observable<any>{
+  getUser(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -25,12 +26,25 @@ export class ClientService {
       );
   }
 
-  editUser(client: ClientResponse): Observable<any>{
+  editUser(client: ClientResponse): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.put<any>(`${environment.backend}/api/client/`, client,{headers})
+    return this.http.put<any>(`${environment.backend}/api/client/`, client, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  removeUser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/client/req-desactive`, {headers})
       .pipe(
         map((res: any) => {
           return res;

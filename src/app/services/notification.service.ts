@@ -27,6 +27,15 @@ export class NotificationService {
     });
   }
 
+  logOutDesact(): void {
+    this.nService.error('Estado de cuenta', 'Su cuenta está en proceso desactivación.', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
   logOutExpired(): void {
     this.nService.warn('Estado de cuenta', 'Su sesión ha expirado', {
       timeOut: 3000,

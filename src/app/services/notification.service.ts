@@ -53,13 +53,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
-  succesChangePass(): void {
-    this.nService.success('Estado del cliente', '¡Contraseña cambiada correctamente!', {
+
+  succesEditAdmin(): void {
+    this.nService.success('Estado del administrador', 'Administrador editado correctamente', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true
     });
   }
-
 }

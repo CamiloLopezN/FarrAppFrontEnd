@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -23,8 +24,8 @@ import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.c
 import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
 import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
-import {SecurityClientComponent} from './client/security-client/security-client.component';
+import { ClientProfileComponent } from './admin/client-profile/client-profile.component';
+import { EditAdminComponent } from './admin/edit-admin/edit-admin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import {SecurityClientComponent} from './client/security-client/security-client.
     ProfileAdminComponent,
     ClientsAdminComponent,
     ClientProfileComponent,
-    SecurityClientComponent
+    EditAdminComponent
   ],
   imports: [
     BrowserModule,

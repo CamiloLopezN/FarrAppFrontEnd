@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {ClientResponse} from '../model/client';
+import {ClientRegistration, ClientResponse} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +32,16 @@ export class ClientService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.put<any>(`${environment.backend}/api/client/`, client, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  register(client: ClientRegistration): Observable<any> {
+    console.log(client);
+    return this.http.post<any>(`${environment.backend}/api/client/`, client)
       .pipe(
         map((res: any) => {
           return res;

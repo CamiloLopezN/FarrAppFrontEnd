@@ -5,7 +5,7 @@ import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {faCalendarDay} from '@fortawesome/free-solid-svg-icons';
 import {faIdCard} from '@fortawesome/free-solid-svg-icons';
 import {faLock, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/';
-import {ClientServiceService} from '../../services/client-service.service';
+import {ClientService} from '../../services/client.service';
 
 @Component({
   selector: 'app-register-client',
@@ -32,7 +32,7 @@ export class RegisterClientComponent implements OnInit {
   errorMessage: string;
 
 
-  constructor(private router: Router, private clientServiceService: ClientServiceService) {
+  constructor(private router: Router, private clientService: ClientService) {
   }
 
   onSubmit(): void {
@@ -45,7 +45,7 @@ export class RegisterClientComponent implements OnInit {
       e_mail: this.email,
       password: this.password
     };
-    this.clientServiceService.register(this.client).subscribe((res) => {
+    this.clientService.register(this.client).subscribe((res) => {
         this.router.navigate(['login']);
       },
       error => {
@@ -97,7 +97,7 @@ export class RegisterClientComponent implements OnInit {
     }
   }
 
-  contentUpper() {
+  contentUpper(): boolean {
     if (/[A-Z]/.test(this.password?.toString())){
       return false;
     } else {
@@ -105,7 +105,7 @@ export class RegisterClientComponent implements OnInit {
     }
   }
 
-  contentLower() {
+  contentLower(): boolean {
     if (/[a-z]/.test(this.password?.toString())){
       return false;
     } else {
@@ -113,7 +113,7 @@ export class RegisterClientComponent implements OnInit {
     }
   }
 
-  contentDigits() {
+  contentDigits(): boolean {
     if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())){
       return false;
     } else {

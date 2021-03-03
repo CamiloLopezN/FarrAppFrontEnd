@@ -62,4 +62,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesChangePass(): void {
+    this.nService.success('Estado de cuenta', 'Contraseña editada con éxito', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

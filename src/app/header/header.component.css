@@ -1,11 +1,119 @@
-.navbar{
+.navbar {
   background: #252427;
   color: #FFFFFF;
 }
 
-#FarrAppHeader{
+#FarrAppHeader {
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
   line-height: 17px;
+}
+
+@keyframes multicolor {
+  0% {
+    color: #252427;
+  }
+  33% {
+    color: #ff1a43;
+  }
+  66% {
+    color: #bf72fb;
+  }
+  100% {
+    color: #FFFFFF;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0rem);
+    opacity: 1;
+  }
+  0% {
+    transform: translateX(1rem);
+    opacity: 0;
+  }
+}
+
+.animate {
+  animation-duration: 0.3s;
+  -webkit-animation-duration: 0.3s;
+  animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
+
+.border-card {
+  border: 2px solid #2f3031;
+  background: #252427;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.icon {
+  background: #3a3b3c;
+  color: white
+}
+
+.dropdown-menu{
+  width: 96vw;
+}
+
+.dropdown-item{
+  color: #FFFFFF;
+  font-size: 20px;
+  transition: 0.15s;
+  margin-top: 10px;
+}
+
+.dropdown-item:hover{
+  background-color: #3b3c3c;
+}
+
+.dropdown-item:active{
+  background-color: #2b2a30;
+}
+
+.dropdown-item:hover .icon{
+  background-color: #4e4f50;
+}
+
+.dropdown-item:hover .event-icon{
+  animation: multicolor 3s infinite;
+}
+
+.iconRedSocial{
+  color: #FFFFFF;
+}
+
+.iconRedSocial :hover{
+  animation: multicolor 3s infinite;
+}
+
+.activado{
+  background-color: #3b3c3c;
+  padding-left: 10px !important;
 }

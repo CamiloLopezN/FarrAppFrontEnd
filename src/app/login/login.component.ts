@@ -3,6 +3,7 @@ import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faExclamationCirc
 import {Router} from '@angular/router';
 import {ClientLogin} from '../model/client';
 import {AuthService} from '../services/auth.service';
+import {NotificationService} from '../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,14 @@ export class LoginComponent implements OnInit {
   emailRetrieve: string;
   isUserEmailRetrieve = true;
 
+  rol;
+
   errorMessage: string;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private notifyS: NotificationService
   ) {
   }
 
@@ -45,7 +49,15 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.client).subscribe(() => {
         this.isPass = true;
         this.isUserMail = true;
-        this.redirect();
+        this.notifyS.sucessLogin();
+        this.authService.roled.subscribe(rol =>
+          this.rol = rol
+        );
+        if (this.rol == 'superAdmin') {
+          this.redirectAdmin();
+        } else {
+          this.redirect();
+        }
       },
       error => {
         this.errorMessage = error.error.message;
@@ -79,7 +91,6 @@ export class LoginComponent implements OnInit {
     return this.e_mail === 'josedaza@gmail.com';
   }
 
-
   isEmailExistTwo(): boolean {
     return this.emailRetrieve === 'josedaza@gmail.com';
   }
@@ -89,9 +100,13 @@ export class LoginComponent implements OnInit {
 
   }
 
+  redirectAdmin(): void {
+    this.router.navigate(['admin/dashboard']);
+
+  }
+
   retrievePass(): void {
     this.isUserEmailRetrieve = this.isEmailExistTwo();
-    console.log('Email enviado');
   }
 
   resetEmailRetrieve(): void {

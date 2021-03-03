@@ -9,8 +9,22 @@ import {RegisterClientComponent} from './client/register-client/register-client.
 import {HeaderComponent} from './header/header.component';
 import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import { MainPanelComponent } from './main-panel/main-panel.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {MainPanelComponent} from './main-panel/main-panel.component';
+import {ProfileClientComponent} from './client/profile-client/profile-client.component';
+import {DatePipe} from '@angular/common';
+import {NgxSpinnerModule} from 'ngx-spinner';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {InterceptorService} from './services/interceptor.service';
+import {SimpleNotificationsModule} from 'angular2-notifications';
+import {EditClientComponent} from './client/edit-client/edit-client.component';
+import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
+import {EditCompanyComponent} from './company/edit-company/edit-company.component';
+import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
+import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ClientProfileComponent } from './admin/client-profile/client-profile.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +33,31 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     RegisterClientComponent,
     LoginComponent,
     HeaderComponent,
-    MainPanelComponent
+    MainPanelComponent,
+    ProfileClientComponent,
+    EditClientComponent,
+    ProfileCompanyComponent,
+    EditCompanyComponent,
+    AdminDashboardComponent,
+    ProfileAdminComponent,
+    ClientsAdminComponent,
+    ClientProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
-  providers: [],
+  providers: [DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

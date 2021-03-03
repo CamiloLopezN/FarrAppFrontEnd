@@ -25,6 +25,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/fonts/customfont.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
@@ -92,6 +93,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/assets/fonts/customfont.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [

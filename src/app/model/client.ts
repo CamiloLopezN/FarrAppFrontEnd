@@ -1,4 +1,4 @@
-export interface Client {
+export interface ClientRegistration {
   name: string;
   lastname: string;
   birthdate: string;

@@ -3,19 +3,15 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {ClientResponse} from '../model/client';
-import {ClientAccount} from '../model/client';
+import {ClientAccount, ClientRegistration, ClientResponse} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
-
   constructor(private http: HttpClient) {
   }
-
-
 
   getUser(): Observable<any> {
     const headers = new HttpHeaders({
@@ -30,6 +26,18 @@ export class ClientService {
       );
   }
 
+  editUser(client: ClientResponse): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.put<any>(`${environment.backend}/api/client/`, client, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 
   getUserSecurity(): Observable<any> {
     const headers = new HttpHeaders({
@@ -57,13 +65,9 @@ export class ClientService {
         })
       );
   }
-
-  editUser(client: ClientResponse): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.put<any>(`${environment.backend}/api/client/`, client, {headers})
+  register(client: ClientRegistration): Observable<any> {
+    console.log(client);
+    return this.http.post<any>(`${environment.backend}/api/client/`, client)
       .pipe(
         map((res: any) => {
           return res;

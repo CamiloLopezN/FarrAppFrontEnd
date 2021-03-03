@@ -36,7 +36,7 @@
     <div class="d-flex justify-content-around mt-5">
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta
       </button>
-      <button type="button" class="btn btn-primary" (click)="edit()">Editar</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['edit']" >Editar</button>
       <button type="button" class="btn btn-success" [routerLink]="['']">Regresar</button>
     </div>
   </div>

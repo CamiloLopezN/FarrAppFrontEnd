@@ -1,1 +1,179 @@
-<p>register-client works!</p>
+<div class="container-fluid">
+
+  <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()" class="text-center p-3">
+
+    <p id="createAccountTittle" class="h4 p-4">Crear cuenta de usuario</p>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+
+      <input type="text" class="form-control " placeholder="Nombre"
+             #firstNameClient="ngModel" name="firstNameClient" [(ngModel)]="nameClient" required>
+    </div>
+
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="text" class="form-control" placeholder="Apellido"
+             #lastNameClient="ngModel" name="lastNameClient" [(ngModel)]="lastName" required>
+    </div>
+
+    <div class="mb-2" *ngIf="!emailClient.valid && emailClient.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Utiliza un formato valido!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="emailClient.valid  && isExistEmail()">
+      <div class="window-notice" id="window-notice">
+        <div class="content">
+          <div class="content-text">¡Hay una cuenta enlazada a este correo, presiona el botón para iniciar sesión!
+          <div class="content-buttons"><a class="nav-item nav-link active" [routerLink]="['/login']">
+            Aceptar <span class="sr-only">(current)</span></a></div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faUser" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="email" id="email" class="form-control" placeholder="Correo electronico"
+             #emailClient="ngModel" name="emailClient" [(ngModel)]="email" email
+             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+    </div>
+
+
+    <div class="mb-2" *ngIf="isDifferentTo() && passwordClient.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Esfuerzate un poco!
+        </span>
+    </div>
+
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentUpper()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren mayusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentLower()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren minusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentDigits()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Debe contener 2 digitos!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && contentSpaces()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡No se aceptan espacios!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && isValidPassLenght()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requiere minimo 8 caracteres!
+        </span>
+    </div>
+
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faLock" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="password" id="password" class="form-control" minlength="8" maxlength="100" placeholder="Contraseña"
+             #passwordClient="ngModel" name="passwordClient" [(ngModel)]="password"
+             pattern="[a-zA-Z0-9]*" required>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordConfirm.valid && passwordConfirm.dirty && !isEmpty()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+            ¡Debes confirmar la contraseña!
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="!isEqual() &&  passwordConfirm.dirty ">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+            Intenta que coincidan las contraseñas
+        </span>
+    </div>
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faLock" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="password" id="passwordConfirm" class="form-control" placeholder="Confirmar contraseña"
+             #passwordConfirm="ngModel" name="passwordConfirm" [(ngModel)]="passwordCon" required>
+    </div>
+
+
+    <div id="gender" class="mb-4">
+      <div class="form-check-inline">
+        <h5>Genero</h5>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="male" value="Masculino"
+                 #maleGender="ngModel" name="maleGender" [(ngModel)]="gender" required>Hombre
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="female" value="Femenino"
+                 #femaleGender="ngModel" name="femaleGender" [(ngModel)]="gender" required>Mujer
+        </label>
+      </div>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="other" value="Otro"
+                 #otherGender="ngModel" name="otherGender" [(ngModel)]="gender" required>Otro
+        </label>
+      </div>
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faCalendarDay" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput placeholder="Fecha de nacimiento" type="date" datepicker_format="dd-MM-yyyy" class="form-control"
+             #birthdateClient="ngModel" name="bithdateClient" [(ngModel)]="birthdate" required>
+    </div>
+
+
+    <div class="container p-5 w-75 col-md-12">
+      <button id="acceptRegister" class="btn btn-primary" type="submit"
+              [disabled]="!formClient.form.valid || isInvalid()">Registrar
+      </button>
+    </div>
+
+  </form>
+</div>

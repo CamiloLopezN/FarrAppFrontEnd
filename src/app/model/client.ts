@@ -1,4 +1,4 @@
-export interface ClientRegistration {
+export class ClientRegistration {
   name: string;
   lastname: string;
   birthdate: string;
@@ -13,13 +13,20 @@ export interface ClientLogin {
 }
 
 export interface ClientResponse {
+
   name: string;
   lastname: string;
   birthdate: string;
   gender: string;
+
 }
 
-export interface ClientAccount{
+export interface ClientResponseAdmin {
+  _id: string;
+  name: string;
+  lastname: string;
+  birthdate: string;
+  gender: string;
   e_mail: string;
-  password: string;
+
 }

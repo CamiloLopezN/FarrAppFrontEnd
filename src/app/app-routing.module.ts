@@ -13,7 +13,8 @@ import {CompanySesionGuard} from './company-sesion.guard';
 import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
 import {AdminSesionGuard} from './admin-sesion.guard';
 import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
-import {SecurityClientComponent} from './client/security-client/security-client.component';
+import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
+import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
 
 const routes: Routes = [
   {
@@ -26,15 +27,12 @@ const routes: Routes = [
     path: 'login', canActivate: [AuthGuard], component: LoginComponent
   },
   {
-    path: 'client/register', canActivate: [AuthGuard], component: RegisterClientComponent
+    path: 'client/register', component: RegisterClientComponent
   },
   {
     path: 'client', canActivate: [InitSesionGuard], component: ProfileClientComponent
   }, {
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
-  },
-  {
-    path: 'client/security', canActivate: [InitSesionGuard], component: SecurityClientComponent
   },
   {
     path: 'company', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
@@ -47,6 +45,13 @@ const routes: Routes = [
   },
   {
     path: 'admin/profile', canActivate: [AdminSesionGuard], component: ProfileAdminComponent
+  }
+  ,
+  {
+    path: 'admin/client', canActivate: [AdminSesionGuard], component: ClientsAdminComponent
+  },
+  {
+    path: 'admin/client/:id', component: ClientProfileComponent
   }
 ];
 

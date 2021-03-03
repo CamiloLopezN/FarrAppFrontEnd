@@ -18,10 +18,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from './services/interceptor.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
-import { ProfileCompanyComponent } from './company/profile-company/profile-company.component';
-import { EditCompanyComponent } from './company/edit-company/edit-company.component';
-import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
+import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
+import {EditCompanyComponent} from './company/edit-company/edit-company.component';
+import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
+import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { ClientProfileComponent } from './admin/client-profile/client-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
     ProfileCompanyComponent,
     EditCompanyComponent,
     AdminDashboardComponent,
-    ProfileAdminComponent
+    ProfileAdminComponent,
+    ClientsAdminComponent,
+    ClientProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +49,10 @@ import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.compo
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    NgxPaginationModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [DatePipe,
     {

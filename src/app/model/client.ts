@@ -11,7 +11,10 @@ export interface ClientLogin {
   e_mail: string;
   password: string;
 }
-
+export interface ClientAccount{
+  e_mail: string;
+  password: string;
+}
 export interface ClientResponse {
 
   name: string;

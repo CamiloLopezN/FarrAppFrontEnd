@@ -1,0 +1,137 @@
+<div class="pt-5 pb-5 pl-4 pr-4">
+  <div class="text-center">
+    <h4 id="LoginTitle" class="mb-4">
+      ¡Modifica tus datos!
+    </h4>
+    <img src="assets/icons/UserIcon.png" class="rounded mx-auto d-block" alt="User Icon" id="ImageUser">
+  </div>
+
+  <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-login">
+
+    <div class="mb-2" *ngIf="email.valid && email.touched &&!isUserMail">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="email.valid && email.touched &&isUserMail &&errorMessage &&isPass">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
+        </span>
+    </div>
+    <div class="input-group mt-4 mb-4">
+      <div class="input-group-prepend">
+        <div class="input-group-text" style="background: #2B2A30">
+          <fa-icon [icon]="faUserCircle" style="color: #D1D1D1" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input type="email" class="form-control color-gray" id="exampleInputEmail1" aria-describedby="emailHelp"
+             placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" readonly>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          Debe ingresar una contraseña
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="isDifferentTo() && passwordClient.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Esfuerzate un poco!
+        </span>
+    </div>
+
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentUpper()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren mayusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentLower()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren minusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentDigits()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Debe contener 2 digitos!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && contentSpaces()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡No se aceptan espacios!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && isValidPassLenght()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requiere minimo 8 caracteres!
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="passwordClient.valid && passwordClient.touched &&!isPass">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          {{errorMessage}}
+        </span>
+    </div>
+
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <div class="input-group-text" style="background: #2B2A30">
+          <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
+                   class="fa-lg" *ngIf="!isEmpty()"></fa-icon>
+          <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
+                   *ngIf="isEmpty()"
+          ></fa-icon>
+        </div>
+      </div>
+      <input type="password" class="form-control color-gray" placeholder="Contraseña"
+             #passwordClient="ngModel" name="passwordClient" [(ngModel)]="password" required>
+    </div>
+
+
+    <div class="mb-2" *ngIf="!passwordConfirm.valid && passwordConfirm.dirty && !isEmpty()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+            ¡Debes confirmar la contraseña!
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="!isEqual() &&  passwordConfirm.dirty ">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+            Intenta que coincidan las contraseñas
+        </span>
+    </div>
+
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <div class="input-group-text" style="background: #2B2A30">
+          <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
+                   class="fa-lg" *ngIf="!isEmptyConfirm()"></fa-icon>
+          <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
+                   *ngIf="isEmptyConfirm()"
+          ></fa-icon>
+        </div>
+      </div>
+      <input type="password" class="form-control color-gray" placeholder="Confirmar contraseña"
+             #passwordConfirm="ngModel" name="passConfirm" [(ngModel)]="passWordConfirm" required>
+    </div>
+
+    <div class="text-right" style="text-align: right;">
+      <button type="submit" class="btn btn-primary mr-5" [disabled]="!formUser.form.valid">Guardar</button>
+      <button type="submit" class="btn btn-success" [routerLink]="['/client']">Regresar</button>
+    </div>
+
+  </form>
+</div>

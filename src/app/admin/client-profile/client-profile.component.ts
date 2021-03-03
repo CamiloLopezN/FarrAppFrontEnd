@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {AdminService} from '../../services/admin.service';
 import {ClientResponseAdmin} from '../../model/client';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-client-profile',
@@ -11,7 +12,7 @@ import {ClientResponseAdmin} from '../../model/client';
 export class ClientProfileComponent implements OnInit {
   client: ClientResponseAdmin;
 
-  constructor(private _route: ActivatedRoute, private adminS: AdminService) {
+  constructor(private _route: ActivatedRoute, private adminS: AdminService, private  authS: AuthService) {
     this.client = {
       _id: '',
       e_mail: '',
@@ -43,8 +44,9 @@ export class ClientProfileComponent implements OnInit {
               gender: client.gender
             };
           }
-
         }
+      }, () => {
+        this.authS.logoutExpired();
       });
     });
   }

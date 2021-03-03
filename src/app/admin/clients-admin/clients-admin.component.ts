@@ -3,7 +3,7 @@ import {AdminService} from '../../services/admin.service';
 import {ClientResponseAdmin} from '../../model/client';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
-import {environment} from '../../../environments/environment';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-clients-admin',
@@ -15,9 +15,8 @@ export class ClientsAdminComponent implements OnInit {
   clients: ClientResponseAdmin[];
   client: ClientResponseAdmin;
   faUser = faUser;
-  p: Number = 1;
 
-  constructor(private adminS: AdminService, private route: Router) {
+  constructor(private adminS: AdminService, private route: Router, private authS: AuthService) {
     this.client = {
       _id: '',
       e_mail: '',
@@ -46,8 +45,8 @@ export class ClientsAdminComponent implements OnInit {
         };
         this.clients.push(this.client);
       }
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.authS.logoutExpired();
     });
   }
 

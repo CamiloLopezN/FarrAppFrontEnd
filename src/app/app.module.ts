@@ -25,6 +25,7 @@ import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.compone
 import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { ClientProfileComponent } from './admin/client-profile/client-profile.component';
+import { EditAdminComponent } from './admin/edit-admin/edit-admin.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ClientProfileComponent } from './admin/client-profile/client-profile.co
     AdminDashboardComponent,
     ProfileAdminComponent,
     ClientsAdminComponent,
-    ClientProfileComponent
+    ClientProfileComponent,
+    EditAdminComponent
   ],
   imports: [
     BrowserModule,

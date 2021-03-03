@@ -53,4 +53,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesEditAdmin(): void {
+    this.nService.success('Estado del administrador', 'Administrador editado correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

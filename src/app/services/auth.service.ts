@@ -19,7 +19,7 @@ export class AuthService {
   private role = new BehaviorSubject<string>('norole');
 
   constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService) {
-    //this.checkToken();
+    this.checkToken();
   }
 
   get isLogged(): Observable<boolean> {

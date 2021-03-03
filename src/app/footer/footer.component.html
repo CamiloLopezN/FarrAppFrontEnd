@@ -1,10 +1,6 @@
-<!-- Footer -->
-<footer class="page-footer font-small special-color-dark">
 
-  <!-- Footer Elements -->
+<footer class="page-footer font-small special-color-dark" *ngIf="router.url !== '/mainPanel'">
   <div class="container">
-
-    <!-- Social buttons -->
     <ul class="list-unstyled list-inline text-center">
       <li class="list-inline-item mt-4">
         <a href="#" class="btn-floating btn-fb mr-4">
@@ -22,17 +18,46 @@
         </a>
       </li>
     </ul>
-    <!-- Social buttons -->
-
   </div>
-  <!-- Footer Elements -->
-
-  <!-- Copyright -->
   <div class="footer-copyright text-center pb-4">
     <a class="copyright">(c) 2020 FarrApp. All Rights Reserverd</a>
     <a class="termsOfService" href="https://mdbootstrap.com/"> <br> Privacy Policy | Terms of Service</a>
   </div>
-  <!-- Copyright -->
-
 </footer>
-<!-- Footer -->
+<footer *ngIf="router.url === '/mainPanel'">
+  <div class="" id="padre">
+    <img id="content_div_one_photo" class="img-fluid"
+         src="https://i.pinimg.com/736x/e3/db/9a/e3db9ab5579492bcab9b55ec72e6fe69.jpg">
+    <div class="container-fluid card-title position-absolute ">
+      <div class="container-fluid">
+        <div class="mt-4 justify-content-center text-center">
+          <a [routerLink]="['/company/register']" class="btn btn-outline-light">Visualiza tu empresa con nosotros</a>
+        </div>
+        <ul class="list-unstyled list-inline text-center">
+          <li class="list-inline-item mt-0">
+            <a href="#" class="btn-floating btn-fb mr-4 mt-2">
+              <fa-icon [icon]="faFacebook" class="iconSocial fa-2x"></fa-icon>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="btn-floating btn-tw mr-4 mt-2 ">
+              <fa-icon [icon]="faTwitter" class="iconSocial fa-2x"></fa-icon>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="btn-floating btn-gplus">
+              <i>
+                <fa-icon [icon]="faInstagram" class="iconSocial fa-2x mt-2 "></fa-icon>
+              </i>
+            </a>
+          </li>
+        </ul>
+        <div class="footer-copyright text-center pb-4">
+          <a class="copyright">(c) 2020 FarrApp. All Rights Reserverd</a>
+          <a class="termsOfService" href="https://mdbootstrap.com/"> <br> Privacy Policy | Terms of Service</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>

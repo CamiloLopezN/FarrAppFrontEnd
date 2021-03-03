@@ -43,7 +43,7 @@ export class SecurityClientComponent implements OnInit {
 
   getUser(): void {
     this.clientService.getUserSecurity().subscribe((res) => {
-          this.e_mail = res.search.e_mail;
+        this.e_mail = res.search.e_mail;
       },
       () => {
         this.authS.logoutExpired();
@@ -58,8 +58,8 @@ export class SecurityClientComponent implements OnInit {
     };
     console.log(this.client);
     this.clientService.changePass(this.client).subscribe((res) => {
-        this.router.navigate(['login']);
         this.notifyS.succesChangePass();
+        this.router.navigate(['login']);
       },
       error => {
         this.errorMessage = error.error.message;

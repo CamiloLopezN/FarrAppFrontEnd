@@ -27,15 +27,6 @@ export class NotificationService {
     });
   }
 
-  logOutDesact(): void {
-    this.nService.error('Estado de cuenta', 'Su cuenta está en proceso desactivación.', {
-      timeOut: 3000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
-  }
-
   logOutExpired(): void {
     this.nService.warn('Estado de cuenta', 'Su sesión ha expirado', {
       timeOut: 3000,
@@ -53,13 +44,32 @@ export class NotificationService {
       clickToClose: true
     });
   }
-  succesChangePass(): void {
-    this.nService.success('Estado del cliente', '¡Contraseña cambiada correctamente!', {
+  emailExist(): void {
+    this.nService.warn('Estado del correo', '¡Ya existe una cuenta enlazada al correo ingresado!', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true
     });
   }
+
+  nameExist(): void {
+    this.nService.warn('Estado del nombre', '¡Ya existe una empresa con ese nombre!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  nitExist(): void {
+    this.nService.warn('Estado del NIT', '¡El NIT ingresado esta enlazado a una cuenta existente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
 
 }

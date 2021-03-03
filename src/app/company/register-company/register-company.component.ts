@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {faLocationArrow, faPhone, faUser} from '@fortawesome/free-solid-svg-icons';
 import {faIdCard} from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ import {faAt} from '@fortawesome/free-solid-svg-icons/faAt';
 import {faSlideshare} from '@fortawesome/free-brands-svg-icons';
 import {CompanyRegistration} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-register-company',
@@ -36,9 +37,10 @@ export class RegisterCompanyComponent implements OnInit {
   nit: string;
   errorMessage: string;
 
-  constructor(private router: Router, private companyService: CompanyService) {
+  constructor(private router: Router, private companyService: CompanyService, private  notificationService: NotificationService) {
 
   }
+
   ngOnInit(): void {
   }
 
@@ -53,13 +55,21 @@ export class RegisterCompanyComponent implements OnInit {
     };
     this.companyService.register(this.company).subscribe((res) => {
         this.router.navigate(['login']);
+        console.log(res);
       },
       error => {
-      console.log(error.error)
         this.errorMessage = error.error.message;
+        if (this.isExistEmail()) {
+          this.notificationService.emailExist();
+        } else if (this.isExistName()) {
+          this.notificationService.nameExist();
+        } else if (this.isExistNit()) {
+          this.notificationService.nitExist();
+        }
       }
     );
   }
+
   redirect(): void {
     this.router.navigate(['']);
   }
@@ -77,6 +87,13 @@ export class RegisterCompanyComponent implements OnInit {
     return this.errorMessage === 'El correo electronico ingresado ya existe';
   }
 
+  isExistNit(): boolean {
+    return this.errorMessage === 'Ya existe una empresa registrada con ese identificador de NIT';
+  }
+
+  isExistName(): boolean {
+    return this.errorMessage === 'Ya existe una empresa registrada con ese nombre';
+  }
 
   isInvalid(): boolean {
     return !this.isEqual();
@@ -93,40 +110,40 @@ export class RegisterCompanyComponent implements OnInit {
 
 
   contentSpaces(): boolean {
-    if (/\s/.test(this.password?.toString())){
+    if (/\s/.test(this.password?.toString())) {
       return true;
     } else {
-      return  false;
+      return false;
     }
   }
 
   contentUpper() {
-    if (/[A-Z]/.test(this.password?.toString())){
+    if (/[A-Z]/.test(this.password?.toString())) {
       return false;
     } else {
-      return  true;
+      return true;
     }
   }
 
   contentLower() {
-    if (/[a-z]/.test(this.password?.toString())){
+    if (/[a-z]/.test(this.password?.toString())) {
       return false;
     } else {
-      return  true;
+      return true;
     }
   }
 
   contentDigits() {
-    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())){
+    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())) {
       return false;
     } else {
-      return  true;
+      return true;
     }
   }
 
 
   isMaxLength() {
-    console.log("CONTACT: " + this.contactNumber?.length);
+    console.log('CONTACT: ' + this.contactNumber?.length);
     return this.contactNumber?.length < 10;
   }
 

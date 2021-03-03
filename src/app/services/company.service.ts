@@ -17,11 +17,9 @@ export class CompanyService {
 
 
   register(company: CompanyRegistration): Observable<any> {
-    console.log(company);
     return this.httpCompany.post<any>(`${environment.backend}/api/company/`, company)
       .pipe(
         map((res: any) => {
-          console.log(res.toString())
           return res;
         })
       );

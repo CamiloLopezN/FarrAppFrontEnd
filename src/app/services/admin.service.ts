@@ -24,4 +24,17 @@ export class AdminService {
         })
       );
   }
+
+  getClients(): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/admin/clients`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

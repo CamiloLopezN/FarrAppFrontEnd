@@ -24,3 +24,13 @@ export interface ClientResponse {
   gender: string;
 
 }
+
+export interface ClientResponseAdmin {
+  _id: string;
+  name: string;
+  lastname: string;
+  birthdate: string;
+  gender: string;
+  e_mail: string;
+
+}

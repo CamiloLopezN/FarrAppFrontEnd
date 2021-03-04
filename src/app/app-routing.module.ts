@@ -31,14 +31,14 @@ const routes: Routes = [
     path: 'client/register', component: RegisterClientComponent
   },
   {
-    path: 'client', canActivate: [InitSesionGuard], component: ProfileClientComponent
+    path: 'client/profile', canActivate: [InitSesionGuard], component: ProfileClientComponent
   }, {
     path: 'client/security', canActivate: [InitSesionGuard], component: SecurityClientComponent
   }, {
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
   },
   {
-    path: 'company', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
+    path: 'company/profile', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
   },
   {
     path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent

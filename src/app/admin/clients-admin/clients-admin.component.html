@@ -1,4 +1,4 @@
-<div class="text-white">
+<div class="text-white animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
   <h3 class="mt-4 mb-4 ml-2">
     USUARIOS
   </h3>
@@ -26,7 +26,5 @@
   </div>
   <div class="text-right mt-4">
     <pagination-controls (pageChange)="p = $event" *ngIf="clients.length>= 8"></pagination-controls>
-    <button type="button" class="btn btn-success mt-2 mr-2" [routerLink]="['/admin/dashboard']">Regresar
-    </button>
   </div>
 </div>

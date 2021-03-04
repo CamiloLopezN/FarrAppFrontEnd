@@ -56,7 +56,6 @@ export class SecurityClientComponent implements OnInit {
       e_mail: this.e_mail,
       password: this.password
     };
-    console.log(this.client);
     this.clientService.changePass(this.client).subscribe((res) => {
         this.notifyS.succesChangePass();
         this.router.navigate(['login']);
@@ -118,7 +117,5 @@ export class SecurityClientComponent implements OnInit {
       return true;
     }
   }
-
-
 }
 

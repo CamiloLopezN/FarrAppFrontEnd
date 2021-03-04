@@ -20,6 +20,7 @@ import {SecurityClientComponent} from './client/security-client/security-client.
 import {CompaniesAdminComponent} from './admin/companies-admin/companies-admin.component';
 import {CompanyProfileComponent} from './admin/company-profile/company-profile.component';
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
+import {CreateClientComponent} from './admin/create-client/create-client.component';
 
 const routes: Routes = [
   {
@@ -53,10 +54,9 @@ const routes: Routes = [
   },
   {
     path: 'admin/profile', canActivate: [AdminSesionGuard], component: ProfileAdminComponent
-  }
-  ,
+  },
   {
-    path: 'admin/client', canActivate: [AdminSesionGuard], component: ClientsAdminComponent
+    path: 'admin/client/register', canActivate: [AdminSesionGuard], component: CreateClientComponent
   },
   {
     path: 'admin/client/:id', canActivate: [AdminSesionGuard], component: ClientProfileComponent
@@ -69,6 +69,12 @@ const routes: Routes = [
   },
   {
     path: 'admin/company/:id', canActivate: [AdminSesionGuard], component: CompanyProfileComponent
+  },
+  {
+    path: 'admin/company', canActivate: [AdminSesionGuard], component: CompaniesAdminComponent
+  },
+  {
+    path: 'admin/client', canActivate: [AdminSesionGuard], component: ClientsAdminComponent
   },
   {path: '', redirectTo: 'mainPanel', pathMatch: 'full'},
   {path: '**', component: MainPanelComponent}

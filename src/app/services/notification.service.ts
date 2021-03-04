@@ -152,4 +152,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesCreateClient(): void {
+    this.nService.success('Estado del cliente', '¡Se ha registrado el cliente correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

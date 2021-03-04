@@ -38,25 +38,12 @@ export class ProfileCompanyComponent implements OnInit {
   }
 
   private getCompany(): void {
-    this.company = {
-      nit: '4564115-9',
-      name: 'La Pacha',
-      contact_number: '3554987897',
-      address: 'Dirección Enrique Segoviano'
-    };
+    this.companyS.getCompany().subscribe((res) => {
+       this.company = res;
+      },
+      () => {
+        this.authS.logoutExpired();
+      }
+    );
   }
-
-  /*this.companyS.getCompany().subscribe((res) => {
-      this.company = {
-        nit: res.nit,
-        name: res.name,
-        contact_number: res.contact_number,
-        address: res.address
-      };
-    },
-    () => {
-      this.authS.logoutExpired();
-    }
-  );
-}*/
 }

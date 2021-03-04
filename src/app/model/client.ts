@@ -31,5 +31,10 @@ export interface ClientResponseAdmin {
   birthdate: string;
   gender: string;
   e_mail: string;
+}
 
+export interface ClientResponseAdmin2 {
+  _id: string;
+  name: string;
+  lastname: string;
 }

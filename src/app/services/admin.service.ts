@@ -108,4 +108,17 @@ export class AdminService {
         })
       );
   }
+
+  getUserById(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/admin/client?_id=${id}`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

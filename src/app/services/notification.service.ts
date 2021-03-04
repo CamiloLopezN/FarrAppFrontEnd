@@ -80,4 +80,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  sucessActivateCompany(): void {
+    this.nService.success('Estado de la empresa', 'Empresa activada correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

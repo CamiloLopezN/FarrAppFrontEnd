@@ -13,6 +13,7 @@ export class CompanyProfileComponent implements OnInit {
 
   company: CompanyResponseAdmin2;
   isActive: boolean;
+  e_mail: string;
 
   constructor(private _route: ActivatedRoute, private adminS: AdminService, private authS: AuthService) {
     this.company = {
@@ -23,6 +24,7 @@ export class CompanyProfileComponent implements OnInit {
       name: '',
       nit: ''
     };
+    this.e_mail = '';
   }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class CompanyProfileComponent implements OnInit {
 
           this.company = res.company[0];
           this.isActive = res.company[0].user.active;
+          this.e_mail = res.company[0].user.e_mail;
         },
         this.authS.logoutExpired);
     });

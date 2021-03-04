@@ -1,4 +1,4 @@
-<div class="text-center pt-5 pb-5 pl-4 pr-4">
+<div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
   <h4 class="text-white text-left">
     EDITAR
   </h4>
@@ -29,7 +29,7 @@
       </div>
       <div class="d-flex justify-content-around mt-5">
         <button type="submit" class="btn btn-primary" [disabled]="!formEdit.form.valid">Guardar</button>
-        <button type="button" class="btn btn-success">Regresar</button>
+        <button type="button" class="btn btn-success" [routerLink]="['/admin/profile']">Regresar</button>
       </div>
     </form>
   </div>

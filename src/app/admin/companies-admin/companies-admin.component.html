@@ -1,4 +1,4 @@
-<div class="text-white pb-4">
+<div class="text-white pb-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
   <h3 class="mt-4 mb-4 ml-2">
     EMPRESAS
   </h3>
@@ -73,9 +73,5 @@
         <pagination-controls (pageChange)="p = $event" *ngIf="companiesP.length> 8"></pagination-controls>
       </div>
     </div>
-  </div>
-  <div class="text-right">
-    <button type="button" class="btn btn-success mt-2 mr-2" [routerLink]="['/admin/dashboard']">Regresar
-    </button>
   </div>
 </div>

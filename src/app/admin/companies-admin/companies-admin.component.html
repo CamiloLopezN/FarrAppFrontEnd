@@ -8,70 +8,78 @@
          aria-selected="true" (click)="getCompanies()">Aprobadas</a>
       <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
          aria-selected="false" (click)="getCompaniesP()">Pendientes</a>
+      <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
+         aria-selected="false" (click)="getCompaniesD()">Desactivados</a>
+      <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
+         aria-selected="false" (click)="getCompaniesPT()">Peticiones</a>
     </div>
   </nav>
   <div class="tab-content" style="background: #252427">
     <div id="aprobadas" class="tab-pane fade in active show">
-      <div *ngIf="companies.length == 0" class="text-center"
-           style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
-        <h4>
-          No hay empresas aprobadas
-        </h4>
-      </div>
-      <div *ngFor="let company of companies | paginate: { itemsPerPage: 7, currentPage: p }">
-        <div class="holi" (click)="profile(company._id)">
-          <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
-            <div class="col-3">
-              <fa-icon [icon]="faUsers" class="fa-2x">
-              </fa-icon>
-            </div>
-            <div class="col-9">
-              <div>
-                <div class="d-flex justify-content-start">
-                  {{company.name}}
-                </div>
-                <div class="d-flex justify-content-end">
-                  {{company.nit}}
-                </div>
-              </div>
-            </div>
-          </div>
+      <div *ngIf="companies.length == 0 else list">
+        <div class="text-center"
+             style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
+          <h4>
+            No hay empresas aprobadas
+          </h4>
         </div>
-      </div>
-      <div class="text-sm-right mt-4">
-        <pagination-controls (pageChange)="p = $event" *ngIf="companies.length> 8"></pagination-controls>
       </div>
     </div>
     <div id="poraprobar" class="tab-pane fade">
-      <div *ngIf="companiesP.length == 0" class="text-center"
-           style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
-        <h4>
-          No hay empresas pendientes
-        </h4>
-      </div>
-      <div *ngFor="let company of companiesP | paginate: { itemsPerPage: 7, currentPage: p }">
-        <div class="holi" (click)="profile(company._id)">
-          <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
-            <div class="col-3">
-              <fa-icon [icon]="faUsers" class="fa-2x">
-              </fa-icon>
-            </div>
-            <div class="col-9">
-              <div>
-                <div class="d-flex justify-content-start">
-                  {{company.name}}
-                </div>
-                <div class="d-flex justify-content-end">
-                  {{company.nit}}
-                </div>
-              </div>
-            </div>
-          </div>
+      <div *ngIf="companies.length == 0 else list">
+        <div class="text-center"
+             style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
+          <h4>
+            No hay empresas pendientes
+          </h4>
         </div>
       </div>
-      <div class="text-sm-right mt-4">
-        <pagination-controls (pageChange)="p = $event" *ngIf="companiesP.length> 8"></pagination-controls>
+    </div>
+    <div id="desactivados" class="tab-pane fade">
+      <div *ngIf="companies.length == 0 else list">
+        <div class="text-center"
+             style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
+          <h4>
+            No hay empresas desactivadas
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div id="peticiones" class="tab-pane fade">
+      <div *ngIf="companies.length == 0 else list">
+        <div class="text-center"
+             style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
+          <h4>
+            No hay peticiones de empresas
+          </h4>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #list>
+  <div *ngFor="let company of companies | paginate: { itemsPerPage: 7, currentPage: p }">
+    <div class="holi" (click)="profile(company._id)">
+      <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
+        <div class="col-3">
+          <fa-icon [icon]="faUsers" class="fa-2x">
+          </fa-icon>
+        </div>
+        <div class="col-9">
+          <div>
+            <div class="d-flex justify-content-start">
+              {{company.name}}
+            </div>
+            <div class="d-flex justify-content-end">
+              {{company.nit}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-sm-right mt-4">
+    <pagination-controls (pageChange)="p = $event" *ngIf="companies.length> 8"></pagination-controls>
+  </div>
+</ng-template>

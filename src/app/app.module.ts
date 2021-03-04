@@ -29,6 +29,7 @@ import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
 import { SecurityClientComponent } from './client/security-client/security-client.component';
 import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
 import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
+import { ListCompaniesComponent } from './list-companies/list-companies.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { CompanyProfileComponent } from './admin/company-profile/company-profile
     SecurityClientComponent,
     CompaniesAdminComponent,
     CompanyProfileComponent,
+    ListCompaniesComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ export class CompanyProfileComponent implements OnInit {
 
   company: CompanyResponseAdmin2;
   isActive: boolean;
+  isReq: boolean;
   e_mail: string;
 
   constructor(private ns: NotificationService, private _route: ActivatedRoute, private adminS: AdminService, private authS: AuthService, private _router: Router) {
@@ -38,6 +39,7 @@ export class CompanyProfileComponent implements OnInit {
       this.adminS.getCompanyById(id).subscribe(res => {
           this.company = res.company[0];
           this.isActive = res.company[0].user.active;
+          this.isReq = res.company[0].user.reqDesactive;
           this.e_mail = res.company[0].user.e_mail;
           this.company._id = res.company[0].id_user;
         },
@@ -46,9 +48,18 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   active(): void {
-    this.adminS.activeCompany(this.company._id, true).subscribe(() => {
+    this.adminS.activeCompany(this.company._id, true, false).subscribe(() => {
       this._router.navigate(['/admin/company']);
       this.ns.sucessActivateCompany();
+    }, () => {
+      this.authS.logoutExpired();
+    });
+  }
+
+  desactive(): void {
+    this.adminS.activeCompany(this.company._id, false, true).subscribe(() => {
+      this._router.navigate(['/admin/company']);
+      this.ns.sucessDesactivateCompany();
     }, () => {
       this.authS.logoutExpired();
     });

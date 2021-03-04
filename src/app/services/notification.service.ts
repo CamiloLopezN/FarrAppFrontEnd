@@ -90,8 +90,26 @@ export class NotificationService {
     });
   }
 
-  sucessDesactivateCompany() {
+  sucessDesactivateCompany(): void {
     this.nService.success('Estado de la empresa', 'Empresa desactivada correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  sucessDesactivateClient(): void {
+    this.nService.success('Estado del cliente', 'Cliente desactivado correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesActivateClient(): void {
+    this.nService.success('Estado del cliente', 'Cliente activado correctamente', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,

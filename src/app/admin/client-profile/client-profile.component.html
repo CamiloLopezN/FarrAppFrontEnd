@@ -45,8 +45,14 @@
     <div class="d-flex justify-content-around mt-5">
       <button type="button" class="btn btn-success" [routerLink]="['/admin/client']">Regresar
       </button>
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta
-      </button>
+      <div *ngIf="(isActive && !isReq) || (isActive && isReq)">
+        <button type="button" class="btn btn-danger" (click)="desactive()">Desactivar
+        </button>
+      </div>
+      <div *ngIf="!isActive && !isReq">
+        <button type="button" class="btn btn-primary" (click)="active()">Activar
+        </button>
+      </div>
     </div>
   </div>
 </div>

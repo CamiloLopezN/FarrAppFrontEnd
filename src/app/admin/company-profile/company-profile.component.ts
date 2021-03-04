@@ -17,7 +17,12 @@ export class CompanyProfileComponent implements OnInit {
   isReq: boolean;
   e_mail: string;
 
-  constructor(private ns: NotificationService, private _route: ActivatedRoute, private adminS: AdminService, private authS: AuthService, private _router: Router) {
+  constructor(
+    private ns: NotificationService,
+    private _route: ActivatedRoute,
+    private adminS: AdminService,
+    private authS: AuthService,
+    private _router: Router) {
     this.company = {
       _id: '',
       active: false,

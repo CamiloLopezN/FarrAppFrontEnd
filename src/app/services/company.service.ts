@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {CompanyResponse} from '../model/comapany';
+import {CompanyResponse} from '../model/company';
+import {CompanyRegistration} from '../model/company';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,15 @@ import {CompanyResponse} from '../model/comapany';
 export class CompanyService {
 
   constructor(private http: HttpClient) {
+  }
+
+  register(company: CompanyRegistration): Observable<any> {
+    return this.http.post<any>(`${environment.backend}/api/company/`, company)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   getCompany(): Observable<any> {
@@ -26,12 +36,12 @@ export class CompanyService {
       );
   }
 
-  editCompany(company: CompanyResponse): Observable<any>{
+  editCompany(company: CompanyResponse): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.put<any>(`${environment.backend}/api/company`, company,{headers})
+    return this.http.put<any>(`${environment.backend}/api/company`, company, {headers})
       .pipe(
         map((res: any) => {
           return res;

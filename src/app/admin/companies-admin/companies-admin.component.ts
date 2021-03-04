@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyService} from '../../services/company.service';
 import {AdminService} from '../../services/admin.service';
-import {ClientResponseAdmin} from '../../model/client';
-import {CompanyResponseAdmin} from '../../model/comapany';
+import {CompanyResponseAdmin} from '../../model/company';
 import {faUsers} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../services/auth.service';
-import {Route, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-companies-admin',

@@ -19,6 +19,7 @@ import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
 import {SecurityClientComponent} from './client/security-client/security-client.component';
 import {CompaniesAdminComponent} from './admin/companies-admin/companies-admin.component';
 import {CompanyProfileComponent} from './admin/company-profile/company-profile.component';
+import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 
 const routes: Routes = [
   {
@@ -32,13 +33,17 @@ const routes: Routes = [
   },
   {
     path: 'client/profile', canActivate: [InitSesionGuard], component: ProfileClientComponent
-  }, {
+  },
+  {
     path: 'client/security', canActivate: [InitSesionGuard], component: SecurityClientComponent
   }, {
     path: 'client/edit', canActivate: [InitSesionGuard], component: EditClientComponent
   },
   {
     path: 'company/profile', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
+  },
+  {
+    path: 'company/register', component: RegisterCompanyComponent
   },
   {
     path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent

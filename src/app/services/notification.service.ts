@@ -116,4 +116,40 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  emailExist(): void {
+    this.nService.warn('Estado del correo', '¡Ya existe una cuenta enlazada al correo ingresado!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  nameExist(): void {
+    this.nService.warn('Estado del nombre', '¡Ya existe una empresa con ese nombre!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  nitExist(): void {
+    this.nService.warn('Estado del NIT', '¡El NIT ingresado esta enlazado a una cuenta existente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesCreateCompany(): void {
+    this.nService.success('Estado de la compañia', '¡Se ha registrado tu petición correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

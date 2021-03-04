@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyResponseAdmin2} from '../../model/comapany';
+import {CompanyResponseAdmin2} from '../../model/company';
+
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {AdminService} from '../../services/admin.service';
 import {AuthService} from '../../services/auth.service';

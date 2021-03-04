@@ -1,0 +1,156 @@
+<div class="container-fluid animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
+
+  <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()" class="text-center p-3">
+
+    <p id="createAccountTittle" class="h4 p-4">¡Dejanos tus datos!</p>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faBuilding" class="fa-lg img-fluid"></fa-icon>
+        </div>
+      </div>
+
+      <input type="text" class="form-control " placeholder="Nombre de la compañia"
+             #nameCompany="ngModel" name="nameCompany" [(ngModel)]="name" required>
+    </div>
+
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faLocationArrow" class="fa-lg img-fluid"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="text" class="form-control" placeholder="Dirección"
+             #addressCompany="ngModel" name="addressCompany" [(ngModel)]="address" required>
+    </div>
+
+    <div class="mb-2" *ngIf="!emailCompany.valid && emailCompany.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Utiliza un formato valido!
+        </span>
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faAt" class="fa-lg img-fluid"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="email" id="email" class="form-control" placeholder="Correo electronico"
+             #emailCompany="ngModel" name="emailCompany" [(ngModel)]="email" email
+             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+    </div>
+
+
+    <div class="mb-2" *ngIf="isDifferentTo() && passwordCompany.touched">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Esfuerzate un poco!
+        </span>
+    </div>
+
+
+    <div class="mb-2" *ngIf="passwordCompany.dirty && !isEmpty() && contentUpper()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren mayusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordCompany.dirty && !isEmpty() && contentLower()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requieren minusculas!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="passwordCompany.dirty && !isEmpty() && contentDigits()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Debe contener 2 digitos!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordCompany.valid && passwordCompany.dirty && !isEmpty() && contentSpaces()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡No se aceptan espacios!
+        </span>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordCompany.valid && passwordCompany.dirty && !isEmpty() && isValidPassLenght()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+          ¡Se requiere minimo 8 caracteres!
+        </span>
+    </div>
+
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faLock" class="fa-lg img-fluid"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="password" id="password" class="form-control" minlength="8" maxlength="100" placeholder="Contraseña"
+             #passwordCompany="ngModel" name="passwordCompany" [(ngModel)]="password"
+             pattern="[a-zA-Z0-9]*" required>
+    </div>
+
+    <div class="mb-2" *ngIf="!passwordConfirm.valid && passwordConfirm.dirty && !isEmpty()">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+            ¡Debes confirmar la contraseña!
+        </span>
+    </div>
+    <div class="mb-2" *ngIf="!isEqual() &&  passwordConfirm.dirty ">
+        <span style="color: #D1D1D1">
+          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
+            Intenta que coincidan las contraseñas
+        </span>
+    </div>
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faLock" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="password" id="passwordConfirm" class="form-control" placeholder="Confirmar contraseña"
+             #passwordConfirm="ngModel" name="passwordConfirm" [(ngModel)]="passwordCon" required>
+    </div>
+
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faPhone" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+             type = "text"
+             maxlength = "10" id="contact_Number" class="form-control" placeholder="Numero de contacto"
+             #contact_Number="ngModel" name="contact_Number" [(ngModel)]="contactNumber"   required  >
+    </div>
+
+    <div class="input-group mb-4 mr-sm-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <fa-icon [icon]="faSlideshare" class="fa-lg"></fa-icon>
+        </div>
+      </div>
+      <input mdbInput type="text" id="nitCompany" class="form-control" placeholder="NIT"
+             #nitCompany="ngModel" name="nitCompany" [(ngModel)]="nit" required>
+    </div>
+
+
+    <div class="container p-5 w-75 col-md-12">
+      <button id="acceptRegister" class="btn btn-primary" type="submit"
+              [disabled]="!formClient.form.valid || isInvalid()">Registrar
+      </button>
+    </div>
+
+  </form>
+</div>

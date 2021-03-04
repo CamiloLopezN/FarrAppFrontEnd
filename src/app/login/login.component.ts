@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   isPass = true;
   isUserMail = true;
   emailRetrieve: string;
-  isUserEmailRetrieve = true;
-
+  error: string;
+  isError: boolean;
   rol;
 
   errorMessage: string;
@@ -87,14 +87,6 @@ export class LoginComponent implements OnInit {
     return this.password === 'hola';
   }
 
-  isEmailExist(): boolean {
-    return this.e_mail === 'josedaza@gmail.com';
-  }
-
-  isEmailExistTwo(): boolean {
-    return this.emailRetrieve === 'josedaza@gmail.com';
-  }
-
   redirect(): void {
     this.router.navigate(['']);
 
@@ -106,7 +98,13 @@ export class LoginComponent implements OnInit {
   }
 
   retrievePass(): void {
-    this.isUserEmailRetrieve = this.isEmailExistTwo();
+    this.isError = false;
+    this.authService.retrievePass(this.emailRetrieve).subscribe(res => {
+      console.log(res);
+    }, error => {
+      this.error = error.error.message;
+      this.isError = true;
+    });
   }
 
   resetEmailRetrieve(): void {

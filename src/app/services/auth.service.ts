@@ -59,6 +59,17 @@ export class AuthService {
     );
   }
 
+  retrievePass(e_mail: string): Observable<any> {
+    const req = {
+      e_mail: e_mail
+    };
+    return this.httpClient.put(`${environment.backend}/api/user/recover-pass`, req).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
   changeLogAndRole(): void {
     this.loggedIn.next(true);
     this.role.next(helper.decodeToken(localStorage.getItem('token')).role[0].name);

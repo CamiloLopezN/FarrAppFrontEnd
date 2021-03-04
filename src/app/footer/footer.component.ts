@@ -3,6 +3,7 @@ import {faFacebook} from '@fortawesome/free-brands-svg-icons/faFacebook';
 import {faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {faInstagram} from '@fortawesome/free-brands-svg-icons';
 import {Router} from '@angular/router';
+import {AuthService} from '../services/auth.service';
 
 
 @Component({
@@ -16,10 +17,14 @@ export class FooterComponent implements OnInit {
   faFacebook = faFacebook;
   faTwitter = faTwitter;
   faInstagram = faInstagram;
+  isLogged: boolean;
 
-  constructor(public router: Router) { }
+  constructor(private authService: AuthService, public router: Router) { }
 
   ngOnInit(): void {
+    this.authService.isLogged.subscribe(isLogged => {
+      this.isLogged = isLogged;
+    });
   }
 
 }

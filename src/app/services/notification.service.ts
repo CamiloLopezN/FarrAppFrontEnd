@@ -89,4 +89,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  sucessDesactivateCompany() {
+    this.nService.success('Estado de la empresa', 'Empresa desactivada correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

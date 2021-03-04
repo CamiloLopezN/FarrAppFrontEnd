@@ -15,7 +15,6 @@ import {Route, Router} from '@angular/router';
 export class CompaniesAdminComponent implements OnInit {
 
   companies: CompanyResponseAdmin[];
-  companiesP: CompanyResponseAdmin[];
   company: CompanyResponseAdmin;
   faUsers = faUsers;
   p: number;
@@ -27,7 +26,6 @@ export class CompaniesAdminComponent implements OnInit {
       nit: ''
     };
     this.companies = [];
-    this.companiesP = [];
   }
 
   ngOnInit(): void {
@@ -38,8 +36,7 @@ export class CompaniesAdminComponent implements OnInit {
     this.adminS.getCompanies().subscribe(res => {
       this.companies = [];
       for (const company of res) {
-        console.log(company);
-        if (company.user.active) {
+        if (company.user.active && !company.user.req_desactive) {
           this.company = {
             _id: company._id,
             name: company.name,
@@ -54,15 +51,17 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   getCompaniesP(): void {
-    this.adminS.getCompaniesP().subscribe(res => {
-      this.companiesP = [];
+    this.adminS.getCompanies().subscribe(res => {
+      this.companies = [];
       for (const company of res) {
-        this.company = {
-          _id: company._id,
-          name: company.name,
-          nit: company.nit
-        };
-        this.companiesP.push(this.company);
+        if (!company.user.active && !company.user.req_desactive) {
+          this.company = {
+            _id: company._id,
+            name: company.name,
+            nit: company.nit
+          };
+          this.companies.push(this.company);
+        }
       }
     }, () => {
       this.authS.logoutExpired();
@@ -71,5 +70,42 @@ export class CompaniesAdminComponent implements OnInit {
 
   profile(_id: string): void {
     this.route.navigate([`admin/company/${_id}`]);
+  }
+
+  getCompaniesD(): void {
+    this.adminS.getCompanies().subscribe(res => {
+      this.companies = [];
+      for (const company of res) {
+        if (!company.user.active && company.user.req_desactive) {
+          this.company = {
+            _id: company._id,
+            name: company.name,
+            nit: company.nit
+          };
+          this.companies.push(this.company);
+        }
+      }
+    }, () => {
+      this.authS.logoutExpired();
+    });
+  }
+
+  getCompaniesPT(): void {
+    this.adminS.getCompanies().subscribe(res => {
+      this.companies = [];
+      for (const company of res) {
+        console.log(res);
+        if (company.user.active && company.user.req_desactive) {
+          this.company = {
+            _id: company._id,
+            name: company.name,
+            nit: company.nit
+          };
+          this.companies.push(this.company);
+        }
+      }
+    }, () => {
+      this.authS.logoutExpired();
+    });
   }
 }

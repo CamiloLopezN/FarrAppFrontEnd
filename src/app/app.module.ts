@@ -49,7 +49,7 @@ import { CompanyProfileComponent } from './admin/company-profile/company-profile
     EditAdminComponent,
     SecurityClientComponent,
     CompaniesAdminComponent,
-    CompanyProfileComponent,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,

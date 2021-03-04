@@ -30,6 +30,7 @@ import { SecurityClientComponent } from './client/security-client/security-clien
 import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
 import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
+import { CreateClientComponent } from './admin/create-client/create-client.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {RegisterCompanyComponent} from './company/register-company/register-comp
     SecurityClientComponent,
     CompaniesAdminComponent,
     CompanyProfileComponent,
-    RegisterCompanyComponent
+    RegisterCompanyComponent,
+    CreateClientComponent
   ],
   imports: [
     BrowserModule,

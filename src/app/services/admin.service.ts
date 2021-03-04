@@ -3,7 +3,8 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {AdminResponse} from '../model/admin';
+import {AdminResponse, CreateClient} from '../model/admin';
+import {CompanyResponse} from '../model/company';
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +115,19 @@ export class AdminService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.get<any>(`${environment.backend}/api/admin/client?_id=${id}`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  createClient(client: CreateClient): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/admin/client`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;

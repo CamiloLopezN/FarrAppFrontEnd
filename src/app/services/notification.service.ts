@@ -54,6 +54,15 @@ export class NotificationService {
     });
   }
 
+  sucessEditCompany(): void {
+    this.nService.success('Estado de la empresa', 'Empresa editada correctamente', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
   succesEditAdmin(): void {
     this.nService.success('Estado del administrador', 'Administrador editado correctamente', {
       timeOut: 3000,

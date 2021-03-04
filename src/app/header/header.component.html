@@ -2,6 +2,15 @@
   <a class="navbar-brand" id="FarrAppHeader" [routerLink]="['/mainPanel']">
     FarrApp
   </a>
+  <a class="navbar-brand rol" *ngIf="isLogged && rol =='client'">
+    CLIENTE
+  </a>
+  <a class="navbar-brand rol" *ngIf="isLogged && rol =='company'">
+    EMPRESA
+  </a>
+  <a class="navbar-brand rol" *ngIf="isLogged && rol =='superAdmin'">
+    ADMIN
+  </a>
   <div class="dropdown show ml-auto" data-placement="bottom" title="Cuenta">
     <a class="btn-lg dropdown-toggle rounded-circle" href="#" role="button"
        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,7 +70,8 @@
         Perfil
       </a>
 
-      <a class="dropdown-item" [routerLink]="['admin/profile']" [routerLinkActive]="['activado']" *ngIf="isLogged && rol=='superAdmin'">
+      <a class="dropdown-item" [routerLink]="['admin/profile']" [routerLinkActive]="['activado']"
+         *ngIf="isLogged && rol=='superAdmin'">
         <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
         </div>

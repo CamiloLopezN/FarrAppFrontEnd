@@ -79,6 +79,22 @@ export class AdminService {
       );
   }
 
+  activeCompany(id: string, action: boolean): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const req = {
+      action: action
+    };
+    return this.http.put<any>(`${environment.backend}/api/admin/activate?_id=${id}`, req, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   getCompanyById(id: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',

@@ -3,6 +3,8 @@ import {CompanyResponse} from '../../model/comapany';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {CompanyService} from '../../services/company.service';
+import {AdminService} from '../../services/admin.service';
+import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-company',
@@ -12,6 +14,8 @@ import {CompanyService} from '../../services/company.service';
 export class ProfileCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
+  private _id: string;
+  faExclamationTriangle = faExclamationTriangle;
 
   constructor(
     // tslint:disable-next-line:variable-name
@@ -33,13 +37,22 @@ export class ProfileCompanyComponent implements OnInit {
     this.getCompany();
   }
 
+  removeCompany() {
+    this.companyS.removeUser().subscribe(() => {
+        this.authS.logoutSessionDesact();
+      },
+      () => {
+        this.authS.logoutExpired();
+      });
+  }
+
   edit(): void {
     this._router.navigate(['company/edit']);
   }
 
   private getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-       this.company = res;
+        this.company = res;
       },
       () => {
         this.authS.logoutExpired();

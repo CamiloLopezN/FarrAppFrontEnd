@@ -1,0 +1,81 @@
+<div class="text-white pb-4">
+  <h3 class="mt-4 mb-4 ml-2">
+    EMPRESAS
+  </h3>
+  <nav>
+    <div class="nav nav-tabs nav-fill nav-test" role="tablist">
+      <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
+         aria-selected="true" (click)="getCompanies()">Aprobadas</a>
+      <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
+         aria-selected="false" (click)="getCompaniesP()">Pendientes</a>
+    </div>
+  </nav>
+  <div class="tab-content" style="background: #252427">
+    <div id="aprobadas" class="tab-pane fade in active show">
+      <div *ngIf="companies.length == 0" class="text-center"
+           style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
+        <h4>
+          No hay empresas aprobadas
+        </h4>
+      </div>
+      <div *ngFor="let company of companies | paginate: { itemsPerPage: 7, currentPage: p }">
+        <div class="holi" (click)="profile(company._id)">
+          <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
+            <div class="col-3">
+              <fa-icon [icon]="faUsers" class="fa-2x">
+              </fa-icon>
+            </div>
+            <div class="col-9">
+              <div>
+                <div class="d-flex justify-content-start">
+                  {{company.name}}
+                </div>
+                <div class="d-flex justify-content-end">
+                  {{company.nit}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-sm-right mt-4">
+        <pagination-controls (pageChange)="p = $event" *ngIf="companies.length> 8"></pagination-controls>
+      </div>
+    </div>
+    <div id="poraprobar" class="tab-pane fade">
+      <div *ngIf="companiesP.length == 0" class="text-center"
+           style="background: #2b2a30; margin-top: 38%; margin-bottom: 38%">
+        <h4>
+          No hay empresas pendientes
+        </h4>
+      </div>
+      <div *ngFor="let company of companiesP | paginate: { itemsPerPage: 7, currentPage: p }">
+        <div class="holi" (click)="profile(company._id)">
+          <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
+            <div class="col-3">
+              <fa-icon [icon]="faUsers" class="fa-2x">
+              </fa-icon>
+            </div>
+            <div class="col-9">
+              <div>
+                <div class="d-flex justify-content-start">
+                  {{company.name}}
+                </div>
+                <div class="d-flex justify-content-end">
+                  {{company.nit}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-sm-right mt-4">
+        <pagination-controls (pageChange)="p = $event" *ngIf="companiesP.length> 8"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  <div class="text-right">
+    <button type="button" class="btn btn-success mt-2 mr-2" [routerLink]="['/admin/dashboard']">Regresar
+    </button>
+  </div>
+</div>

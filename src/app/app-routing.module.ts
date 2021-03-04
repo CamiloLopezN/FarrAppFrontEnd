@@ -17,6 +17,8 @@ import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.compone
 import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
 import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
 import {SecurityClientComponent} from './client/security-client/security-client.component';
+import {CompaniesAdminComponent} from './admin/companies-admin/companies-admin.component';
+import {CompanyProfileComponent} from './admin/company-profile/company-profile.component';
 
 const routes: Routes = [
   {
@@ -56,6 +58,12 @@ const routes: Routes = [
   },
   {
     path: 'admin/edit', canActivate: [AdminSesionGuard], component: EditAdminComponent
+  },
+  {
+    path: 'admin/company', canActivate: [AdminSesionGuard], component: CompaniesAdminComponent
+  },
+  {
+    path: 'admin/company/:id', canActivate: [AdminSesionGuard], component: CompanyProfileComponent
   },
   {path: '', redirectTo: 'mainPanel', pathMatch: 'full'},
   {path: '**', component: MainPanelComponent}

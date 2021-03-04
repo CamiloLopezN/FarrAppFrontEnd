@@ -15,6 +15,7 @@ export class ClientsAdminComponent implements OnInit {
   clients: ClientResponseAdmin[];
   client: ClientResponseAdmin;
   faUser = faUser;
+  p: number;
 
   constructor(private adminS: AdminService, private route: Router, private authS: AuthService) {
     this.client = {

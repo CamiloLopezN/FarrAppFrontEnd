@@ -1,0 +1,37 @@
+
+.holi {
+  background: #252427;
+  padding-left: 10%;
+  padding-right: 10%;
+  cursor: pointer;
+}
+
+
+.holi :hover {
+  background: #4c4444;
+  transition: 0.2s !important;
+}
+
+.nav-item {
+  color: white;
+  background-color: #252427;
+  text-decoration:none;
+  border: 0;
+  border-top: 2px solid #2f3031;
+  border-bottom: 2px solid #2f3031;
+  transition: 0.3s;
+}
+a.nav-item.nav-link.active {
+  color: white;
+  background-color: #3b3c3c;
+  text-decoration:none;
+  font-weight: bold;
+  border: 0;
+  border-top: 2px solid #2f3031;
+  border-bottom: 2px solid #2f3031;
+}
+
+a.nav-item.nav-link:hover {
+  border-top: 2px solid #2f3031;
+  border-bottom: 2px solid #2f3031;
+}

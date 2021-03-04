@@ -3,9 +3,9 @@
     USUARIOS
   </h3>
   <div style="background: #252427 " *ngIf="clients.length != 0">
-    <div *ngFor="let client of clients | paginate: { itemsPerPage: 8, currentPage: p }">
+    <div *ngFor="let client of clients | paginate: { itemsPerPage: 7, currentPage: p }">
       <div class="holi" (click)="profile(client._id)">
-        <div class="row h3" style="border-bottom: 3px solid #FAFAFA">
+        <div class="row h4" style="border-bottom: 3px solid #FAFAFA">
           <div class="col-3">
             <fa-icon [icon]="faUser" class="fa-2x">
             </fa-icon>

@@ -117,3 +117,10 @@
   background-color: #3b3c3c;
   padding-left: 10px !important;
 }
+
+.rol{
+  font-style: italic;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 17px;
+}

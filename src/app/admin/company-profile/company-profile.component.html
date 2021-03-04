@@ -1,9 +1,9 @@
 <div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
   <h4 class="text-white text-left">
-    USUARIO PERFIL
+    EMPRESA PERFIL
   </h4>
   <div>
-    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
+    <img src="assets/icons/UsersIcons.png" class="img-fluid" alt="iconUser">
     <div class="text-left mt-5">
       <div class="border-profile mb-4">
         <label class="text-white ml-4">
@@ -11,25 +11,34 @@
             Nombre
           </strong></label>
         <h5 class="profile-font text-center">
-          {{client.name}} {{client.lastname}}
+          {{company.name}}
         </h5>
       </div>
       <div class="border-profile mb-4">
         <label class="text-white ml-4">
           <strong>
-            Género
+            NIT
           </strong></label>
         <h5 class="profile-font text-center">
-          {{client.gender}}
+          {{company.nit}}
         </h5>
       </div>
       <div class="border-profile mb-4">
         <label class="text-white ml-4">
           <strong>
-            Fecha de nacimiento
+            Contacto
           </strong></label>
         <h5 class="profile-font text-center">
-          {{client.birthdate}}
+          {{company.contact_number}}
+        </h5>
+      </div>
+      <div class="border-profile mb-4">
+        <label class="text-white ml-4">
+          <strong>
+            Dirección
+          </strong></label>
+        <h5 class="profile-font text-center">
+          {{company.address}}
         </h5>
       </div>
       <div class="border-profile mb-4">
@@ -38,19 +47,23 @@
             E-mail
           </strong></label>
         <h5 class="profile-font text-center">
-          {{client.e_mail}}
+          {{e_mail}}
         </h5>
       </div>
     </div>
     <div class="d-flex justify-content-around mt-5">
-      <button type="button" class="btn btn-success" [routerLink]="['/admin/client']">Regresar
+      <button type="button" class="btn btn-success" [routerLink]="['/admin/company']">Regresar
       </button>
-      <div *ngIf="(isActive && !isReq) || (isActive && isReq)">
+      <div *ngIf="isActive && !isReq">
         <button type="button" class="btn btn-danger" (click)="desactive()">Desactivar
         </button>
       </div>
       <div *ngIf="!isActive && !isReq">
         <button type="button" class="btn btn-primary" (click)="active()">Activar
+        </button>
+      </div>
+      <div *ngIf="isActive && isReq">
+        <button type="button" class="btn btn-primary" (click)="desactive()">Desactivar
         </button>
       </div>
     </div>

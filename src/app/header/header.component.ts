@@ -14,9 +14,6 @@ export class HeaderComponent implements OnInit {
 
   isLogged: boolean;
   rol: string;
-  isAdmin: boolean;
-  isClient: boolean;
-  isCompany: boolean;
 
   faHome = faHome;
   faUserPlus = faUserPlus;

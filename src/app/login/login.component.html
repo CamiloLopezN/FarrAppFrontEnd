@@ -1,4 +1,4 @@
-<div class="pt-5 pb-5 pl-4 pr-4">
+<div class="pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
   <div class="text-center">
     <img src="assets/icons/UserIcon.png" class="rounded mx-auto d-block" alt="User Icon" id="ImageUser">
     <h4 id="LoginTitle" class="m-5">
@@ -117,13 +117,13 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div *ngIf="isUserEmailRetrieve" class="text-center">
+      <div *ngIf="!isError" class="text-center">
         <fa-icon [icon]="faExclamation" class="fa-9x text-success"></fa-icon>
         <div class="ralewayFont modal-body">
           ¡Hemos enviado a tu correo instrucciones para que puedas recuperar tu contraseña!
         </div>
       </div>
-      <div *ngIf="!isUserEmailRetrieve" class="text-center">
+      <div *ngIf="isError" class="text-center">
         <fa-icon [icon]="faExclamation" class="fa-9x text-danger"></fa-icon>
         <div class="ralewayFont modal-body">
           El correo electrónico que ingresó no coincide con ninguna cuenta.
@@ -131,7 +131,7 @@
       </div>
       <div class="modal-footer ralewayFont">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-                data-dismiss="modal" *ngIf="!isUserEmailRetrieve">Regresar
+                data-dismiss="modal" *ngIf="isError">Regresar
         </button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetEmailRetrieve()">Cerrar
         </button>

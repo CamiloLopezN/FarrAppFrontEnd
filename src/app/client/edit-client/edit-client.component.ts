@@ -67,7 +67,7 @@ export class EditClientComponent implements OnInit {
     this.client.birthdate = vBirth[2] + '-' + vBirth[1] + '-' + vBirth[0];
     console.log(this.client);
     this.clientS.editUser(this.client).subscribe(() => {
-      this._router.navigate(['/client']);
+      this._router.navigate(['/client/profile']);
       this.ns.succesEditClient();
     }, () => {
       this.authService.logoutExpired();

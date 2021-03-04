@@ -34,20 +34,28 @@ export class EditCompanyComponent implements OnInit {
     this.getCompany();
   }
 
-  save() {
+  save(): void {
+    this.companyS.editCompany(this.company).subscribe(() => {
+      this._router.navigate(['/company/profile']);
+      this.ns.sucessEditCompany();
+    }, () => {
+      this.authService.logoutExpired();
+    });
 
   }
 
   private getCompany(): void {
-    this.company = {
-      nit: '4564115-9',
-      name: 'La Pacha',
-      contact_number: '3554987897',
-      address: 'Dirección Enrique Segoviano'
-    };
-  }
-
-  return() {
-    this._router.navigate(['/company']);
+    this.companyS.getCompany().subscribe((res) => {
+        this.company = {
+          nit: res.nit,
+          contact_number: res.contact_number,
+          address: res.address,
+          name: res.name
+        };
+      },
+      () => {
+        this.authService.logoutExpired();
+      }
+    );
   }
 }

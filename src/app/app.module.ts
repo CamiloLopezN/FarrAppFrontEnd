@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
@@ -24,7 +25,10 @@ import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.compone
 import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
-import {SecurityClientComponent} from './client/security-client/security-client.component';
+import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
+import { SecurityClientComponent } from './client/security-client/security-client.component';
+import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
+import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 
 @NgModule({
@@ -43,7 +47,10 @@ import {RegisterCompanyComponent} from './company/register-company/register-comp
     ProfileAdminComponent,
     ClientsAdminComponent,
     ClientProfileComponent,
+    EditAdminComponent,
     SecurityClientComponent,
+    CompaniesAdminComponent,
+    CompanyProfileComponent,
     RegisterCompanyComponent
   ],
   imports: [

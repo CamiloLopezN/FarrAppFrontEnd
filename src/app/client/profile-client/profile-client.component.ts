@@ -62,6 +62,7 @@ export class ProfileClientComponent implements OnInit {
     this._router.navigate(['client/edit']);
   }
 
+
   sendReqRemove(): void {
     this.clientS.removeUser().subscribe(() => {
         this.authS.logoutSessionDesact();

@@ -1,4 +1,4 @@
-<div class="text-center pt-5 pb-5 pl-4 pr-4">
+<div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
   <h4 class="text-white text-left">
     MI PERFIL
   </h4>
@@ -18,10 +18,10 @@
     <div class="btn-group">
       <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta
       </button>
-      <button type="button" class="btn btn-primary m-3" routerLink="['admin/edit']">Editar</button>
+      <button type="button" class="btn btn-primary m-3" [routerLink]="['/admin/edit']">Editar</button>
     </div>
     <div class="btn-group">
-      <button type="button" class="btn btn-success m-3" routerLink="['admin/security']">Seguridad</button>
+      <button type="button" class="btn btn-success m-3" [routerLink]="['/admin/security']">Seguridad</button>
     </div>
   </div>
 </div>

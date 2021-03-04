@@ -3,6 +3,7 @@ import {CompanyResponse} from '../../model/company';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {CompanyService} from '../../services/company.service';
+import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-company',
@@ -12,6 +13,8 @@ import {CompanyService} from '../../services/company.service';
 export class ProfileCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
+  private _id: string;
+  faExclamationTriangle = faExclamationTriangle;
 
   constructor(
     // tslint:disable-next-line:variable-name
@@ -33,30 +36,26 @@ export class ProfileCompanyComponent implements OnInit {
     this.getCompany();
   }
 
+  removeCompany() {
+    this.companyS.removeUser().subscribe(() => {
+        this.authS.logoutSessionDesact();
+      },
+      () => {
+        this.authS.logoutExpired();
+      });
+  }
+
   edit(): void {
     this._router.navigate(['company/edit']);
   }
 
   private getCompany(): void {
-    this.company = {
-      nit: '4564115-9',
-      name: 'La Pacha',
-      contact_number: '3554987897',
-      address: 'Dirección Enrique Segoviano'
-    };
+    this.companyS.getCompany().subscribe((res) => {
+        this.company = res;
+      },
+      () => {
+        this.authS.logoutExpired();
+      }
+    );
   }
-
-  /*this.companyS.getCompany().subscribe((res) => {
-      this.company = {
-        nit: res.nit,
-        name: res.name,
-        contact_number: res.contact_number,
-        address: res.address
-      };
-    },
-    () => {
-      this.authS.logoutExpired();
-    }
-  );
-}*/
 }

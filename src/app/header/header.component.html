@@ -1,6 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark pl-3 pt-4 pb-4">
-  <a class="navbar-brand" id="FarrAppHeader">
+  <a class="navbar-brand" id="FarrAppHeader" [routerLink]="['/mainPanel']">
     FarrApp
+  </a>
+  <a class="navbar-brand rol" *ngIf="isLogged && rol =='client'">
+    CLIENTE
+  </a>
+  <a class="navbar-brand rol" *ngIf="isLogged && rol =='company'">
+    EMPRESA
+  </a>
+  <a class="navbar-brand rol" *ngIf="isLogged && rol =='superAdmin'">
+    ADMIN
   </a>
   <div class="dropdown show ml-auto" data-placement="bottom" title="Cuenta">
     <a class="btn-lg dropdown-toggle rounded-circle" href="#" role="button"
@@ -45,7 +54,7 @@
         Eventos
       </a>
 
-      <a class="dropdown-item" [routerLink]="['client']" [routerLinkActive]="['activado']"
+      <a class="dropdown-item" [routerLink]="['client/profile']" [routerLinkActive]="['activado']"
          *ngIf="isLogged && rol=='client'">
         <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
@@ -53,7 +62,7 @@
         Perfil
       </a>
 
-      <a class="dropdown-item" [routerLink]="['company']" [routerLinkActive]="['activado']"
+      <a class="dropdown-item" [routerLink]="['company/profile']" [routerLinkActive]="['activado']"
          *ngIf="isLogged && rol=='company'">
         <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
@@ -61,7 +70,8 @@
         Perfil
       </a>
 
-      <a class="dropdown-item" [routerLink]="['admin/profile']" [routerLinkActive]="['activado']" *ngIf="isLogged && rol=='superAdmin'">
+      <a class="dropdown-item" [routerLink]="['admin/profile']" [routerLinkActive]="['activado']"
+         *ngIf="isLogged && rol=='superAdmin'">
         <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
           <fa-icon [icon]="faUser"></fa-icon>
         </div>

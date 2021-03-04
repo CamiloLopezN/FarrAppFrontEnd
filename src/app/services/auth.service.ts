@@ -19,7 +19,7 @@ export class AuthService {
   private role = new BehaviorSubject<string>('norole');
 
   constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService) {
-    //this.checkToken();
+    this.checkToken();
   }
 
   get isLogged(): Observable<boolean> {
@@ -54,6 +54,17 @@ export class AuthService {
       map((res: any) => {
         this.saveToken(res.token);
         this.changeLogAndRole();
+        return res;
+      })
+    );
+  }
+
+  retrievePass(e_mail: string): Observable<any> {
+    const req = {
+      e_mail: e_mail
+    };
+    return this.httpClient.put(`${environment.backend}/api/user/recover-pass`, req).pipe(
+      map((res: any) => {
         return res;
       })
     );

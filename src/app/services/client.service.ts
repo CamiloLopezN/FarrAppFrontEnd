@@ -53,7 +53,6 @@ export class ClientService {
   }
 
   changePass(client: ClientAccount): Observable<any> {
-    console.log(client);
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -66,7 +65,6 @@ export class ClientService {
       );
   }
   register(client: ClientRegistration): Observable<any> {
-    console.log(client);
     return this.http.post<any>(`${environment.backend}/api/client/`, client)
       .pipe(
         map((res: any) => {

@@ -3,8 +3,9 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {AdminResponse, CreateClient} from '../model/admin';
-import {CompanyResponse} from '../model/company';
+import {AdminResponse} from '../model/admin';
+import {ClientRegistration2} from '../model/client';
+import {CompanyRegistration2} from '../model/company';
 
 @Injectable({
   providedIn: 'root'
@@ -122,12 +123,25 @@ export class AdminService {
       );
   }
 
-  createClient(client: CreateClient): Observable<any> {
+  postUser(client: ClientRegistration2): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.post<any>(`${environment.backend}/api/admin/client`, client, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postCompany(company: CompanyRegistration2): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/admin/company`, company, {headers})
       .pipe(
         map((res: any) => {
           return res;

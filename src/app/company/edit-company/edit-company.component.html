@@ -1,44 +1,67 @@
-<div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
-  <h4 class="text-white text-left">
-    EDITAR
-  </h4>
-  <div>
-    <img src="assets/icons/UsersIcons.png" class="img-fluid" alt="iconUser">
-    <form #formEdit="ngForm" (ngSubmit)="save()" id="form-edit">
-      <div class="text-left mt-3">
-        <div class="form-group">
-          <label for="nombre" class="text-white">Nombre de la empresa</label>
-          <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name"
-                 [(ngModel)]="company.name" required>
-          <small id="emailHelp" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
-            este campo vacío.</small>
-        </div>
-        <div class="form-group">
-          <label for="address" class="text-white">Dirección</label>
-          <input type="text" class="form-control color-gray" id="address" #address="ngModel" name="address"
-                 [(ngModel)]="company.address" required>
-          <small id="emailHelp" class="form-text text-danger" *ngIf="!address.valid && address.touched">No puedes dejar
-            este campo vacío.</small>
-        </div>
-        <div class="form-group">
-          <label for="contact_number" class="text-white">Número de contacto</label>
-          <input type="text" class="form-control color-gray" id="contact_number" #contact_number="ngModel" name="contact_number"
-                 [(ngModel)]="company.contact_number" required>
-          <small id="emailHelp" class="form-text text-danger" *ngIf="!contact_number.valid && contact_number.touched">No puedes dejar
-            este campo vacío.</small>
-        </div>
-        <div class="form-group">
-          <label for="nit" class="text-white">NIT</label>
-          <input type="text" class="form-control color-gray" id="nit" #nit="ngModel" name="nit"
-                 [(ngModel)]="company.nit" required>
-          <small id="emailHelp" class="form-text text-danger" *ngIf="!nit.valid && nit.touched">No puedes dejar
-            este campo vacío.</small>
-        </div>
+<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
+     style="animation-duration: 0.2s" id="container" *ngIf="company">
+  <div id="log-in">
+    <div class="text-center pl-4 pr-4 pt-4 pb-4">
+      <h4 class="text-white text-center mb-3">EDITAR</h4>
+      <div>
+        <img src="assets/icons/UsersIcons.png" class="img-fluid" alt="iconUser" id="ImageUser">
+        <form #formEdit="ngForm" (ngSubmit)="save()" id="form-edit">
+          <div class="text-left mt-3">
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="nombre" class="text-white">Nombre</label>
+                  <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name"
+                         [(ngModel)]="company.name" required>
+                  <small id="emailHelp" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
+                    este campo vacío.</small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="lastname" class="text-white">NIT</label>
+                  <input type="text" class="form-control color-gray" id="lastname" #lastname="ngModel" name="lastname"
+                         [(ngModel)]="company.nit" required>
+                  <small id="emailHelp" class="form-text text-danger" *ngIf="!lastname.valid && lastname.touched">No puedes dejar
+                    este campo vacío.</small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="address" class="text-white">Dirección</label>
+                  <input type="text" class="form-control color-gray" id="address" #address="ngModel" name="address"
+                         [(ngModel)]="company.address" required>
+                  <small id="emailHelp" class="form-text text-danger" *ngIf="!address.valid && address.touched">No puedes dejar
+                    este campo vacío.</small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="contactNumber" class="text-white">Número de contacto</label>
+                  <input type="text" class="form-control color-gray" id="contactNumber" #contactNumber="ngModel" name="contactNumber"
+                         [(ngModel)]="company.contact_number" required>
+                  <small id="emailHelp" class="form-text text-danger" *ngIf="!contactNumber.valid && contactNumber.touched">No puedes dejar
+                    este campo vacío.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/company/profile']">Regresar</button>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [disabled]="!formEdit.valid">Guardar</button>
+            </div>
+          </div>
+        </form>
       </div>
-      <div class="d-flex justify-content-around mt-5">
-        <button type="submit" class="btn btn-primary" [disabled]="!formEdit.form.valid">Guardar</button>
-        <button type="button" class="btn btn-success" [routerLink]="['/company/profile']">Regresar</button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

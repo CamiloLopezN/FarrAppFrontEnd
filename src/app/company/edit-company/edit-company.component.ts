@@ -22,12 +22,6 @@ export class EditCompanyComponent implements OnInit {
     private authService: AuthService,
     private ns: NotificationService
   ) {
-    this.company = {
-      nit: '',
-      contact_number: '',
-      address: '',
-      name: ''
-    };
   }
 
   ngOnInit(): void {

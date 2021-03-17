@@ -1,9 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import {faHome, faUserPlus, faUser, faSignOutAlt, faGlassCheers, faSignInAlt, faKey, faUsersCog} from '@fortawesome/free-solid-svg-icons/';
+import {
+  faHome,
+  faUserPlus,
+  faUser,
+  faSignOutAlt,
+  faGlassCheers,
+  faSignInAlt,
+  faKey,
+  faUsersCog,
+  faUserCircle
+} from '@fortawesome/free-solid-svg-icons/';
 import {faFacebook, faInstagram, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {ClientService} from '../services/client.service';
 import {Router} from '@angular/router';
+import {faEllipsisV, faSearch} from '@fortawesome/free-solid-svg-icons/';
+
+declare var $: any;
 
 @Component({
   selector: 'app-header',
@@ -12,9 +25,14 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  prevScrollPos = window.pageYOffset;
   isLogged: boolean;
   rol: string;
+  name: string;
 
+  faUserCircle = faUserCircle;
+  faElipsis = faEllipsisV;
+  faSearch = faSearch;
   faHome = faHome;
   faUserPlus = faUserPlus;
   faUser = faUser;
@@ -28,7 +46,7 @@ export class HeaderComponent implements OnInit {
   faTwitter = faTwitter;
   faInstagram = faInstagram;
 
-  constructor(private authService: AuthService, private clientS: ClientService, private router: Router) {
+  constructor(public authService: AuthService, private clientS: ClientService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,6 +56,9 @@ export class HeaderComponent implements OnInit {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
+    this.authService.getName.subscribe(name => {
+      this.name = name;
+    });
   }
 
   logOut(): void {
@@ -46,5 +67,27 @@ export class HeaderComponent implements OnInit {
 
   edit(): void {
     this.router.navigate(['client/edit']);
+  }
+
+
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(): void {
+    const currentScrollPos = window.pageYOffset;
+    if (this.prevScrollPos < currentScrollPos) {
+      document.getElementById('navbar').style.top = '-350px';
+    } else {
+      document.getElementById('navbar').style.top = '0';
+    }
+    this.prevScrollPos = currentScrollPos;
+  }
+
+  user(): void {
+    if (this.rol == 'client') {
+      this.router.navigate(['/client/profile']);
+    } else if (this.rol == 'company') {
+      this.router.navigate(['/company/profile']);
+    } else if (this.rol == 'superAdmin') {
+      this.router.navigate(['/admin/profile']);
+    }
   }
 }

@@ -1,13 +1,14 @@
 .navbar {
   background: #252427;
   color: #FFFFFF;
+  transition: top 0.3s;
+  box-shadow: 0 4px 9px 0 rgba(191,114,251,0.6);
 }
 
 #FarrAppHeader {
   font-style: normal;
   font-weight: normal;
-  font-size: 30px;
-  line-height: 17px;
+  font-size: 35px;
 }
 
 @keyframes multicolor {
@@ -24,6 +25,7 @@
     color: #FFFFFF;
   }
 }
+
 
 @keyframes slideIn {
   0% {
@@ -68,7 +70,6 @@
 
 .border-card {
   border: 2px solid #2f3031;
-  background: #252427;
   padding: 10px;
   margin-top: 10px;
 }
@@ -78,49 +79,93 @@
   color: white
 }
 
-.dropdown-menu{
-  width: 96vw;
-}
-
-.dropdown-item{
-  color: #FFFFFF;
-  font-size: 20px;
+.dropdown-item {
   transition: 0.15s;
   margin-top: 10px;
 }
 
-.dropdown-item:hover{
-  background-color: #3b3c3c;
+.dropdown-item:hover {
+  background-color: #f7f7f7;
 }
 
-.dropdown-item:active{
+.dropdown-item:active {
   background-color: #2b2a30;
 }
 
-.dropdown-item:hover .icon{
+.dropdown-item:hover .icon {
   background-color: #4e4f50;
 }
 
-.dropdown-item:hover .event-icon{
+.dropdown-item:hover .event-icon {
   animation: multicolor 3s infinite;
 }
 
-.iconRedSocial{
+.dropdown-item:hover .event-icon {
+  animation: multicolor 3s infinite;
+}
+
+.iconRedSocial {
   color: #FFFFFF;
 }
 
-.iconRedSocial :hover{
+.iconRedSocial :hover {
   animation: multicolor 3s infinite;
 }
 
-.activado{
+.activado {
   background-color: #3b3c3c;
   padding-left: 10px !important;
 }
 
-.rol{
+.rol {
   font-style: italic;
   font-weight: normal;
   font-size: 28px;
   line-height: 17px;
+}
+
+.rainbow-text {
+  transition: 1s;
+}
+
+.rainbow-text:hover {
+  background: linear-gradient(to right, #ff1a43 20%, #bf72fb 30%, #bf72fb 70%, #ff1a43 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: textShine 3s ease-in-out infinite;
+
+}
+
+@keyframes textShine {
+  to {
+    background-position: 200%;
+  }
+}
+
+.dropdown-menu{
+  border-radius: 20px;
+  width: 15rem;
+  box-shadow: 0 4px 9px 0 rgba(0,0,0,0.7);
+  border: none;
+}
+
+
+.icon-mine{
+  display: inline-block;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+.my-button:hover{
+  color: #bf72fb !important;
+}
+
+a{
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+a:hover{
+  color: #bf72fb !important;
 }

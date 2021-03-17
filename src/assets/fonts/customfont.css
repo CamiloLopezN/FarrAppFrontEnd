@@ -2,3 +2,8 @@
   font-family: Raleway;
   src: url("Raleway-Regular.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: Lovelo;
+  src: url("Lovelo-Black.ttf") format("truetype");
+}

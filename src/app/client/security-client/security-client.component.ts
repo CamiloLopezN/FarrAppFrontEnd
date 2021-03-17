@@ -56,9 +56,9 @@ export class SecurityClientComponent implements OnInit {
       e_mail: this.e_mail,
       password: this.password
     };
-    this.clientService.changePass(this.client).subscribe((res) => {
+    this.clientService.changePass(this.client).subscribe(() => {
         this.notifyS.succesChangePass();
-        this.router.navigate(['login']);
+        this.router.navigate(['/client/profile']);
       },
       error => {
         this.errorMessage = error.error.message;
@@ -66,12 +66,10 @@ export class SecurityClientComponent implements OnInit {
     );
   }
 
-  isEmpty(): boolean {
-    return this.password === '';
-  }
-
-  isEmptyConfirm(): boolean {
-    return this.passWordConfirm === '';
+  isValidAll(): boolean {
+    return !this.isDifferentTo() && this.isValidPassLenght()
+      && this.isEqual() && !this.contentSpaces()
+      && this.contentDigits() && this.contentLower() && this.contentUpper();
   }
 
   isEqual(): boolean {
@@ -83,39 +81,25 @@ export class SecurityClientComponent implements OnInit {
   }
 
   isValidPassLenght(): boolean {
-    return this.password?.length < 8;
+    return this.password.length >= 8 && this.password.length <= 100;
   }
 
+
   contentSpaces(): boolean {
-    if (/\s/.test(this.password?.toString())) {
-      return true;
-    } else {
-      return false;
-    }
+    return /\s/.test(this.password.toString());
   }
 
   contentUpper(): boolean {
-    if (/[A-Z]/.test(this.password?.toString())) {
-      return false;
-    } else {
-      return true;
-    }
+    return /[A-Z]/.test(this.password.toString());
   }
 
   contentLower(): boolean {
-    if (/[a-z]/.test(this.password?.toString())) {
-      return false;
-    } else {
-      return true;
-    }
+    return /[a-z]/.test(this.password.toString());
   }
 
   contentDigits(): boolean {
-    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())) {
-      return false;
-    } else {
-      return true;
-    }
+    return /^(?:\D*\d){2,100}\D*$/.test(this.password.toString());
   }
+
 }
 

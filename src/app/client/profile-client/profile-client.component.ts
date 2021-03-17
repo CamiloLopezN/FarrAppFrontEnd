@@ -24,12 +24,6 @@ export class ProfileClientComponent implements OnInit {
     private datePipe: DatePipe,
     private authS: AuthService
   ) {
-    this.client = {
-      name: '',
-      lastname: '',
-      birthdate: '',
-      gender: ''
-    };
   }
 
   ngOnInit(): void {

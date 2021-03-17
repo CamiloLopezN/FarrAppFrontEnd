@@ -7,6 +7,14 @@ export interface CompanyRegistration {
   nit: string;
 }
 
+export interface CompanyRegistration2 {
+  e_mail: string;
+  name: string;
+  address: string;
+  contact_number: string;
+  nit: string;
+}
+
 export interface CompanyResponse {
   name: string;
   address: string;

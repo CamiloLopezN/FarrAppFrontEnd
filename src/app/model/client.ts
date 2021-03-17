@@ -11,10 +11,12 @@ export interface ClientLogin {
   e_mail: string;
   password: string;
 }
-export interface ClientAccount{
+
+export interface ClientAccount {
   e_mail: string;
   password: string;
 }
+
 export interface ClientResponse {
 
   name: string;
@@ -37,4 +39,12 @@ export interface ClientResponseAdmin2 {
   _id: string;
   name: string;
   lastname: string;
+}
+
+export class ClientRegistration2 {
+  name: string;
+  lastname: string;
+  birthdate: string;
+  gender: string;
+  e_mail: string;
 }

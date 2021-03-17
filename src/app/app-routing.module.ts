@@ -20,9 +20,13 @@ import {SecurityClientComponent} from './client/security-client/security-client.
 import {CompaniesAdminComponent} from './admin/companies-admin/companies-admin.component';
 import {CompanyProfileComponent} from './admin/company-profile/company-profile.component';
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
-import {CreateClientComponent} from './admin/create-client/create-client.component';
+import {LandingPageComponent} from './landing-page/landing-page.component';
+import {SecurityCompanyComponent} from './company/security-company/security-company.component';
 
 const routes: Routes = [
+  {
+    path: 'landing-page', component: LandingPageComponent
+  },
   {
     path: 'mainPanel', component: MainPanelComponent
   },
@@ -50,13 +54,17 @@ const routes: Routes = [
     path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent
   },
   {
+    path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent
+  },
+  {
     path: 'admin/dashboard', canActivate: [AdminSesionGuard], component: AdminDashboardComponent
   },
   {
     path: 'admin/profile', canActivate: [AdminSesionGuard], component: ProfileAdminComponent
-  },
+  }
+  ,
   {
-    path: 'admin/client/register', canActivate: [AdminSesionGuard], component: CreateClientComponent
+    path: 'admin/client', canActivate: [AdminSesionGuard], component: ClientsAdminComponent
   },
   {
     path: 'admin/client/:id', canActivate: [AdminSesionGuard], component: ClientProfileComponent
@@ -70,14 +78,8 @@ const routes: Routes = [
   {
     path: 'admin/company/:id', canActivate: [AdminSesionGuard], component: CompanyProfileComponent
   },
-  {
-    path: 'admin/company', canActivate: [AdminSesionGuard], component: CompaniesAdminComponent
-  },
-  {
-    path: 'admin/client', canActivate: [AdminSesionGuard], component: ClientsAdminComponent
-  },
-  {path: '', redirectTo: 'mainPanel', pathMatch: 'full'},
-  {path: '**', component: MainPanelComponent}
+  {path: '', redirectTo: 'landing-page', pathMatch: 'full'},
+  {path: '**', component: LandingPageComponent}
 ];
 
 @NgModule({

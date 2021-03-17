@@ -30,7 +30,11 @@ import { SecurityClientComponent } from './client/security-client/security-clien
 import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
 import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
-import { CreateClientComponent } from './admin/create-client/create-client.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
+import { RegisterModalComponent } from './client/register-modal/register-modal.component';
+import { RegisterCompanyModalComponent } from './company/register-company-modal/register-company-modal.component';
+import { SecurityCompanyComponent } from './company/security-company/security-company.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { CreateClientComponent } from './admin/create-client/create-client.compo
     CompaniesAdminComponent,
     CompanyProfileComponent,
     RegisterCompanyComponent,
-    CreateClientComponent
+    LandingPageComponent,
+    LoginModalComponent,
+    RegisterModalComponent,
+    RegisterCompanyModalComponent,
+    SecurityCompanyComponent
   ],
   imports: [
     BrowserModule,

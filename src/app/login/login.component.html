@@ -63,7 +63,7 @@
              #pass="ngModel" name="pass" [(ngModel)]="password" required>
     </div>
     <div class="text-center mt-5" id="Login">
-      <button type="submit" class="btn btn-primary" [disabled]="!formUser.form.valid">Iniciar sesión</button>
+      <button type="submit" class="btn btn-primary bg-gradient-primary" [disabled]="!formUser.form.valid">Iniciar sesión</button>
       <p id="PassRemember" class="mt-4 mb-4" data-toggle="modal" data-target="#exampleModal">
         ¿Olvidó su contraseña?
       </p>
@@ -99,7 +99,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetEmailRetrieve()">Cerrar
           </button>
           <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exclamationModal"
-                  data-dismiss="modal" [disabled]="!formRetrieve.form.valid" (click)="retrievePass()">Recuperar
+                  [disabled]="!formRetrieve.form.valid" (click)="retrievePass()">Recuperar
           </button>
         </div>
       </form>

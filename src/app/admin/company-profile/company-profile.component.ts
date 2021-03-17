@@ -24,14 +24,6 @@ export class CompanyProfileComponent implements OnInit {
     private adminS: AdminService,
     private authS: AuthService,
     private _router: Router) {
-    this.company = {
-      _id: '',
-      active: false,
-      address: '',
-      contact_number: '',
-      name: '',
-      nit: ''
-    };
     this.e_mail = '';
   }
 

@@ -16,14 +16,6 @@ export class ClientProfileComponent implements OnInit {
   isReq: boolean;
 
   constructor(private ns: NotificationService, private _route: ActivatedRoute, private adminS: AdminService, private  authS: AuthService, private router: Router) {
-    this.client = {
-      _id: '',
-      e_mail: '',
-      name: '',
-      lastname: '',
-      birthdate: '',
-      gender: ''
-    };
   }
 
   ngOnInit(): void {

@@ -12,6 +12,7 @@
   transition: 0.2s !important;
 }
 
+
 .nav-item {
   color: white;
   background-color: #252427;
@@ -34,4 +35,40 @@ a.nav-item.nav-link.active {
 a.nav-item.nav-link:hover {
   border-top: 2px solid #2f3031;
   border-bottom: 2px solid #2f3031;
+}
+
+.testp {
+  font-style: inherit;
+  background: #252427;
+}
+
+.dropdown-divider {
+  border: 2px solid #2b2a30;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.holi :hover{
+  background-color: #3a3b3c;
+}
+
+.container{
+  padding: 5vh 0 !important;
+}
+
+#dashboard{
+  border-radius: 30px;
+  box-shadow: 0 9px 15px 0 rgba(0,0,0,0.4);
+}
+
+@media screen and (max-width: 1024px) {
+  .container{
+    padding: 9vh 5% !important;
+  }
+
+}
+@media screen and (max-width: 480px) {
+  .container{
+    padding: 6vh 0 !important;
+  }
 }

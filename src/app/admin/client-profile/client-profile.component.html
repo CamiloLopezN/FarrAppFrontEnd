@@ -1,58 +1,56 @@
-<div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
-  <h4 class="text-white text-left">
-    USUARIO PERFIL
-  </h4>
-  <div>
-    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
-    <div class="text-left mt-5">
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Nombre
-          </strong></label>
-        <h5 class="profile-font text-center">
-          {{client.name}} {{client.lastname}}
-        </h5>
+<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
+     style="animation-duration: 0.2s" id="container" *ngIf="client">
+  <div id="log-in">
+    <div class="text-center pl-4 pr-4 pt-4 pb-4">
+      <h4 class="text-white text-center mb-4">USUARIO PERFIL</h4>
+      <div>
+        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
+        <div class="text-left mt-5">
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Nombre
+              </strong></label>
+            <h5 class="profile-font text-center text-white">{{client.name}} {{client.lastname}}</h5>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Género
+              </strong></label>
+            <h5 class="profile-font text-center text-white">{{client.gender}}</h5>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Fecha de nacimiento
+              </strong></label>
+            <h5 class="profile-font text-center text-white">{{client.birthdate}}</h5>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                E-mail
+              </strong></label>
+            <h5 class="profile-font text-center text-white">{{client.e_mail}}</h5>
+          </div>
+        </div>
+
       </div>
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Género
-          </strong></label>
-        <h5 class="profile-font text-center">
-          {{client.gender}}
-        </h5>
-      </div>
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Fecha de nacimiento
-          </strong></label>
-        <h5 class="profile-font text-center">
-          {{client.birthdate}}
-        </h5>
-      </div>
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            E-mail
-          </strong></label>
-        <h5 class="profile-font text-center">
-          {{client.e_mail}}
-        </h5>
-      </div>
-    </div>
-    <div class="d-flex justify-content-around mt-5">
-      <button type="button" class="btn btn-success" [routerLink]="['/admin/client']">Regresar
-      </button>
-      <div *ngIf="(isActive && !isReq) || (isActive && isReq)">
-        <button type="button" class="btn btn-danger" (click)="desactive()">Desactivar
-        </button>
-      </div>
-      <div *ngIf="!isActive && !isReq">
-        <button type="button" class="btn btn-primary" (click)="active()">Activar
-        </button>
+      <div class="mt-2">
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/admin/client']">Regresar</button>
+          </div>
+          <div class="col" *ngIf="(isActive && !isReq) || (isActive && isReq)">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100" (click)="desactive()">Desactivar</button>
+          </div>
+          <div class="col" *ngIf="!isActive && !isReq">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" (click)="active()">Activar</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+

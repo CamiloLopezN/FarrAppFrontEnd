@@ -1,20 +1,21 @@
-<div class="text-white p-3 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
+<div class="text-white animate__animated animate__fadeInRight container" style="animation-duration: 0.2s;">
   <h2>
     ¡Bienvenido!
   </h2>
   <div class="pl-5 pr-5">
-    <div class="text-center h4 testp mt-5 pt-3 pb-3" style="border-radius: 10px">
-        <a class="text-white" [routerLink]="['/admin/profile']">
-          <fa-icon [icon]="faUserEdit" class="d-block fa-2x"></fa-icon>
-          Perfil
-        </a>
+    <div class="text-center h4 testp mt-5 pt-3 pb-3" id="dashboard">
+      <a class="text-white" [routerLink]="['/admin/profile']">
+        <fa-icon [icon]="faUserEdit" class="d-block fa-2x"></fa-icon>
+        Perfil
+      </a>
       <div class="dropdown-divider"></div>
       <a class="text-white" [routerLink]="['/admin/client']">
         <fa-icon [icon]="faUser" class="d-block fa-2x"></fa-icon>
         Usuarios
       </a>
       <div class="dropdown-divider"></div>
-      <a class="text-white" [routerLink]="['/admin/client/register']">
+      <a class="text-white" data-toggle="modal" data-target="#register-client-modal"
+          (click)="authS.inReg.next(false)" style="cursor:pointer;">
         <fa-icon [icon]="faUserPlus" class="d-block fa-2x"></fa-icon>
         Crear usuario
       </a>
@@ -22,6 +23,11 @@
       <a class="text-white" [routerLink]="['/admin/company']">
         <fa-icon [icon]="faUsers" class="d-block fa-2x"></fa-icon>
         Empresas
+      </a>
+      <div class="dropdown-divider"></div>
+      <a class="text-white" style="cursor:pointer;" data-toggle="modal" data-target="#register-company-modal" (click)="authS.inRegCompany.next(false)">
+        <fa-icon [icon]="faUserEdit" class="d-block fa-2x"></fa-icon>
+        Crear empresa
       </a>
     </div>
   </div>

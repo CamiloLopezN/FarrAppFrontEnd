@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {faUserEdit, faUsers, faUserPlus, faUser} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,7 +14,8 @@ export class AdminDashboardComponent implements OnInit {
   faUserPlus = faUserPlus;
   faUser = faUser;
 
-  constructor() {
+  constructor(public authS: AuthService) {
+
   }
 
   ngOnInit(): void {

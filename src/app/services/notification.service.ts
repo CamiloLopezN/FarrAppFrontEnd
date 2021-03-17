@@ -145,7 +145,25 @@ export class NotificationService {
   }
 
   succesCreateCompany(): void {
-    this.nService.success('Estado de la compañia', '¡Se ha registrado tu petición correctamente!', {
+    this.nService.success('Estado de la empresa', '¡Se ha registrado tu petición correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesRegisterClient(): void {
+    this.nService.success('Estado del cliente', '¡Se ha creado el cliente correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesRegisterCompany(): void {
+    this.nService.success('Estado de la empresa', '¡Se ha creado la compañia correctamente!', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,

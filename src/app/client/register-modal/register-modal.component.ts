@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {ClientLogin, ClientRegistration, ClientRegistration2} from '../../model/client';
+import {ClientAdmin, ClientLogin, ClientRegistration, ClientRegistration2} from '../../model/client';
 import {Router} from '@angular/router';
 import {
   faLock,
@@ -7,10 +7,7 @@ import {
   faCalendarDay,
   faIdCard,
   faExclamationTriangle,
-  faExclamationCircle,
-  faUserCircle,
   faUnlock,
-  faChevronLeft
 } from '@fortawesome/free-solid-svg-icons';
 import {ClientService} from '../../services/client.service';
 import {NgForm} from '@angular/forms';
@@ -40,7 +37,7 @@ export class RegisterModalComponent implements OnInit {
   birthdate: string;
   gender: string;
   email: string;
-  password: string;
+  password = '';
   passwordCon: string;
   errorMessage: string;
   faUnlock = faUnlock;
@@ -49,12 +46,17 @@ export class RegisterModalComponent implements OnInit {
   btnOther: string;
   btnMasc: string;
   btnFemale: string;
+  btnClient: string;
+  btnAdmin: string;
   screenVerify: boolean;
   clientLog: ClientLogin;
   role: string;
   @ViewChild('formClient') formC: NgForm;
 
   clientA: ClientRegistration2;
+  adminSelect = false;
+
+  clientAdmin: ClientAdmin;
 
   constructor(private notifyS: NotificationService, private authS: AuthService,
               private router: Router, private clientService: ClientService,
@@ -62,6 +64,8 @@ export class RegisterModalComponent implements OnInit {
     this.btnOther = 'btnOther';
     this.btnMasc = 'btnMasc';
     this.btnFemale = 'btnFemale';
+    this.btnAdmin = 'btnAdmin';
+    this.btnClient = 'btnClient';
     this.actualDate = new Date();
     this.birthdate = this.datePipe.transform(this.getDateActual(), 'yyyy-MM-dd');
     this.gender = '';
@@ -72,9 +76,9 @@ export class RegisterModalComponent implements OnInit {
 
   onSubmit(): void {
 
-    const vBirth = this.birthdate.split('-');
     this.errorMessage = '';
     if (this.role != 'superAdmin') {
+      const vBirth = this.birthdate.split('-');
       this.client = {
         name: this.nameClient,
         lastname: this.lastName,
@@ -96,8 +100,8 @@ export class RegisterModalComponent implements OnInit {
           this.errorMessage = error.error.message;
         }
       );
-    }
-    else{
+    } else if (!this.adminSelect) {
+      const vBirth = this.birthdate.split('-');
       this.clientA = {
         name: this.nameClient,
         lastname: this.lastName,
@@ -113,6 +117,21 @@ export class RegisterModalComponent implements OnInit {
       }, error => {
         this.errorMessage = error.error.message;
       });
+    } else {
+      this.clientAdmin = {
+        e_mail: this.email,
+        lastname: this.lastName,
+        name: this.nameClient,
+        password: this.password
+      };
+      this.adminS.postAdmin(this.clientAdmin).subscribe(() => {
+        $('#register-client-modal').modal('hide');
+        this.notifyS.succesRegisterAdmin();
+        this.formC.reset();
+        this.changeDetectorRef.detectChanges();
+      }, error => {
+        this.errorMessage = error.error.message;
+      });
     }
   }
 
@@ -123,6 +142,7 @@ export class RegisterModalComponent implements OnInit {
     $(document).ready(() => {
       $('#register-client-modal').on('show.bs.modal', () => {
         this.birthdate = this.datePipe.transform(this.getDateActual(), 'yyyy-MM-dd');
+        this.adminSelect = false;
         this.nameClient = '';
         this.lastName = '';
         this.email = '';
@@ -130,7 +150,16 @@ export class RegisterModalComponent implements OnInit {
         this.passwordCon = '';
         this.gender = '';
         this.errorMessage = '';
+        this.authS.inReg.next(false);
+        this.formC.reset();
+        this.changeDetectorRef.detectChanges();
 
+        if (this.role == 'superAdmin') {
+          document.getElementById(this.btnAdmin).style.backgroundColor = '#fafafa';
+          document.getElementById(this.btnAdmin).style.color = '#b6babd';
+          document.getElementById(this.btnClient).style.backgroundColor = '#9edcf6';
+          document.getElementById(this.btnClient).style.color = '#fafafa';
+        }
         if (document.getElementById(this.btnOther) != null) {
           document.getElementById(this.btnOther).style.backgroundColor = '#fafafa';
           document.getElementById(this.btnFemale).style.backgroundColor = '#fafafa';
@@ -139,11 +168,6 @@ export class RegisterModalComponent implements OnInit {
           document.getElementById(this.btnFemale).style.color = '#b6babd';
           document.getElementById(this.btnOther).style.color = '#b6babd';
         }
-      });
-      $('#register-client-modal').on('hidden.bs.modal', () => {
-        this.authS.inReg.next(false);
-        this.formC.reset();
-        this.changeDetectorRef.detectChanges();
       });
     });
   }
@@ -167,12 +191,17 @@ export class RegisterModalComponent implements OnInit {
   }
 
   isValidAll(): boolean {
-    if (this.role == 'superAdmin' && this.ifBefore()) {
-      return true;
+    if (this.role == 'superAdmin' && !this.adminSelect) {
+      return this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender != '';
+    } else if (this.role == 'superAdmin' && this.adminSelect) {
+      return this.isEmailLength() && this.isLastNameLength() && this.isNameLength() && !this.isDifferentTo() && this.isValidPassLenght()
+        && this.isEqual() && !this.contentSpaces()
+        && this.contentDigits() && this.contentLower() && this.contentUpper();
     } else {
       return !this.isDifferentTo() && this.isValidPassLenght()
         && this.isEqual() && !this.contentSpaces()
-        && this.contentDigits() && this.contentLower() && this.contentUpper() && this.ifBefore();
+        && this.contentDigits() && this.contentLower() && this.contentUpper() &&
+        this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender != '';
     }
   }
 
@@ -185,7 +214,11 @@ export class RegisterModalComponent implements OnInit {
   }
 
   isValidPassLenght(): boolean {
-    return this.password.length >= 8 && this.password.length <= 100;
+    if (this.password != null) {
+      return this.password.length >= 8 && this.password.length <= 100;
+    } else {
+      return false;
+    }
   }
 
 
@@ -231,6 +264,24 @@ export class RegisterModalComponent implements OnInit {
     }
   }
 
+
+  changeButtoms2(btnString: string): void {
+    document.getElementById(btnString).style.color = '#ffffff';
+    if (btnString === this.btnAdmin) {
+      this.adminSelect = true;
+      document.getElementById(btnString).style.backgroundColor = '#b6babd';
+      document.getElementById(this.btnClient).style.backgroundColor = '#fafafa';
+      document.getElementById(this.btnClient).style.color = '#b6babd';
+    } else {
+      this.adminSelect = false;
+      document.getElementById(btnString).style.backgroundColor = '#9edcf6';
+      document.getElementById(this.btnAdmin).style.backgroundColor = '#fafafa';
+      document.getElementById(this.btnAdmin).style.color = '#b6babd';
+    }
+    this.formC.reset();
+    this.changeDetectorRef.detectChanges();
+  }
+
   getDateActual(): string {
     return getStringActual();
   }
@@ -250,5 +301,20 @@ export class RegisterModalComponent implements OnInit {
     this.router.navigate(['admin/dashboard']);
   }
 
+  isNameLength(): boolean {
+    return this.nameClient.length <= 150;
+  }
+
+  isLastNameLength(): boolean {
+    return this.lastName.length <= 150;
+  }
+
+  isEmailLength(): boolean {
+    if (this.email != undefined) {
+      return this.email.length <= 150;
+    } else {
+      return false;
+    }
+  }
 }
 

@@ -2,7 +2,7 @@
      style="animation-duration: 0.2s" id="container" *ngIf="company">
   <div id="log-in">
     <div class="text-center pl-4 pr-4 pt-4 pb-4">
-      <h4 class="text-white text-center mb-4">EMPRESA PERFIL</h4>
+      <h4 class="text-white text-center mb-4" data-toggle="tooltip" data-placement="top" title="Mi empresa">EMPRESA PERFIL</h4>
       <div>
         <img src="assets/icons/UsersIcons.png" class="img-fluid" alt="iconUser" id="ImageUser">
         <div class="text-left mt-5">
@@ -11,7 +11,7 @@
               <strong>
                 Nombre
               </strong></label>
-            <h5 class="profile-font text-center text-white">{{company.name}}</h5>
+            <h5 class="profile-font text-center text-white crow2" data-toggle="tooltip" data-placement="top" title="{{company.name}}">{{company.name}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
@@ -25,21 +25,21 @@
               <strong>
                 Número de contacto
               </strong></label>
-            <h5 class="profile-font text-center text-white">{{company.contact_number}}</h5>
+            <h5 class="profile-font text-center text-white crow2" data-toggle="tooltip" data-placement="top" title="{{company.contact_number}}">{{company.contact_number}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
               <strong>
                 Dirección
               </strong></label>
-            <h5 class="profile-font text-center text-white">{{company.address}}</h5>
+            <h5 class="profile-font text-center text-white crow2" data-toggle="tooltip" data-placement="top" title="{{company.address}}">{{company.address}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
               <strong>
                 E-mail
               </strong></label>
-            <h5 class="profile-font text-center text-white">{{e_mail}}</h5>
+            <h5 class="profile-font text-center text-white crow2" data-toggle="tooltip" data-placement="top" title="{{e_mail}}">{{e_mail}}</h5>
           </div>
         </div>
 

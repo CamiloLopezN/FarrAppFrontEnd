@@ -62,7 +62,7 @@
 </div>
 </div>
 <ng-template #list>
-  <div *ngFor="let client of clients | paginate: { itemsPerPage: 7, currentPage: p }">
+  <div *ngFor="let client of clients | paginate: { itemsPerPage: 8, currentPage: p }">
     <div class="holi" (click)="profile(client._id)">
       <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
         <div class="col-3">
@@ -71,10 +71,10 @@
         </div>
         <div class="col-9">
           <div>
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start crow">
               {{client.name}}
             </div>
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-end crow">
               {{client.lastname}}
             </div>
           </div>
@@ -84,6 +84,6 @@
   </div>
 
   <div class="text-sm-right mt-4">
-    <pagination-controls (pageChange)="p = $event" *ngIf="clients.length> 8"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" *ngIf="clients.length>= 8"></pagination-controls>
   </div>
 </ng-template>

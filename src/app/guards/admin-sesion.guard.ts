@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from './services/auth.service';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class AdminSesionGuard implements CanActivate {
   isLogged: boolean;
+  rol: string;
 
   constructor(private router: Router, private authService: AuthService) {
   }
@@ -20,13 +20,19 @@ export class AuthGuard implements CanActivate {
     this.authService.isLogged.subscribe(isLogged => {
       this.isLogged = isLogged;
     });
+    this.authService.roled.subscribe(rol => {
+      this.rol = rol;
+    });
+    if (this.rol != 'superAdmin') {
+      this.router.navigate(['']);
+      return false;
+    }
 
-    if (!this.isLogged) {
+    if (this.isLogged) {
       return true;
     }
-    this.router.navigate(['']);
+
+    this.router.navigate(['login']);
     return false;
-
   }
-
 }

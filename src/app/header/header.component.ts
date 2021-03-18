@@ -16,8 +16,6 @@ import {ClientService} from '../services/client.service';
 import {Router} from '@angular/router';
 import {faEllipsisV, faSearch} from '@fortawesome/free-solid-svg-icons/';
 
-declare var $: any;
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,19 +30,11 @@ export class HeaderComponent implements OnInit {
 
   faUserCircle = faUserCircle;
   faElipsis = faEllipsisV;
-  faSearch = faSearch;
-  faHome = faHome;
   faUserPlus = faUserPlus;
   faUser = faUser;
-  faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
-  faGlassCheers = faGlassCheers;
   faKey = faKey;
   faUsersCog = faUsersCog;
-
-  faFacebook = faFacebook;
-  faTwitter = faTwitter;
-  faInstagram = faInstagram;
 
   constructor(public authService: AuthService, private clientS: ClientService, private router: Router) {
   }
@@ -72,13 +62,15 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(): void {
-    const currentScrollPos = window.pageYOffset;
-    if (this.prevScrollPos < currentScrollPos) {
-      document.getElementById('navbar').style.top = '-350px';
-    } else {
-      document.getElementById('navbar').style.top = '0';
+    if (screen.width <= 1024) {
+      const currentScrollPos = window.pageYOffset;
+      if (this.prevScrollPos < currentScrollPos) {
+        document.getElementById('navbar').style.top = '-350px';
+      } else {
+        document.getElementById('navbar').style.top = '0';
+      }
+      this.prevScrollPos = currentScrollPos;
     }
-    this.prevScrollPos = currentScrollPos;
   }
 
   user(): void {

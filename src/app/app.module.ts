@@ -13,7 +13,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MainPanelComponent} from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
-import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from './services/interceptor.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
@@ -35,6 +34,11 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { RegisterModalComponent } from './client/register-modal/register-modal.component';
 import { RegisterCompanyModalComponent } from './company/register-company-modal/register-company-modal.component';
 import { SecurityCompanyComponent } from './company/security-company/security-company.component';
+import {NgProgressHttpModule} from 'ngx-progressbar/http';
+import {NgProgressModule} from 'ngx-progressbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ import { SecurityCompanyComponent } from './company/security-company/security-co
     LoginModalComponent,
     RegisterModalComponent,
     RegisterCompanyModalComponent,
-    SecurityCompanyComponent
+    SecurityCompanyComponent,
+    SecurityAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +75,11 @@ import { SecurityCompanyComponent } from './company/security-company/security-co
     FontAwesomeModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgxSpinnerModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
+    NgProgressModule,
+    NgProgressHttpModule,
+    MatProgressSpinnerModule
   ],
   providers: [DatePipe,
     {

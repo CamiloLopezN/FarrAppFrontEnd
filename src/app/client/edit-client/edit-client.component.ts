@@ -139,4 +139,12 @@ export class EditClientComponent implements OnInit {
     }
   }
 
+  isNameLength(): boolean {
+    return this.client.name.length <= 150;
+  }
+
+  isLastNameLength(): boolean {
+    return this.client.lastname.length <= 150;
+  }
+
 }

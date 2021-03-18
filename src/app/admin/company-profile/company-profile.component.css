@@ -52,7 +52,7 @@
 }
 @media screen and (max-width: 480px) {
   #ImageUser {
-    max-width: 100%;
+    max-width: 100% !important;
   }
   #form-login{
     padding-left: 0;

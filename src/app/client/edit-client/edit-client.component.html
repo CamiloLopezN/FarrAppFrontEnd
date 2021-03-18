@@ -6,7 +6,7 @@
         EDITAR
       </h4>
       <div>
-        <img src="assets/icons/UsersIcons.png" class="img-fluid" alt="iconUser" id="ImageUser">
+        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
         <form #formEdit="ngForm" (ngSubmit)="save()" id="form-edit">
           <div class="text-left mt-3">
             <div class="row">
@@ -17,6 +17,8 @@
                          [(ngModel)]="client.name" required>
                   <small id="emailHelp" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
                     este campo vacío.</small>
+                  <small id="nameHelp" class="form-text text-danger"
+                         *ngIf="name.valid && name.touched && !isNameLength()">Tu nombre debe tener menos de 150 caracteres.</small>
                 </div>
               </div>
               <div class="col">
@@ -26,6 +28,8 @@
                          [(ngModel)]="client.lastname" required>
                   <small id="emailHelp" class="form-text text-danger" *ngIf="!lastName.valid && lastName.touched">No puedes dejar
                     este campo vacío.</small>
+                  <small id="nameHelp" class="form-text text-danger"
+                         *ngIf="lastName.valid && lastName.touched && !isLastNameLength()">Tu apellido debe tener menos de 150 caracteres.</small>
                 </div>
               </div>
             </div>
@@ -79,7 +83,7 @@
               <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/client/profile']">Regresar</button>
             </div>
             <div class="col">
-              <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [disabled]="!formEdit.valid || !ifBefore()">Guardar</button>
+              <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [disabled]="!formEdit.valid || !ifBefore() || !isLastNameLength() || !isNameLength()">Guardar</button>
             </div>
           </div>
         </form>

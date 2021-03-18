@@ -1,7 +1,5 @@
 <div class="text-white animate__animated animate__fadeInRight container" style="animation-duration: 0.2s;">
-  <h2>
-    ¡Bienvenido!
-  </h2>
+  <h2>¡Bienvenido!</h2>
   <div class="pl-5 pr-5">
     <div class="text-center h4 testp mt-5 pt-3 pb-3" id="dashboard">
       <a class="text-white" [routerLink]="['/admin/profile']">
@@ -9,7 +7,7 @@
         Perfil
       </a>
       <div class="dropdown-divider"></div>
-      <a class="text-white" [routerLink]="['/admin/client']">
+      <a class="text-white" style="cursor:pointer;" (click)="clients()">
         <fa-icon [icon]="faUser" class="d-block fa-2x"></fa-icon>
         Usuarios
       </a>
@@ -20,7 +18,7 @@
         Crear usuario
       </a>
       <div class="dropdown-divider"></div>
-      <a class="text-white" [routerLink]="['/admin/company']">
+      <a class="text-white" style="cursor:pointer;" (click)="companies()">
         <fa-icon [icon]="faUsers" class="d-block fa-2x"></fa-icon>
         Empresas
       </a>

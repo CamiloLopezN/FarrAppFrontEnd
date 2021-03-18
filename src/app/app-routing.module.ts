@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {Routes, RouterModule, GuardsCheckEnd, NavigationEnd} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {RegisterClientComponent} from './client/register-client/register-client.component';
 import {MainPanelComponent} from './main-panel/main-panel.component';
-import {AuthGuard} from './auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
-import {InitSesionGuard} from './init-sesion.guard';
+import {InitSesionGuard} from './guards/init-sesion.guard';
 import {ProfileCompanyComponent} from './company/profile-company/profile-company.component';
 import {EditCompanyComponent} from './company/edit-company/edit-company.component';
-import {CompanySesionGuard} from './company-sesion.guard';
+import {CompanySesionGuard} from './guards/company-sesion.guard';
 import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
-import {AdminSesionGuard} from './admin-sesion.guard';
+import {AdminSesionGuard} from './guards/admin-sesion.guard';
 import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
 import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.component';
 import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
@@ -22,6 +22,7 @@ import {CompanyProfileComponent} from './admin/company-profile/company-profile.c
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 import {LandingPageComponent} from './landing-page/landing-page.component';
 import {SecurityCompanyComponent} from './company/security-company/security-company.component';
+import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,9 @@ const routes: Routes = [
     path: 'admin/edit', canActivate: [AdminSesionGuard], component: EditAdminComponent
   },
   {
+    path: 'admin/security', canActivate: [AdminSesionGuard], component: SecurityAdminComponent
+  },
+  {
     path: 'admin/company', canActivate: [AdminSesionGuard], component: CompaniesAdminComponent
   },
   {
@@ -83,7 +87,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled', useHash: true})
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

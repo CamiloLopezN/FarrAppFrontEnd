@@ -13,7 +13,9 @@ import {CompanyService} from '../../services/company.service';
 export class EditCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
-
+  errorMessageEmail: string;
+  errorMessageNIT: string;
+  errorMessageName: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -29,11 +31,24 @@ export class EditCompanyComponent implements OnInit {
   }
 
   save(): void {
+    this.errorMessageEmail = '';
+    this.errorMessageNIT = '';
+    this.errorMessageName = '';
     this.companyS.editCompany(this.company).subscribe(() => {
       this._router.navigate(['/company/profile']);
       this.ns.sucessEditCompany();
-    }, () => {
-      this.authService.logoutExpired();
+    }, error => {
+      if (error.status != 403) {
+        if (error.error.message == 'Ya existe una empresa registrada con ese identificador de NIT') {
+          this.errorMessageNIT = error.error.message;
+        } else if (error.error.message == 'Ya existe una empresa registrada con ese nombre') {
+          this.errorMessageName = error.error.message;
+        } else {
+          this.errorMessageEmail = error.error.message;
+        }
+      }else{
+        this.authService.logoutExpired();
+      }
     });
 
   }
@@ -52,4 +67,26 @@ export class EditCompanyComponent implements OnInit {
       }
     );
   }
+
+  isValidAll(): boolean {
+    return this.isContactNumber() && this.isNameLenght() && this.isNit() && this.isAddress();
+  }
+
+
+  isNameLenght(): boolean {
+    return this.company.name.length <= 150;
+  }
+
+  isAddress(): boolean {
+    return this.company.address.length <= 150;
+  }
+
+  isContactNumber(): boolean {
+    return this.company.contact_number.length <= 50;
+  }
+
+  isNit(): boolean {
+    return /^([0-9]{9}-[0-9])$/.test(this.company.nit.toString());
+  }
+
 }

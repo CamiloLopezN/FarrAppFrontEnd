@@ -3,64 +3,64 @@
     EMPRESAS
   </h3>
   <div id="dashboard">
-  <nav>
-    <div class="nav nav-tabs nav-fill nav-test" role="tablist">
-      <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
-         aria-selected="true" (click)="getCompanies()">Aprobadas</a>
-      <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
-         aria-selected="false" (click)="getCompaniesP()">Pendientes</a>
-      <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
-         aria-selected="false" (click)="getCompaniesD()">Desactivados</a>
-      <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
-         aria-selected="false" (click)="getCompaniesPT()">Peticiones</a>
-    </div>
-  </nav>
-  <div class="tab-content" style="background: #252427">
-    <div id="aprobadas" class="tab-pane fade in active show">
-      <div *ngIf="companies.length == 0 else list">
-        <div class="text-center list-companies-client"
-             style="background: #2b2a30;">
-          <h4>
-            No hay empresas aprobadas
-          </h4>
+    <nav>
+      <div class="nav nav-tabs nav-fill nav-test" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
+           aria-selected="true" (click)="getCompanies()">Aprobadas</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
+           aria-selected="false" (click)="getCompaniesP()">Pendientes</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
+           aria-selected="false" (click)="getCompaniesD()">Desactivados</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
+           aria-selected="false" (click)="getCompaniesPT()">Peticiones</a>
+      </div>
+    </nav>
+    <div class="tab-content" style="background: #252427">
+      <div id="aprobadas" class="tab-pane fade in active show">
+        <div *ngIf="companies.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay empresas aprobadas
+            </h4>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="poraprobar" class="tab-pane fade">
-      <div *ngIf="companies.length == 0 else list">
-        <div class="text-center list-companies-client"
-             style="background: #2b2a30;">
-          <h4>
-            No hay empresas pendientes
-          </h4>
+      <div id="poraprobar" class="tab-pane fade">
+        <div *ngIf="companies.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay empresas pendientes
+            </h4>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="desactivados" class="tab-pane fade">
-      <div *ngIf="companies.length == 0 else list">
-        <div class="text-center list-companies-client"
-             style="background: #2b2a30;">
-          <h4>
-            No hay empresas desactivadas
-          </h4>
+      <div id="desactivados" class="tab-pane fade">
+        <div *ngIf="companies.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay empresas desactivadas
+            </h4>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="peticiones" class="tab-pane fade">
-      <div *ngIf="companies.length == 0 else list">
-        <div class="text-center list-companies-client"
-             style="background: #2b2a30;">
-          <h4>
-            No hay peticiones de empresas
-          </h4>
+      <div id="peticiones" class="tab-pane fade">
+        <div *ngIf="companies.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay peticiones de empresas
+            </h4>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 <ng-template #list>
-  <div *ngFor="let company of companies | paginate: { itemsPerPage: 7, currentPage: p }">
+  <div *ngFor="let company of companies | paginate: { itemsPerPage: 8, currentPage: p }">
     <div class="holi" (click)="profile(company._id)">
       <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
         <div class="col-3">
@@ -69,7 +69,7 @@
         </div>
         <div class="col-9">
           <div>
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start crow">
               {{company.name}}
             </div>
             <div class="d-flex justify-content-end">
@@ -81,6 +81,6 @@
     </div>
   </div>
   <div class="text-sm-right mt-4">
-    <pagination-controls (pageChange)="p = $event" *ngIf="companies.length> 8"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" *ngIf="companies.length >= 8"></pagination-controls>
   </div>
 </ng-template>

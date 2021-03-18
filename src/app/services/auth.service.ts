@@ -23,7 +23,8 @@ export class AuthService {
   public inRegCompany = new BehaviorSubject<boolean>(false);
   private nameUser = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService, private clientS: ClientService) {
+  constructor(private httpClient: HttpClient, private router: Router,
+              private notifyS: NotificationService) {
     this.checkToken();
   }
 

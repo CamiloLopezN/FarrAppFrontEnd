@@ -33,7 +33,6 @@ export class ClientsAdminComponent implements OnInit {
   getClients(): void {
     this.adminS.getClients().subscribe(res => {
       this.clients = [];
-      console.log(res);
       for (const client of res) {
         if (client.user.active && !client.user.req_desactive) {
           this.client = {

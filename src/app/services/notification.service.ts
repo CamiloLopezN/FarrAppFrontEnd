@@ -171,8 +171,17 @@ export class NotificationService {
     });
   }
 
-  succesCreateClient(): void {
-    this.nService.success('Estado del cliente', '¡Se ha registrado el cliente correctamente!', {
+  sucessRetreivePass(): void {
+    this.nService.info('Estado de la cuenta', '¡Se ha enviado a su correo los pasos para recuperar la contraseña!', {
+      timeOut: 5000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesRegisterAdmin(): void {
+    this.nService.success('Estado del administrador', '¡Se ha registrado la cuenta de administrador correctamente!', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,

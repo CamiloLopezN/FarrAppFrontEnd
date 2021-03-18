@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel10" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header m-0 p-0" style="border: none;">
@@ -20,14 +20,13 @@
                       <fa-icon [icon]="faUserCircle" class="fa-lg"></fa-icon>
                     </div>
                   </div>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  <input type="email" class="form-control" id="exampleInputEmail10" aria-describedby="emailHelp"
                          placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
                          pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required (click)="errorMessage = ''">
                 </div>
                 <div class="text-left">
-                <small id="emailHelp" class="form-text text-danger" *ngIf="!email.valid && email.touched">El correo
-                  electrónico es inválido.</small>
-                <small id="emailHelp" class="form-text text-danger"
+                <small id="emailHelp123" class="form-text text-danger" *ngIf="!email.valid && email.touched">Debes ingresar un e-mail válido.</small>
+                <small id="emailHelp321" class="form-text text-danger"
                        *ngIf="email.valid && email.touched && errorMessage && !isUserMail && isPass">{{errorMessage}}</small>
                 </div>
               </div>
@@ -41,13 +40,13 @@
                     ></fa-icon>
                   </div>
                 </div>
-                <input type="password" class="form-control color-gray" id="exampleInputPassword1"
+                <input type="password" class="form-control color-gray" id="exampleInputPassword10"
                        placeholder="Contraseña"
                        #pass="ngModel" name="pass" [(ngModel)]="password" required (click)="errorMessage = ''">
               </div>
               <div class="text-left">
-                <small id="passHelp" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar la contraseña.</small>
-                <small id="passHelp" class="form-text text-danger"
+                <small id="passHelp1" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar la contraseña.</small>
+                <small id="passHelp2" class="form-text text-danger"
                        *ngIf="(pass.valid && errorMessage && !isPass && isUserMail )|| (pass.valid && pass.touched && errorMessage && !isPass && isUserMail)">{{errorMessage}}</small>
               </div>
             </div>
@@ -71,10 +70,10 @@
     </div>
     <form #formRetrieve="ngForm" (ngSubmit)="retrievePass()">
       <div class="form-group text-left">
-        <input type="email" class="form-control my-form" id="exampleInputEmail1" aria-describedby="emailHelp"
+        <input type="email" class="form-control my-form" id="inputEmailRetrieve" aria-describedby="emailHelp"
                placeholder="Correo electrónico" #emailR="ngModel" name="emailR" [(ngModel)]="emailRetrieve" email
                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
-        <small id="emailHelp" class="form-text text-danger" *ngIf="!emailR.valid && emailR.touched">El correo
+        <small id="emaiHelpRetrievePass" class="form-text text-danger" *ngIf="!emailR.valid && emailR.touched">El correo
           electrónico es inválido.</small>
         <div class="row border-login">
           <div class="col col-2">

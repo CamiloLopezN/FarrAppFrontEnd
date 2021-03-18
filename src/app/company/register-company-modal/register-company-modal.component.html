@@ -14,7 +14,7 @@
         <div *ngIf="!screenVerify else succesAccount">
           <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
 
-            <p id="createAccountTittle" class="h4 pt-2 pb-2">Crear empresa</p>
+            <p id="createAccountTittle" class="h4 pt-2 pb-2">¡Registra tu empresa!</p>
 
             <div class="input-group mt-4">
               <div class="input-group-prepend">
@@ -28,6 +28,10 @@
             <div class="text-left">
               <small id="buildingHelp" class="form-text text-danger"
                      *ngIf="!building.valid && building.touched">Debes ingresar el nombre de tu empresa.</small>
+              <small id="buildingHelp" class="form-text text-danger"
+                     *ngIf="building.valid && building.touched && !isNameLenght()">El nombre de la empresa debe tener menos de 150 caracteres</small>
+              <small id="buildingHelp2" class="form-text text-danger"
+                     *ngIf="building.valid && building.touched && errorMessageName">{{errorMessageName}}</small>
             </div>
 
             <div class="input-group mt-4">
@@ -43,6 +47,8 @@
               <small id="addrHelp" class="form-text text-danger"
                      *ngIf="!addr.valid && addr.touched">Debes
                 ingresar la dirección física de tu empresa.</small>
+              <small id="contactN" class="form-text text-danger"
+                     *ngIf="addr.valid && addr.touched && !isAddress()">La dirección debe tener menos de 150 caracteres</small>
             </div>
 
             <div class="input-group mt-4">
@@ -56,10 +62,11 @@
                      pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required (click)="errorMessageEmail=''">
             </div>
             <div class="text-left">
-              <small id="emailHelp" class="form-text text-danger" *ngIf="!emailC.valid && emailC.touched">El correo
-                electrónico es inválido.</small>
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!emailC.valid && emailC.touched">Debes ingresar un correo válido</small>
               <small id="emailHelp" class="form-text text-danger"
                      *ngIf="emailC.valid && emailC.touched && errorMessageEmail">{{errorMessageEmail}}</small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="emailC.valid && emailC.touched && !isEmailLength()">El correo debe tener menos de 150 caracteres.</small>
             </div>
 
             <div *ngIf="role != 'superAdmin'">
@@ -73,7 +80,7 @@
                   ></fa-icon>
                 </div>
               </div>
-              <input type="password" class="form-control color-gray" id="exampleInputPassword1"
+              <input type="password" class="form-control color-gray" id="PassWordId12"
                      placeholder="Contraseña"
                      #pass="ngModel" name="pass" [(ngModel)]="password" required>
             </div>
@@ -107,7 +114,7 @@
                   ></fa-icon>
                 </div>
               </div>
-              <input type="password" class="form-control color-gray" id="exampleInputPassword1"
+              <input type="password" class="form-control color-gray" id="inputPass232"
                      placeholder="Confirmar contraseña"
                      #passConf="ngModel" name="passConf" [(ngModel)]="passwordCon" required>
             </div>
@@ -133,6 +140,8 @@
               <small id="contactN" class="form-text text-danger"
                      *ngIf="!contactN.valid && contactN.touched">Debes
                 ingresar el número de contacto de tu empresa.</small>
+              <small id="contactN" class="form-text text-danger"
+                     *ngIf="contactN.valid && contactN.touched && !isContactNumber()">El número de contacto debe tener menos de 50 caracteres</small>
             </div>
 
             <div class="input-group mt-4">
@@ -149,11 +158,13 @@
                      *ngIf="!nitng.valid && nitng.touched">Debes
                 ingresar el NIT de tu empresa.</small>
               <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="nitng.valid && nitng.touched && !isNit()">El NIT debe ser válido. Ej: 123456789-1</small>
+              <small id="emailHelp" class="form-text text-danger"
                      *ngIf="nitng.valid && nitng.touched && errorMessageNIT">{{errorMessageNIT}}</small>
             </div>
 
             <button type="submit" class="btn btn-outline-dark mt-4" style="border-radius: 30px"
-                    [disabled]="!formClient.form.valid || !isValidAll()">Crear empresa
+                    [disabled]="!formClient.form.valid || !isValidAll()">Registrar empresa
             </button>
           </form>
         </div>

@@ -47,6 +47,7 @@ export class RegisterCompanyModalComponent implements OnInit {
   passwordCon: string;
   errorMessageEmail: string;
   errorMessageNIT: string;
+  errorMessageName: string;
   faUnlock = faUnlock;
 
   screenVerify: boolean;
@@ -65,10 +66,35 @@ export class RegisterCompanyModalComponent implements OnInit {
     this.password = '';
   }
 
+
+  ngOnInit(): void {
+    this.authS.regComp.subscribe(reg => {
+      this.screenVerify = reg;
+    });
+    $(document).ready(() => {
+      $('#register-company-modal').on('show.bs.modal', () => {
+        this.email = '';
+        this.password = '';
+        this.passwordCon = '';
+        this.errorMessageEmail = '';
+        this.errorMessageNIT = '';
+        this.errorMessageName = '';
+        this.nit = '';
+        this.contactNumber = '';
+        this.name = '';
+        this.address = '';
+        this.authS.inRegCompany.next(false);
+        this.formC.reset();
+        this.changeDetectorRef.detectChanges();
+      });
+    });
+  }
+
   onSubmit(): void {
 
     this.errorMessageEmail = '';
     this.errorMessageNIT = '';
+    this.errorMessageName = '';
     // tslint:disable-next-line:triple-equals
     if (this.role != 'superAdmin') {
       this.company = {
@@ -87,6 +113,8 @@ export class RegisterCompanyModalComponent implements OnInit {
         error => {
           if (error.error.message == 'Ya existe una empresa registrada con ese identificador de NIT') {
             this.errorMessageNIT = error.error.message;
+          } else if (error.error.message == 'Ya existe una empresa registrada con ese nombre') {
+            this.errorMessageName = error.error.message;
           } else {
             this.errorMessageEmail = error.error.message;
           }
@@ -108,6 +136,8 @@ export class RegisterCompanyModalComponent implements OnInit {
       }, error => {
         if (error.error.message == 'Ya existe una empresa registrada con ese identificador de NIT') {
           this.errorMessageNIT = error.error.message;
+        } else if (error.error.message == 'Ya existe una empresa registrada con ese nombre') {
+          this.errorMessageName = error.error.message;
         } else {
           this.errorMessageEmail = error.error.message;
         }
@@ -115,39 +145,14 @@ export class RegisterCompanyModalComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.authS.regComp.subscribe(reg => {
-      this.screenVerify = reg;
-    });
-    $(document).ready(() => {
-      $('#register-company-modal').on('show.bs.modal', () => {
-
-        this.email = '';
-        this.password = '';
-        this.passwordCon = '';
-        this.errorMessageEmail = '';
-        this.errorMessageNIT = '';
-        this.nit = '';
-        this.contactNumber = '';
-        this.name = '';
-        this.address = '';
-
-      });
-      $('#register-company-modal').on('hidden.bs.modal', () => {
-        this.authS.inRegCompany.next(false);
-        this.formC.reset();
-        this.changeDetectorRef.detectChanges();
-      });
-    });
-  }
-
   isValidAll(): boolean {
     if (this.role == 'superAdmin') {
-      return true;
+      return this.isNameLenght() && this.isNit() && this.isAddress() && this.isContactNumber() && this.isEmailLength();
     } else {
       return !this.isDifferentTo() && this.isValidPassLenght()
         && this.isEqual() && !this.contentSpaces()
-        && this.contentDigits() && this.contentLower() && this.contentUpper();
+        && this.contentDigits() && this.contentLower() &&
+        this.isContactNumber() && this.contentUpper() && this.isNameLenght() && this.isNit() && this.isAddress() && this.isEmailLength();
     }
   }
 
@@ -162,7 +167,6 @@ export class RegisterCompanyModalComponent implements OnInit {
   isValidPassLenght(): boolean {
     return this.password.length >= 8 && this.password.length <= 100;
   }
-
 
   contentSpaces(): boolean {
     return /\s/.test(this.password.toString());
@@ -180,4 +184,27 @@ export class RegisterCompanyModalComponent implements OnInit {
     return /^(?:\D*\d){2,100}\D*$/.test(this.password.toString());
   }
 
+  isEmailLength(): boolean {
+    return this.email.length <= 150;
+  }
+
+  isNameLenght(): boolean {
+    if (this.name != undefined) {
+      return this.name.length <= 150;
+    } else {
+      return false;
+    }
+  }
+
+  isAddress(): boolean {
+    return this.address.length <= 150;
+  }
+
+  isContactNumber(): boolean {
+    return this.contactNumber.length <= 50;
+  }
+
+  isNit(): boolean {
+    return /^([0-9]{9}-[0-9])$/.test(this.nit.toString());
+  }
 }

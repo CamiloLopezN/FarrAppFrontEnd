@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faExclamationCircle} from '@fortawesome/free-solid-svg-icons/';
+import {faUserCircle, faLock, faExclamationTriangle, faUnlock} from '@fortawesome/free-solid-svg-icons/';
 import {Router} from '@angular/router';
 import {ClientAccount} from '../../model/client';
 import {NotificationService} from '../../services/notification.service';
@@ -17,16 +17,11 @@ export class SecurityClientComponent implements OnInit {
   faLock = faLock;
   faExclamationTriangle = faExclamationTriangle;
   faUnlock = faUnlock;
-  faExclamation = faExclamationCircle;
   client: ClientAccount;
   // tslint:disable-next-line:variable-name
   e_mail = '';
   password = '';
   passWordConfirm = '';
-  isPass = true;
-  isUserMail = true;
-  emailRetrieve: string;
-  isUserEmailRetrieve = true;
   errorMessage: string;
 
   constructor(

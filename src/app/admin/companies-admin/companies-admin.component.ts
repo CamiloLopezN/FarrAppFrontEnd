@@ -92,7 +92,6 @@ export class CompaniesAdminComponent implements OnInit {
     this.companies = [];
     this.adminS.getCompanies().subscribe(res => {
       for (const company of res) {
-        console.log(res);
         if (company.user.active && company.user.req_desactive) {
           this.company = {
             _id: company._id,

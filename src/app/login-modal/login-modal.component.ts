@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {faExclamationCircle, faUserCircle, faLock, faExclamationTriangle, faUnlock, faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import {ClientLogin} from '../model/client';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
@@ -20,7 +20,6 @@ export class LoginModalComponent implements OnInit {
   faLock = faLock;
   faExclamationTriangle = faExclamationTriangle;
   faUnlock = faUnlock;
-  faExclamation = faExclamationCircle;
   faChevronLeft = faChevronLeft;
   client: ClientLogin;
   // tslint:disable-next-line:variable-name
@@ -38,6 +37,7 @@ export class LoginModalComponent implements OnInit {
 
 
   @ViewChild('formUser') formRecipe: NgForm;
+
   constructor(
     private router: Router,
     public authService: AuthService,
@@ -56,8 +56,6 @@ export class LoginModalComponent implements OnInit {
         this.emailRetrieve = '';
         this.password = '';
         this.e_mail = '';
-      });
-      $('#login-modal').on('hidden.bs.modal', () => {
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
       });
@@ -90,6 +88,9 @@ export class LoginModalComponent implements OnInit {
       },
       error => {
         this.errorMessage = error.error.message;
+        if (this.errorMessage == '"e_mail" must be a valid email') {
+          this.errorMessage = 'Debes ingresar un e-mail válido';
+        }
         if (this.errorMessage === 'Error la contraseña es incorrecta') {
           this.isUserMail = true;
           this.isPass = false;
@@ -125,13 +126,9 @@ export class LoginModalComponent implements OnInit {
 
   retrievePass(): void {
     this.authService.retrievePass(this.emailRetrieve).subscribe(res => {
-      console.log(res);
+      this.notifyS.sucessRetreivePass();
     }, error => {
       this.error = error.error.message;
     });
-  }
-
-  resetEmailRetrieve(): void {
-    this.emailRetrieve = '';
   }
 }

@@ -41,6 +41,8 @@ import { SecurityAdminComponent } from './admin/security-admin/security-admin.co
 import { LandingPageCompanyComponent } from './company/landing-page-company/landing-page-company.component';
 import { EventsCompanyComponent } from './company/events-company/events-company.component';
 import { EventComponent } from './company/event/event.component';
+import { EstablishmentsCompanyComponent } from './company/establishments-company/establishments-company.component';
+import { EstablishmentComponent } from './company/establishment/establishment.component';
 
 
 @NgModule({
@@ -72,7 +74,9 @@ import { EventComponent } from './company/event/event.component';
     SecurityAdminComponent,
     LandingPageCompanyComponent,
     EventsCompanyComponent,
-    EventComponent
+    EventComponent,
+    EstablishmentsCompanyComponent,
+    EstablishmentComponent
   ],
   imports: [
     BrowserModule,

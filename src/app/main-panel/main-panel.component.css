@@ -1,11 +1,24 @@
-#content_div_one_photo {
+.icon{
+  color: black;
+  background: #FAFAFA;
 }
 
-#padre {
-  position: relative;    /* para poder posicionar el texto de forma absoluta */
-  display: inline-block; /* para que solo ocupe el ancho de la imagen */
+#PassRemember{
+  color: #0089FF;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 24px;
+  cursor: pointer;
 }
 
-.card-title {
-  bottom: 0;             /* posicionada en la esquina inferior derecha */
+.my-form{
+  background: #FAFAFA;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+}
+
+.border-circ{
+  border-radius: 30px;
 }

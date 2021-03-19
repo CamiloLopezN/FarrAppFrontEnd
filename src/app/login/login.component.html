@@ -31,9 +31,9 @@
           <fa-icon [icon]="faUserCircle" style="color: #D1D1D1" class="fa-lg"></fa-icon>
         </div>
       </div>
-      <input type="email" class="form-control color-gray" id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
-             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+      <label for="exampleInputEmail422"></label><input type="email" class="form-control color-gray" id="exampleInputEmail422" aria-describedby="emailHelp"
+                                                       placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+                                                       pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
     </div>
 
     <div class="mb-2" *ngIf="!pass.valid && pass.touched">
@@ -59,8 +59,8 @@
           ></fa-icon>
         </div>
       </div>
-      <input type="password" class="form-control color-gray" id="exampleInputPassword1" placeholder="Contraseña"
-             #pass="ngModel" name="pass" [(ngModel)]="password" required>
+      <label for="exampleInputPassword13232"></label><input type="password" class="form-control color-gray" id="exampleInputPassword13232" placeholder="Contraseña"
+                                                            #pass="ngModel" name="pass" [(ngModel)]="password" required>
     </div>
     <div class="text-center mt-5" id="Login">
       <button type="submit" class="btn btn-primary bg-gradient-primary" [disabled]="!formUser.form.valid">Iniciar sesión</button>
@@ -89,9 +89,9 @@
       </div>
       <form #formRetrieve="ngForm" (ngSubmit)="retrievePass()">
         <div class="form-group ml-3 mr-3">
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                 placeholder="Correo electrónico" #emailR="ngModel" name="emailR" [(ngModel)]="emailRetrieve" email
-                 pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+          <label for="exampleInputEmail1442"></label><input type="email" class="form-control" id="exampleInputEmail1442" aria-describedby="emailHelp"
+                                                            placeholder="Correo electrónico" #emailR="ngModel" name="emailR" [(ngModel)]="emailRetrieve" email
+                                                            pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
           <small id="emailHelp" class="form-text text-danger" *ngIf="!emailR.valid && emailR.touched">El correo
             electrónico es inválido.</small>
         </div>

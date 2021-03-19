@@ -8,6 +8,15 @@
   top: -86px;
 }
 
+h4{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #FFFFFF;
+}
+
 .options{
   transform: rotate(-70deg);
 }

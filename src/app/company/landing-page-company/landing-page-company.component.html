@@ -4,7 +4,7 @@
     <label class="nit-company m-0 p-0">{{company.nit}}</label>
   </div>
   <div class="d-flex justify-content-end">
-    <div style="padding-right: 15vh;">
+    <div style="padding-right: 8rem">
       <div class="position-absolute info-company text-white" style="padding-top: 150px;">
         <div class="options text-right">
           <label class="title-top m-0 p-0">Eventos activos</label>
@@ -44,5 +44,8 @@
   </div>
   <div class="p-2">
     <app-events-company [events]="events"></app-events-company>
+  </div>
+  <div class="pt-5">
+    <app-establishments-company [establishments]="establishments"></app-establishments-company>
   </div>
 </div>

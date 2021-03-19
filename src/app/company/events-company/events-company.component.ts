@@ -1,7 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {EventC} from '../../model/company';
-import {faClock} from '@fortawesome/free-solid-svg-icons';
-import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {getDateEvent} from '../../model/RelojTest';
 
 declare const $: any;
@@ -15,8 +13,6 @@ declare const $: any;
 export class EventsCompanyComponent implements OnInit {
 
 
-  faClock = faClock;
-  faMap = faMapMarkerAlt;
   @Input() events: EventC[];
 
   constructor(private cdr: ChangeDetectorRef) {
@@ -32,7 +28,7 @@ export class EventsCompanyComponent implements OnInit {
       const $imgs = $carousel.find('.carousel-cell img');
 // get transform property
       const docStyle = document.documentElement.style;
-      const transformProp = typeof docStyle.transform == 'string' ?
+      const transformProp = typeof docStyle.transform === 'string' ?
         'transform' : 'WebkitTransform';
 // get Flickity instance
       const flkty = $carousel.data('flickity');

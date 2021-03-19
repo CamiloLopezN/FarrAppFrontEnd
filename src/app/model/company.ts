@@ -47,3 +47,9 @@ export interface EventC {
   hourInit: string;
   hourFin: string;
 }
+
+export interface Establishment {
+  name: string;
+  address: string;
+  img: string;
+}

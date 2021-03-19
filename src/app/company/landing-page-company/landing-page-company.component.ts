@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {CompanyResponse, EventC} from '../../model/company';
+import {CompanyResponse, Establishment, EventC} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
 import {AuthService} from '../../services/auth.service';
 import {faUser, faCalendarCheck, faBuilding} from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +15,7 @@ export class LandingPageCompanyComponent implements OnInit {
   faCalendar = faCalendarCheck;
   faBuilding = faBuilding;
   events: EventC[];
+  establishments: Establishment[];
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
     this.events = [{
@@ -34,6 +35,24 @@ export class LandingPageCompanyComponent implements OnInit {
         name: 'Saturday Night Party'
       }
     ];
+
+    this.establishments = [{
+      address: 'Calle 11 N89 - 16',
+      name: 'El Atico',
+      img: 'https://cdn.pixabay.com/photo/2016/03/09/09/42/buildings-1245953_960_720.jpg'
+    }, {
+      address: 'Calle 11 N89 - 16',
+      name: 'La cava',
+      img: 'https://cdn.pixabay.com/photo/2015/05/15/14/55/cafe-768771_960_720.jpg'
+    }, {
+      address: 'Calle 11 N89 - 16',
+      name: 'El infiernito',
+      img: 'https://cdn.pixabay.com/photo/2016/03/09/09/42/buildings-1245953_960_720.jpg'
+    }, {
+      address: 'Calle 11 N89 - 16',
+      name: 'El Yefri',
+      img: 'https://cdn.pixabay.com/photo/2015/05/15/14/55/cafe-768771_960_720.jpg'
+    }];
   }
 
   ngOnInit(): void {

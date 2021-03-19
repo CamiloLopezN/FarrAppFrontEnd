@@ -1,20 +1,16 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {
-  faHome,
   faUserPlus,
   faUser,
-  faSignOutAlt,
-  faGlassCheers,
   faSignInAlt,
   faKey,
   faUsersCog,
   faUserCircle
 } from '@fortawesome/free-solid-svg-icons/';
-import {faFacebook, faInstagram, faTwitter} from '@fortawesome/free-brands-svg-icons';
 import {ClientService} from '../services/client.service';
 import {Router} from '@angular/router';
-import {faEllipsisV, faSearch} from '@fortawesome/free-solid-svg-icons/';
+import {faEllipsisV} from '@fortawesome/free-solid-svg-icons/';
 
 @Component({
   selector: 'app-header',
@@ -74,12 +70,22 @@ export class HeaderComponent implements OnInit {
   }
 
   user(): void {
-    if (this.rol == 'client') {
+    if (this.rol === 'client') {
       this.router.navigate(['/client/profile']);
-    } else if (this.rol == 'company') {
+    } else if (this.rol === 'company') {
       this.router.navigate(['/company/profile']);
-    } else if (this.rol == 'superAdmin') {
+    } else if (this.rol === 'superAdmin') {
       this.router.navigate(['/admin/profile']);
+    }
+  }
+
+  landingPage(): void {
+    if (this.rol === 'client') {
+      this.router.navigate(['/client/landing-page']);
+    } else if (this.rol === 'company') {
+      this.router.navigate(['/company/landing-page']);
+    } else if (this.rol === 'superAdmin') {
+      this.router.navigate(['/admin/landing-page']);
     }
   }
 }

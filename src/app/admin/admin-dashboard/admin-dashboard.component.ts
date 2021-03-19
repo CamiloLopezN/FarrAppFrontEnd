@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faUserEdit, faUsers, faUserPlus, faUser} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -13,10 +15,18 @@ export class AdminDashboardComponent implements OnInit {
   faUserPlus = faUserPlus;
   faUser = faUser;
 
-  constructor() {
+  constructor(public authS: AuthService, private router: Router) {
+
   }
 
   ngOnInit(): void {
   }
 
+  companies():void {
+    this.router.navigate(['/admin/company']);
+  }
+
+  clients():void {
+    this.router.navigate(['/admin/client']);
+  }
 }

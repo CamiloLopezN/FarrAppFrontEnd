@@ -1,4 +1,4 @@
-import {Component, Directive, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ClientRegistration} from '../../model/client';
 import {Router} from '@angular/router';
 import {faUser} from '@fortawesome/free-solid-svg-icons';

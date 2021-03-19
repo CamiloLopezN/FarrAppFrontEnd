@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
 import {NotificationService} from './notification.service';
+import {ClientService} from './client.service';
 
 const helper = new JwtHelperService();
 
@@ -17,8 +18,13 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
   private role = new BehaviorSubject<string>('norole');
+  public inLog = new BehaviorSubject<boolean>(true);
+  public inReg = new BehaviorSubject<boolean>(false);
+  public inRegCompany = new BehaviorSubject<boolean>(false);
+  private nameUser = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient, private router: Router, private notifyS: NotificationService) {
+  constructor(private httpClient: HttpClient, private router: Router,
+              private notifyS: NotificationService) {
     this.checkToken();
   }
 
@@ -26,8 +32,24 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
+  get isLog(): Observable<boolean> {
+    return this.inLog.asObservable();
+  }
+
+  get reg(): Observable<boolean> {
+    return this.inReg.asObservable();
+  }
+
   get roled(): Observable<string> {
     return this.role.asObservable();
+  }
+
+  get getName(): Observable<string> {
+    return this.nameUser.asObservable();
+  }
+
+  get regComp(): Observable<boolean> {
+    return this.inRegCompany.asObservable();
   }
 
   saveToken(token: string): void {
@@ -52,8 +74,10 @@ export class AuthService {
   login(client: ClientLogin): Observable<any> {
     return this.httpClient.post(`${environment.backend}/api/client/signin`, client).pipe(
       map((res: any) => {
-        this.saveToken(res.token);
-        this.changeLogAndRole();
+        if (res.token != undefined) {
+          this.saveToken(res.token);
+          this.changeLogAndRole();
+        }
         return res;
       })
     );
@@ -83,19 +107,19 @@ export class AuthService {
 
   logoutSession(): void {
     this.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/landing-page']);
     this.notifyS.logOut();
   }
 
   logoutExpired(): void {
     this.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/landing-page']);
     this.notifyS.logOutExpired();
   }
 
   logoutSessionDesact(): void {
     this.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/landing-page']);
     this.notifyS.logOutDesact();
   }
 }

@@ -12,3 +12,25 @@
 .holi :hover{
   background-color: #3a3b3c;
 }
+
+.container{
+  padding: 5vh 0 !important;
+}
+
+#dashboard{
+  border-radius: 30px;
+  box-shadow: 0 9px 15px 0 rgba(0,0,0,0.4);
+  background-color: #37363e;
+}
+
+@media screen and (max-width: 1024px) {
+  .container{
+    padding: 9vh 5% !important;
+  }
+
+}
+@media screen and (max-width: 480px) {
+  .container{
+    padding: 6vh 0 !important;
+  }
+}

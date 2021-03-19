@@ -3,8 +3,9 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {AdminResponse, CreateClient} from '../model/admin';
-import {CompanyResponse} from '../model/company';
+import {AdminResponse} from '../model/admin';
+import {ClientAccount, ClientAdmin, ClientRegistration2} from '../model/client';
+import {CompanyRegistration2} from '../model/company';
 
 @Injectable({
   providedIn: 'root'
@@ -66,19 +67,6 @@ export class AdminService {
       );
   }
 
-  getCompaniesP(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/admin/pending-companies`, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
   activeCompany(id: string, action: boolean, reqDesactive: boolean): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
@@ -122,7 +110,7 @@ export class AdminService {
       );
   }
 
-  createClient(client: CreateClient): Observable<any> {
+  postUser(client: ClientRegistration2): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -134,4 +122,57 @@ export class AdminService {
         })
       );
   }
+
+  postCompany(company: CompanyRegistration2): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/admin/company`, company, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postAdmin(client: ClientAdmin): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/admin/`, client, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getAdminSecurity(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/admin/account`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  changePassAdmin(admin: ClientAccount): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.put<any>(`${environment.backend}/api/admin/account`, admin, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
 }

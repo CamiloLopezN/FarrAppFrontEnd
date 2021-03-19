@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AuthService} from './services/auth.service';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CompanySesionGuard implements CanActivate {
+export class InitSesionGuard implements CanActivate {
   isLogged: boolean;
   rol: string;
 
@@ -23,7 +23,7 @@ export class CompanySesionGuard implements CanActivate {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
-    if (this.rol != 'company') {
+    if (this.rol != 'client') {
       this.router.navigate(['']);
       return false;
     }
@@ -34,6 +34,7 @@ export class CompanySesionGuard implements CanActivate {
 
     this.router.navigate(['login']);
     return false;
+
   }
 
 }

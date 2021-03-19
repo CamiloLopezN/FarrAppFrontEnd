@@ -145,7 +145,7 @@ export class NotificationService {
   }
 
   succesCreateCompany(): void {
-    this.nService.success('Estado de la compañia', '¡Se ha registrado tu petición correctamente!', {
+    this.nService.success('Estado de la empresa', '¡Se ha registrado tu petición correctamente!', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,
@@ -153,8 +153,35 @@ export class NotificationService {
     });
   }
 
-  succesCreateClient(): void {
-    this.nService.success('Estado del cliente', '¡Se ha registrado el cliente correctamente!', {
+  succesRegisterClient(): void {
+    this.nService.success('Estado del cliente', '¡Se ha creado el cliente correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesRegisterCompany(): void {
+    this.nService.success('Estado de la empresa', '¡Se ha creado la compañia correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  sucessRetreivePass(): void {
+    this.nService.info('Estado de la cuenta', '¡Se ha enviado a su correo los pasos para recuperar la contraseña!', {
+      timeOut: 5000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesRegisterAdmin(): void {
+    this.nService.success('Estado del administrador', '¡Se ha registrado la cuenta de administrador correctamente!', {
       timeOut: 3000,
       showProgressBar: true,
       pauseOnHover: true,

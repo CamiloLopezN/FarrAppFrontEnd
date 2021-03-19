@@ -1,137 +1,98 @@
-<div class="pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
-  <div class="text-center">
-    <h4 id="LoginTitle" class="mb-4">
-      ¡Modifica tus datos!
-    </h4>
-    <img src="assets/icons/UserIcon.png" class="rounded mx-auto d-block" alt="User Icon" id="ImageUser">
+<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
+     style="animation-duration: 0.2s" id="container" *ngIf="e_mail">
+  <div id="log-in">
+    <div class="text-center pl-4 pr-4 pt-4 pb-4">
+      <h4 class="text-white text-center mb-3">
+        SEGURIDAD
+      </h4>
+      <div>
+        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
+        <form #formUser="ngForm" (ngSubmit)="onSubmit()">
+          <div class="input-group mt-4 mb-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="background: #2B2A30">
+                <fa-icon [icon]="faUserCircle" style="color: #D1D1D1" class="fa-lg"></fa-icon>
+              </div>
+            </div>
+            <input type="email" class="form-control color-gray" id="exampleInputEmail102" aria-describedby="emailHelp"
+                   placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+                   pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" readonly>
+          </div>
+
+          <h5 class="mt-4 mb-4 text-white text-left">
+            Ingresa tu nueva contraseña
+          </h5>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="background: #2B2A30">
+                <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
+                         class="fa-lg" *ngIf="password"></fa-icon>
+                <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
+                         *ngIf="!password"
+                ></fa-icon>
+              </div>
+            </div>
+            <input type="password" class="form-control color-gray" placeholder="Contraseña"
+                   #passwordClient="ngModel" name="passwordClient" [(ngModel)]="password" required>
+          </div>
+          <div class="text-left">
+            <small id="emailHelp" class="form-text text-danger" *ngIf="!passwordClient.valid && passwordClient.touched">Debes ingresar una
+              contraseña.</small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordClient.valid && passwordClient.touched && !contentUpper()">La contraseña debe tener al menos una <b>mayúscula.</b></small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordClient.valid && passwordClient.touched && !contentLower()">La contraseña debe tener al menos una <b>minúscula.</b></small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordClient.valid && passwordClient.touched && !contentDigits()">La contraseña debe tener al menos dos <b>dígitos.</b></small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordClient.valid && passwordClient.touched &&contentSpaces()">La contraseña no debe tener
+              <b>espacios.</b></small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordClient.valid && passwordClient.touched &&!isValidPassLenght()">La contraseña debe tener entre 8 y 100
+              <b>caracteres.</b></small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordClient.valid && passwordClient.touched &&isDifferentTo()">La contraseña es muy fácil, intenta con
+              otra</small>
+          </div>
+
+          <div class="input-group mt-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text" style="background: #2B2A30">
+                <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
+                         class="fa-lg" *ngIf="passWordConfirm"></fa-icon>
+                <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
+                         *ngIf="!passWordConfirm"
+                ></fa-icon>
+              </div>
+            </div>
+            <input type="password" class="form-control color-gray" placeholder="Confirmar contraseña"
+                   #passwordConf="ngModel" name="passwordConf" [(ngModel)]="passWordConfirm" required>
+          </div>
+          <div class="text-left">
+            <small id="emailHelp" class="form-text text-danger" *ngIf="!passwordConf.valid && passwordConf.touched">Debes
+              confirmar la contraseña.</small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="passwordConf.valid && passwordConf.touched && passwordClient.valid && password!=passWordConfirm">Las contraseñas
+              no
+              coinciden.</small>
+          </div>
+          <div class="mt-5">
+            <div class="row">
+              <div class="col">
+                <button type="button" class="btn btn-outline-info w-100 border-circ" [routerLink]="['/client/profile']">
+                  Regresar
+                </button>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-outline-primary w-100 border-circ"
+                        [disabled]="!formUser.form.valid || !isValidAll()">Guardar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-
-  <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-login">
-
-    <div class="mb-2" *ngIf="email.valid && email.touched &&!isUserMail">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          {{errorMessage}}
-        </span>
-    </div>
-    <div class="mb-2" *ngIf="email.valid && email.touched &&isUserMail &&errorMessage &&isPass">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          {{errorMessage}}
-        </span>
-    </div>
-    <div class="input-group mt-4 mb-4">
-      <div class="input-group-prepend">
-        <div class="input-group-text" style="background: #2B2A30">
-          <fa-icon [icon]="faUserCircle" style="color: #D1D1D1" class="fa-lg"></fa-icon>
-        </div>
-      </div>
-      <input type="email" class="form-control color-gray" id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
-             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" readonly>
-    </div>
-
-    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.touched">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          Debe ingresar una contraseña
-        </span>
-    </div>
-    <div class="mb-2" *ngIf="isDifferentTo() && passwordClient.touched">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Esfuerzate un poco!
-        </span>
-    </div>
-
-
-    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentUpper()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Se requieren mayusculas!
-        </span>
-    </div>
-
-    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentLower()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Se requieren minusculas!
-        </span>
-    </div>
-
-    <div class="mb-2" *ngIf="passwordClient.dirty && !isEmpty() && contentDigits()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Debe contener 2 digitos!
-        </span>
-    </div>
-
-    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && contentSpaces()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡No se aceptan espacios!
-        </span>
-    </div>
-
-    <div class="mb-2" *ngIf="!passwordClient.valid && passwordClient.dirty && !isEmpty() && isValidPassLenght()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          ¡Se requiere minimo 8 caracteres!
-        </span>
-    </div>
-    <div class="mb-2" *ngIf="passwordClient.valid && passwordClient.touched &&!isPass">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-          {{errorMessage}}
-        </span>
-    </div>
-
-    <div class="input-group mb-4">
-      <div class="input-group-prepend">
-        <div class="input-group-text" style="background: #2B2A30">
-          <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
-                   class="fa-lg" *ngIf="!isEmpty()"></fa-icon>
-          <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
-                   *ngIf="isEmpty()"
-          ></fa-icon>
-        </div>
-      </div>
-      <input type="password" class="form-control color-gray" placeholder="Contraseña"
-             #passwordClient="ngModel" name="passwordClient" [(ngModel)]="password" required>
-    </div>
-
-
-    <div class="mb-2" *ngIf="!passwordConfirm.valid && passwordConfirm.dirty && !isEmpty()">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-            ¡Debes confirmar la contraseña!
-        </span>
-    </div>
-    <div class="mb-2" *ngIf="!isEqual() &&  passwordConfirm.dirty ">
-        <span style="color: #D1D1D1">
-          <fa-icon [icon]="faExclamationTriangle" class="fa-lg text-danger ml-2 mr-2"></fa-icon>
-            Intenta que coincidan las contraseñas
-        </span>
-    </div>
-
-    <div class="input-group mb-4">
-      <div class="input-group-prepend">
-        <div class="input-group-text" style="background: #2B2A30">
-          <fa-icon [icon]="faUnlock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px"
-                   class="fa-lg" *ngIf="!isEmptyConfirm()"></fa-icon>
-          <fa-icon [icon]="faLock" style="color: #D1D1D1; margin-left: 1px; margin-right: 1px" class="fa-lg"
-                   *ngIf="isEmptyConfirm()"
-          ></fa-icon>
-        </div>
-      </div>
-      <input type="password" class="form-control color-gray" placeholder="Confirmar contraseña"
-             #passwordConfirm="ngModel" name="passConfirm" [(ngModel)]="passWordConfirm" required>
-    </div>
-
-    <div class="d-flex justify-content-around mt-5">
-      <button type="submit" class="btn btn-primary" [disabled]="!formUser.form.valid">Guardar</button>
-      <button type="button" class="btn btn-success" [routerLink]="['/client/profile']">Regresar</button>
-    </div>
-
-  </form>
 </div>

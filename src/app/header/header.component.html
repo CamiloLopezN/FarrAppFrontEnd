@@ -1,127 +1,86 @@
-<nav class="navbar navbar-expand-lg navbar-dark pl-3 pt-4 pb-4">
-  <a class="navbar-brand" id="FarrAppHeader" [routerLink]="['/mainPanel']">
-    FarrApp
+<nav class="navbar navbar-expand-lg navbar-dark pl-3 pr-3 pt-1 pb-1 sticky-top" id="navbar">
+  <a class="navbar-brand d-none d-lg-inline" [routerLink]="['/landing-page']" style="font-family: Lovelo, sans-serif">
+    <h2 class="m-2 ml-3 p-0">FARRAPP</h2>
   </a>
-  <a class="navbar-brand rol" *ngIf="isLogged && rol =='client'">
-    CLIENTE
-  </a>
-  <a class="navbar-brand rol" *ngIf="isLogged && rol =='company'">
-    EMPRESA
-  </a>
-  <a class="navbar-brand rol" *ngIf="isLogged && rol =='superAdmin'">
-    ADMIN
-  </a>
-  <div class="dropdown show ml-auto" data-placement="bottom" title="Cuenta">
-    <a class="btn-lg dropdown-toggle rounded-circle" href="#" role="button"
-       id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    </a>
-    <div class="dropdown-menu dropdown-menu-right border-card animate slideIn" aria-labelledby="dropdownMenuLink">
-
-      <a class="dropdown-item" [routerLink]="['/mainPanel']" [routerLinkActive]="['activado']">
-        <div class="icon d-inline p-1 rounded-circle">
-          <fa-icon [icon]="faHome"></fa-icon>
+  <div class="navbar-nav ml-auto d-none d-lg-inline">
+    <a class="text-white mr-4" [routerLink]="['/register']">Eventos</a>
+    <a class="text-white mr-4" [routerLink]="['/register']" *ngIf="isLogged && rol=='company'">Publicar evento</a>
+    <a class="text-white mr-4" [routerLink]="['/register']" *ngIf="isLogged && rol=='company'">Agregar
+      establecimiento</a>
+    <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#login-modal" *ngIf="!isLogged"
+       (click)="authService.inLog.next(true)">Iniciar sesión</a>
+    <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#register-client-modal"
+       *ngIf="!isLogged" (click)="authService.inReg.next(false)">Registrarse</a>
+    <a class="text-white mr-4" [routerLink]="['/admin/dashboard']" *ngIf="isLogged && rol=='superAdmin'">Panel de
+      control</a>
+    <div class="dropdown d-inline" *ngIf="isLogged">
+      <button class="btn animate m-0 p-0 my-button" type="button" id="dropdownUser" data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false" style="color: #ffffff">
+        <fa-icon [icon]="faUserCircle" size="lg"></fa-icon>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right border-card animate__animated animate__fadeInRight"
+           style="animation-duration: 0.3s"
+           aria-labelledby="dropdownUser">
+        <div class="dropdown-item" style="cursor: pointer" (click)="user()">
+          <div class="row">
+            <div class="col col-2 p-2">
+              <fa-icon class="icon-mine" [icon]="faUserCircle" size="2x"></fa-icon>
+            </div>
+            <div class="col col-10">
+              <div class="font-weight-bold">Usuario</div>
+              <div class="font-weight-lighter">Editar perfil</div>
+            </div>
+          </div>
         </div>
-        Inicio
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/admin/dashboard']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol== 'superAdmin'">
-        <div class="icon d-inline rounded-circle"
-             style="padding: 3px 3px;">
-          <fa-icon [icon]="faUsersCog"></fa-icon>
-        </div>
-        Panel de control
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/login']" *ngIf="!isLogged" [routerLinkActive]="['activado']">
-        <div class="icon d-inline rounded-circle" style="padding: 4px 5px;">
-          <fa-icon [icon]="faSignInAlt"></fa-icon>
-        </div>
-        Iniciar sesión
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/client/register']" *ngIf="!isLogged" [routerLinkActive]="['activado']">
-        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
-          <fa-icon [icon]="faUser"></fa-icon>
-        </div>
-        Registrarse
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/admin']">
-        <div class="icon d-inline rounded-circle event-icon" style="padding: 4px 3px;">
-          <fa-icon [icon]="faGlassCheers"></fa-icon>
-        </div>
-        Eventos
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['client/profile']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol=='client'">
-        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
-          <fa-icon [icon]="faUser"></fa-icon>
-        </div>
-        Perfil
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['company/profile']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol=='company'">
-        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
-          <fa-icon [icon]="faUser"></fa-icon>
-        </div>
-        Perfil
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['admin/profile']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol=='superAdmin'">
-        <div class="icon d-inline rounded-circle" style="padding: 4px 6px;">
-          <fa-icon [icon]="faUser"></fa-icon>
-        </div>
-        Perfil
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/client/security']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol=='client'">
-        <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
-          <fa-icon [icon]="faKey"></fa-icon>
-        </div>
-        Seguridad
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/company/security']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol=='company'">
-        <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
-          <fa-icon [icon]="faKey"></fa-icon>
-        </div>
-        Seguridad
-      </a>
-
-      <a class="dropdown-item" [routerLink]="['/admin/security']" [routerLinkActive]="['activado']"
-         *ngIf="isLogged && rol=='superAdmin'">
-        <div class="icon d-inline rounded-circle" style="padding: 3px 4px;">
-          <fa-icon [icon]="faKey"></fa-icon>
-        </div>
-        Seguridad
-      </a>
-
-      <div class="dropdown-divider" style="border: 2px solid #2b2a30;" *ngIf="isLogged"></div>
-
-      <a class="dropdown-item" (click)="logOut()" style="cursor: pointer" *ngIf="isLogged">
-        <div class="icon d-inline rounded-circle" style="padding: 4px 5px;">
-          <fa-icon [icon]="faSignOutAlt"></fa-icon>
-        </div>
-        Cerrar sesión
-      </a>
-      <div class="dropdown-divider" style="border: 2px solid #2b2a30;"></div>
-      <div class="text-center mt-3 h3">
-        <a class="iconRedSocial" href="https://www.facebook.com" target="_blank">
-          <fa-icon [icon]="faFacebook"></fa-icon>
-        </a>
-        <a class="iconRedSocial m-5" href="https://twitter.com/home" target="_blank">
-          <fa-icon [icon]="faTwitter"></fa-icon>
-        </a>
-        <a class="iconRedSocial" href="https://www.instagram.com/" target="_blank">
-          <fa-icon [icon]="faInstagram"></fa-icon>
-        </a>
+        <div class="dropdown-divider" style="border-color: #e2e4e5"></div>
+        <button class="dropdown-item" type="button" (click)="logOut()">Cerrar sesión</button>
       </div>
+    </div>
+
+  </div>
+
+
+  <div class="navbar-nav mr-auto d-lg-none mr-5 ml-5">
+  </div>
+  <a class="navbar-brand mx-auto d-lg-none" [routerLink]="['/landing-page']" style="font-family: Lovelo, sans-serif">
+    <h2 class="m-0 p-0">FARRAPP</h2>
+  </a>
+
+  <div class="dropdown ml-auto d-lg-none" id="the-dropdown">
+    <button class="btn animate" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false" style="color: #ffffff">
+      <fa-icon [icon]="faElipsis" style="font-size: 20px"></fa-icon>
+    </button>
+    <div class="dropdown-menu dropdown-menu-right border-card animate__animated animate__fadeInRight"
+         style="animation-duration: 0.3s"
+         aria-labelledby="dropdownMenu2">
+      <div class="dropdown-item" style="cursor: pointer" *ngIf="isLogged" (click)="user()">
+        <div class="row">
+          <div class="col col-2 p-2">
+            <fa-icon class="icon-mine" [icon]="faUserCircle" size="2x"></fa-icon>
+          </div>
+          <div class="col col-10">
+            <div class="font-weight-bold">Usuario</div>
+            <div class="font-weight-lighter">Editar perfil</div>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
+      <button class="dropdown-item" type="button">Eventos</button>
+      <button class="dropdown-item" type="button" *ngIf="isLogged && rol == 'company'">Publicar evento</button>
+      <button class="dropdown-item" type="button" *ngIf="isLogged && rol == 'company'">Agregar establecimiento</button>
+      <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal" data-target="#login-modal"
+              (click)="authService.inLog.next(true)">Iniciar sesión
+      </button>
+      <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal"
+              data-target="#register-client-modal" (click)="authService.inReg.next(false)">Registrarse
+      </button>
+      <button class="dropdown-item" type="button" *ngIf="isLogged && rol=='superAdmin'"
+              [routerLink]="['admin/dashboard']">Panel de control
+      </button>
+      <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
+      <button class="dropdown-item" type="button" *ngIf="isLogged" (click)="logOut()">Cerrar sesión</button>
     </div>
   </div>
 </nav>

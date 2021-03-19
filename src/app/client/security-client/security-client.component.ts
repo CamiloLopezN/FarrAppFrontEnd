@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faExclamationCircle} from '@fortawesome/free-solid-svg-icons/';
+import {faUserCircle, faLock, faExclamationTriangle, faUnlock} from '@fortawesome/free-solid-svg-icons/';
 import {Router} from '@angular/router';
 import {ClientAccount} from '../../model/client';
 import {NotificationService} from '../../services/notification.service';
@@ -17,16 +17,11 @@ export class SecurityClientComponent implements OnInit {
   faLock = faLock;
   faExclamationTriangle = faExclamationTriangle;
   faUnlock = faUnlock;
-  faExclamation = faExclamationCircle;
   client: ClientAccount;
   // tslint:disable-next-line:variable-name
   e_mail = '';
   password = '';
   passWordConfirm = '';
-  isPass = true;
-  isUserMail = true;
-  emailRetrieve: string;
-  isUserEmailRetrieve = true;
   errorMessage: string;
 
   constructor(
@@ -56,9 +51,9 @@ export class SecurityClientComponent implements OnInit {
       e_mail: this.e_mail,
       password: this.password
     };
-    this.clientService.changePass(this.client).subscribe((res) => {
+    this.clientService.changePass(this.client).subscribe(() => {
         this.notifyS.succesChangePass();
-        this.router.navigate(['login']);
+        this.router.navigate(['/client/profile']);
       },
       error => {
         this.errorMessage = error.error.message;
@@ -66,12 +61,10 @@ export class SecurityClientComponent implements OnInit {
     );
   }
 
-  isEmpty(): boolean {
-    return this.password === '';
-  }
-
-  isEmptyConfirm(): boolean {
-    return this.passWordConfirm === '';
+  isValidAll(): boolean {
+    return !this.isDifferentTo() && this.isValidPassLenght()
+      && this.isEqual() && !this.contentSpaces()
+      && this.contentDigits() && this.contentLower() && this.contentUpper();
   }
 
   isEqual(): boolean {
@@ -83,39 +76,25 @@ export class SecurityClientComponent implements OnInit {
   }
 
   isValidPassLenght(): boolean {
-    return this.password?.length < 8;
+    return this.password.length >= 8 && this.password.length <= 100;
   }
 
+
   contentSpaces(): boolean {
-    if (/\s/.test(this.password?.toString())) {
-      return true;
-    } else {
-      return false;
-    }
+    return /\s/.test(this.password.toString());
   }
 
   contentUpper(): boolean {
-    if (/[A-Z]/.test(this.password?.toString())) {
-      return false;
-    } else {
-      return true;
-    }
+    return /[A-Z]/.test(this.password.toString());
   }
 
   contentLower(): boolean {
-    if (/[a-z]/.test(this.password?.toString())) {
-      return false;
-    } else {
-      return true;
-    }
+    return /[a-z]/.test(this.password.toString());
   }
 
   contentDigits(): boolean {
-    if (/^(?:\D*\d){2,100}\D*$/.test(this.password?.toString())) {
-      return false;
-    } else {
-      return true;
-    }
+    return /^(?:\D*\d){2,100}\D*$/.test(this.password.toString());
   }
+
 }
 

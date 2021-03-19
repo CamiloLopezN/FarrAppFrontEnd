@@ -1,0 +1,24 @@
+.icon{
+  color: black;
+  background: #FAFAFA;
+}
+
+#PassRemember{
+  color: #0089FF;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.my-form{
+  background: #FAFAFA;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+}
+
+.border-circ{
+  border-radius: 30px;
+}

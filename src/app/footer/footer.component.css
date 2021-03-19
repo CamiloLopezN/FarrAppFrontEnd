@@ -10,10 +10,6 @@
   color: #FF1A43;
 }
 
-footer {
-  background-color: #252427;
-}
-
 #content_div_one_photo {
   opacity: 0.6;
 }
@@ -26,4 +22,12 @@ footer {
 
 .card-title {
   top: 0;             /* posicionada en la esquina inferior derecha */
+}
+
+img {
+  float: top;
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+  filter: blur(6px);
 }

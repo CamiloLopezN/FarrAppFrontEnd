@@ -1,5 +1,4 @@
-
-<footer class="page-footer font-small special-color-dark" *ngIf="router.url !== '/mainPanel'">
+<footer class="font-small special-color-dark" style="background: #252427" *ngIf="router.url != '/landing-page'">
   <div class="container">
     <ul class="list-unstyled list-inline text-center">
       <li class="list-inline-item mt-4">
@@ -24,14 +23,14 @@
     <a class="termsOfService" href="https://mdbootstrap.com/"> <br> Privacy Policy | Terms of Service</a>
   </div>
 </footer>
-<footer *ngIf="router.url === '/mainPanel'">
-  <div class="" id="padre">
-    <img id="content_div_one_photo" class="img-fluid"
-         src="https://i.pinimg.com/736x/e3/db/9a/e3db9ab5579492bcab9b55ec72e6fe69.jpg">
+<footer *ngIf="router.url === '/landing-page'">
+  <div>
+    <img src="https://cdn.pixabay.com/photo/2018/01/15/21/50/concert-3084876_960_720.jpg">
     <div class="container-fluid card-title position-absolute ">
       <div class="container-fluid">
-        <div class="mt-4 justify-content-center text-center">
-          <a [routerLink]="['/company/register']" class="btn btn-outline-light" *ngIf="!isLogged">Visualiza tu empresa con nosotros</a>
+        <div class="mt-4 mb-4 justify-content-center text-center">
+          <a class="btn btn-outline-light" *ngIf="!isLogged" data-toggle="modal" data-target="#register-company-modal"
+              (click)="authService.inRegCompany.next(false)">Registra tu empresa con nosotros</a>
         </div>
         <ul class="list-unstyled list-inline text-center">
           <li class="list-inline-item mt-0">

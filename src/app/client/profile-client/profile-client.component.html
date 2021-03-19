@@ -1,55 +1,69 @@
-<div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
-  <h4 class="text-white text-left">
-    MI PERFIL
-  </h4>
-  <div>
-    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
-    <div class="text-left mt-5">
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Nombre
-          </strong></label>
-        <h4 class="profile-font ml-5">
-          {{client.name}} {{client.lastname}}
-        </h4>
+<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
+     style="animation-duration: 0.2s" id="container" *ngIf="client">
+  <div id="log-in">
+    <div class="text-center pl-4 pr-4 pt-4 pb-4">
+      <h4 class="text-white text-center mb-3">
+        MI PERFIL
+      </h4>
+      <div>
+        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
+        <div class="text-left mt-5">
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Nombre
+              </strong></label>
+            <h5 class="profile-font text-center text-white crow2">{{client.name}}</h5>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Apellido
+              </strong></label>
+            <h5 class="profile-font text-center text-white crow2">{{client.lastname}}</h5>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Género
+              </strong></label>
+            <h5 class="profile-font text-center text-white">{{client.gender}}</h5>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Fecha de nacimiento
+              </strong></label>
+            <h5 class="profile-font text-center text-white">{{client.birthdate}}</h5>
+          </div>
+        </div>
+
       </div>
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Género
-          </strong></label>
-        <h4 class="profile-font ml-5">
-          {{client.gender}}
-        </h4>
+      <div class="mt-2">
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [routerLink]="['/client/edit']">Editar</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/client/security']">Seguridad</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100" data-toggle="modal" data-target="#exampleModal">Eliminar</button>
+          </div>
+        </div>
       </div>
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Fecha de nacimiento
-          </strong></label>
-        <h4 class="profile-font ml-5">
-          {{client.birthdate}}
-        </h4>
-      </div>
-    </div>
-    <div class="btn-group">
-      <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta
-      </button>
-      <button type="button" class="btn btn-primary m-3" [routerLink]="['/client/edit']">Editar</button>
-    </div>
-    <div class="btn-group">
-      <button type="button" class="btn btn-success m-3" [routerLink]="['/client/security']">Seguridad</button>
     </div>
   </div>
 </div>
+
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="ralewayFont modal-title" id="exampleModalLabel">Eliminación de cuenta</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h4 class="ralewayFont modal-title" id="exampleModalLabel">Eliminación de cuenta</h4>
+        <button type="button" class="close p-0 pr-3" data-dismiss="modal" aria-label="Close" style="font-size: 60px; outline: none">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -64,12 +78,18 @@
           </h6>
         </div>
       </div>
-      <div class="modal-footer ralewayFont">
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confimationModal"
-                data-dismiss="modal" (click)="sendReqRemove()">Aceptar
-        </button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar
-        </button>
+      <div class="ralewayFont p-4">
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn border-circ btn-danger w-100" data-toggle="modal" data-target="#confimationModal"
+                    data-dismiss="modal" (click)="sendReqRemove()">Borrar
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn border-circ btn-dark w-100" data-dismiss="modal">Cerrar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

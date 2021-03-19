@@ -13,7 +13,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MainPanelComponent} from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
-import {NgxSpinnerModule} from 'ngx-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InterceptorService} from './services/interceptor.service';
 import {SimpleNotificationsModule} from 'angular2-notifications';
@@ -30,7 +29,16 @@ import { SecurityClientComponent } from './client/security-client/security-clien
 import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
 import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
 import {RegisterCompanyComponent} from './company/register-company/register-company.component';
-import { CreateClientComponent } from './admin/create-client/create-client.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginModalComponent } from './login-modal/login-modal.component';
+import { RegisterModalComponent } from './client/register-modal/register-modal.component';
+import { RegisterCompanyModalComponent } from './company/register-company-modal/register-company-modal.component';
+import { SecurityCompanyComponent } from './company/security-company/security-company.component';
+import {NgProgressHttpModule} from 'ngx-progressbar/http';
+import {NgProgressModule} from 'ngx-progressbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +61,12 @@ import { CreateClientComponent } from './admin/create-client/create-client.compo
     CompaniesAdminComponent,
     CompanyProfileComponent,
     RegisterCompanyComponent,
-    CreateClientComponent
+    LandingPageComponent,
+    LoginModalComponent,
+    RegisterModalComponent,
+    RegisterCompanyModalComponent,
+    SecurityCompanyComponent,
+    SecurityAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -62,9 +75,11 @@ import { CreateClientComponent } from './admin/create-client/create-client.compo
     FontAwesomeModule,
     HttpClientModule,
     NgxPaginationModule,
-    NgxSpinnerModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
+    NgProgressModule,
+    NgProgressHttpModule,
+    MatProgressSpinnerModule
   ],
   providers: [DatePipe,
     {

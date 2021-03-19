@@ -15,10 +15,6 @@ export class EditAdminComponent implements OnInit {
   admin: AdminResponse;
 
   constructor(private adminS: AdminService, private authS: AuthService, private _router: Router, private ns: NotificationService) {
-    this.admin = {
-      name: '',
-      lastname: ''
-    };
   }
 
   ngOnInit(): void {

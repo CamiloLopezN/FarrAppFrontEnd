@@ -1,27 +1,42 @@
-<div class="text-center pt-5 pb-5 pl-4 pr-4 animate__animated animate__fadeInRight" style="animation-duration: 0.2s">
-  <h4 class="text-white text-left">
-    MI PERFIL
-  </h4>
-  <div>
-    <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser">
-    <div class="text-left mt-5">
-      <div class="border-profile mb-4">
-        <label class="text-white ml-4">
-          <strong>
-            Nombre
-          </strong></label>
-        <h4 class="profile-font text-center">
-          {{admin.name}} {{admin.lastname}}
-        </h4>
+<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight" *ngIf="admin"
+     style="animation-duration: 0.2s" id="container">
+  <div id="log-in">
+    <div class="text-center pl-4 pr-4 pt-4 pb-4">
+      <h4 class="text-white text-center mb-4">MI PERFIL</h4>
+      <div>
+        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
+        <div class="text-left mt-5">
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Nombre
+              </strong></label>
+            <h4 class="profile-font text-center text-white crow2">{{admin.name}}</h4>
+          </div>
+          <div class="border-profile mb-4">
+            <label class="text-white ml-4">
+              <strong>
+                Apellido
+              </strong></label>
+            <h4 class="profile-font text-center text-white crow2">{{admin.lastname}}</h4>
+          </div>
+        </div>
+
       </div>
-    </div>
-    <div class="btn-group">
-      <button type="button" class="btn btn-danger m-3" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta
-      </button>
-      <button type="button" class="btn btn-primary m-3" [routerLink]="['/admin/edit']">Editar</button>
-    </div>
-    <div class="btn-group">
-      <button type="button" class="btn btn-success m-3" [routerLink]="['/admin/security']">Seguridad</button>
+      <div class="mt-2">
+        <div class="row">
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [routerLink]="['/admin/edit']">Editar</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/admin/security']">Seguridad</button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100">Eliminar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

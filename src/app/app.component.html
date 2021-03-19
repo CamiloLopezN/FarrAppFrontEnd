@@ -1,11 +1,14 @@
+<ng-progress color="white" [spinner]="false"></ng-progress>
 <app-header></app-header>
-<router-outlet></router-outlet>
-<ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-8bits"
->
-</ngx-spinner>
-<app-footer></app-footer>
+<div id="page-container">
+  <div id="content-wrap">
+    <router-outlet></router-outlet>
+  </div>
+  <footer id="footer">
+    <app-footer></app-footer>
+  </footer>
+</div>
 <simple-notifications></simple-notifications>
+<app-login-modal></app-login-modal>
+<app-register-modal></app-register-modal>
+<app-register-company-modal></app-register-company-modal>

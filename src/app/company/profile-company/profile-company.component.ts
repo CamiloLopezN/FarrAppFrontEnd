@@ -24,12 +24,6 @@ export class ProfileCompanyComponent implements OnInit {
     private companyS: CompanyService,
     private authS: AuthService
   ) {
-    this.company = {
-      address: '',
-      contact_number: '',
-      name: '',
-      nit: ''
-    };
   }
 
   ngOnInit(): void {

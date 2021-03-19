@@ -31,8 +31,8 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   getCompanies(): void {
+    this.companies = [];
     this.adminS.getCompanies().subscribe(res => {
-      this.companies = [];
       for (const company of res) {
         if (company.user.active && !company.user.req_desactive) {
           this.company = {
@@ -49,8 +49,8 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   getCompaniesP(): void {
+    this.companies = [];
     this.adminS.getCompanies().subscribe(res => {
-      this.companies = [];
       for (const company of res) {
         if (!company.user.active && !company.user.req_desactive) {
           this.company = {
@@ -71,8 +71,8 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   getCompaniesD(): void {
+    this.companies = [];
     this.adminS.getCompanies().subscribe(res => {
-      this.companies = [];
       for (const company of res) {
         if (!company.user.active && company.user.req_desactive) {
           this.company = {
@@ -89,10 +89,9 @@ export class CompaniesAdminComponent implements OnInit {
   }
 
   getCompaniesPT(): void {
+    this.companies = [];
     this.adminS.getCompanies().subscribe(res => {
-      this.companies = [];
       for (const company of res) {
-        console.log(res);
         if (company.user.active && company.user.req_desactive) {
           this.company = {
             _id: company._id,

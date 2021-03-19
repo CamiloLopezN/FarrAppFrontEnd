@@ -13,10 +13,6 @@ export class ProfileAdminComponent implements OnInit {
   admin: AdminResponse;
 
   constructor(private adminS: AdminService, private authS: AuthService) {
-    this.admin = {
-      name: '',
-      lastname: ''
-    };
   }
 
   ngOnInit(): void {

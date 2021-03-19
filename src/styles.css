@@ -1,7 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~animate.css/animate.min.css";
 
-body{
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 100px; /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px; /* Footer height */
+}
+
+body {
   background: #2B2A30 !important;
   font-family: Raleway, serif !important;
 }
@@ -13,3 +30,128 @@ body{
 .btn-group .btn {
   width: 50%;
 }
+
+html {
+  font-size: 1.3rem;
+}
+
+.crow {
+  overflow: hidden;
+}
+
+.crow2 {
+  overflow: hidden;
+  max-width: 75vw;
+}
+
+.border-login {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.border-content {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+.border-content-register {
+  padding-top: 1.4rem !important;
+  padding-bottom: 1.4rem !important;
+}
+
+
+.list-companies-client {
+  padding-top: 35vh;
+  padding-bottom: 35vh;
+}
+
+.modal-content {
+  border-radius: 4vh !important;
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 1.1rem;
+  }
+
+  .border-login {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .border-content {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .list-companies-client {
+    padding-top: 35vh;
+    padding-bottom: 35vh;
+  }
+  .crow2 {
+    overflow: hidden;
+    max-width: 80vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 0.9rem;
+  }
+
+  .modal-dialog {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-content {
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+  }
+
+  .border-login {
+    padding-top: 3.8rem !important;
+    padding-bottom: 3.8rem !important;
+  }
+
+  .border-content {
+    padding-top: 7.5rem !important;
+    padding-bottom: 7.5rem !important;
+  }
+
+  .border-content-register {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .modal-content {
+    border-radius: 0 !important;
+  }
+
+  .list-companies-client {
+    padding-top: 32vh;
+    padding-bottom: 32vh;
+  }
+
+  .crow2 {
+    overflow: hidden;
+    width: 85vw;
+  }
+
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

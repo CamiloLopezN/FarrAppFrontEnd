@@ -1,9 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule, GuardsCheckEnd, NavigationEnd} from '@angular/router';
-import {LoginComponent} from './login/login.component';
-import {RegisterClientComponent} from './client/register-client/register-client.component';
-import {MainPanelComponent} from './main-panel/main-panel.component';
-import {AuthGuard} from './guards/auth.guard';
+import {Routes, RouterModule} from '@angular/router';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {EditClientComponent} from './client/edit-client/edit-client.component';
 import {InitSesionGuard} from './guards/init-sesion.guard';
@@ -19,7 +15,6 @@ import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
 import {SecurityClientComponent} from './client/security-client/security-client.component';
 import {CompaniesAdminComponent} from './admin/companies-admin/companies-admin.component';
 import {CompanyProfileComponent} from './admin/company-profile/company-profile.component';
-import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 import {LandingPageComponent} from './landing-page/landing-page.component';
 import {SecurityCompanyComponent} from './company/security-company/security-company.component';
 import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
@@ -28,15 +23,6 @@ import {LandingPageCompanyComponent} from './company/landing-page-company/landin
 const routes: Routes = [
   {
     path: 'landing-page', component: LandingPageComponent
-  },
-  {
-    path: 'mainPanel', component: MainPanelComponent
-  },
-  {
-    path: 'login', canActivate: [AuthGuard], component: LoginComponent
-  },
-  {
-    path: 'client/register', component: RegisterClientComponent
   },
   {
     path: 'client/profile', canActivate: [InitSesionGuard], component: ProfileClientComponent
@@ -48,9 +34,6 @@ const routes: Routes = [
   },
   {
     path: 'company/profile', canActivate: [CompanySesionGuard], component: ProfileCompanyComponent
-  },
-  {
-    path: 'company/register', component: RegisterCompanyComponent
   },
   {
     path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent

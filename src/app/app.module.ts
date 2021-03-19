@@ -5,12 +5,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FooterComponent} from './footer/footer.component';
-import {RegisterClientComponent} from './client/register-client/register-client.component';
 import {HeaderComponent} from './header/header.component';
-import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {MainPanelComponent} from './main-panel/main-panel.component';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,7 +25,6 @@ import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
 import { SecurityClientComponent } from './client/security-client/security-client.component';
 import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
 import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
-import {RegisterCompanyComponent} from './company/register-company/register-company.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { RegisterModalComponent } from './client/register-modal/register-modal.component';
@@ -49,10 +45,7 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
   declarations: [
     AppComponent,
     FooterComponent,
-    RegisterClientComponent,
-    LoginComponent,
     HeaderComponent,
-    MainPanelComponent,
     ProfileClientComponent,
     EditClientComponent,
     ProfileCompanyComponent,
@@ -65,7 +58,6 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
     SecurityClientComponent,
     CompaniesAdminComponent,
     CompanyProfileComponent,
-    RegisterCompanyComponent,
     LandingPageComponent,
     LoginModalComponent,
     RegisterModalComponent,

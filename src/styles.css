@@ -23,6 +23,11 @@ body {
   font-family: Raleway, serif !important;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .btn-group {
   width: 100%;
 }

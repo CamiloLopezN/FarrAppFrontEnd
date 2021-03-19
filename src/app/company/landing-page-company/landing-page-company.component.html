@@ -1,0 +1,48 @@
+<div style="background: white" *ngIf="company">
+  <div class="p-4">
+    <label class="name-company d-block m-0 p-0">{{company.name}}</label>
+    <label class="nit-company m-0 p-0">{{company.nit}}</label>
+  </div>
+  <div class="d-flex justify-content-end">
+    <div style="padding-right: 15vh;">
+      <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+        <div class="options text-right">
+          <label class="title-top m-0 p-0">Eventos activos</label>
+          <h4 class="m-0 p-0">90</h4>
+          <label class="title-top m-0 p-0">Asistentes</label>
+          <h4 class="m-0 p-0">1200</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 6vh">
+  </div>
+  <div class="accions-company-icons">
+    <div class="row p-3 text-center justify-content-center">
+      <div class="col col-4" style="font-size: 0.85rem">
+        <button class="btn my-btn text-white w-100 h-100">
+          <fa-icon [icon]="faUser" size="3x">
+          </fa-icon>
+        </button>
+        Mi perfil
+      </div>
+      <div class="col col-4" style="font-size: 0.85rem">
+        <button class="btn my-btn text-white w-100 h-100">
+          <fa-icon [icon]="faCalendar" size="3x">
+          </fa-icon>
+        </button>
+        Eventos
+      </div>
+      <div class="col col-4" style="font-size: 0.85rem">
+        <button class="btn my-btn text-white w-100 h-100">
+          <fa-icon [icon]="faBuilding" size="3x">
+          </fa-icon>
+        </button>Establecimientos</div>
+    </div>
+  </div>
+  <div style="padding: 2.5vh">
+  </div>
+  <div class="p-2">
+    <app-events-company [events]="events"></app-events-company>
+  </div>
+</div>

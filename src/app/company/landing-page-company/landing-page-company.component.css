@@ -1,0 +1,46 @@
+.info-company{
+  width: 170px;
+  height: 233px;
+  background: #252427;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  transform: rotate(70deg);
+  top: -86px;
+}
+
+.options{
+  transform: rotate(-70deg);
+}
+
+.title-top{
+  font-style: normal;
+  font-weight: 275;
+  font-size: 10px;
+  line-height: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name-company{
+  font-style: normal;
+  font-weight: 300;
+  font-size: 25px;
+  line-height: 170%;
+  color: rgba(37, 36, 39, 0.8);
+}
+
+.nit-company{
+  font-style: normal;
+  font-weight: 275;
+  font-size: 15px;
+  line-height: 170%;
+
+  text-align: center;
+
+  color: rgba(37, 36, 39, 0.8);
+}
+
+.my-btn{
+  background: #FF1A43;
+  border-radius: 15px;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,24 @@
+.carousel {
+  background: #ffffff;
+}
+
+.carousel-cell {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.events{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: 41px;
+  color: #252427;
+}
+
+.events2{
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 21px;
+  color: rgba(37, 36, 39, 0.6);
+}

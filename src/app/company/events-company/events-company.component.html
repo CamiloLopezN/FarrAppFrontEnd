@@ -1,0 +1,9 @@
+<div class="p-3">
+  <p class="events">Eventos</p>
+  <p class="events2">!Tus próximos eventos!</p>
+</div>
+<div class="carousel">
+  <div class="carousel-cell" *ngFor="let event of events">
+    <app-event [event]="event"></app-event>
+  </div>
+</div>

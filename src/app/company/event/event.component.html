@@ -1,0 +1,26 @@
+<div class="card" style="width: 90vw;">
+  <img class="card-img-top" style="width: 90vw"
+       src="{{event.img}}" alt="Card image cap">
+  <div class="card-body">
+    <div>
+      <div class="float-left">
+        <p>{{getDate()}}</p>
+      </div>
+
+      <div class="float-right">
+        <p>
+          <fa-icon [icon]="faClock"></fa-icon>
+          {{event.hourInit}} - {{event.hourFin}}</p>
+      </div>
+    </div>
+    <div>
+      <label class="title-event">{{event.name}}</label>
+    </div>
+    <div>
+      <label class="city-title">
+        <fa-icon [icon]="faMap"></fa-icon>
+        {{event.city}}
+      </label>
+    </div>
+  </div>
+</div>

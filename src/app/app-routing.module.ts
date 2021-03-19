@@ -23,6 +23,7 @@ import {RegisterCompanyComponent} from './company/register-company/register-comp
 import {LandingPageComponent} from './landing-page/landing-page.component';
 import {SecurityCompanyComponent} from './company/security-company/security-company.component';
 import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
+import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,9 @@ const routes: Routes = [
   },
   {
     path: 'company/edit', canActivate: [CompanySesionGuard], component: EditCompanyComponent
+  },
+  {
+    path: 'company/landing-page', canActivate: [CompanySesionGuard], component: LandingPageCompanyComponent
   },
   {
     path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent

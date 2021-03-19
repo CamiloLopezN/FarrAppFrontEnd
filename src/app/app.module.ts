@@ -38,6 +38,9 @@ import {NgProgressHttpModule} from 'ngx-progressbar/http';
 import {NgProgressModule} from 'ngx-progressbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
+import { LandingPageCompanyComponent } from './company/landing-page-company/landing-page-company.component';
+import { EventsCompanyComponent } from './company/events-company/events-company.component';
+import { EventComponent } from './company/event/event.component';
 
 
 @NgModule({
@@ -66,7 +69,10 @@ import { SecurityAdminComponent } from './admin/security-admin/security-admin.co
     RegisterModalComponent,
     RegisterCompanyModalComponent,
     SecurityCompanyComponent,
-    SecurityAdminComponent
+    SecurityAdminComponent,
+    LandingPageCompanyComponent,
+    EventsCompanyComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

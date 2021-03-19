@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainPanelComponent } from './main-panel.component';
+import { LandingPageCompanyComponent } from './landing-page-company.component';
 
-describe('MainPanelComponent', () => {
-  let component: MainPanelComponent;
-  let fixture: ComponentFixture<MainPanelComponent>;
+describe('LandingPageCompanyComponent', () => {
+  let component: LandingPageCompanyComponent;
+  let fixture: ComponentFixture<LandingPageCompanyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainPanelComponent ]
+      declarations: [ LandingPageCompanyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainPanelComponent);
+    fixture = TestBed.createComponent(LandingPageCompanyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

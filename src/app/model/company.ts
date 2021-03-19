@@ -38,3 +38,18 @@ export interface CompanyResponseAdmin2 {
   address: string;
   active: boolean;
 }
+
+export interface EventC {
+  date: Date;
+  name: string;
+  city: string;
+  img: string;
+  hourInit: string;
+  hourFin: string;
+}
+
+export interface Establishment {
+  name: string;
+  address: string;
+  img: string;
+}

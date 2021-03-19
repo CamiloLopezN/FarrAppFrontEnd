@@ -78,8 +78,10 @@ export class LoginModalComponent implements OnInit {
         this.authService.roled.subscribe(rol =>
           this.rol = rol
         );
-        if (this.rol == 'superAdmin') {
+        if (this.rol === 'superAdmin') {
           this.redirectAdmin();
+        } else if (this.rol === 'company'){
+          this.redirectCompany();
         } else {
           this.redirect();
         }
@@ -88,7 +90,7 @@ export class LoginModalComponent implements OnInit {
       },
       error => {
         this.errorMessage = error.error.message;
-        if (this.errorMessage == '"e_mail" must be a valid email') {
+        if (this.errorMessage === '"e_mail" must be a valid email') {
           this.errorMessage = 'Debes ingresar un e-mail válido';
         }
         if (this.errorMessage === 'Error la contraseña es incorrecta') {
@@ -116,7 +118,10 @@ export class LoginModalComponent implements OnInit {
 
   redirect(): void {
     this.router.navigate(['']);
+  }
 
+  redirectCompany(): void {
+    this.router.navigate(['company/landing-page']);
   }
 
   redirectAdmin(): void {
@@ -125,7 +130,7 @@ export class LoginModalComponent implements OnInit {
   }
 
   retrievePass(): void {
-    this.authService.retrievePass(this.emailRetrieve).subscribe(res => {
+    this.authService.retrievePass(this.emailRetrieve).subscribe(() => {
       this.notifyS.sucessRetreivePass();
     }, error => {
       this.error = error.error.message;

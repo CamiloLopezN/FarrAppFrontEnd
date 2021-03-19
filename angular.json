@@ -25,13 +25,16 @@
             ],
             "styles": [
               "node_modules/animate.css/animate.min.css",
+              "node_modules/flickity/dist/flickity.min.css",
+              "node_modules/flickity/css/flickity.css",
               "src/styles.css",
               "src/assets/fonts/customfont.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/flickity/dist/flickity.pkgd.min.js"
             ]
           },
           "configurations": {
@@ -94,13 +97,16 @@
             ],
             "styles": [
               "node_modules/animate.css/animate.min.css",
+              "node_modules/flickity/dist/flickity.min.css",
+              "node_modules/flickity/css/flickity.css",
               "src/styles.css",
               "src/assets/fonts/customfont.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/flickity/dist/flickity.pkgd.min.js"
             ]
           }
         },

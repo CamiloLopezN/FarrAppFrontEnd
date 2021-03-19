@@ -1,0 +1,34 @@
+.card{
+  background: #FCFCFD;
+  border-radius: 20px;
+  border: none;
+}
+
+p{
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height */
+
+
+  color: rgba(37, 36, 39, 0.6);
+}
+
+.title-event{
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: #252427;
+}
+
+.city-title{
+  font-style: normal;
+  font-weight: 900;
+  font-size: 11px;
+  line-height: 13px;
+  color: rgba(174, 216, 229, 0.6);
+}

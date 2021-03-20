@@ -1,10 +1,10 @@
-<div style="background: white" *ngIf="company">
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="company">
   <div class="p-4">
     <label class="name-company d-block m-0 p-0">{{company.name}}</label>
     <label class="nit-company m-0 p-0">{{company.nit}}</label>
   </div>
   <div class="d-flex justify-content-end">
-    <div style="padding-right: 8rem">
+    <div style="padding-right: 8rem;">
       <div class="position-absolute info-company text-white" style="padding-top: 150px;">
         <div class="options text-right">
           <label class="title-top m-0 p-0">Eventos activos</label>
@@ -20,30 +20,39 @@
   <div class="accions-company-icons">
     <div class="row p-3 text-center justify-content-center">
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white w-100 h-100">
+        <button class="btn my-btn text-white" style="width: 20vw; height: 20vw" [routerLink]="['/company/profile']">
           <fa-icon [icon]="faUser" size="3x">
           </fa-icon>
         </button>
-        Mi perfil
+        <div>
+          Mi perfil
+        </div>
       </div>
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white w-100 h-100">
+        <button class="btn my-btn text-white " style="width: 20vw; height: 20vw" [routerLink]="['/company/events']">
           <fa-icon [icon]="faCalendar" size="3x">
           </fa-icon>
         </button>
-        Eventos
+        <div>
+          Eventos
+        </div>
       </div>
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white w-100 h-100">
+        <button class="btn my-btn text-white" style="width: 20vw; height: 20vw">
           <fa-icon [icon]="faBuilding" size="3x">
           </fa-icon>
-        </button>Establecimientos</div>
+        </button>
+        <div>
+          Establecimientos
+        </div>
+      </div>
     </div>
   </div>
   <div style="padding: 2.5vh">
   </div>
   <div class="p-2">
-    <app-events-company [events]="events"></app-events-company>
+    <app-events-company [events]="events" [typeEvent]="'¡Tus próximos eventos!'" [index]="'0'"
+                        [tittle]="'Eventos'"></app-events-company>
   </div>
   <div class="pt-5">
     <app-establishments-company [establishments]="establishments"></app-establishments-company>

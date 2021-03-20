@@ -1,0 +1,46 @@
+<div style="background: white; animation-duration: 0.2s; overflow: hidden"
+     class="animate__animated animate__fadeInRight">
+  <div class="p-4">
+    <label class="name-company d-block mb-5 p-0">¡Tus eventos!</label>
+    <div class="pt-2">
+      <label class="nit-company">Crea tus propias</label>
+    </div>
+    <div class="text-right pr-5 pt-0">
+      <label class="options-label text-right">OPCIONES</label>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <div style="padding-right: 8rem">
+      <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+        <div class="options text-right">
+          <label class="title-top m-0 p-0">Eventos activos</label>
+          <h4 class="m-0 p-0">90</h4>
+          <label class="title-top m-0 p-0">Asistentes</label>
+          <h4 class="m-0 p-0">1200</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pt-3" style="font-size: 0.85rem">
+    <button class="btn my-btn text-white" [routerLink]="['/company/events']" style="width: 20vw; height: 20vw">
+      <fa-icon [icon]="faCalendarPlus" size="3x">
+      </fa-icon>
+    </button>
+    <div>
+      Crear evento
+    </div>
+  </div>
+  <div class="m-2 mt-5">
+    <app-events-company [events]="eventsActive" [tittle]="'Activos'" [index]="'0'" [typeEvent]="'¡Estos son tus eventos activos!'"></app-events-company>
+  </div>
+  <div class="m-2 mt-5">
+    <app-events-company [events]="eventsInactive" [tittle]="'Inactivos'" [index]="'1'" [typeEvent]="'¡Estos son tus eventos inactivos!'"></app-events-company>
+  </div>
+  <div class="m-2 mt-5">
+    <app-events-company [events]="eventsPostpone" [tittle]="'Aplazados'" [index]="'2'" [typeEvent]="'¡Estos son tus eventos aplazados!'"></app-events-company>
+  </div>
+  <div class="m-2 mt-5">
+    <app-events-company [events]="eventsFinish" [tittle]="'Terminados'" [index]="'3'" [typeEvent]="'¡Estos son tus eventos finalizados!'"></app-events-company>
+  </div>
+  <div style="padding: 4vh"></div>
+</div>

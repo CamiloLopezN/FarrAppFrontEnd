@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {EventC} from '../../model/company';
-import {getDateEvent} from '../../model/RelojTest';
 
 declare const $: any;
 
@@ -14,18 +13,21 @@ export class EventsCompanyComponent implements OnInit {
 
 
   @Input() events: EventC[];
+  @Input() typeEvent: string;
+  @Input() tittle: string;
+  @Input() index: string;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.cdr.detectChanges();
-    document.querySelectorAll('.carousel').forEach(() => {
-      const $carousel = $('.carousel').flickity({
+    document.querySelectorAll('.carousel' + this.index).forEach(() => {
+      const $carousel = $('.carousel' + this.index).flickity({
         imagesLoaded: true,
-        percentPosition: false,
+        percentPosition: false
       });
-      const $imgs = $carousel.find('.carousel-cell img');
+      const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
 // get transform property
       const docStyle = document.documentElement.style;
       const transformProp = typeof docStyle.transform === 'string' ?
@@ -41,12 +43,5 @@ export class EventsCompanyComponent implements OnInit {
         });
       });
     });
-
   }
-
-  getDate(event: EventC): string {
-    return getDateEvent(event.date);
-  }
-
-
 }

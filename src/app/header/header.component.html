@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark pl-3 pr-3 pt-1 pb-1 sticky-top" id="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark pl-3 pr-3 pt-2 pb-2 sticky-top" id="navbar">
   <a class="navbar-brand d-none d-lg-inline" [routerLink]="['/landing-page']" style="font-family: Lovelo, sans-serif">
     <h2 class="m-2 ml-3 p-0">FARRAPP</h2>
   </a>
@@ -25,13 +25,13 @@
         <div class="dropdown-item" style="cursor: pointer" (click)="landingPage()">
           <div>
             <fa-icon class="icon-mine mr-2" [icon]="faUserCircle" size="2x"></fa-icon>
-            <label class="align-middle">
-            Usuario
+            <label class="align-middle" style="cursor: pointer">
+              Usuario
             </label>
           </div>
         </div>
         <div class="dropdown-divider" style="border-color: #e2e4e5"></div>
-        <button class="dropdown-item" type="button" (click)="user()">Editar perfil</button>
+        <button class="dropdown-item" type="button" (click)="user()" *ngIf="isLogged">Editar perfil</button>
         <div class="dropdown-divider" style="border-color: #e2e4e5"></div>
         <button class="dropdown-item" type="button" (click)="logOut()">Cerrar sesión</button>
 
@@ -58,14 +58,14 @@
       <div class="dropdown-item" style="cursor: pointer" *ngIf="isLogged" (click)="landingPage()">
         <div>
           <fa-icon class="icon-mine mr-2" [icon]="faUserCircle" size="2x"></fa-icon>
-          <label class="align-middle">
+          <label class="align-middle" style="cursor: pointer">
             Usuario
           </label>
         </div>
       </div>
       <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
       <button class="dropdown-item" type="button">Eventos</button>
-      <button class="dropdown-item" type="button" (click)="user()">Editar perfil</button>
+      <button class="dropdown-item" type="button" (click)="user()" *ngIf="isLogged">Editar perfil</button>
       <button class="dropdown-item" type="button" *ngIf="isLogged && rol == 'company'">Publicar evento</button>
       <button class="dropdown-item" type="button" *ngIf="isLogged && rol == 'company'">Agregar establecimiento</button>
       <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal" data-target="#login-modal"

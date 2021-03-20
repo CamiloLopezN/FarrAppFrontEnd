@@ -19,6 +19,7 @@ import {LandingPageComponent} from './landing-page/landing-page.component';
 import {SecurityCompanyComponent} from './company/security-company/security-company.component';
 import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
 import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
+import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,9 @@ const routes: Routes = [
   },
   {
     path: 'company/landing-page', canActivate: [CompanySesionGuard], component: LandingPageCompanyComponent
+  },
+  {
+    path: 'company/events', canActivate: [CompanySesionGuard], component: AlleventsCompanyComponent
   },
   {
     path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent
@@ -74,7 +78,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled', useHash: true})
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
   ],
   exports: [RouterModule]
 })

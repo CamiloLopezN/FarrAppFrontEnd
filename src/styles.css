@@ -23,11 +23,6 @@ body {
   font-family: Raleway, serif !important;
 }
 
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
 .btn-group {
   width: 100%;
 }
@@ -93,6 +88,7 @@ html {
     padding-top: 35vh;
     padding-bottom: 35vh;
   }
+
   .crow2 {
     overflow: hidden;
     max-width: 80vw;
@@ -148,56 +144,124 @@ html {
 
 }
 
-
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.carousel .flickity-page-dots {
-  bottom: -22px;
-}
-/* dots are lines */
-.carousel .flickity-page-dots .dot {
-  height: 4px;
-  width: 40px;
-  margin: 0;
-  border-radius: 0;
-}
-
 /* position outside */
 .carousel-mine .flickity-prev-next-button.previous {
   top: 130%;
   left: 35%;
 }
+
 .carousel-mine .flickity-prev-next-button.next {
   top: 130%;
   right: 35%;
 }
 
-.carousel-mine .flickity-button{
+.carousel-mine .flickity-button {
   background: #252427;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
   color: white;
 }
 
 
-.carousel .flickity-button{
+.carousel0 .flickity-button {
   background: #FAFAFA;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: #36424b;
 }
 
-.carousel .flickity-prev-next-button.previous {
+.carousel0 .flickity-prev-next-button.previous {
   left: 1%;
 }
-.carousel .flickity-prev-next-button.next {
+
+.carousel0 .flickity-prev-next-button.next {
   right: 1%;
+}
+
+.carousel0 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel0 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.carousel1 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel1 .flickity-prev-next-button.previous {
+  left: 1%;
+}
+
+.carousel1 .flickity-prev-next-button.next {
+  right: 1%;
+}
+
+.carousel1 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel1 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.carousel2 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel2 .flickity-prev-next-button.previous {
+  left: 1%;
+}
+
+.carousel2 .flickity-prev-next-button.next {
+  right: 1%;
+}
+
+.carousel2 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel2 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.carousel3 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel3 .flickity-prev-next-button.previous {
+  left: 1%;
+}
+
+.carousel3 .flickity-prev-next-button.next {
+  right: 1%;
+}
+
+.carousel3 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel3 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
 }

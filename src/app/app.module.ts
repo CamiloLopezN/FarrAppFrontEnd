@@ -39,6 +39,7 @@ import { EventsCompanyComponent } from './company/events-company/events-company.
 import { EventComponent } from './company/event/event.component';
 import { EstablishmentsCompanyComponent } from './company/establishments-company/establishments-company.component';
 import { EstablishmentComponent } from './company/establishment/establishment.component';
+import { AlleventsCompanyComponent } from './company/allevents-company/allevents-company.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
     EventsCompanyComponent,
     EventComponent,
     EstablishmentsCompanyComponent,
-    EstablishmentComponent
+    EstablishmentComponent,
+    AlleventsCompanyComponent
   ],
   imports: [
     BrowserModule,

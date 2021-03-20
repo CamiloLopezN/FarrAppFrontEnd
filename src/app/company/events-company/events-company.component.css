@@ -1,11 +1,41 @@
-.carousel {
+.carousel0 {
   background: #ffffff;
 }
 
-.carousel-cell {
+.carousel-cell0 {
   margin-right: 20px;
   overflow: hidden;
 }
+
+.carousel1 {
+  background: #ffffff;
+}
+
+.carousel-cell1 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+
+.carousel2 {
+  background: #ffffff;
+}
+
+.carousel-cell2 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+
+.carousel3 {
+  background: #ffffff;
+}
+
+.carousel-cell3 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
 
 .events{
   font-style: normal;

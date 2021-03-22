@@ -20,7 +20,7 @@
   <div class="accions-company-icons">
     <div class="row p-3 text-center justify-content-center">
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white" style="width: 20vw; height: 20vw" [routerLink]="['/company/profile']">
+        <button class="btn my-btn text-white" [routerLink]="['/company/profile']">
           <fa-icon [icon]="faUser" size="3x">
           </fa-icon>
         </button>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white " style="width: 20vw; height: 20vw" [routerLink]="['/company/events']">
+        <button class="btn my-btn text-white" [routerLink]="['/company/events']">
           <fa-icon [icon]="faCalendar" size="3x">
           </fa-icon>
         </button>
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white" style="width: 20vw; height: 20vw">
+        <button class="btn my-btn text-white">
           <fa-icon [icon]="faBuilding" size="3x">
           </fa-icon>
         </button>

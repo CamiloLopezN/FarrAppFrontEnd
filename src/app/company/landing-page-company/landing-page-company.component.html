@@ -50,11 +50,11 @@
   </div>
   <div style="padding: 2.5vh">
   </div>
-  <div class="p-2">
+  <div class="p-2" *ngIf="events">
     <app-events-company [events]="events" [typeEvent]="'¡Tus próximos eventos!'" [index]="'0'"
                         [tittle]="'Eventos'"></app-events-company>
   </div>
-  <div class="pt-5">
+  <div class="pt-5" *ngIf="establishments">
     <app-establishments-company [establishments]="establishments"></app-establishments-company>
   </div>
 </div>

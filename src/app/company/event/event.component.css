@@ -1,10 +1,15 @@
-.card{
+.card {
   background: #FCFCFD;
   border-radius: 20px;
-  margin: 2px;
+  margin: 3px;
+  width: 31vw;
 }
 
-p{
+.card-img-top {
+  width: 31vw;
+}
+
+p {
   font-family: Lovelo, serif;
   font-style: normal;
   font-weight: 900;
@@ -16,7 +21,7 @@ p{
   color: rgba(37, 36, 39, 0.6);
 }
 
-.title-event{
+.title-event {
   font-style: normal;
   font-weight: 900;
   font-size: 20px;
@@ -25,10 +30,32 @@ p{
   color: #252427;
 }
 
-.city-title{
+.city-title {
   font-style: normal;
   font-weight: 900;
-  font-size: 11px;
+  font-size: 15px;
   line-height: 13px;
-  color: rgba(174, 216, 229, 0.6);
+  color: rgba(174, 216, 229, 0.9);
 }
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 90vw;
+  }
+
+  .card-img-top {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 93vw;
+  }
+
+  .card-img-top {
+    width: 93vw;
+  }
+}
+
+

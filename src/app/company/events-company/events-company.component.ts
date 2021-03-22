@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, Input, OnInit} from '@angular/core';
 import {EventC} from '../../model/company';
 
 declare const $: any;
@@ -21,27 +21,58 @@ export class EventsCompanyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cdr.detectChanges();
-    document.querySelectorAll('.carousel' + this.index).forEach(() => {
-      const $carousel = $('.carousel' + this.index).flickity({
-        imagesLoaded: true,
-        percentPosition: false
-      });
-      const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
-// get transform property
-      const docStyle = document.documentElement.style;
-      const transformProp = typeof docStyle.transform === 'string' ?
-        'transform' : 'WebkitTransform';
-// get Flickity instance
-      const flkty = $carousel.data('flickity');
+    this.onResize();
+  }
 
-      $carousel.on('scroll.flickity', () => {
-        flkty.slides.forEach((slide, i) => {
-          const img = $imgs[i];
-          const x = (slide.target + flkty.x) * -1 / 3;
-          img.style[transformProp] = 'translateX(' + x + 'px)';
+  @HostListener('window:resize', [])
+  private onResize(): void {
+    this.cdr.detectChanges();
+    if (screen.width <= 1080) {
+      document.querySelectorAll('.carousel' + this.index).forEach(() => {
+        const $carousel = $('.carousel' + this.index).flickity({
+          imagesLoaded: true,
+          percentPosition: false
+        });
+        const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
+// get transform property
+        const docStyle = document.documentElement.style;
+        const transformProp = typeof docStyle.transform === 'string' ?
+          'transform' : 'WebkitTransform';
+// get Flickity instance
+        const flkty = $carousel.data('flickity');
+
+        $carousel.on('scroll.flickity', () => {
+          flkty.slides.forEach((slide, i) => {
+            const img = $imgs[i];
+            const x = (slide.target + flkty.x) * -1 / 3;
+            img.style[transformProp] = 'translateX(' + x + 'px)';
+          });
         });
       });
-    });
+    } else {
+      document.querySelectorAll('.carousel' + this.index).forEach(() => {
+        const $carousel = $('.carousel' + this.index).flickity({
+          imagesLoaded: true,
+          percentPosition: false
+        });
+
+        const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
+// get transform property
+        const docStyle = document.documentElement.style;
+        const transformProp = typeof docStyle.transform === 'string' ?
+          'transform' : 'WebkitTransform';
+// get Flickity instance
+        const flkty = $carousel.data('flickity');
+
+        $carousel.on('scroll.flickity', () => {
+          flkty.slides.forEach((slide, i) => {
+            const img = $imgs[i];
+            const x = (slide.target + flkty.x) * -0.001;
+            img.style[transformProp] = 'translateX(' + x + 'px)';
+          });
+        });
+      });
+    }
   }
+
 }

@@ -30,16 +30,16 @@
       Crear evento
     </div>
   </div>
-  <div class="m-2 mt-5">
+  <div class="m-2 mt-5" *ngIf="eventsActive">
     <app-events-company [events]="eventsActive" [tittle]="'Activos'" [index]="'0'" [typeEvent]="'¡Estos son tus eventos activos!'"></app-events-company>
   </div>
-  <div class="m-2 mt-5">
+  <div class="m-2 mt-5" *ngIf="eventsInactive">
     <app-events-company [events]="eventsInactive" [tittle]="'Inactivos'" [index]="'1'" [typeEvent]="'¡Estos son tus eventos inactivos!'"></app-events-company>
   </div>
-  <div class="m-2 mt-5">
+  <div class="m-2 mt-5" *ngIf="eventsPostpone">
     <app-events-company [events]="eventsPostpone" [tittle]="'Aplazados'" [index]="'2'" [typeEvent]="'¡Estos son tus eventos aplazados!'"></app-events-company>
   </div>
-  <div class="m-2 mt-5">
+  <div class="m-2 mt-5" *ngIf="eventsFinish">
     <app-events-company [events]="eventsFinish" [tittle]="'Terminados'" [index]="'3'" [typeEvent]="'¡Estos son tus eventos finalizados!'"></app-events-company>
   </div>
   <div style="padding: 4vh"></div>

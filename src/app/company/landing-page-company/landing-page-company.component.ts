@@ -62,7 +62,8 @@ export class LandingPageCompanyComponent implements OnInit {
 
   getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-        this.company = res;
+        this.company = res.search;
+        console.log(res);
       },
       () => {
         this.authS.logoutExpired();

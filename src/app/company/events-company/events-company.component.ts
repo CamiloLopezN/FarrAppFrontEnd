@@ -31,7 +31,8 @@ export class EventsCompanyComponent implements OnInit {
       document.querySelectorAll('.carousel' + this.index).forEach(() => {
         const $carousel = $('.carousel' + this.index).flickity({
           imagesLoaded: true,
-          percentPosition: false
+          percentPosition: false,
+          initialIndex: 1
         });
         const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
 // get transform property
@@ -53,9 +54,9 @@ export class EventsCompanyComponent implements OnInit {
       document.querySelectorAll('.carousel' + this.index).forEach(() => {
         const $carousel = $('.carousel' + this.index).flickity({
           imagesLoaded: true,
-          percentPosition: false
+          percentPosition: false,
+          initialIndex: 1
         });
-
         const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
 // get transform property
         const docStyle = document.documentElement.style;

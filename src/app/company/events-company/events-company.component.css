@@ -40,7 +40,7 @@
 .events{
   font-style: normal;
   font-weight: 500;
-  font-size: 35px;
+  font-size: 40px;
   line-height: 41px;
   color: #252427;
 }
@@ -48,7 +48,18 @@
 .events2{
   font-style: normal;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 23px;
   line-height: 21px;
   color: rgba(37, 36, 39, 0.6);
+}
+
+
+@media screen and (max-width: 1024px) {
+  .events{
+    font-size: 35px;
+  }
+
+  .events2{
+    font-size: 18px;
+  }
 }

@@ -21,6 +21,25 @@ p {
   color: rgba(37, 36, 39, 0.6);
 }
 
+.like-event-like {
+  position: absolute;
+  background: #fefefe;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 19.2vw;
+  right: 2vw;
+  width: 45px;
+  height: 45px;
+  transition: 0.2s;
+  outline: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
+}
+
+.like-event-like:hover {
+  color: red;
+}
+
 .title-event {
   font-style: normal;
   font-weight: 900;
@@ -38,16 +57,6 @@ p {
   color: rgba(174, 216, 229, 0.9);
 }
 
-@media screen and (max-width: 480px) {
-  .card {
-    width: 90vw;
-  }
-
-  .card-img-top {
-    width: 90vw;
-  }
-}
-
 @media screen and (max-width: 1024px) {
   .card {
     width: 93vw;
@@ -56,6 +65,29 @@ p {
   .card-img-top {
     width: 93vw;
   }
+
+  .like-event-like {
+    top: 58.2vw;
+    right: 4vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 90vw;
+  }
+
+  .card-img-top {
+    width: 90vw;
+  }
+
+  .like-event-like {
+    top: 52.2vw;
+    right: 8vw;
+    width: 40px;
+    height: 40px;
+  }
+
 }
 
 

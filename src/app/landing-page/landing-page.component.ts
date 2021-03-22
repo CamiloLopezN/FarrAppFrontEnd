@@ -14,6 +14,7 @@ export class LandingPageComponent implements OnInit {
 
   constructor() {
     this.events = [{
+      id: '0',
       city: 'Tunja',
       date: new Date(),
       hourFin: '21:00',
@@ -22,6 +23,7 @@ export class LandingPageComponent implements OnInit {
       name: 'Fiesta fin de semestre'
     },
       {
+        id: '1',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -30,6 +32,7 @@ export class LandingPageComponent implements OnInit {
         name: 'Saturday Night Party'
       },
       {
+        id: '2',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -38,6 +41,7 @@ export class LandingPageComponent implements OnInit {
         name: 'Saturday Night Party'
       },
       {
+        id: '3',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -46,6 +50,7 @@ export class LandingPageComponent implements OnInit {
         name: 'Saturday Night Party'
       },
       {
+        id: '4',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -72,4 +77,7 @@ export class LandingPageComponent implements OnInit {
     this.prevScrollpos = currentScrollPos;
   }
 
+  scroll(target: HTMLDivElement): void {
+    target.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
 }

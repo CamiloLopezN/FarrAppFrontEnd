@@ -19,6 +19,7 @@ export class LandingPageCompanyComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
     this.events = [{
+      id: '0',
       city: 'Tunja',
       date: new Date(),
       hourFin: '21:00',
@@ -27,6 +28,7 @@ export class LandingPageCompanyComponent implements OnInit {
       name: 'Fiesta fin de semestre'
     },
       {
+        id: '1',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',

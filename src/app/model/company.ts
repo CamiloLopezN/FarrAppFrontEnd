@@ -40,6 +40,7 @@ export interface CompanyResponseAdmin2 {
 }
 
 export interface EventC {
+  id: string;
   date: Date;
   name: string;
   city: string;

@@ -1,6 +1,9 @@
 <div class="card">
   <img class="card-img-top"
        src="{{event.img}}" alt="Card image cap">
+  <button class="like-event-like" id="like{{event.id}}" (click)="like()" *ngIf="isClient == 'client' || isClient == 'norole'">
+    <fa-icon [icon]="faLike"></fa-icon>
+  </button>
   <div class="card-body">
     <div>
       <div class="float-left">

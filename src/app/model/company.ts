@@ -53,3 +53,10 @@ export interface Establishment {
   address: string;
   img: string;
 }
+
+export interface Ticket{
+  name: string;
+  price: number;
+  status: string;
+  info: string;
+}

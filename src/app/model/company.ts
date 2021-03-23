@@ -61,5 +61,19 @@ export interface Category {
 
 export interface Img {
   imgFile: FileList;
-  imgUrl: string;
+  imgUrl: string | ArrayBuffer;
+}
+
+export interface EstablishmentRegister {
+  typeEstablishment: string[];
+  categories: string [];
+  name: string;
+  logo: string;
+  description: string;
+  photo: string[];
+  latitude: number;
+  longitud: number;
+  address: string;
+  city: string;
+  capacity: number;
 }

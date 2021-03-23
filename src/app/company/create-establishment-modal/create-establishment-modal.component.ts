@@ -1,18 +1,12 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {Category, Img} from '../../model/company';
+import {Category, EstablishmentRegister, Img} from '../../model/company';
 import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../services/notification.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {CompanyService} from '../../services/company.service';
 import {AdminService} from '../../services/admin.service';
-import {
-  faGlassCheers,
-  faImage,
-  faImages,
-  faMapMarkerAlt,
-  faClipboardList
-} from '@fortawesome/free-solid-svg-icons';
+import {faClipboardList, faGlassCheers, faImage, faImages, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {CitiesService} from '../../services/cities.service';
 
 
@@ -25,15 +19,17 @@ declare var $: any;
 })
 export class CreateEstablishmentModalComponent implements OnInit {
 
+  establishmentR: EstablishmentRegister;
+
   faImage = faImage;
   faImages = faImages;
   faGlassCheers = faGlassCheers;
   faMarkerAlt = faMapMarkerAlt;
   faClipBoard = faClipboardList;
 
-  nameEst: string;
-  desc: string;
-  address: string;
+  nameEst = '';
+  desc = '';
+  address = '';
   capacity: number;
 
   btnBar: string;
@@ -41,15 +37,18 @@ export class CreateEstablishmentModalComponent implements OnInit {
 
   isBar: boolean;
   isDiscotheque: boolean;
-
+  isSroll = false;
 
   messageErrorType: string;
+  messageErrorCategory: string;
+  messageErrorPhotos: string;
+  messageErrorUbication: string;
 
   role: string;
-  @ViewChild('formClient') formC: NgForm;
+  @ViewChild('formEstablishment') formC: NgForm;
 
   public imagePath;
-  imgURL: any;
+  imgURL: string | ArrayBuffer = '';
   public message: string;
   public message2: string;
 
@@ -96,17 +95,56 @@ export class CreateEstablishmentModalComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-
     $(document).ready(() => {
-      $('#register-company-modal').on('show.bs.modal', () => {
-        this.authS.inRegCompany.next(false);
+      $('#register-establishment-modal').on('show.bs.modal', () => {
+        console.log('Hola');
+        this.nameEst = '';
+        this.desc = '';
+        this.address = '';
+        this.capacity = 0;
+
+        this.isBar = false;
+        this.isDiscotheque = false;
+        this.isSroll = false;
+
+        this.messageErrorType = '';
+        this.messageErrorCategory = '';
+        this.messageErrorPhotos = '';
+        this.messageErrorUbication = '';
+
+        this.imagePath = null;
+        this.imgURL = '';
+        this.message = '';
+        this.message2 = '';
+
+        this.images = [];
+        this.marker.lat = null;
+        this.marker.lng = null;
+
+        this.categories = [{
+          name: 'Campo abierto',
+          select: false
+        }, {
+          name: 'Encerrado',
+          select: false
+        }
+        ];
+
+        document.getElementById(this.btnBar).style.background = '#fafafa';
+        document.getElementById(this.btnBar).style.color = '#c2c5c8';
+
+        document.getElementById(this.btnDiscotheque).style.background = '#fafafa';
+        document.getElementById(this.btnDiscotheque).style.color = '#c2c5c8';
+
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
+        this.citySelect = 'Tunja';
       });
     });
   }
 
   selectBar(): void {
+    this.messageErrorType = '';
     this.isBar = !this.isBar;
     if (this.isBar) {
       document.getElementById(this.btnBar).style.background = 'black';
@@ -130,7 +168,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
   }
 
   selectCategorie(category: Category): void {
-    this.messageErrorType = '';
+    this.messageErrorCategory = '';
     category.select = !category.select;
     if (category.select) {
       document.getElementById(category.name).style.background = 'black';
@@ -170,6 +208,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
 
   preview2(files: FileList): void {
     this.message2 = '';
+    this.messageErrorPhotos = '';
     if (files.length === 0) {
       return;
     }
@@ -208,14 +247,132 @@ export class CreateEstablishmentModalComponent implements OnInit {
   }
 
   mapClicked(lng: number, lat: number): void {
+    this.messageErrorUbication = '';
     this.marker.lat = lat;
     this.marker.lng = lng;
   }
 
   onSubmit(): void {
+    if (this.validForm()) {
+      const categoriesString = this.categories.map((category) => {
+        return category.name;
+      });
+      const typeEstablishments = [];
+      if (this.isBar) {
+        typeEstablishments.push('Bar');
+      }
+      if (this.isDiscotheque) {
+        typeEstablishments.push('Discoteca');
+      }
+      this.establishmentR = {
+        address: this.address,
+        capacity: this.capacity,
+        city: this.citySelect,
+        description: this.desc,
+        name: this.nameEst,
+        categories: categoriesString,
+        latitude: this.marker.lat,
+        longitud: this.marker.lng,
+        typeEstablishment: typeEstablishments,
+        logo: 'logo',
+        photo: []
+      };
+      console.log(this.establishmentR);
+    }
+  }
+
+  validForm(): boolean {
     this.messageErrorType = '';
-    if (!this.isBar || !this.isDiscotheque) {
-      this.messageErrorType = 'Selecciona al menos un tipo';
+    this.messageErrorCategory = '';
+    this.message = '';
+    this.messageErrorPhotos = '';
+    this.messageErrorUbication = '';
+    if (!this.isBar && !this.isDiscotheque) {
+      this.messageErrorType = 'Selecciona al menos un tipo.';
+      if (!this.isSroll) {
+        const target = document.getElementById('type-establishment');
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.isSroll = true;
+      }
+    }
+    if (this.imgURL === '') {
+      this.message = 'Debes seleccionar el logotipo de tu establecimiento.';
+      if (!this.isSroll) {
+        const target = document.getElementById('logo-establishment');
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.isSroll = true;
+      }
+    }
+    if (!this.ifValidCategory()) {
+      if (!this.isSroll) {
+        const target = document.getElementById('category-establishment');
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.isSroll = true;
+      }
+    }
+    if (!this.isValidPhotos()) {
+      if (!this.isSroll) {
+        const target = document.getElementById('photos-establishment');
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.isSroll = true;
+      }
+    }
+    if (this.marker.lat === null && this.marker.lng === null) {
+      this.messageErrorUbication = 'Debes seleccionar la ubicación de tu establecimiento';
+      if (!this.isSroll) {
+        const target = document.getElementById('ubication-establishment');
+        target.scrollIntoView({behavior: 'smooth', block: 'center'});
+        this.isSroll = true;
+      }
+    }
+    this.isSroll = false;
+    return this.messageErrorType === '' && this.messageErrorCategory === ''
+      && this.message === '' && this.messageErrorPhotos === '' && this.messageErrorUbication === '';
+  }
+
+  isValidPhotos(): boolean {
+    if (this.images.length === 0) {
+      this.messageErrorPhotos = 'Selecciona por lo menos una foto de tu establecimiento.';
+      return false;
+    } else if (this.images.length > 7) {
+      this.messageErrorPhotos = 'Selecciona máximo 7 fotos de tu establecimiento.';
+      return false;
+    }
+    return true;
+  }
+
+  isValidLength(): boolean {
+    return this.isNameLength() && this.isDescriptionLength() && this.isAddressLength();
+  }
+
+  isNameLength(): boolean {
+    return this.nameEst.length <= 150;
+  }
+
+  isDescriptionLength(): boolean {
+    return this.desc.length <= 1024;
+  }
+
+  isAddressLength(): boolean {
+    return this.address.length <= 150;
+  }
+
+  ifValidCategory(): boolean {
+    let count = 0;
+    for (const category of this.categories) {
+      if (category.select) {
+        count++;
+        if (count > 5) {
+          this.messageErrorCategory = 'Selecciona máximo 5 categorías.';
+          return false;
+        }
+      }
+    }
+    if (count === 0) {
+      this.messageErrorCategory = 'Selecciona por lo menos una categoría.';
+      return false;
+    } else {
+      return true;
     }
   }
 }

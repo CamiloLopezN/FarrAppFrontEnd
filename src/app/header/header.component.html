@@ -6,7 +6,7 @@
     <a class="text-white mr-4" [routerLink]="['/register']">Eventos</a>
     <a class="text-white mr-4" [routerLink]="['/register']" *ngIf="isLogged && rol=='company'">Publicar evento</a>
     <a class="text-white mr-4" data-toggle="modal" data-target="#register-establishment-modal"
-       *ngIf="isLogged && rol=='company'">Agregar
+       *ngIf="isLogged && rol=='company'" style="cursor: pointer">Agregar
       establecimiento</a>
     <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#login-modal" *ngIf="!isLogged"
        (click)="authService.inLog.next(true)">Iniciar sesión</a>
@@ -69,7 +69,7 @@
       <button class="dropdown-item" type="button" (click)="user()">Editar perfil</button>
       <button class="dropdown-item" type="button" *ngIf="isLogged && rol == 'company'">Publicar evento</button>
       <button class="dropdown-item" type="button" data-toggle="modal" data-target="#register-establishment-modal"
-              *ngIf="isLogged && rol == 'company'">Agregar establecimiento
+              *ngIf="isLogged && rol == 'company'" style="cursor: pointer">Agregar establecimiento
       </button>
       <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal" data-target="#login-modal"
               (click)="authService.inLog.next(true)">Iniciar sesión

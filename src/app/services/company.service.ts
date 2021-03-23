@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {CompanyResponse} from '../model/company';
+import {CompanyResponse, EstablishmentRegister} from '../model/company';
 import {CompanyRegistration} from '../model/company';
 import {ClientAccount} from '../model/client';
 
@@ -83,6 +83,19 @@ export class CompanyService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.put<any>(`${environment.backend}/api/company/account`, company, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postEstablishment(establishment: EstablishmentRegister): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}//api/company/establishment`, establishment, {headers})
       .pipe(
         map((res: any) => {
           return res;

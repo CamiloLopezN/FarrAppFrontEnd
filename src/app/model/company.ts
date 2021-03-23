@@ -53,3 +53,13 @@ export interface Establishment {
   address: string;
   img: string;
 }
+
+export interface Category {
+  name: string;
+  select: boolean;
+}
+
+export interface Img {
+  imgFile: FileList;
+  imgUrl: string;
+}

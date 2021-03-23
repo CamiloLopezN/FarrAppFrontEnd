@@ -22,23 +22,25 @@ import {ClientsAdminComponent} from './admin/clients-admin/clients-admin.compone
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ClientProfileComponent} from './admin/client-profile/client-profile.component';
 import {EditAdminComponent} from './admin/edit-admin/edit-admin.component';
-import { SecurityClientComponent } from './client/security-client/security-client.component';
-import { CompaniesAdminComponent } from './admin/companies-admin/companies-admin.component';
-import { CompanyProfileComponent } from './admin/company-profile/company-profile.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { LoginModalComponent } from './login-modal/login-modal.component';
-import { RegisterModalComponent } from './client/register-modal/register-modal.component';
-import { RegisterCompanyModalComponent } from './company/register-company-modal/register-company-modal.component';
-import { SecurityCompanyComponent } from './company/security-company/security-company.component';
+import {SecurityClientComponent} from './client/security-client/security-client.component';
+import {CompaniesAdminComponent} from './admin/companies-admin/companies-admin.component';
+import {CompanyProfileComponent} from './admin/company-profile/company-profile.component';
+import {LandingPageComponent} from './landing-page/landing-page.component';
+import {LoginModalComponent} from './login-modal/login-modal.component';
+import {RegisterModalComponent} from './client/register-modal/register-modal.component';
+import {RegisterCompanyModalComponent} from './company/register-company-modal/register-company-modal.component';
+import {SecurityCompanyComponent} from './company/security-company/security-company.component';
 import {NgProgressHttpModule} from 'ngx-progressbar/http';
 import {NgProgressModule} from 'ngx-progressbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
-import { LandingPageCompanyComponent } from './company/landing-page-company/landing-page-company.component';
-import { EventsCompanyComponent } from './company/events-company/events-company.component';
-import { EventComponent } from './company/event/event.component';
-import { EstablishmentsCompanyComponent } from './company/establishments-company/establishments-company.component';
-import { EstablishmentComponent } from './company/establishment/establishment.component';
+import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
+import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
+import {EventsCompanyComponent} from './company/events-company/events-company.component';
+import {EventComponent} from './company/event/event.component';
+import {EstablishmentsCompanyComponent} from './company/establishments-company/establishments-company.component';
+import {EstablishmentComponent} from './company/establishment/establishment.component';
+import {CreateEstablishmentModalComponent} from './company/create-establishment-modal/create-establishment-modal.component';
+import {AgmCoreModule} from '@agm/core';
 
 
 @NgModule({
@@ -68,7 +70,8 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
     EventsCompanyComponent,
     EventComponent,
     EstablishmentsCompanyComponent,
-    EstablishmentComponent
+    EstablishmentComponent,
+    CreateEstablishmentModalComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,10 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
     SimpleNotificationsModule.forRoot(),
     NgProgressModule,
     NgProgressHttpModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDj7S6KshIWY1rgkzv03ymsaABDr8W63g4'
+    })
   ],
   providers: [DatePipe,
     {

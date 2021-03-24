@@ -17,6 +17,7 @@ export class AlleventsCompanyComponent implements OnInit {
 
   constructor() {
     this.eventsActive = [{
+      id: '0',
       city: 'Tunja',
       date: new Date(),
       hourFin: '21:00',
@@ -25,6 +26,7 @@ export class AlleventsCompanyComponent implements OnInit {
       name: 'Fiesta fin de semestre'
     },
       {
+        id: '1',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -34,6 +36,7 @@ export class AlleventsCompanyComponent implements OnInit {
       }
     ];
     this.eventsInactive = [{
+      id: '2',
       city: 'Tunja',
       date: new Date(),
       hourFin: '21:00',
@@ -42,6 +45,7 @@ export class AlleventsCompanyComponent implements OnInit {
       name: 'Fiesta fin de semestre'
     },
       {
+        id: '3',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -51,6 +55,7 @@ export class AlleventsCompanyComponent implements OnInit {
       }
     ];
     this.eventsPostpone = [{
+      id: '4',
       city: 'Tunja',
       date: new Date(),
       hourFin: '21:00',
@@ -59,6 +64,7 @@ export class AlleventsCompanyComponent implements OnInit {
       name: 'Fiesta fin de semestre'
     },
       {
+        id: '5',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',
@@ -68,6 +74,7 @@ export class AlleventsCompanyComponent implements OnInit {
       }
     ];
     this.eventsFinish = [{
+      id: '6',
       city: 'Tunja',
       date: new Date(),
       hourFin: '21:00',
@@ -76,6 +83,7 @@ export class AlleventsCompanyComponent implements OnInit {
       name: 'Fiesta fin de semestre'
     },
       {
+        id: '7',
         city: 'Villa de leyva',
         date: new Date(),
         hourFin: '21:00',

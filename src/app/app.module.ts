@@ -39,6 +39,11 @@ import { EventsCompanyComponent } from './company/events-company/events-company.
 import { EventComponent } from './company/event/event.component';
 import { EstablishmentsCompanyComponent } from './company/establishments-company/establishments-company.component';
 import { EstablishmentComponent } from './company/establishment/establishment.component';
+import { TicketTypeComponent } from './company/ticket/ticket-type/ticket-type.component';
+import { ListTicketComponent } from './company/ticket/list-ticket/list-ticket.component';
+import { CardTicketTypeComponent } from './company/ticket/card-ticket-type/card-ticket-type.component';
+import { CodePromotionalCardComponent } from './company/code/code-promotional-card/code-promotional-card.component';
+import { RegisterCodeComponent } from './company/code/register-code/register-code.component';
 
 
 @NgModule({
@@ -68,7 +73,12 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
     EventsCompanyComponent,
     EventComponent,
     EstablishmentsCompanyComponent,
-    EstablishmentComponent
+    EstablishmentComponent,
+    TicketTypeComponent,
+    ListTicketComponent,
+    CardTicketTypeComponent,
+    CodePromotionalCardComponent,
+    RegisterCodeComponent
   ],
   imports: [
     BrowserModule,

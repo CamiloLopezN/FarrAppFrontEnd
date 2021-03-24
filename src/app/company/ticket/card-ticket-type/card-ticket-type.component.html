@@ -1,0 +1,41 @@
+<div class="p-3 mb-5 my-box" style="cursor:pointer;background: #fbfbfb;color: #b8bcbe" *ngIf="ticket.status=='Agotado'">
+  <p class="float-right">
+    <b>
+      <del><em>{{ticket.price | currency}}</em></del>
+    </b>
+  </p>
+  <p class="text-uppercase mb-0">
+    <b>{{ticket.name}}</b>
+  </p>
+  <p style="color: #f1b2b2">
+    <b><em>Agotado</em></b>
+  </p>
+  <p>{{ticket.info}}</p>
+  <div class="clearfix"></div>
+  <button class="btn btn-danger float-right ml-2" style="border-radius: 50%" (click)="deleted()">
+    <fa-icon [icon]="faMinus"></fa-icon>
+  </button>
+  <button class="btn btn-secondary float-right" style="border-radius: 50%">
+    <fa-icon [icon]="faPen"></fa-icon>
+  </button>
+</div>
+
+<div class="p-3 mb-5 my-box" style="cursor:pointer;background: #ffffff;" *ngIf="ticket.status!='Agotado'">
+  <p class="float-right">
+    <b>{{ticket.price | currency}}</b>
+  </p>
+  <p class="text-uppercase mb-0">
+    <b>{{ticket.name}}</b>
+  </p>
+  <p style="color: #f1b2b2">
+    <br>
+  </p>
+  <p>{{ticket.info}}</p>
+  <div class="clearfix"></div>
+  <button class="btn btn-danger float-right ml-2" style="border-radius: 50%" (click)="deleted()">
+    <fa-icon [icon]="faMinus"></fa-icon>
+  </button>
+  <button class="btn btn-secondary float-right" style="border-radius: 50%">
+    <fa-icon [icon]="faPen"></fa-icon>
+  </button>
+</div>

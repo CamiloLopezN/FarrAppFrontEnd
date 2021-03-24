@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
@@ -42,7 +42,6 @@ import {EstablishmentComponent} from './company/establishment/establishment.comp
 import {CreateEstablishmentModalComponent} from './company/create-establishment-modal/create-establishment-modal.component';
 import {AgmCoreModule} from '@agm/core';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +76,7 @@ import {AgmCoreModule} from '@agm/core';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
     NgxPaginationModule,

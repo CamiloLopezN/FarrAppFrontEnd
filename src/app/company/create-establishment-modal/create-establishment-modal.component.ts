@@ -186,7 +186,8 @@ export class CreateEstablishmentModalComponent implements OnInit {
     }
 
     const mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null || mimeType.match(/image\/x-icon/) || mimeType.match(/image\/svg+xml/)) {
+    console.log(mimeType);
+    if (mimeType.match(/image\/*/) == null || (!mimeType.match(/image\/png/) && !mimeType.match(/image\/jpeg/))) {
       this.message = 'Debes escoger un tipo de imagen válida.';
       this.imagePath = null;
       this.imgURL = '';
@@ -214,7 +215,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
     }
 
     const mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null || mimeType.match(/image\/x-icon/) || mimeType.match(/image\/svg+xml/)) {
+    if (mimeType.match(/image\/*/) == null || (!mimeType.match(/image\/png/) && !mimeType.match(/image\/jpeg/))) {
       this.message = 'Debes escoger un tipo de imagen válida.';
       this.imagePath = null;
       this.imgURL = '';
@@ -254,9 +255,6 @@ export class CreateEstablishmentModalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.validForm()) {
-      const categoriesString = this.categories.map((category) => {
-        return category.name;
-      });
       const typeEstablishments = [];
       if (this.isBar) {
         typeEstablishments.push('Bar');
@@ -264,20 +262,43 @@ export class CreateEstablishmentModalComponent implements OnInit {
       if (this.isDiscotheque) {
         typeEstablishments.push('Discoteca');
       }
+
       this.establishmentR = {
         address: this.address,
         capacity: this.capacity,
         city: this.citySelect,
         description: this.desc,
         name: this.nameEst,
-        categories: categoriesString,
+        categories: this.categories.filter(category => category.select === true).map(category => category.name),
         latitude: this.marker.lat,
-        longitud: this.marker.lng,
+        longitude: this.marker.lng,
         typeEstablishment: typeEstablishments,
-        logo: 'logo',
+        logo: '',
         photo: []
       };
-      console.log(this.establishmentR);
+
+      this.companyService.postLogo(this.imagePath[0]).subscribe(res => {
+        this.establishmentR.logo = res.logo;
+      }, error => {
+        console.log(error);
+      }, () => {
+        this.companyService.postPhotos(this.images.map(myimg => myimg.imgFile[0])).subscribe(res => {
+          this.establishmentR.photo = res.map(photoObj => photoObj.photo);
+        }, error => {
+          console.log(error);
+        }, () => {
+          this.companyService.postEstablishment(this.establishmentR).subscribe(() => {
+              $('#register-establishment-modal').modal('hide');
+              this.notifyS.succesRegisterCompany();
+              this.formC.reset();
+              this.changeDetectorRef.detectChanges();
+            }, error => {
+              console.log(error);
+            }
+          );
+        });
+      });
+
     }
   }
 

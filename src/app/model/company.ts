@@ -72,7 +72,7 @@ export interface EstablishmentRegister {
   description: string;
   photo: string[];
   latitude: number;
-  longitud: number;
+  longitude: number;
   address: string;
   city: string;
   capacity: number;

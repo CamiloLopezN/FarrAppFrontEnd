@@ -37,6 +37,37 @@ export class CompanyService {
       );
   }
 
+  postLogo(img: File): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    const formData = new FormData();
+    formData.append('logo', img);
+
+    return this.http.post<any>(`${environment.backend}/api/upload/establishment/logo`, formData, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postPhotos(img: File[]): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const formData = new FormData();
+    img.forEach(photo => formData.append('photo', photo));
+
+    return this.http.post<any>(`${environment.backend}/api/upload/establishment/photos`, formData, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   editCompany(company: CompanyResponse): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
@@ -95,7 +126,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend}//api/company/establishment`, establishment, {headers})
+    return this.http.post<any>(`${environment.backend}/api/company/establishment`, establishment, {headers})
       .pipe(
         map((res: any) => {
           return res;

@@ -188,4 +188,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesEstablishmentCreated(): void {
+    this.nService.success('Estado del establecimiento', '¡Se ha registrado el establecimiento correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

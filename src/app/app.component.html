@@ -1,1 +1,14 @@
-<app-ticket-type></app-ticket-type>
+<ng-progress color="white" [spinner]="false"></ng-progress>
+<app-header></app-header>
+<div id="page-container">
+  <div id="content-wrap">
+    <router-outlet></router-outlet>
+  </div>
+  <footer id="footer">
+    <app-footer></app-footer>
+  </footer>
+</div>
+<simple-notifications></simple-notifications>
+<app-login-modal></app-login-modal>
+<app-register-modal></app-register-modal>
+<app-register-company-modal></app-register-company-modal>

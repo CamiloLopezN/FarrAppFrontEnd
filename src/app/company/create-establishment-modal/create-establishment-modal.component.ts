@@ -289,7 +289,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
         }, () => {
           this.companyService.postEstablishment(this.establishmentR).subscribe(() => {
               $('#register-establishment-modal').modal('hide');
-              this.notifyS.succesRegisterCompany();
+              this.notifyS.succesEstablishmentCreated();
               this.formC.reset();
               this.changeDetectorRef.detectChanges();
             }, error => {

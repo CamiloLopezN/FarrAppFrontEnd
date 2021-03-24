@@ -12,6 +12,8 @@
       <div class="ralewayFont modal-body border-content-register">
         <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0 text-center">FarrApp</h1>
         <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()">
+
+          <p id="createAccountTittle" class="h4 pt-2 pb-2 text-center">¡Diseña tu evento!</p>
           <app-list-ticket></app-list-ticket>
           <button type="submit" class="btn btn-outline-dark mt-4" style="border-radius: 30px"
                   [disabled]="!formClient.form.valid">Crear evento

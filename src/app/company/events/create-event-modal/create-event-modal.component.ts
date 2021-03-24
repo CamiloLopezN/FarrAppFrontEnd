@@ -7,6 +7,12 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CreateEventModalComponent implements OnInit {
 
+  nameEvent: string;
+  dateInit: string;
+  dateInitHour: string;
+  dateFin: string;
+  dateFinHour: string;
+
   constructor() {
   }
 

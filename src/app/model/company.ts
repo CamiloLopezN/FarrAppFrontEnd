@@ -54,11 +54,14 @@ export interface Establishment {
   img: string;
 }
 
-export interface Ticket {
+export interface Category {
   name: string;
-  price: number;
-  status: string;
-  info: string;
+  select: boolean;
+}
+
+export interface Img {
+  imgFile: FileList;
+  imgUrl: string | ArrayBuffer;
 }
 
 export interface Ticket2 {
@@ -77,13 +80,26 @@ export interface Ticket2 {
   infoExtra: string;
 }
 
+export interface EstablishmentRegister {
+  typeEstablishment: string[];
+  categories: string [];
+  name: string;
+  logo: string;
+  description: string;
+  photo: string[];
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+  capacity: number;
+}
 
 export interface Status {
   name: string;
   isSelect: boolean;
 }
 
-export interface CodePromotional {
+export interface CodePromotional{
   code: string;
   numberCanj: number;
   discountType: string;

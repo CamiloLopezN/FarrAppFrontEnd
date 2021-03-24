@@ -54,21 +54,26 @@ export interface Establishment {
   img: string;
 }
 
-export interface Ticket{
+export interface Category {
   name: string;
-  price: number;
-  status: string;
-  info: string;
+  select: boolean;
 }
 
-export interface Status{
-  name: string;
-  isSelect: boolean;
+export interface Img {
+  imgFile: FileList;
+  imgUrl: string | ArrayBuffer;
 }
 
-export interface CodePromotional{
-  code: string;
-  numberCanj: number;
-  discountType: string;
-  discountValue: number;
+export interface EstablishmentRegister {
+  typeEstablishment: string[];
+  categories: string [];
+  name: string;
+  logo: string;
+  description: string;
+  photo: string[];
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+  capacity: number;
 }

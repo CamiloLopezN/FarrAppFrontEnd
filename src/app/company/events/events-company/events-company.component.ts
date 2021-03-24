@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {EventC} from '../../model/company';
-import {getDateEvent} from '../../model/RelojTest';
+import {EventC} from '../../../model/company';
+import {getDateEvent} from '../../../model/RelojTest';
 
 declare const $: any;
 

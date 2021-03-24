@@ -54,19 +54,36 @@ export interface Establishment {
   img: string;
 }
 
-export interface Ticket{
+export interface Ticket {
   name: string;
   price: number;
   status: string;
   info: string;
 }
 
-export interface Status{
+export interface Ticket2 {
+  price: number;
+  quantity: number;
+  dateInit: Date;
+  dateFin: Date;
+  description: string;
+  priceDoor: number;
+  fastLine: boolean;
+  status: string;
+  codes: CodePromotional[];
+  maxTicket: number;
+  minTicket: number;
+  ballotHolder: string;
+  infoExtra: string;
+}
+
+
+export interface Status {
   name: string;
   isSelect: boolean;
 }
 
-export interface CodePromotional{
+export interface CodePromotional {
   code: string;
   numberCanj: number;
   discountType: string;

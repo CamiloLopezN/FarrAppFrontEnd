@@ -1,6 +1,6 @@
-<div class="pt-4 pb-4">
+<div class="my-box pt-4 pb-4">
   <form name="registerCLient" #formTicket="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
-    <div class="form-row mt-4 text-left">
+    <div class="form-row mt-2 text-left">
       <div class="form-group col">
         <label for="myprice" class="h5">Precio *</label>
         <input type="number" class="form-control"
@@ -71,7 +71,7 @@
 
     <div class="form-row mt-4 text-left">
       <div class="form-group col">
-        <label for="pricDoor" class="h5">Precio en la puerta *</label>
+        <label for="pricDoor" class="h5">Precio en puerta *</label>
         <input type="number" class="form-control"
                #pricDoor="ngModel" name="pricDoor" [(ngModel)]="priceDoor" id="pricDoor" required>
         <small id="priceDoorHelp" class="form-text text-danger" *ngIf="!pricDoor.valid && pricDoor.touched">Debes

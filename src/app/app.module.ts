@@ -35,15 +35,16 @@ import {NgProgressModule} from 'ngx-progressbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
 import { LandingPageCompanyComponent } from './company/landing-page-company/landing-page-company.component';
-import { EventsCompanyComponent } from './company/events-company/events-company.component';
-import { EventComponent } from './company/event/event.component';
-import { EstablishmentsCompanyComponent } from './company/establishments-company/establishments-company.component';
-import { EstablishmentComponent } from './company/establishment/establishment.component';
+import { EventsCompanyComponent } from './company/events/events-company/events-company.component';
+import { EventComponent } from './company/events/event/event.component';
+import { EstablishmentsCompanyComponent } from './company/establishments/establishments-company/establishments-company.component';
+import { EstablishmentComponent } from './company/establishments/establishment/establishment.component';
 import { TicketTypeComponent } from './company/ticket/ticket-type/ticket-type.component';
 import { ListTicketComponent } from './company/ticket/list-ticket/list-ticket.component';
 import { CardTicketTypeComponent } from './company/ticket/card-ticket-type/card-ticket-type.component';
 import { CodePromotionalCardComponent } from './company/code/code-promotional-card/code-promotional-card.component';
 import { RegisterCodeComponent } from './company/code/register-code/register-code.component';
+import { CreateEventModalComponent } from './company/events/create-event-modal/create-event-modal.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { RegisterCodeComponent } from './company/code/register-code/register-cod
     ListTicketComponent,
     CardTicketTypeComponent,
     CodePromotionalCardComponent,
-    RegisterCodeComponent
+    RegisterCodeComponent,
+    CreateEventModalComponent
   ],
   imports: [
     BrowserModule,

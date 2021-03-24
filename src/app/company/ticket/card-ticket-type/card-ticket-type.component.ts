@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {faMinus, faPen} from '@fortawesome/free-solid-svg-icons';
-import {Ticket} from '../../../model/company';
+import {Ticket2} from '../../../model/company';
 
 @Component({
   selector: 'app-card-ticket-type',
@@ -11,7 +11,7 @@ export class CardTicketTypeComponent implements OnInit {
 
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onDelete: EventEmitter<any> = new EventEmitter();
-  @Input() ticket: Ticket;
+  @Input() ticket: Ticket2;
   faPen = faPen;
   faMinus = faMinus;
 
@@ -22,7 +22,7 @@ export class CardTicketTypeComponent implements OnInit {
   }
 
   disabled(): void {
-    if (this.ticket.status === 'Agotado') {
+    if (this.ticket.status === 'Agotada') {
       document.getElementById('div-ticket').style.background = '#fbfbfb';
     } else {
       document.getElementById('div-ticket').style.background = '#ffffff';

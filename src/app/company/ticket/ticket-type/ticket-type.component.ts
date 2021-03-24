@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {faChevronDown, faPlus, faChevronUp} from '@fortawesome/free-solid-svg-icons';
-import {CodePromotional, Status} from '../../../model/company';
+import {CodePromotional, Status, Ticket2} from '../../../model/company';
 
 @Component({
   selector: 'app-ticket-type',
@@ -8,6 +8,7 @@ import {CodePromotional, Status} from '../../../model/company';
   styleUrls: ['./ticket-type.component.css']
 })
 export class TicketTypeComponent implements OnInit {
+  ticket: Ticket2;
 
   price: number;
   quantity: number;
@@ -38,6 +39,8 @@ export class TicketTypeComponent implements OnInit {
 
   isScroll = false;
 
+  @Output() public addTicket: EventEmitter<any> = new EventEmitter();
+
   constructor() {
     this.status = [
       {isSelect: false, name: 'En venta'},
@@ -50,13 +53,38 @@ export class TicketTypeComponent implements OnInit {
       {isSelect: false, name: 'Nominativas'}
     ];
     this.codePromotionals = [];
+    this.dateHourInit = '20:00';
+    this.dateHourFin = '21:00';
   }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    this.ifValidate();
+    if (this.ifValidate()) {
+      this.ticket = {
+        ballotHolder: this.transNorm.find(item => item.isSelect === true).name,
+        codes: this.codePromotionals,
+        dateFin: this.makeDate(this.dateFin, this.dateHourFin),
+        dateInit: this.makeDate(this.dateInit, this.dateHourInit),
+        description: this.description,
+        fastLine: this.fastLine,
+        infoExtra: this.infoExtra,
+        maxTicket: this.maxTicketNumber,
+        minTicket: this.minTicketNumber,
+        price: this.price,
+        priceDoor: this.priceDoor,
+        quantity: this.quantity,
+        status: this.status.find(item => item.isSelect === true).name
+      };
+      this.addTicket.emit(this.ticket);
+    }
+  }
+
+  makeDate(date, hour): Date {
+    const splitInitDate = date.split('-').map(x => Number.parseInt(x, 10));
+    const splitInitHour = hour.split(':').map(x => Number.parseInt(x, 10));
+    return new Date(splitInitDate[0], splitInitDate[1] - 1, splitInitDate[2], splitInitHour[0], splitInitHour[1], 0);
   }
 
   ifValidate(): boolean {
@@ -163,7 +191,7 @@ export class TicketTypeComponent implements OnInit {
   addCode(code: CodePromotional): void {
     this.isVisible = false;
     this.codePromotionals.push(code);
-    document.getElementById('divPromotionals').scrollIntoView({behavior: 'smooth', block: 'center'});
+    document.getElementById('divPromotionals').scrollIntoView({behavior: 'smooth', block: 'nearest'});
   }
 
   changeButton(state: Status, list: Status[], message: string): void {

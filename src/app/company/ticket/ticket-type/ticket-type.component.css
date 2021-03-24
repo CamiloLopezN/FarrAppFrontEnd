@@ -3,6 +3,10 @@
   background: #FAFAFA;
 }
 
+label, input, h5{
+  font-size: 0.95rem !important;
+}
+
 #PassRemember {
   color: #0089FF;
   font-style: italic;
@@ -49,4 +53,10 @@
 
 .checkbox-round:checked {
   background-color: gray;
+}
+
+.my-box {
+  -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
 }

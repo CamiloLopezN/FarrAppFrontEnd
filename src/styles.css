@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~animate.css/animate.min.css";
 
+.my-ticket-form{
+  font-size: 1.1rem !important;
+}
 
 #page-container {
   position: relative;
@@ -19,13 +22,8 @@
 }
 
 body {
-  background: white !important;
+  background: #2B2A30 !important;
   font-family: Raleway, serif !important;
-}
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
 }
 
 .btn-group {
@@ -106,7 +104,6 @@ html {
 
   .modal-dialog {
     width: 100%;
-    height: 100%;
     margin: 0;
     padding: 0;
   }
@@ -148,18 +145,6 @@ html {
 
 }
 
-
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .carousel .flickity-page-dots {
   bottom: -22px;

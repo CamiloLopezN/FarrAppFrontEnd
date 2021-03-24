@@ -1,0 +1,58 @@
+.icon {
+  color: black;
+  background: #FAFAFA;
+}
+
+#PassRemember {
+  color: #0089FF;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.my-form {
+  background: #FAFAFA;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+}
+
+.mybtn {
+  right: 10%;
+  outline: none;
+  border: none
+}
+
+.border-circ {
+  border-radius: 30px;
+}
+
+.my-btn {
+  color: #c2c5c8;
+  background: #FAFAFA;
+  box-shadow: none;
+}
+
+.checkbox-round {
+  width: 2.2em;
+  height: 2.2em;
+  background-color: white;
+  vertical-align: middle;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.checkbox-round:checked {
+  background-color: gray;
+}
+
+.my-box {
+  -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+}

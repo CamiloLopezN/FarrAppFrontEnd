@@ -60,3 +60,15 @@ export interface Ticket{
   status: string;
   info: string;
 }
+
+export interface Status{
+  name: string;
+  isSelect: boolean;
+}
+
+export interface CodePromotional{
+  code: string;
+  numberCanj: number;
+  discountType: string;
+  discountValue: number;
+}

@@ -42,6 +42,8 @@ import { EstablishmentComponent } from './company/establishment/establishment.co
 import { TicketTypeComponent } from './company/ticket/ticket-type/ticket-type.component';
 import { ListTicketComponent } from './company/ticket/list-ticket/list-ticket.component';
 import { CardTicketTypeComponent } from './company/ticket/card-ticket-type/card-ticket-type.component';
+import { CodePromotionalCardComponent } from './company/code/code-promotional-card/code-promotional-card.component';
+import { RegisterCodeComponent } from './company/code/register-code/register-code.component';
 
 
 @NgModule({
@@ -74,7 +76,9 @@ import { CardTicketTypeComponent } from './company/ticket/card-ticket-type/card-
     EstablishmentComponent,
     TicketTypeComponent,
     ListTicketComponent,
-    CardTicketTypeComponent
+    CardTicketTypeComponent,
+    CodePromotionalCardComponent,
+    RegisterCodeComponent
   ],
   imports: [
     BrowserModule,

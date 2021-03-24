@@ -1,8 +1,16 @@
 <div class="p-3" style="background: #f9f9f9">
-  <h5 class="font-weight-bolder" style="color: #36424a !important;">
+  <div class="align-middle">
+  <h5 class="font-weight-bolder mt-2 mb-4 float-left" style="color: #36424a !important;">
     Entradas
   </h5>
-  <div *ngFor="let ticket of tickets">
-    <app-card-ticket-type></app-card-ticket-type>
+  <button class="btn btn-success float-right" style="border-radius: 50%">
+    <fa-icon [icon]="faPlus"></fa-icon>
+  </button>
+  </div>
+  <div class="clearfix"></div>
+  <div *ngIf="tickets">
+    <div *ngFor="let ticket of tickets; index as i">
+      <app-card-ticket-type [ticket]="ticket" (onDelete)="removeTicket(i)"></app-card-ticket-type>
+    </div>
   </div>
 </div>

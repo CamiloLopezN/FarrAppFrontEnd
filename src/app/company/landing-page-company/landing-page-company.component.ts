@@ -18,9 +18,14 @@ export class LandingPageCompanyComponent implements OnInit {
   establishments: Establishment[];
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
+
+    const actualDate = new Date();
+    const day = actualDate.getDate();
+    const year = actualDate.getFullYear();
+    const month = actualDate.getMonth() + 1;
     this.events = [{
       city: 'Tunja',
-      date: new Date(),
+      date: `${year}-${month}-${day}`,
       hourFin: '21:00',
       hourInit: '19:00',
       img: 'https://cdn.pixabay.com/photo/2015/03/17/14/05/sparkler-677774_960_720.jpg',
@@ -28,7 +33,7 @@ export class LandingPageCompanyComponent implements OnInit {
     },
       {
         city: 'Villa de leyva',
-        date: new Date(),
+        date: `${year}-${month}-${day}`,
         hourFin: '21:00',
         hourInit: '19:00',
         img: 'https://cdn.pixabay.com/photo/2015/09/02/13/04/marriage-918864_960_720.jpg',

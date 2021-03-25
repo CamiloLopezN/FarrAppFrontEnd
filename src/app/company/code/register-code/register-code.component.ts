@@ -36,10 +36,10 @@ export class RegisterCodeComponent implements OnInit {
       this.messageDisTypeErr = 'Debes seleccionar el tipo de descuento';
     } else {
       this.codePromotional = {
-        discountValue: this.discountValue,
+        discountRate: this.discountValue,
         code: this.code,
         discountType: this.typeDescount.find(item => item.isSelect === true).name,
-        numberCanj: this.canjVal
+        ammountExchanges: this.canjVal
       };
       this.onAdd.emit(this.codePromotional);
     }

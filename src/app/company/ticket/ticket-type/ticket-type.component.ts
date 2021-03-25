@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {faChevronDown, faPlus, faChevronUp} from '@fortawesome/free-solid-svg-icons';
-import {CodePromotional, Status} from '../../../model/company';
+import {CodePromotional, Status, Ticket2} from '../../../model/company';
 
 @Component({
   selector: 'app-ticket-type',
@@ -8,6 +8,7 @@ import {CodePromotional, Status} from '../../../model/company';
   styleUrls: ['./ticket-type.component.css']
 })
 export class TicketTypeComponent implements OnInit {
+  ticket: Ticket2;
 
   price: number;
   quantity: number;
@@ -17,7 +18,7 @@ export class TicketTypeComponent implements OnInit {
   dateHourFin: string;
   description: string;
   priceDoor: number;
-  fastLine: boolean;
+  fastLine = false;
   statusStr: string;
   codePromotionals: CodePromotional[];
   maxTicketNumber: number;
@@ -38,6 +39,9 @@ export class TicketTypeComponent implements OnInit {
 
   isScroll = false;
 
+  @Output() public addTicket: EventEmitter<any> = new EventEmitter();
+  nameTicket: string;
+
   constructor() {
     this.status = [
       {isSelect: false, name: 'En venta'},
@@ -50,13 +54,40 @@ export class TicketTypeComponent implements OnInit {
       {isSelect: false, name: 'Nominativas'}
     ];
     this.codePromotionals = [];
+    this.dateHourInit = '20:00';
+    this.dateHourFin = '21:00';
   }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    this.ifValidate();
+    if (this.ifValidate()) {
+      this.ticket = {
+        transferable: this.transNorm[0].isSelect,
+        promotionalCode: this.codePromotionals,
+        endDateSale: this.makeDate(this.dateFin, this.dateHourFin),
+        startDateSale: this.makeDate(this.dateInit, this.dateHourInit),
+        description: this.description,
+        fastLine: this.fastLine,
+        otherInfo: this.infoExtra,
+        maxTicketPerTransfer: this.maxTicketNumber,
+        minTicketPerTransfer: this.minTicketNumber,
+        onlinePrice: this.price,
+        doorPrice: this.priceDoor,
+        amountEntries: this.quantity,
+        statusTicket: this.status.find(item => item.isSelect === true).name,
+        ticketName: this.nameTicket
+      };
+      console.log(this.fastLine);
+      this.addTicket.emit(this.ticket);
+    }
+  }
+
+  makeDate(date, hour): Date {
+    const splitInitDate = date.split('-').map(x => Number.parseInt(x, 10));
+    const splitInitHour = hour.split(':').map(x => Number.parseInt(x, 10));
+    return new Date(splitInitDate[0], splitInitDate[1] - 1, splitInitDate[2], splitInitHour[0], splitInitHour[1], 0);
   }
 
   ifValidate(): boolean {
@@ -163,7 +194,7 @@ export class TicketTypeComponent implements OnInit {
   addCode(code: CodePromotional): void {
     this.isVisible = false;
     this.codePromotionals.push(code);
-    document.getElementById('divPromotionals').scrollIntoView({behavior: 'smooth', block: 'center'});
+    document.getElementById('divPromotionals').scrollIntoView({behavior: 'smooth', block: 'nearest'});
   }
 
   changeButton(state: Status, list: Status[], message: string): void {

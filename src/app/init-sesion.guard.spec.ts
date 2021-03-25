@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InitSesionGuard } from './init-sesion.guard';
+import { InitSesionGuard} from './guards/init-sesion.guard';
 
 describe('InitSesionGuard', () => {
   let guard: InitSesionGuard;

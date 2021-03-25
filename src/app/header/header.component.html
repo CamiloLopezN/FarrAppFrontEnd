@@ -4,9 +4,9 @@
   </a>
   <div class="navbar-nav ml-auto d-none d-lg-inline">
     <a class="text-white mr-4" [routerLink]="['/register']">Eventos</a>
-    <a class="text-white mr-4" [routerLink]="['/register']" *ngIf="isLogged && rol=='company'">Publicar evento</a>
+    <a class="text-white mr-4" (click)="event()" *ngIf="isLogged && rol=='company'" style="cursor: pointer">Publicar evento</a>
     <a class="text-white mr-4" data-toggle="modal" data-target="#register-establishment-modal"
-       *ngIf="isLogged && rol=='company'" style="cursor: pointer">Agregar
+       *ngIf="isLogged && rol=='company'" style="cursor: pointer" (click)="event2()">Agregar
       establecimiento</a>
     <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#login-modal" *ngIf="!isLogged"
        (click)="authService.inLog.next(true)">Iniciar sesión</a>
@@ -67,9 +67,9 @@
       <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
       <button class="dropdown-item" type="button">Eventos</button>
       <button class="dropdown-item" type="button" (click)="user()">Editar perfil</button>
-      <button class="dropdown-item" type="button" *ngIf="isLogged && rol == 'company'">Publicar evento</button>
+      <button class="dropdown-item" type="button" (click)="event()" *ngIf="isLogged && rol=='company'" style="cursor: pointer">Publicar evento</button>
       <button class="dropdown-item" type="button" data-toggle="modal" data-target="#register-establishment-modal"
-              *ngIf="isLogged && rol == 'company'" style="cursor: pointer">Agregar establecimiento
+              *ngIf="isLogged && rol=='company'" style="cursor: pointer" (click)="event2()">Agregar establecimiento
       </button>
       <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal" data-target="#login-modal"
               (click)="authService.inLog.next(true)">Iniciar sesión

@@ -1,10 +1,23 @@
-<div class="pt-4 pb-4">
+<div class="my-box pt-4 pb-4">
   <form name="registerCLient" #formTicket="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
+
     <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="namTicket" class="h5">Nombre *</label>
+        <input type="text" class="form-control"
+               #namTicket="ngModel" name="namTicket" [(ngModel)]="nameTicket" id="namTicket" required>
+        <small id="nameHelp" class="form-text text-danger" *ngIf="!namTicket.valid && namTicket.touched">Debes ingresar
+          el nombre del ticket.</small>
+
+      </div>
+    </div>
+
+    <div class="form-row mt-2 text-left">
       <div class="form-group col">
         <label for="myprice" class="h5">Precio *</label>
         <input type="number" class="form-control"
                #pric="ngModel" name="pric" [(ngModel)]="price" id="myprice" required>
+        <small id="priceHelp3" class="form-text text-danger" *ngIf="price">{{price | currency}}</small>
         <small id="priceHelp" class="form-text text-danger" *ngIf="!pric.valid && pric.touched">Debes ingresar un número
           válido</small>
         <small id="priceHelp2" class="form-text text-danger"
@@ -71,9 +84,10 @@
 
     <div class="form-row mt-4 text-left">
       <div class="form-group col">
-        <label for="pricDoor" class="h5">Precio en la puerta *</label>
+        <label for="pricDoor" class="h5">Precio en puerta *</label>
         <input type="number" class="form-control"
                #pricDoor="ngModel" name="pricDoor" [(ngModel)]="priceDoor" id="pricDoor" required>
+        <small id="priceDoorHelp23" class="form-text text-danger" *ngIf="priceDoor">{{priceDoor | currency}}</small>
         <small id="priceDoorHelp" class="form-text text-danger" *ngIf="!pricDoor.valid && pricDoor.touched">Debes
           ingresar un número válido</small>
         <small id="priceDoorHelp2" class="form-text text-danger"

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {Establishment} from '../../model/company';
+import {Establishment} from '../../../model/company';
 
 declare var $: any;
 

@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {CompanyResponse, EstablishmentRegister} from '../model/company';
+import {CompanyResponse, EstablishmentRegister, EventRegister} from '../model/company';
 import {CompanyRegistration} from '../model/company';
 import {ClientAccount} from '../model/client';
 
@@ -61,6 +61,21 @@ export class CompanyService {
     img.forEach(photo => formData.append('photo', photo));
 
     return this.http.post<any>(`${environment.backend}/api/upload/establishment/photos`, formData, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postPhotosEvent(img: File[]): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const formData = new FormData();
+    img.forEach(photo => formData.append('photo', photo));
+
+    return this.http.post<any>(`${environment.backend}/api/upload/event/photos`, formData, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -134,4 +149,29 @@ export class CompanyService {
       );
   }
 
+  getEstablishment(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/company/establishments`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postEvent(event: EventRegister): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/company/event`, event, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

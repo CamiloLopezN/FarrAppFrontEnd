@@ -39,6 +39,10 @@
         <label for="disVal">Valor de descuento</label>
         <input type="number" class="form-control"
                #disVal="ngModel" name="disVal" [(ngModel)]="discountValue" id="disVal" required>
+        <small id="num-1" class="form-text text-danger"
+               *ngIf="typeDescount[0].isSelect && !typeDescount[1].isSelect && discountValue">{{discountValue / 100 | percent}}</small>
+        <small id="num-2" class="form-text text-danger"
+               *ngIf="!typeDescount[0].isSelect && typeDescount[1].isSelect && discountValue">{{discountValue | currency}}</small>
         <small id="disValHelp" class="form-text text-danger" *ngIf="!disVal.valid && disVal.touched">Debes ingresar un
           número válido.</small>
         <small id="disValHelp2" class="form-text text-danger"

@@ -1,8 +1,9 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {Ticket} from '../../../model/company';
+import {Component, Input, OnInit, Output} from '@angular/core';
+import {Ticket2} from '../../../model/company';
 
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {EventEmitter} from 'events';
+import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
+import {faChevronUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list-ticket',
@@ -14,28 +15,13 @@ export class ListTicketComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onDelete: EventEmitter<any> = new EventEmitter();
 
-  tickets: Ticket[];
-  faPlus = faPlus;
+  @Input() tickets: Ticket2[];
+  faChevronUp = faChevronUp;
+  faChevronDown = faChevronDown;
+  isVisible = false;
 
   constructor() {
-    this.tickets = [{
-      info: 'Acceso al recinto de concierto todos los días',
-      name: ' Abono general',
-      price: 61000,
-      status: 'Agotado'
-    },
-      {
-        info: 'Acceso al recinto de concierto todos los días',
-        name: ' Abono general',
-        price: 61000,
-        status: 'Agotado'
-      },
-      {
-        info: 'Acceso al recinto de concierto todos los días',
-        name: ' Abono general',
-        price: 61000,
-        status: 'En venta'
-      }];
+    this.tickets = [];
   }
 
   ngOnInit(): void {
@@ -45,4 +31,13 @@ export class ListTicketComponent implements OnInit {
     this.tickets.splice(index, 1);
   }
 
+  changeView(): void {
+    this.isVisible = true;
+  }
+
+  addTicket(ticket: Ticket2): void {
+    this.tickets.push(ticket);
+    this.isVisible = false;
+    document.getElementById('divTickets').scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }
 }

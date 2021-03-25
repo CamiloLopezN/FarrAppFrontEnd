@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {faClock} from '@fortawesome/free-solid-svg-icons';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import {EventC} from '../../model/company';
-import {getDateEvent} from '../../model/RelojTest';
+import {EventC} from '../../../model/company';
+import {getDateEvent} from '../../../model/RelojTest';
 
 @Component({
   selector: 'app-event',
@@ -24,7 +24,8 @@ export class EventComponent implements OnInit {
   }
 
   getDate(): string {
-    return getDateEvent(this.event.date);
+    const date = this.event.date.split('-').map(item => Number.parseInt(item, 10));
+    return getDateEvent(new Date(date[0], date[1] - 1, date[2]));
   }
 
 }

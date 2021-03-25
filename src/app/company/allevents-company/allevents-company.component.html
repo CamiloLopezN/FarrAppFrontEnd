@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="text-center pt-3">
-    <button class="btn my-btn text-white" [routerLink]="['/company/events']">
+    <button class="btn my-btn text-white" (click)="event()">
       <fa-icon [icon]="faCalendarPlus" size="3x">
       </fa-icon>
     </button>
@@ -30,17 +30,22 @@
       Crear evento
     </div>
   </div>
-  <div class="m-2 mt-3" *ngIf="eventsActive">
-    <app-events-company [events]="eventsActive" [tittle]="'Activos'" [index]="'0'" [typeEvent]="'¡Estos son tus eventos activos!'"></app-events-company>
+  <div class="m-2 mt-3" *ngIf="eventsActive.length != 0">
+    <app-events-company [events]="eventsActive" [tittle]="'Activos'" [index]="'0'"
+                        [typeEvent]="'¡Estos son tus eventos activos!'"></app-events-company>
   </div>
-  <div class="m-2 mt-5" *ngIf="eventsInactive">
-    <app-events-company [events]="eventsInactive" [tittle]="'Inactivos'" [index]="'1'" [typeEvent]="'¡Estos son tus eventos inactivos!'"></app-events-company>
+  <div class="m-2 mt-5" *ngIf="eventsInactive.length != 0">
+    <app-events-company [events]="eventsInactive" [tittle]="'Inactivos'" [index]="'1'"
+                        [typeEvent]="'¡Estos son tus eventos inactivos!'"></app-events-company>
   </div>
-  <div class="m-2 mt-5" *ngIf="eventsPostpone">
-    <app-events-company [events]="eventsPostpone" [tittle]="'Aplazados'" [index]="'2'" [typeEvent]="'¡Estos son tus eventos aplazados!'"></app-events-company>
+  <div class="m-2 mt-5" *ngIf="eventsPostpone.length != 0">
+    <app-events-company [events]="eventsPostpone" [tittle]="'Aplazados'" [index]="'2'"
+                        [typeEvent]="'¡Estos son tus eventos aplazados!'"></app-events-company>
   </div>
-  <div class="m-2 mt-5" *ngIf="eventsFinish">
-    <app-events-company [events]="eventsFinish" [tittle]="'Terminados'" [index]="'3'" [typeEvent]="'¡Estos son tus eventos finalizados!'"></app-events-company>
+  <div class="m-2 mt-5" *ngIf="eventsFinish.length != 0">
+    <app-events-company [events]="eventsFinish" [tittle]="'Terminados'" [index]="'3'"
+                        [typeEvent]="'¡Estos son tus eventos finalizados!'"></app-events-company>
   </div>
-  <div style="padding: 4vh"></div>
+  <div style="padding: 25vh"
+       *ngIf="eventsActive.length == 0 && eventsFinish.length == 0 && eventsPostpone.length == 0 && eventsInactive.length == 0"></div>
 </div>

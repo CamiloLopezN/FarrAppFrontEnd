@@ -1,9 +1,16 @@
-.card{
-  background: #fcfcfd;
+.card {
+  background: #FCFCFD;
   border-radius: 20px;
+  margin: 5px;
+  width: 15vw;
 }
 
-p{
+.card-img-top {
+  width: 15vw;
+  height: 7vw;
+}
+
+p {
   font-family: Lovelo, serif;
   font-style: normal;
   font-weight: 900;
@@ -15,23 +22,74 @@ p{
   color: rgba(37, 36, 39, 0.6);
 }
 
-.title-event{
+.like-event-like {
+  position: absolute;
+  background: #fefefe;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  top: 19.2vw;
+  right: 2vw;
+  width: 45px;
+  height: 45px;
+  transition: 0.2s;
+  outline: none;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
+}
+
+.like-event-like:hover {
+  color: red;
+}
+
+.title-event {
   font-style: normal;
   font-weight: 900;
-  font-size: 15px;
-  line-height: 18px;
+  font-size: 20px;
+  line-height: 23px;
 
   color: #252427;
 }
 
-.city-title{
+.city-title {
   font-style: normal;
   font-weight: 900;
-  font-size: 11px;
+  font-size: 15px;
   line-height: 13px;
-  color: rgba(174, 216, 229, 0.6);
+  color: rgba(174, 216, 229, 0.9);
 }
 
-.card-img-top{
-  border-radius: 20px 20px 0 0;
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 30vw;
+    margin: 3px;
+  }
+
+  .card-img-top {
+    width: 30vw;
+    height: 15vw;
+  }
+
+  .like-event-like {
+    top: 58.2vw;
+    right: 4vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 90vw;
+  }
+
+  .card-img-top {
+    width: 90vw;
+    height: 45vw;
+  }
+
+  .like-event-like {
+    top: 52.2vw;
+    right: 8vw;
+    width: 40px;
+    height: 40px;
+  }
+
 }

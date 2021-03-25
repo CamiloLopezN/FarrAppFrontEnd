@@ -54,7 +54,7 @@
     <app-events-company [events]="eventss" [typeEvent]="'¡Tus próximos eventos!'" [index]="'0'"
                         [tittle]="'Eventos'"></app-events-company>
   </div>
-  <div class="pt-5" *ngIf="establishments">
+  <div class="pt-5" *ngIf="establishments.length != 0">
     <app-establishments-company [establishments]="establishments"></app-establishments-company>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {CompanyResponse, Establishment, EventC, EventView} from '../../model/company';
+import {CompanyResponse, EstablishmentView, EventC, EventView} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
 import {AuthService} from '../../services/auth.service';
 import {faUser, faCalendarCheck, faBuilding} from '@fortawesome/free-solid-svg-icons';
@@ -16,41 +16,24 @@ export class LandingPageCompanyComponent implements OnInit {
   faBuilding = faBuilding;
   events: EventC[];
   eventss: EventView[];
-  establishments: Establishment[];
+  establishments: EstablishmentView[];
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
     this.eventss = [];
-    this.events = [];
+    this.establishments = [];
 
-    this.establishments = [{
-      address: 'Calle 11 N89 - 16',
-      name: 'El Atico',
-      img: 'https://cdn.pixabay.com/photo/2016/03/09/09/42/buildings-1245953_960_720.jpg'
-    }, {
-      address: 'Calle 11 N89 - 16',
-      name: 'La cava',
-      img: 'https://cdn.pixabay.com/photo/2015/05/15/14/55/cafe-768771_960_720.jpg'
-    }, {
-      address: 'Calle 11 N89 - 16',
-      name: 'El infiernito',
-      img: 'https://cdn.pixabay.com/photo/2016/03/09/09/42/buildings-1245953_960_720.jpg'
-    }, {
-      address: 'Calle 11 N89 - 16',
-      name: 'El Yefri',
-      img: 'https://cdn.pixabay.com/photo/2015/05/15/14/55/cafe-768771_960_720.jpg'
-    }];
   }
 
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.getCompany();
     this.getParcialEvents();
+    this.getEstablishments();
   }
 
   getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
         this.company = res.search;
-        console.log(res);
       },
       () => {
         this.authS.logoutExpired();
@@ -70,7 +53,14 @@ export class LandingPageCompanyComponent implements OnInit {
           photos: event.photos
         });
       });
-      console.log(this.eventss);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  private getEstablishments(): void {
+    this.companyS.getParcialEstablishment().subscribe(res => {
+      this.establishments = res;
     }, error => {
       console.log(error);
     });

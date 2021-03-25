@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {Establishment} from '../../../model/company';
+import {EstablishmentView} from '../../../model/company';
 
 declare var $: any;
 
@@ -10,7 +10,7 @@ declare var $: any;
 })
 export class EstablishmentsCompanyComponent implements OnInit {
 
-  @Input() establishments: Establishment[];
+  @Input() establishments: EstablishmentView[];
 
   constructor(private cdr: ChangeDetectorRef) {
   }
@@ -20,7 +20,6 @@ export class EstablishmentsCompanyComponent implements OnInit {
     document.querySelectorAll('.carousel-mine').forEach(() => {
       $('.carousel-mine').flickity({
         imagesLoaded: true,
-        percentPosition: false,
         groupCells: true,
         pageDots: false
       });

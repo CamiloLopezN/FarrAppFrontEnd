@@ -144,3 +144,10 @@ export interface Establishment2 {
   longitude: number;
   city: string;
 }
+
+export interface EstablishmentView {
+  _id: string;
+  address: string;
+  name: string;
+  photo: string[];
+}

@@ -50,6 +50,7 @@ import {EstablishmentsCompanyComponent} from './company/establishments/establish
 import {EstablishmentComponent} from './company/establishments/establishment/establishment.component';
 import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
 import { AllestablishmentCompanyComponent } from './company/establishments/allestablishment-company/allestablishment-company.component';
+import { EstablishmentPerfilComponent } from './company/establishments/establishment-perfil/establishment-perfil.component';
 
 
 @NgModule({
@@ -89,7 +90,8 @@ import { AllestablishmentCompanyComponent } from './company/establishments/alles
     CreateEventModalComponent,
     CreateEstablishmentModalComponent,
     EventVisualComponent,
-    AllestablishmentCompanyComponent
+    AllestablishmentCompanyComponent,
+    EstablishmentPerfilComponent
   ],
   imports: [
     BrowserModule,

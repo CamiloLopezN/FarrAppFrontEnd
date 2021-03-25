@@ -21,6 +21,7 @@ import {SecurityAdminComponent} from './admin/security-admin/security-admin.comp
 import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
 import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
 import {AllestablishmentCompanyComponent} from './company/establishments/allestablishment-company/allestablishment-company.component';
+import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,9 @@ const routes: Routes = [
   },
   {
     path: 'company/establishments', canActivate: [CompanySesionGuard], component: AllestablishmentCompanyComponent
+  },
+  {
+    path: 'company/establishments/:id', canActivate: [CompanySesionGuard], component: EstablishmentPerfilComponent
   },
   {
     path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent

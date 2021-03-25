@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white">
+        <button class="btn my-btn text-white" [routerLink]="['/company/establishments']">
           <fa-icon [icon]="faBuilding" size="3x">
           </fa-icon>
         </button>
@@ -57,4 +57,5 @@
   <div class="pt-5" *ngIf="establishments.length != 0">
     <app-establishments-company [establishments]="establishments"></app-establishments-company>
   </div>
+  <div *ngIf="establishments.length == 0 && eventss.length == 0" style="padding: 25vh"></div>
 </div>

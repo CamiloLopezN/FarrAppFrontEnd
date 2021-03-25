@@ -11,7 +11,9 @@ declare var $: any;
 export class EstablishmentsCompanyComponent implements OnInit {
 
   @Input() establishments: EstablishmentView[];
-
+  @Input() typeEstablishment: string;
+  @Input() tittle: string;
+  @Input() index: string;
   constructor(private cdr: ChangeDetectorRef) {
   }
 

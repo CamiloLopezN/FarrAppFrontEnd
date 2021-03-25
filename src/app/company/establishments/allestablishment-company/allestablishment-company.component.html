@@ -1,0 +1,44 @@
+<div style="background: white; animation-duration: 0.2s; overflow: hidden"
+     class="animate__animated animate__fadeInRight">
+  <div class="p-4 text-left">
+    <label class="name-company d-block mb-5 p-0">¡Tus Establecimientos!</label>
+    <div class="pt-2">
+      <label class="nit-company">Crea tus propias</label>
+    </div>
+    <div class="pl-5 pt-0">
+      <label class="options-label">OPCIONES</label>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <div style="padding-right: 8rem">
+      <div class="position-absolute info-company text-white">
+        <div class="options text-right">
+          <label class="title-top m-0 p-0">Establecimientos</label>
+          <h4 class="m-0 p-0">90</h4>
+          <label class="title-top m-0 p-0">Asistentes</label>
+          <h4 class="m-0 p-0">1200</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pt-3">
+    <button class="btn my-btn text-white" data-toggle="modal" data-target="#register-establishment-modal"
+            (click)="establishment()">
+      <fa-icon [icon]="faCalendarPlus" size="3x">
+      </fa-icon>
+    </button>
+    <div>
+      Crear Establecimento
+    </div>
+  </div>
+  <div class="m-2 mt-3" *ngIf="establishmentActive.length != 0">
+    <app-establishments-company [establishments]="establishmentActive" [tittle]="'Activos'" [index]="'0'"
+                                [typeEstablishment]="'¡Estos son tus establecimientos activos!'"></app-establishments-company>
+  </div>
+  <div class="m-2 mt-3" *ngIf="establishmentInactive.length != 0">
+    <app-establishments-company [establishments]="establishmentInactive" [tittle]="'Inactivos'" [index]="'1'"
+                                [typeEstablishment]="'¡Estos son tus establecimientos inactivos!'"></app-establishments-company>
+  </div>
+  <div style="padding: 25vh"
+       *ngIf="establishmentActive.length == 0 && establishmentInactive.length == 0"></div>
+</div>

@@ -49,6 +49,8 @@ import {EventComponent} from './company/events/event/event.component';
 import {EstablishmentsCompanyComponent} from './company/establishments/establishments-company/establishments-company.component';
 import {EstablishmentComponent} from './company/establishments/establishment/establishment.component';
 import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
+import { AllestablishmentCompanyComponent } from './company/establishments/allestablishment-company/allestablishment-company.component';
+import { EstablishmentPerfilComponent } from './company/establishments/establishment-perfil/establishment-perfil.component';
 
 
 @NgModule({
@@ -87,7 +89,9 @@ import {AlleventsCompanyComponent} from './company/allevents-company/allevents-c
     RegisterCodeComponent,
     CreateEventModalComponent,
     CreateEstablishmentModalComponent,
-    EventVisualComponent
+    EventVisualComponent,
+    AllestablishmentCompanyComponent,
+    EstablishmentPerfilComponent
   ],
   imports: [
     BrowserModule,

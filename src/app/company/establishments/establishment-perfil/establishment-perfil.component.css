@@ -1,0 +1,46 @@
+.my-img{
+  background: #FCFCFD;
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.25);
+  border-radius: 150px;
+}
+
+.typeEst{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 10px;
+  /* or 67% */
+
+  display: flex;
+  align-items: center;
+
+  color: rgba(37, 36, 39, 0.6);
+}
+
+.nameEvent{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 17px;
+  /* or 53% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #252427;
+
+}
+
+.category{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 10px;
+  /* identical to box height, or 67% */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}

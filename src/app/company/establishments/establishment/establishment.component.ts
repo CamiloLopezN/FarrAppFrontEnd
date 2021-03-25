@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Establishment} from '../../../model/company';
+import {EstablishmentView} from '../../../model/company';
 
 @Component({
   selector: 'app-establishment',
@@ -8,7 +8,7 @@ import {Establishment} from '../../../model/company';
 })
 export class EstablishmentComponent implements OnInit {
 
-  @Input() establishment: Establishment;
+  @Input() establishment: EstablishmentView;
 
   constructor() {
   }

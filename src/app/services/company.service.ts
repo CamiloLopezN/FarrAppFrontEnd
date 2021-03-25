@@ -161,6 +161,18 @@ export class CompanyService {
         })
       );
   }
+  getEstablishmentById(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/company/establishment?establishmentId=${id}`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 
   postEvent(event: EventRegister): Observable<any> {
     const headers = new HttpHeaders({
@@ -180,6 +192,19 @@ export class CompanyService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.get<any>(`${environment.backend}/api/company/events-cover`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getParcialEstablishment(): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/company/establishment-cover`, {headers})
       .pipe(
         map((res: any) => {
           return res;

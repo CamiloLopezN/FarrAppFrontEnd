@@ -3,16 +3,14 @@
 }
 
 .carousel-cell-mine {
-  width: 28%;
-  margin-left: 10px;
-  margin-right: 10px;
-  counter-increment: carousel-cell;
+  margin-right: 20px;
+  overflow: hidden;
 }
 
 .events{
   font-style: normal;
   font-weight: 500;
-  font-size: 35px;
+  font-size: 40px;
   line-height: 41px;
   color: #252427;
 }
@@ -20,7 +18,18 @@
 .events2{
   font-style: normal;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 23px;
   line-height: 21px;
   color: rgba(37, 36, 39, 0.6);
+}
+
+
+@media screen and (max-width: 1024px) {
+  .events{
+    font-size: 35px;
+  }
+
+  .events2{
+    font-size: 18px;
+  }
 }

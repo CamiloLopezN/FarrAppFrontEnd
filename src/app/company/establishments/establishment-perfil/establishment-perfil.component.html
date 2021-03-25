@@ -1,0 +1,22 @@
+<div style="background: white; animation-duration: 0.2s; overflow: hidden"
+     class="animate__animated animate__fadeInRight" *ngIf="establishment">
+  <div class="mb-3">
+    <img src="{{establishment.photo[0]}}" style="width: 100%; height: 205px" alt="logo">
+  </div>
+  <div class="m-3">
+    <img class="my-img float-left mr-4" src="{{establishment.logo}}" style="width: 115px; height: 115px" alt="logo">
+    <div *ngFor="let typeEst of establishment.typeEst">
+      <p class="typeEst">{{typeEst.name}}</p>
+    </div>
+    <div class="text-center">
+      <p class="nameEvent pl-3 mb-4">
+        {{establishment.name}}
+      </p>
+    </div>
+    <div>
+      <p class="category text-uppercase">
+        {{getCategories()}}
+      </p>
+    </div>
+  </div>
+</div>

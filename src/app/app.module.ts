@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ProfileClientComponent} from './client/profile-client/profile-client.component';
 import {DatePipe} from '@angular/common';
@@ -33,12 +33,10 @@ import {SecurityCompanyComponent} from './company/security-company/security-comp
 import {NgProgressHttpModule} from 'ngx-progressbar/http';
 import {NgProgressModule} from 'ngx-progressbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
 import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
 import {CreateEstablishmentModalComponent} from './company/create-establishment-modal/create-establishment-modal.component';
 import {AgmCoreModule} from '@agm/core';
 import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
-import { LandingPageCompanyComponent } from './company/landing-page-company/landing-page-company.component';
 import { EventsCompanyComponent } from './company/events/events-company/events-company.component';
 import { EventComponent } from './company/events/event/event.component';
 import { EstablishmentsCompanyComponent } from './company/establishments/establishments-company/establishments-company.component';
@@ -49,6 +47,7 @@ import { CardTicketTypeComponent } from './company/ticket/card-ticket-type/card-
 import { CodePromotionalCardComponent } from './company/code/code-promotional-card/code-promotional-card.component';
 import { RegisterCodeComponent } from './company/code/register-code/register-code.component';
 import { CreateEventModalComponent } from './company/events/create-event-modal/create-event-modal.component';
+import { EventVisualComponent } from './company/events/event-visual/event-visual.component';
 
 
 @NgModule({
@@ -84,14 +83,14 @@ import { CreateEventModalComponent } from './company/events/create-event-modal/c
     CardTicketTypeComponent,
     CodePromotionalCardComponent,
     RegisterCodeComponent,
-    CreateEventModalComponent
-    CreateEstablishmentModalComponent
+    CreateEventModalComponent,
+    CreateEstablishmentModalComponent,
+    EventVisualComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     FontAwesomeModule,
     HttpClientModule,
     NgxPaginationModule,

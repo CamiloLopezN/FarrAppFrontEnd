@@ -22,7 +22,7 @@ export class CardTicketTypeComponent implements OnInit {
   }
 
   disabled(): void {
-    if (this.ticket.status === 'Agotada') {
+    if (this.ticket.statusTicket === 'Agotada') {
       document.getElementById('div-ticket').style.background = '#fbfbfb';
     } else {
       document.getElementById('div-ticket').style.background = '#ffffff';

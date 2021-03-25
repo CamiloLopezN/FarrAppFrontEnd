@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 import {Ticket2} from '../../../model/company';
 
 import {EventEmitter} from 'events';
@@ -15,7 +15,7 @@ export class ListTicketComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onDelete: EventEmitter<any> = new EventEmitter();
 
-  tickets: Ticket2[];
+  @Input() tickets: Ticket2[];
   faChevronUp = faChevronUp;
   faChevronDown = faChevronDown;
   isVisible = false;
@@ -37,7 +37,6 @@ export class ListTicketComponent implements OnInit {
 
   addTicket(ticket: Ticket2): void {
     this.tickets.push(ticket);
-    console.log(ticket);
     this.isVisible = false;
     document.getElementById('divTickets').scrollIntoView({behavior: 'smooth', block: 'nearest'});
   }

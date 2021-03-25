@@ -91,3 +91,4 @@ export function getDateEvent(date: Date): string {
   // tslint:disable-next-line:max-line-length
   return dayNames[date.getDay()] + ', ' + date.getDate() + ' de ' + monthNames2[date.getMonth()];
 }
+

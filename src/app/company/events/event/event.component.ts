@@ -24,7 +24,8 @@ export class EventComponent implements OnInit {
   }
 
   getDate(): string {
-    return getDateEvent(this.event.date);
+    const date = this.event.date.split('-').map(item => Number.parseInt(item, 10));
+    return getDateEvent(new Date(date[0], date[1] - 1, date[2]));
   }
 
 }

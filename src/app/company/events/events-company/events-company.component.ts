@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {EventC} from '../../../model/company';
-import {getDateEvent} from '../../../model/RelojTest';
 
 declare const $: any;
 
@@ -43,10 +42,5 @@ export class EventsCompanyComponent implements OnInit {
     });
 
   }
-
-  getDate(event: EventC): string {
-    return getDateEvent(event.date);
-  }
-
 
 }

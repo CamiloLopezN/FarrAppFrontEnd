@@ -18,7 +18,7 @@ export class TicketTypeComponent implements OnInit {
   dateHourFin: string;
   description: string;
   priceDoor: number;
-  fastLine: boolean;
+  fastLine = false;
   statusStr: string;
   codePromotionals: CodePromotional[];
   maxTicketNumber: number;
@@ -40,6 +40,7 @@ export class TicketTypeComponent implements OnInit {
   isScroll = false;
 
   @Output() public addTicket: EventEmitter<any> = new EventEmitter();
+  nameTicket: string;
 
   constructor() {
     this.status = [
@@ -63,20 +64,22 @@ export class TicketTypeComponent implements OnInit {
   onSubmit(): void {
     if (this.ifValidate()) {
       this.ticket = {
-        ballotHolder: this.transNorm.find(item => item.isSelect === true).name,
-        codes: this.codePromotionals,
-        dateFin: this.makeDate(this.dateFin, this.dateHourFin),
-        dateInit: this.makeDate(this.dateInit, this.dateHourInit),
+        transferable: this.transNorm[0].isSelect,
+        promotionalCode: this.codePromotionals,
+        endDateSale: this.makeDate(this.dateFin, this.dateHourFin),
+        startDateSale: this.makeDate(this.dateInit, this.dateHourInit),
         description: this.description,
         fastLine: this.fastLine,
-        infoExtra: this.infoExtra,
-        maxTicket: this.maxTicketNumber,
-        minTicket: this.minTicketNumber,
-        price: this.price,
-        priceDoor: this.priceDoor,
-        quantity: this.quantity,
-        status: this.status.find(item => item.isSelect === true).name
+        otherInfo: this.infoExtra,
+        maxTicketPerTransfer: this.maxTicketNumber,
+        minTicketPerTransfer: this.minTicketNumber,
+        onlinePrice: this.price,
+        doorPrice: this.priceDoor,
+        amountEntries: this.quantity,
+        statusTicket: this.status.find(item => item.isSelect === true).name,
+        ticketName: this.nameTicket
       };
+      console.log(this.fastLine);
       this.addTicket.emit(this.ticket);
     }
   }

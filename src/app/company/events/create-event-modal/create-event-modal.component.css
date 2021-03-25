@@ -28,3 +28,8 @@
   background: #FAFAFA;
   box-shadow: none;
 }
+
+agm-map {
+  width: 100%;
+  height: 300px;
+}

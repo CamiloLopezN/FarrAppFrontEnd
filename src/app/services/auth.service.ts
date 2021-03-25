@@ -7,7 +7,6 @@ import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router} from '@angular/router';
 import {NotificationService} from './notification.service';
-import {ClientService} from './client.service';
 
 const helper = new JwtHelperService();
 
@@ -40,6 +39,10 @@ export class AuthService {
     return this.inReg.asObservable();
   }
 
+  get regComp(): Observable<boolean> {
+    return this.inRegCompany.asObservable();
+  }
+
   get roled(): Observable<string> {
     return this.role.asObservable();
   }
@@ -48,9 +51,6 @@ export class AuthService {
     return this.nameUser.asObservable();
   }
 
-  get regComp(): Observable<boolean> {
-    return this.inRegCompany.asObservable();
-  }
 
   saveToken(token: string): void {
     localStorage.setItem('token', token);
@@ -74,7 +74,7 @@ export class AuthService {
   login(client: ClientLogin): Observable<any> {
     return this.httpClient.post(`${environment.backend}/api/client/signin`, client).pipe(
       map((res: any) => {
-        if (res.token != undefined) {
+        if (res.token !== undefined) {
           this.saveToken(res.token);
           this.changeLogAndRole();
         }

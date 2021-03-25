@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {CompanyResponse, Establishment, EventC} from '../../model/company';
+import {CompanyResponse, Establishment, EventC, EventView} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
 import {AuthService} from '../../services/auth.service';
 import {faUser, faCalendarCheck, faBuilding} from '@fortawesome/free-solid-svg-icons';
@@ -15,9 +15,11 @@ export class LandingPageCompanyComponent implements OnInit {
   faCalendar = faCalendarCheck;
   faBuilding = faBuilding;
   events: EventC[];
+  eventss: EventView[];
   establishments: Establishment[];
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
+    this.eventss = [];
     this.events = [{
       id: '0',
       city: 'Tunja',
@@ -60,6 +62,7 @@ export class LandingPageCompanyComponent implements OnInit {
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.getCompany();
+    this.getParcialEvents();
   }
 
   getCompany(): void {
@@ -73,4 +76,21 @@ export class LandingPageCompanyComponent implements OnInit {
     );
   }
 
+  private getParcialEvents(): void {
+    this.companyS.getParcialEvents().subscribe(res => {
+      res.events.forEach(event => {
+        this.eventss.push({
+          startDate: new Date(event.startDate),
+          _id: event._id,
+          eventName: event.eventName,
+          city: event.city,
+          endDate: new Date(event.endDate),
+          photos: event.photos
+        });
+      });
+      console.log(this.eventss);
+    }, error => {
+      console.log(error);
+    });
+  }
 }

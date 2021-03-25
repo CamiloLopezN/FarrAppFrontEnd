@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, HostListener, Input, OnInit} from '@angular/core';
-import {EventC} from '../../model/company';
+import {EventView} from '../../model/company';
 
 declare const $: any;
 
@@ -12,7 +12,7 @@ declare const $: any;
 export class EventsCompanyComponent implements OnInit {
 
 
-  @Input() events: EventC[];
+  @Input() events: EventView[];
   @Input() typeEvent: string;
   @Input() tittle: string;
   @Input() index: string;

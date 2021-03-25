@@ -1,7 +1,7 @@
 <div class="card">
   <img class="card-img-top"
-       src="{{event.img}}" alt="Card image cap">
-  <button class="like-event-like" id="like{{event.id}}" (click)="like()" *ngIf="isClient == 'client' || isClient == 'norole'">
+       src="{{event.photos[0]}}" alt="Card image cap">
+  <button class="like-event-like" id="like{{event._id}}" (click)="like()" *ngIf="isClient == 'client' || isClient == 'norole'">
     <fa-icon [icon]="faLike"></fa-icon>
   </button>
   <div class="card-body">
@@ -12,12 +12,12 @@
       <div class="float-right">
         <p>
           <fa-icon [icon]="faClock"></fa-icon>
-          {{event.hourInit}} - {{event.hourFin}}</p>
+          {{event.startDate | date:'HH:mm'}} - {{event.endDate | date:'HH:mm'}}</p>
       </div>
       <div class="clearfix"></div>
     </div>
     <div>
-      <p class="title-event">{{event.name}}</p>
+      <p class="title-event">{{event.eventName}}</p>
     </div>
     <div>
       <label class="city-title">

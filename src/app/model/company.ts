@@ -49,6 +49,15 @@ export interface EventC {
   hourFin: string;
 }
 
+export interface EventView {
+  _id: string;
+  city: string;
+  eventName: string;
+  startDate: Date;
+  endDate: Date;
+  photos: string[];
+}
+
 export interface Establishment {
   name: string;
   address: string;

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {faClock, faHeartBroken} from '@fortawesome/free-solid-svg-icons';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import {EventC} from '../../model/company';
+import {EventView} from '../../model/company';
 import {getDateEvent} from '../../model/RelojTest';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {AuthService} from '../../services/auth.service';
@@ -21,7 +21,7 @@ export class EventComponent implements OnInit {
   faLike = faHeart;
   faDislike = faHeartBroken;
 
-  @Input() event: EventC;
+  @Input() event: EventView;
   isLike = false;
   isClient: string;
 
@@ -35,23 +35,27 @@ export class EventComponent implements OnInit {
   }
 
   getDate(): string {
-    return getDateEvent(this.event.date);
+    return getDateEvent(this.event.startDate);
   }
 
   like(): void {
     if (this.isClient !== 'norole') {
       if (!this.isLike) {
-        document.getElementById('like' + this.event.id).style.color = 'red';
-        this.ns.succesFavorite(this.event.name);
+        document.getElementById('like' + this.event._id).style.color = 'red';
+        this.ns.succesFavorite(this.event.eventName);
       } else {
-        document.getElementById('like' + this.event.id).style.color = 'black';
-        this.ns.succesNotFavorite(this.event.name);
+        document.getElementById('like' + this.event._id).style.color = 'black';
+        this.ns.succesNotFavorite(this.event.eventName);
       }
       this.isLike = !this.isLike;
     } else {
       this.authService.inLog.next(true);
       $('#login-modal').modal('show');
     }
+  }
+
+  getHour(date: Date): string {
+    return `${date.getHours()}:${date.getMinutes()}`;
   }
 
 }

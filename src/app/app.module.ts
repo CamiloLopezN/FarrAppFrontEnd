@@ -33,21 +33,22 @@ import {SecurityCompanyComponent} from './company/security-company/security-comp
 import {NgProgressHttpModule} from 'ngx-progressbar/http';
 import {NgProgressModule} from 'ngx-progressbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
 import {CreateEstablishmentModalComponent} from './company/create-establishment-modal/create-establishment-modal.component';
 import {AgmCoreModule} from '@agm/core';
-import { SecurityAdminComponent } from './admin/security-admin/security-admin.component';
-import { EventsCompanyComponent } from './company/events/events-company/events-company.component';
-import { EventComponent } from './company/events/event/event.component';
-import { EstablishmentsCompanyComponent } from './company/establishments/establishments-company/establishments-company.component';
-import { EstablishmentComponent } from './company/establishments/establishment/establishment.component';
-import { TicketTypeComponent } from './company/ticket/ticket-type/ticket-type.component';
-import { ListTicketComponent } from './company/ticket/list-ticket/list-ticket.component';
-import { CardTicketTypeComponent } from './company/ticket/card-ticket-type/card-ticket-type.component';
-import { CodePromotionalCardComponent } from './company/code/code-promotional-card/code-promotional-card.component';
-import { RegisterCodeComponent } from './company/code/register-code/register-code.component';
-import { CreateEventModalComponent } from './company/events/create-event-modal/create-event-modal.component';
-import { EventVisualComponent } from './company/events/event-visual/event-visual.component';
+import {SecurityAdminComponent} from './admin/security-admin/security-admin.component';
+import {TicketTypeComponent} from './company/ticket/ticket-type/ticket-type.component';
+import {ListTicketComponent} from './company/ticket/list-ticket/list-ticket.component';
+import {CardTicketTypeComponent} from './company/ticket/card-ticket-type/card-ticket-type.component';
+import {CodePromotionalCardComponent} from './company/code/code-promotional-card/code-promotional-card.component';
+import {RegisterCodeComponent} from './company/code/register-code/register-code.component';
+import {CreateEventModalComponent} from './company/events/create-event-modal/create-event-modal.component';
+import {EventVisualComponent} from './company/events/event-visual/event-visual.component';
+import {LandingPageCompanyComponent} from './company/landing-page-company/landing-page-company.component';
+import {EventsCompanyComponent} from './company/events/events-company/events-company.component';
+import {EventComponent} from './company/events/event/event.component';
+import {EstablishmentsCompanyComponent} from './company/establishments/establishments-company/establishments-company.component';
+import {EstablishmentComponent} from './company/establishments/establishment/establishment.component';
+import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { EventVisualComponent } from './company/events/event-visual/event-visual
     EventComponent,
     EstablishmentsCompanyComponent,
     EstablishmentComponent,
+    AlleventsCompanyComponent,
     TicketTypeComponent,
     ListTicketComponent,
     CardTicketTypeComponent,

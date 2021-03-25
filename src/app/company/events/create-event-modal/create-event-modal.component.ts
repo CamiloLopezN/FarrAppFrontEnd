@@ -168,7 +168,7 @@ export class CreateEventModalComponent implements OnInit {
         status: this.statusEvent.find(item => item.isSelect === true).name
       };
 
-      this.comps.postPhotosEvent(this.imgs.map(myimg => myimg.imgFile[0])).subscribe(res => {
+      this.comps.postPhotosEvent(this.imgs.map(myimg => myimg.imgFile)).subscribe(res => {
         this.eventReg.photos = res.map(photoObj => photoObj.photo);
       }, error => {
         console.log(error);
@@ -365,7 +365,7 @@ export class CreateEventModalComponent implements OnInit {
       imgURL = reader.result;
       this.eventC.img = imgURL;
       this.imgs.push({
-        imgFile: imgP,
+        imgFile: imgP[0],
         imgUrl: imgURL
       });
     };

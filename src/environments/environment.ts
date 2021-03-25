@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend: 'https://farrapp-backend-stage.herokuapp.com'
+  backend: 'http://localhost:4000'
 };
 
 /*

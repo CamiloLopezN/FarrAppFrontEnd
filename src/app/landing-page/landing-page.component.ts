@@ -1,6 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-
-declare var $: any;
+import {EventC} from '../model/company';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,15 +10,14 @@ export class LandingPageComponent implements OnInit {
 
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
   prevScrollpos = window.pageYOffset;
+  events: EventC[];
 
   constructor() {
+    this.events = [];
   }
 
+
   ngOnInit(): void {
-    $('.carousel').carousel({
-      interval: 6000,
-      pause: false
-    });
   }
 
 
@@ -34,4 +32,7 @@ export class LandingPageComponent implements OnInit {
     this.prevScrollpos = currentScrollPos;
   }
 
+  scroll(target: HTMLDivElement): void {
+    target.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
 }

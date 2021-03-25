@@ -195,7 +195,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
     }
 
     const reader = new FileReader();
-    this.imagePath = files;
+    this.imagePath = files[0];
     reader.readAsDataURL(files[0]);
     // tslint:disable-next-line:variable-name
     reader.onload = (_event) => {
@@ -230,7 +230,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
     reader.onload = (_event) => {
       imgURL = reader.result;
       this.images.push({
-        imgFile: imgP,
+        imgFile: imgP[0],
         imgUrl: imgURL
       });
     };
@@ -277,12 +277,12 @@ export class CreateEstablishmentModalComponent implements OnInit {
         photo: []
       };
 
-      this.companyService.postLogo(this.imagePath[0]).subscribe(res => {
+      this.companyService.postLogo(this.imagePath).subscribe(res => {
         this.establishmentR.logo = res.logo;
       }, error => {
         console.log(error);
       }, () => {
-        this.companyService.postPhotos(this.images.map(myimg => myimg.imgFile[0])).subscribe(res => {
+        this.companyService.postPhotos(this.images.map(myimg => myimg.imgFile)).subscribe(res => {
           this.establishmentR.photo = res.map(photoObj => photoObj.photo);
         }, error => {
           console.log(error);

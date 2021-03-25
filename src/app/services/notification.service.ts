@@ -135,24 +135,6 @@ export class NotificationService {
     });
   }
 
-  nitExist(): void {
-    this.nService.warn('Estado del NIT', '¡El NIT ingresado esta enlazado a una cuenta existente!', {
-      timeOut: 3000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
-  }
-
-  succesCreateCompany(): void {
-    this.nService.success('Estado de la empresa', '¡Se ha registrado tu petición correctamente!', {
-      timeOut: 3000,
-      showProgressBar: true,
-      pauseOnHover: true,
-      clickToClose: true
-    });
-  }
-
   succesRegisterClient(): void {
     this.nService.success('Estado del cliente', '¡Se ha creado el cliente correctamente!', {
       timeOut: 3000,
@@ -184,6 +166,24 @@ export class NotificationService {
     this.nService.success('Estado del administrador', '¡Se ha registrado la cuenta de administrador correctamente!', {
       timeOut: 3000,
       showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesFavorite(tittleEvent): void {
+    this.nService.success(tittleEvent, 'Añadido a favoritos', {
+      timeOut: 2000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  succesNotFavorite(tittleEvent): void {
+    this.nService.error(tittleEvent, 'Eliminado de favoritos', {
+      timeOut: 2000,
+      showProgressBar: false,
       pauseOnHover: true,
       clickToClose: true
     });

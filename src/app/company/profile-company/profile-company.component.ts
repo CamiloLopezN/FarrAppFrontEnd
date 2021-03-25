@@ -13,7 +13,6 @@ import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
 export class ProfileCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
-  private _id: string;
   faExclamationTriangle = faExclamationTriangle;
 
   constructor(
@@ -30,7 +29,7 @@ export class ProfileCompanyComponent implements OnInit {
     this.getCompany();
   }
 
-  removeCompany() {
+  removeCompany(): void {
     this.companyS.removeUser().subscribe(() => {
         this.authS.logoutSessionDesact();
       },
@@ -45,7 +44,7 @@ export class ProfileCompanyComponent implements OnInit {
 
   private getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-        this.company = res;
+        this.company = res.search;
       },
       () => {
         this.authS.logoutExpired();

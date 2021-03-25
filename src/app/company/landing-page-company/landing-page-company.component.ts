@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {CompanyResponse, Establishment, EventC} from '../../model/company';
+import {CompanyResponse, Establishment, EventC, EventView} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
 import {AuthService} from '../../services/auth.service';
 import {faUser, faCalendarCheck, faBuilding} from '@fortawesome/free-solid-svg-icons';
@@ -15,31 +15,12 @@ export class LandingPageCompanyComponent implements OnInit {
   faCalendar = faCalendarCheck;
   faBuilding = faBuilding;
   events: EventC[];
+  eventss: EventView[];
   establishments: Establishment[];
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
-
-    const actualDate = new Date();
-    const day = actualDate.getDate();
-    const year = actualDate.getFullYear();
-    const month = actualDate.getMonth() + 1;
-    this.events = [{
-      city: 'Tunja',
-      date: `${year}-${month}-${day}`,
-      hourFin: '21:00',
-      hourInit: '19:00',
-      img: 'https://cdn.pixabay.com/photo/2015/03/17/14/05/sparkler-677774_960_720.jpg',
-      name: 'Fiesta fin de semestre'
-    },
-      {
-        city: 'Villa de leyva',
-        date: `${year}-${month}-${day}`,
-        hourFin: '21:00',
-        hourInit: '19:00',
-        img: 'https://cdn.pixabay.com/photo/2015/09/02/13/04/marriage-918864_960_720.jpg',
-        name: 'Saturday Night Party'
-      }
-    ];
+    this.eventss = [];
+    this.events = [];
 
     this.establishments = [{
       address: 'Calle 11 N89 - 16',
@@ -63,11 +44,13 @@ export class LandingPageCompanyComponent implements OnInit {
   ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.getCompany();
+    this.getParcialEvents();
   }
 
   getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-        this.company = res;
+        this.company = res.search;
+        console.log(res);
       },
       () => {
         this.authS.logoutExpired();
@@ -75,4 +58,21 @@ export class LandingPageCompanyComponent implements OnInit {
     );
   }
 
+  private getParcialEvents(): void {
+    this.companyS.getParcialEvents().subscribe(res => {
+      res.events.forEach(event => {
+        this.eventss.push({
+          startDate: new Date(event.startDate),
+          _id: event._id,
+          eventName: event.eventName,
+          city: event.city,
+          endDate: new Date(event.endDate),
+          photos: event.photos
+        });
+      });
+      console.log(this.eventss);
+    }, error => {
+      console.log(error);
+    });
+  }
 }

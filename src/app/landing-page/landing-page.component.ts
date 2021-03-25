@@ -13,52 +13,7 @@ export class LandingPageComponent implements OnInit {
   events: EventC[];
 
   constructor() {
-    this.events = [{
-      id: '0',
-      city: 'Tunja',
-      date: new Date(),
-      hourFin: '21:00',
-      hourInit: '19:00',
-      img: 'https://cdn.pixabay.com/photo/2015/03/17/14/05/sparkler-677774_960_720.jpg',
-      name: 'Fiesta fin de semestre'
-    },
-      {
-        id: '1',
-        city: 'Villa de leyva',
-        date: new Date(),
-        hourFin: '21:00',
-        hourInit: '19:00',
-        img: 'https://cdn.pixabay.com/photo/2015/09/02/13/04/marriage-918864_960_720.jpg',
-        name: 'Saturday Night Party'
-      },
-      {
-        id: '2',
-        city: 'Villa de leyva',
-        date: new Date(),
-        hourFin: '21:00',
-        hourInit: '19:00',
-        img: 'https://cdn.pixabay.com/photo/2015/09/02/13/04/marriage-918864_960_720.jpg',
-        name: 'Saturday Night Party'
-      },
-      {
-        id: '3',
-        city: 'Villa de leyva',
-        date: new Date(),
-        hourFin: '21:00',
-        hourInit: '19:00',
-        img: 'https://cdn.pixabay.com/photo/2015/09/02/13/04/marriage-918864_960_720.jpg',
-        name: 'Saturday Night Party'
-      },
-      {
-        id: '4',
-        city: 'Villa de leyva',
-        date: new Date(),
-        hourFin: '21:00',
-        hourInit: '19:00',
-        img: 'https://cdn.pixabay.com/photo/2015/09/02/13/04/marriage-918864_960_720.jpg',
-        name: 'Saturday Night Party'
-      }
-    ];
+    this.events = [];
   }
 
 

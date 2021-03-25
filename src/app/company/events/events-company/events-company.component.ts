@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, HostListener, Input, OnInit} from '@angular/core';
-import {EventView} from '../../model/company';
+import {EventView} from '../../../model/company';
 
 declare const $: any;
 

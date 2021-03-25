@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {faClock, faHeartBroken} from '@fortawesome/free-solid-svg-icons';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import {EventView} from '../../model/company';
-import {getDateEvent} from '../../model/RelojTest';
+import {EventView} from '../../../model/company';
+import {getDateEvent} from '../../../model/RelojTest';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
-import {AuthService} from '../../services/auth.service';
-import {NotificationService} from '../../services/notification.service';
+import {AuthService} from '../../../services/auth.service';
+import {NotificationService} from '../../../services/notification.service';
 
 declare var $: any;
 

@@ -69,7 +69,7 @@ export interface Category {
 }
 
 export interface Img {
-  imgFile: FileList;
+  imgFile: File;
   imgUrl: string | ArrayBuffer;
 }
 

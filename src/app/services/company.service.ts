@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {CompanyResponse} from '../model/company';
+import {CompanyResponse, EstablishmentRegister, EventRegister} from '../model/company';
 import {CompanyRegistration} from '../model/company';
 import {ClientAccount} from '../model/client';
 
@@ -30,6 +30,52 @@ export class CompanyService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.get<any>(`${environment.backend}/api/company/profile`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postLogo(img: File): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    const formData = new FormData();
+    formData.append('logo', img);
+
+    return this.http.post<any>(`${environment.backend}/api/upload/establishment/logo`, formData, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postPhotos(img: File[]): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const formData = new FormData();
+    img.forEach(photo => formData.append('photo', photo));
+
+    return this.http.post<any>(`${environment.backend}/api/upload/establishment/photos`, formData, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postPhotosEvent(img: File[]): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const formData = new FormData();
+    img.forEach(photo => formData.append('photo', photo));
+
+    return this.http.post<any>(`${environment.backend}/api/upload/event/photos`, formData, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -90,6 +136,44 @@ export class CompanyService {
       );
   }
 
+  postEstablishment(establishment: EstablishmentRegister): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/company/establishment`, establishment, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getEstablishment(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/company/establishments`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postEvent(event: EventRegister): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/company/event`, event, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
   getParcialEvents(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',

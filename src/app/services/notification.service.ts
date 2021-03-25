@@ -188,4 +188,31 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesEstablishmentCreated(): void {
+    this.nService.success('Estado del establecimiento', '¡Se ha registrado el establecimiento correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  warnNotEstablishment(): void {
+    this.nService.warn('¡Advertencia!', 'Debes tener mínimo un establecimiento para crear un evento', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  sucessRegisterEvent(): void {
+    this.nService.success('Estado del evento', '¡Se ha registrado el evento correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

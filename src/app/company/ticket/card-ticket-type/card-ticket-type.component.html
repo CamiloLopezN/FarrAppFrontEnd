@@ -1,0 +1,41 @@
+<div class="p-3 mb-5 my-box" style="cursor:pointer;background: #fbfbfb;color: #b8bcbe" *ngIf="ticket.statusTicket=='Agotada'">
+  <p class="float-right">
+    <b>
+      <del><em>{{ticket.onlinePrice | currency}}</em></del>
+    </b>
+  </p>
+  <p class="text-uppercase mb-0">
+    <b>{{ticket.ticketName}}</b>
+  </p>
+  <p style="color: #f1b2b2">
+    <b><em>{{ticket.statusTicket}}</em></b>
+  </p>
+  <p>{{ticket.description}}</p>
+  <div class="clearfix"></div>
+  <button class="btn btn-danger float-right ml-2" style="border-radius: 50%" (click)="deleted()">
+    <fa-icon [icon]="faMinus"></fa-icon>
+  </button>
+  <button class="btn btn-secondary float-right" style="border-radius: 50%">
+    <fa-icon [icon]="faPen"></fa-icon>
+  </button>
+</div>
+
+<div class="p-3 mb-5 my-box" style="cursor:pointer;background: #ffffff;" *ngIf="ticket.statusTicket!='Agotada'">
+  <p class="float-right">
+    <b>{{ticket.onlinePrice | currency}}</b>
+  </p>
+  <p class="text-uppercase mb-0">
+    <b>{{ticket.ticketName}}</b>
+  </p>
+  <p>
+    <b>{{ticket.statusTicket}}</b>
+  </p>
+  <p>{{ticket.otherInfo}}</p>
+  <div class="clearfix"></div>
+  <button class="btn btn-danger float-right ml-2" style="border-radius: 50%" (click)="deleted()">
+    <fa-icon [icon]="faMinus"></fa-icon>
+  </button>
+  <button class="btn btn-secondary float-right" style="border-radius: 50%">
+    <fa-icon [icon]="faPen"></fa-icon>
+  </button>
+</div>

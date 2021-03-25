@@ -11,6 +11,11 @@ import {
 import {ClientService} from '../services/client.service';
 import {Router} from '@angular/router';
 import {faEllipsisV} from '@fortawesome/free-solid-svg-icons/';
+import {CompanyService} from '../services/company.service';
+import {NotificationService} from '../services/notification.service';
+import {IsShowModalService} from '../services/is-show-modal.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-header',
@@ -32,7 +37,10 @@ export class HeaderComponent implements OnInit {
   faKey = faKey;
   faUsersCog = faUsersCog;
 
-  constructor(public authService: AuthService, private clientS: ClientService, private router: Router) {
+  constructor(public authService: AuthService, private ns: NotificationService,
+              private clientS: ClientService, private router: Router, private compS: CompanyService,
+              public serviceShow: IsShowModalService
+  ) {
   }
 
   ngOnInit(): void {
@@ -87,5 +95,25 @@ export class HeaderComponent implements OnInit {
     } else if (this.rol === 'superAdmin') {
       this.router.navigate(['/admin/landing-page']);
     }
+  }
+
+  event(): void {
+    this.serviceShow.isEvent.next(true);
+    this.compS.getEstablishment().subscribe(res => {
+      if (res.establishments.length !== 0) {
+        $('#register-event-modal').modal('show');
+        this.serviceShow.isEstablishment.next(false);
+      } else {
+        this.serviceShow.isEvent.next(false);
+        this.ns.warnNotEstablishment();
+      }
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  event2(): void {
+    this.serviceShow.isEstablishment.next(true);
+    this.serviceShow.isEvent.next(false);
   }
 }

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminSesionGuard } from './admin-sesion.guard';
+import {AdminSesionGuard} from './guards/admin-sesion.guard';
 
 describe('AdminSesionGuard', () => {
   let guard: AdminSesionGuard;

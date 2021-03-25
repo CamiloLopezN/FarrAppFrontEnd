@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Establishment} from '../../model/company';
+import {Establishment} from '../../../model/company';
 
 @Component({
   selector: 'app-establishment',

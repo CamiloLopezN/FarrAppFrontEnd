@@ -40,11 +40,10 @@ export interface CompanyResponseAdmin2 {
 }
 
 export interface EventC {
-  id: string;
-  date: Date;
+  date: string;
   name: string;
   city: string;
-  img: string;
+  img: string | ArrayBuffer;
   hourInit: string;
   hourFin: string;
 }
@@ -62,4 +61,86 @@ export interface Establishment {
   name: string;
   address: string;
   img: string;
+}
+
+export interface Category {
+  name: string;
+  select: boolean;
+}
+
+export interface Img {
+  imgFile: FileList;
+  imgUrl: string | ArrayBuffer;
+}
+
+export interface Ticket2 {
+  ticketName: string;
+  onlinePrice: number;
+  amountEntries: number;
+  startDateSale: Date;
+  endDateSale: Date;
+  description: string;
+  doorPrice: number;
+  fastLine: boolean;
+  statusTicket: string;
+  promotionalCode: CodePromotional[];
+  maxTicketPerTransfer: number;
+  minTicketPerTransfer: number;
+  transferable: boolean;
+  otherInfo: string;
+}
+
+export interface EstablishmentRegister {
+  typeEstablishment: string[];
+  categories: string [];
+  name: string;
+  logo: string;
+  description: string;
+  photo: string[];
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+  capacity: number;
+}
+
+export interface EventRegister {
+  eventName: string;
+  sDate: Date;
+  eDate: Date;
+  photos: string[];
+  eventCategory: string[];
+  description: string;
+  dresCode: string[];
+  minAge: number;
+  establishmentId: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  capacity: number;
+  city: string;
+  tickets: Ticket2[];
+  status: string;
+}
+
+export interface Status {
+  name: string;
+  isSelect: boolean;
+}
+
+export interface CodePromotional {
+  code: string;
+  ammountExchanges: number;
+  discountType: string;
+  discountRate: number;
+}
+
+export interface Establishment2 {
+  _id: string;
+  address: string;
+  name: string;
+  photo: string[];
+  latitude: number;
+  longitude: number;
+  city: string;
 }

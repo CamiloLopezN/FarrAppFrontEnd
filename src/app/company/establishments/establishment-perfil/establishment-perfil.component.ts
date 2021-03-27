@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CompanyService} from '../../../services/company.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {EventView} from '../../../model/company';
-import {faHeart} from '@fortawesome/free-solid-svg-icons';
+import {faHeart, faStar as fs} from '@fortawesome/free-solid-svg-icons';
+import {faStar} from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-establishment-perfil',
@@ -14,8 +15,10 @@ export class EstablishmentPerfilComponent implements OnInit {
   establishment: any;
   uncomingEvents: EventView[];
   terminatedEvents: EventView[];
-
   faHearth = faHeart;
+  faStartSolid = fs;
+  faStart = faStar;
+
   constructor(private compS: CompanyService, private route: ActivatedRoute) {
   }
 

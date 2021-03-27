@@ -27,7 +27,7 @@ export class EventsCompanyComponent implements OnInit {
   @HostListener('window:resize', [])
   private onResize(): void {
     this.cdr.detectChanges();
-    if (screen.width <= 1080) {
+    if (screen.width <= 480) {
       document.querySelectorAll('.carousel' + this.index).forEach(() => {
         const $carousel = $('.carousel' + this.index).flickity({
           imagesLoaded: true,

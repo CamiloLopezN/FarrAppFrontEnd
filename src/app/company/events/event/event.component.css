@@ -1,12 +1,18 @@
 .card {
   background: #FCFCFD;
   border-radius: 20px;
-  margin: 3px;
-  width: 31vw;
+  margin: 5px;
+  width: 350px;
+  height: auto;
 }
 
 .card-img-top {
-  width: 31vw;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+
 }
 
 p {
@@ -57,28 +63,13 @@ p {
   color: rgba(174, 216, 229, 0.9);
 }
 
-@media screen and (max-width: 1024px) {
-  .card {
-    width: 93vw;
-  }
-
-  .card-img-top {
-    width: 93vw;
-  }
-
-  .like-event-like {
-    top: 58.2vw;
-    right: 4vw;
-  }
-}
-
 @media screen and (max-width: 480px) {
   .card {
-    width: 90vw;
+    width: 88vw;
   }
 
   .card-img-top {
-    width: 90vw;
+    width: 88vw;
   }
 
   .like-event-like {

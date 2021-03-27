@@ -5,18 +5,50 @@
   </div>
   <div class="m-3">
     <img class="my-img float-left mr-4" src="{{establishment.logo}}" style="width: 115px; height: 115px" alt="logo">
-    <div *ngFor="let typeEst of establishment.typeEst">
-      <p class="typeEst">{{typeEst.name}}</p>
-    </div>
+    <p class="typeEst">{{getTypes()}}</p>
     <div class="text-center">
-      <p class="nameEvent pl-3 mb-4">
+      <p class="nameEvent mb-4">
         {{establishment.name}}
       </p>
     </div>
-    <div>
+    <div class="text-center">
       <p class="category text-uppercase">
         {{getCategories()}}
       </p>
     </div>
+    <div class="clearfix"></div>
   </div>
+  <div class="text-center description">
+    <p>{{establishment.description}}</p>
+  </div>
+  <div class="my-map" style="padding-left: 35vw">
+    <agm-map [latitude]="establishment.latitude" [longitude]="establishment.longitude" [zoom]="14">
+      <agm-marker [latitude]="establishment.latitude" [longitude]="establishment.longitude">
+        <agm-info-window>{{establishment.name}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+  </div>
+  <div class="p-4"></div>
+  <div *ngIf="uncomingEvents.length != 0">
+    <div class="ml-4">
+      <p class="event-font">¡Próximos eventos!</p>
+    </div>
+    <div class="mr-4 ml-4 dropdown-divider" style="border: 1px solid #000000;"></div>
+    <div class="pl-2 pr-2 pt-3">
+      <app-events-company [events]="uncomingEvents" [typeEvent]="''" [index]="'0'"
+                          [tittle]="''"></app-events-company>
+    </div>
+  </div>
+  <div class="p-4"></div>
+  <div *ngIf="terminatedEvents.length != 0">
+    <div class="ml-4">
+      <p class="event-font">Eventos pasados</p>
+    </div>
+    <div class="mr-4 ml-4 dropdown-divider" style="border: 1px solid #000000;"></div>
+    <div class="pl-2 pr-2 pt-3">
+      <app-events-company [events]="uncomingEvents" [typeEvent]="''" [index]="'0'"
+                          [tittle]="''"></app-events-company>
+    </div>
+  </div>
+
 </div>

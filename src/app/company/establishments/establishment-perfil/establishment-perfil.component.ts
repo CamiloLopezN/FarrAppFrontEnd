@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CompanyService} from '../../../services/company.service';
 import {ActivatedRoute, Params} from '@angular/router';
+import {EventView} from '../../../model/company';
+import {faHeart} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-establishment-perfil',
@@ -10,11 +12,16 @@ import {ActivatedRoute, Params} from '@angular/router';
 export class EstablishmentPerfilComponent implements OnInit {
 
   establishment: any;
+  uncomingEvents: EventView[];
+  terminatedEvents: EventView[];
 
+  faHearth = faHeart;
   constructor(private compS: CompanyService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.uncomingEvents = [];
+    this.terminatedEvents = [];
     this.getEstablishment();
   }
 
@@ -23,7 +30,27 @@ export class EstablishmentPerfilComponent implements OnInit {
       const id = params.id;
       this.compS.getEstablishmentById(id).subscribe(res => {
         this.establishment = res.establishment;
-        console.log(this.establishment);
+        console.log(res);
+        res.upcomingEvents.forEach(event => {
+          this.uncomingEvents.push({
+            startDate: new Date(event.startDate),
+            _id: event._id,
+            eventName: event.eventName,
+            city: event.city,
+            endDate: new Date(event.endDate),
+            photos: event.photos
+          });
+        });
+        res.terminatedEvents.forEach(event => {
+          this.terminatedEvents.push({
+            startDate: new Date(event.startDate),
+            _id: event._id,
+            eventName: event.eventName,
+            city: event.city,
+            endDate: new Date(event.endDate),
+            photos: event.photos
+          });
+        });
       }, error => {
         console.log(error);
       });
@@ -34,6 +61,14 @@ export class EstablishmentPerfilComponent implements OnInit {
     let myStr = '';
     this.establishment.category.forEach(category => {
       myStr += category.name + ' - ';
+    });
+    return myStr.slice(0, -2);
+  }
+
+  getTypes(): string {
+    let myStr = '';
+    this.establishment.typeEst.forEach(typeEst => {
+      myStr += typeEst.name + ' - ';
     });
     return myStr.slice(0, -2);
   }

@@ -1,4 +1,4 @@
-<div class="card" [routerLink]="['/company/establishments/',establishment._id]" style="cursor:pointer;">
+<div class="card" (click)="redirect()"  style="cursor:pointer;">
   <img class="card-img-top"
        src="{{establishment.photo[0]}}" alt="Card image cap">
   <div class="card-body">

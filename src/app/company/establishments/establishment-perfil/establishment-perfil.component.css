@@ -1,46 +1,112 @@
-.my-img{
+.my-img {
   background: #FCFCFD;
   box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.25);
   border-radius: 150px;
 }
 
-.typeEst{
+.typeEst {
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 10px;
   /* or 67% */
 
-  display: flex;
-  align-items: center;
-
   color: rgba(37, 36, 39, 0.6);
 }
 
-.nameEvent{
+.nameEvent {
   font-style: normal;
   font-weight: normal;
   font-size: 32px;
   line-height: 17px;
   /* or 53% */
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
   color: #252427;
 
 }
 
-.category{
+.category {
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
-  line-height: 10px;
-  /* identical to box height, or 67% */
-
-  display: flex;
-  align-items: center;
 
   color: #000000;
+}
+
+
+.event-font {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 15px;
+  color: #000000;
+}
+
+.description {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 15px;
+  /* or 107% */
+  color: rgba(0, 0, 0, 0.73);
+
+}
+
+.map {
+  position: relative;
+}
+
+.map-center-overlay {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.my-map {
+  padding-left: 35vw;
+}
+
+agm-map {
+  width: 30vw;
+  height: 20vw;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+@media screen and (max-width: 1024px) {
+  agm-map {
+    width: 70vw;
+    height: 35vw;
+  }
+
+  .my-map {
+    padding-left: 15vw !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  agm-map {
+    width: 70vw;
+    height: 35vw;
+  }
+
+  .my-map {
+    padding-left: 15vw !important;
+  }
+
+}
+
+
+#text{
+  position:absolute;
+  z-index:3;
+  margin-left:35px;
+  margin-top:25px;
+  color:white;
+}
+#heart {
+  position:relative;
+  width:100px;
+  height:100px;
 }

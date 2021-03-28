@@ -2,7 +2,7 @@
   background: #FCFCFD;
   border-radius: 20px;
   margin: 5px;
-  width: 300px;
+  width: 15vw;
   height: auto;
 }
 
@@ -68,10 +68,23 @@
   white-space: nowrap;
 }
 
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 41vw;
+  }
+
+  .like-event-like {
+    top: 52.2vw;
+    right: 8vw;
+    width: 40px;
+    height: 40px;
+  }
+
+}
 
 @media screen and (max-width: 480px) {
   .card {
-    width: 90vw;
+    width: 88vw;
   }
 
   .like-event-like {

@@ -150,12 +150,12 @@ html {
 /* position outside */
 .carousel-mine .flickity-prev-next-button.previous {
   top: 110%;
-  left: 35%;
+  left: 30vw;
 }
 
 .carousel-mine .flickity-prev-next-button.next {
   top: 110%;
-  right: 35%;
+  right: 30vw;
 }
 
 .carousel-mine .flickity-button {

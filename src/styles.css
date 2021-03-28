@@ -2,8 +2,7 @@
 @import "~animate.css/animate.min.css";
 
 
-
-.my-ticket-form{
+.my-ticket-form {
   font-size: 1.1rem !important;
 }
 
@@ -93,6 +92,7 @@ html {
     padding-top: 35vh;
     padding-bottom: 35vh;
   }
+
   .crow2 {
     overflow: hidden;
     max-width: 80vw;
@@ -172,11 +172,11 @@ html {
 }
 
 .carousel0 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel0 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel0 .flickity-page-dots {
@@ -198,11 +198,11 @@ html {
 }
 
 .carousel1 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel1 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel1 .flickity-page-dots {
@@ -224,11 +224,11 @@ html {
 }
 
 .carousel2 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel2 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel2 .flickity-page-dots {
@@ -250,11 +250,11 @@ html {
 }
 
 .carousel3 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel3 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel3 .flickity-page-dots {

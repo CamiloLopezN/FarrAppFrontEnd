@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EstablishmentView} from '../../../model/company';
 import {Router} from '@angular/router';
 
+declare var $: any;
+
 @Component({
   selector: 'app-establishment',
   templateUrl: './establishment.component.html',
@@ -15,6 +17,9 @@ export class EstablishmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 
   redirect(): void {

@@ -65,11 +65,7 @@ p {
 
 @media screen and (max-width: 480px) {
   .card {
-    width: 88vw;
-  }
-
-  .card-img-top {
-    width: 88vw;
+    width: 90vw;
   }
 
   .like-event-like {

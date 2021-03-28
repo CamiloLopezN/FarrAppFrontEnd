@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {EstablishmentView} from '../../../model/company';
 import {IsShowModalService} from '../../../services/is-show-modal.service';
 import {faBuilding} from '@fortawesome/free-solid-svg-icons';
+import {CompanyService} from '../../../services/company.service';
 
 @Component({
   selector: 'app-allestablishment-company',
@@ -14,12 +15,18 @@ export class AllestablishmentCompanyComponent implements OnInit {
   establishmentInactive: EstablishmentView[];
   faCalendarPlus = faBuilding;
 
-  constructor(private serviceShow: IsShowModalService) {
+  constructor(private serviceShow: IsShowModalService, private companyS: CompanyService) {
     this.establishmentActive = [];
     this.establishmentInactive = [];
   }
 
   ngOnInit(): void {
+    this.companyS.getParcialEstablishment().subscribe(res => {
+      this.establishmentActive = res;
+      console.log(res);
+    }, error => {
+      console.log(error);
+    });
   }
 
   establishment(): void {

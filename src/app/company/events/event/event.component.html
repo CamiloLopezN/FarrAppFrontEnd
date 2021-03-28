@@ -1,29 +1,31 @@
-<div class="card">
+<div class="card" style="cursor: pointer">
   <img class="card-img-top"
        src="{{event.photos[0]}}" alt="Card image cap">
-  <button class="like-event-like" id="like{{event._id}}" (click)="like()" *ngIf="isClient == 'client' || isClient == 'norole'">
+  <button class="like-event-like" id="like{{event._id}}" (click)="like()"
+          *ngIf="isClient == 'client' || isClient == 'norole'">
     <fa-icon [icon]="faLike"></fa-icon>
   </button>
   <div class="card-body">
     <div>
-      <div class="float-left">
+      <div class="float-left date-event">
         <p>{{getDate()}}</p>
       </div>
-      <div class="float-right">
+      <div class="float-right hour-event">
         <p>
           <fa-icon [icon]="faClock"></fa-icon>
           {{event.startDate | date:'HH:mm'}} - {{event.endDate | date:'HH:mm'}}</p>
       </div>
       <div class="clearfix"></div>
     </div>
-    <div>
-      <p class="title-event">{{event.eventName}}</p>
+    <div class="text-wr">
+      <p class="title-event" data-toggle="tooltip" data-placement="top"
+         title="{{event.eventName}}">{{event.eventName}}</p>
     </div>
     <div>
-      <label class="city-title">
+      <a class="city-title m-0" title="Popover title"  data-toggle="modal" data-target="#exampleModalCenter">
         <fa-icon [icon]="faMap"></fa-icon>
         {{event.city}}
-      </label>
+      </a>
     </div>
   </div>
 </div>

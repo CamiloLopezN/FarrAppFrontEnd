@@ -2,7 +2,8 @@
   background: #FCFCFD;
   border-radius: 20px;
   margin: 5px;
-  width: 350px;
+  width: 21.5vw;
+  min-width: 335px;
   height: auto;
 }
 
@@ -15,16 +16,32 @@
 
 }
 
-p {
+.card-body {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.date-event {
   font-family: Lovelo, serif;
   font-style: normal;
   font-weight: 900;
-  font-size: 12px;
-  line-height: 12px;
+  font-size: 0.65rem;
+  line-height: 1.2rem;
+
+  color: rgba(37, 36, 39, 0.6);
+}
+
+.hour-event {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.65rem;
+  line-height: 1.2rem;
   /* identical to box height */
 
 
   color: rgba(37, 36, 39, 0.6);
+
 }
 
 .like-event-like {
@@ -46,26 +63,50 @@ p {
   color: red;
 }
 
+.text-wr{
+  display: flex;
+  justify-content: flex-start;
+
+}
+
 .title-event {
   font-style: normal;
   font-weight: 900;
-  font-size: 20px;
-  line-height: 23px;
-
+  font-size: 1.2rem;
+  line-height: 1.2rem;
   color: #252427;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
 
 .city-title {
   font-style: normal;
   font-weight: 900;
-  font-size: 15px;
-  line-height: 13px;
+  font-size: 0.8rem;
+  line-height: 1rem;
   color: rgba(174, 216, 229, 0.9);
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 41vw;
+  }
+
+  .like-event-like {
+    top: 52.2vw;
+    right: 8vw;
+    width: 40px;
+    height: 40px;
+  }
+
 }
 
 @media screen and (max-width: 480px) {
   .card {
-    width: 90vw;
+    width: 88vw;
+    min-width: 280px;
   }
 
   .like-event-like {

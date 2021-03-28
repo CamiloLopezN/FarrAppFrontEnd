@@ -32,6 +32,9 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 
   getDate(): string {

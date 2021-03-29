@@ -6,6 +6,7 @@ import {getDateEvent} from '../../../model/RelojTest';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {AuthService} from '../../../services/auth.service';
 import {NotificationService} from '../../../services/notification.service';
+import {Router} from '@angular/router';
 
 declare var $: any;
 
@@ -25,7 +26,7 @@ export class EventComponent implements OnInit {
   isLike = false;
   isClient: string;
 
-  constructor(private authService: AuthService, private ns: NotificationService) {
+  constructor(private authService: AuthService, private ns: NotificationService, private router: Router) {
     this.authService.roled.subscribe(rol => {
       this.isClient = rol;
     });
@@ -61,4 +62,7 @@ export class EventComponent implements OnInit {
     return `${date.getHours()}:${date.getMinutes()}`;
   }
 
+  redirect(): void {
+    this.router.navigate(['/company/events/', this.event._id]);
+  }
 }

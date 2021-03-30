@@ -232,29 +232,29 @@ agm-map {
   margin: 7px 7px 10px;
 }
 
-.categories-buttons .button-select{
+.categories-buttons .button-select {
   background: rgba(37, 36, 39, 0.8);
   color: #FFFFFF;
 }
 
-.event-date{
+.event-date {
   width: 80%;
   max-width: 1300px;
   min-width: 288px;
   margin: 0 auto;
 }
 
-.event-date div{
+.event-date div {
   max-width: 400px;
   margin: 0 auto;
 }
 
-.title-date{
+.title-date {
   margin-top: 18px;
   margin-bottom: 10px;
 }
 
-.date-event-p{
+.date-event-p {
 
   font-style: normal;
   font-weight: 300;
@@ -488,6 +488,19 @@ agm-map {
   color: #252427;
 }
 
+.my-pagination {
+  width: 90%;
+  max-width: 1300px;
+  min-width: 288px;
+
+  text-align: center;
+  margin: 0 auto;
+}
+
+.my-pagination a{
+  cursor: pointer;
+}
+
 @media (min-width: 481px) {
 
   .followers {
@@ -497,12 +510,12 @@ agm-map {
     color: white;
   }
 
-  .carousel-cell{
+  .carousel-cell {
     width: 45vw;
     background: white;
   }
 
-  .carousel-cell img{
+  .carousel-cell img {
     height: 300px;
   }
 }
@@ -526,21 +539,21 @@ agm-map {
     background-repeat: no-repeat;
   }
 
-  .event-date{
+  .event-date {
     display: flex;
     justify-content: space-around;
   }
 
-  .event-date div{
+  .event-date div {
     width: 400px;
   }
 
-  .carousel-cell{
+  .carousel-cell {
     width: 32vw;
     background: white;
   }
 
-  .carousel-cell img{
+  .carousel-cell img {
     height: 400px;
   }
 }

@@ -49,13 +49,13 @@ const routes: Routes = [
     path: 'company/events', canActivate: [CompanySesionGuard], component: AlleventsCompanyComponent
   },
   {
-    path: 'company/events/:id', canActivate: [CompanySesionGuard], component: EventPerfilComponent
+    path: 'company/events/:id', component: EventPerfilComponent
   },
   {
     path: 'company/establishments', canActivate: [CompanySesionGuard], component: AllestablishmentCompanyComponent
   },
   {
-    path: 'company/establishments/:id', canActivate: [CompanySesionGuard], component: EstablishmentPerfilComponent
+    path: 'company/establishments/:id', component: EstablishmentPerfilComponent
   },
   {
     path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent

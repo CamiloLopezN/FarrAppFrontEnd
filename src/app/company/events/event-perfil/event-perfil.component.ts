@@ -17,7 +17,7 @@ export class EventPerfilComponent implements OnInit {
   faStartMedia = faStarHalfAlt;
   faClock = faClock;
   faUser = faUser;
-  production = true;
+  production = false;
   comments: MyComment[];
   comments2: MyComment[];
   average: string;
@@ -173,9 +173,10 @@ export class EventPerfilComponent implements OnInit {
     }
   }
 
-  hide(): void {
+  hide(target: HTMLElement): void {
     this.comments2.splice(3, this.comments2.length - 3);
     this.actualPage = 1;
+    this.scroll(target);
   }
 
   getStars(nStar: any): boolean[] {
@@ -209,6 +210,10 @@ export class EventPerfilComponent implements OnInit {
 
   getCoincidenceStar(nStart: number): number {
     return this.comments.filter(comment => comment.nStar === nStart).length;
+  }
+
+  scroll(target: HTMLElement): void {
+    target.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 
 }

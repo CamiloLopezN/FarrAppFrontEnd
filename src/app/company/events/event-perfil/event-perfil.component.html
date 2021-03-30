@@ -90,7 +90,7 @@
       </div>
 
     </section>
-    <section class="opinions">
+    <section #target class="opinions">
       <section class="opinions-title">
         <p class="opinions-text">Opiniones</p>
         <div class="list-hear-opinions">
@@ -135,7 +135,9 @@
         <p class="user-comment">{{comment.comment}}</p>
       </div>
     </section>
-    <a class="text-center" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
-    <a class="text-center" (click)="hide()" *ngIf="actualPage == finishPage">Ocultar</a>
+    <section class="my-pagination">
+      <a class="text-center" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
+      <a class="text-center" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
+    </section>
   </main>
 </div>

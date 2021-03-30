@@ -117,7 +117,7 @@
         </div>
       </section>
     </section>
-    <section class="comments" *ngFor="let comment of comments">
+    <section class="comments" *ngFor="let comment of comments2">
       <div class="comment">
         <div class="title-comment">
           <p>{{comment.title}}</p>
@@ -135,5 +135,7 @@
         <p class="user-comment">{{comment.comment}}</p>
       </div>
     </section>
+    <a class="text-center" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
+    <a class="text-center" (click)="hide()" *ngIf="actualPage == finishPage">Ocultar</a>
   </main>
 </div>

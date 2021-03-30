@@ -19,10 +19,14 @@ export class EventPerfilComponent implements OnInit {
   faUser = faUser;
   production = true;
   comments: MyComment[];
+  comments2: MyComment[];
   average: string;
   opinion: Opinion[];
+  finishPage = 5;
+  actualPage: number;
 
   constructor() {
+    this.actualPage = 1;
     this.comments = [
       {
         author: 'Juan funito',
@@ -70,6 +74,32 @@ export class EventPerfilComponent implements OnInit {
         title: 'Un poco de todo'
       }
     ];
+    this.comments2 = [
+      {
+        author: 'Juan funito',
+        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, ' +
+          'esto le resta bastantes puntos. Todo muy bonito pero el precio de los licores era supremamente alto, ' +
+          'esto le resta bastantes puntos Todo muy bonito pero el precio de los licores era supremamente alto, ' +
+          'esto le resta bastantes puntos',
+        date: '22/03/2021',
+        nStar: 4,
+        title: 'Excelente discoteca, pero muy caro'
+      },
+      {
+        author: 'Alfredo alcachofa',
+        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
+        date: '22/03/2021',
+        nStar: 5,
+        title: '5 estrellas'
+      },
+      {
+        author: 'Sofía rarini',
+        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
+        date: '22/03/2021',
+        nStar: 4,
+        title: 'Un poco de todo'
+      }
+    ];
     this.average = this.getPromedy().toFixed(1);
     this.opinion = [];
     for (let i = 5; i >= 1; i--) {
@@ -105,6 +135,47 @@ export class EventPerfilComponent implements OnInit {
       });
     });
 
+  }
+
+  addComment(): void {
+    this.comments2.push({
+        author: 'Juan funito',
+        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, ' +
+          'esto le resta bastantes puntos. Todo muy bonito pero el precio de los licores era supremamente alto, ' +
+          'esto le resta bastantes puntos Todo muy bonito pero el precio de los licores era supremamente alto, ' +
+          'esto le resta bastantes puntos',
+        date: '22/03/2021',
+        nStar: 4,
+        title: 'Excelente discoteca, pero muy caro'
+      },
+      {
+        author: 'Alfredo alcachofa',
+        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
+        date: '22/03/2021',
+        nStar: 5,
+        title: '5 estrellas'
+      },
+      {
+        author: 'Sofía rarini',
+        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
+        date: '22/03/2021',
+        nStar: 4,
+        title: 'Un poco de todo'
+      });
+  }
+
+  onScroll(): void {
+    if (this.actualPage < this.finishPage) {
+      this.addComment();
+      this.actualPage++;
+    } else {
+      console.log('No more lines. Finish page!');
+    }
+  }
+
+  hide(): void {
+    this.comments2.splice(3, this.comments2.length - 3);
+    this.actualPage = 1;
   }
 
   getStars(nStar: any): boolean[] {

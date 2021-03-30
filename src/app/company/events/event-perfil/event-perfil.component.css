@@ -16,6 +16,7 @@
   --gray: #BABABA;
   --off-white: #FAF8F7;
   --just-white: #ffffff;
+  --max-width: 1200px;
 }
 
 * {
@@ -41,50 +42,66 @@
   text-align: center;
 }
 
+.my-img {
+  visibility: hidden;
+}
+
 .info-company {
-  display: flex;
+  position: relative;
   width: 90%;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   height: auto;
   margin: 30px auto 0;
   align-items: center;
 }
 
-.info-company img {
-  width: 115px;
-  height: 115px;
-  box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.25);
-  border-radius: 150px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-right: 10px;
+.date-str {
+
+  font-family: Lovelo, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.85rem;
+  line-height: 1rem;
+  text-align: left;
+  color: rgba(37, 36, 39, 0.6);
 }
 
-#discoteque {
+.date-hour {
+  font-family: Lovelo, sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 1rem;
-  line-height: .5rem;
-  color: rgba(37, 36, 39, 0.6);
+  font-weight: 900;
+  font-size: 0.85rem;
+  line-height: 1rem;
 
-  margin-bottom: 15px;
+  color: rgba(37, 36, 39, 0.6);
 }
 
 .info-company h1 {
   font-style: normal;
-  font-weight: normal;
-  font-size: 2.3rem;
-  line-height: 2.5rem;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 2rem;
   color: #252427;
 
-  margin-bottom: 15px;
-  text-align: center;
+  margin-bottom: 8px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.city{
+  font-family: Lovelo, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: #827a85;
+  text-align: left;
+
+  margin-bottom: 20px;
 }
 
 #categories {
-  font-family: Lovelo, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 0.85rem;
@@ -98,7 +115,7 @@
   position: relative;
   width: 90%;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   height: 50px;
   margin: 8px auto 0;
 
@@ -108,7 +125,7 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 37px;
+  left: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -117,14 +134,21 @@
 .followers {
   position: absolute;
   font-size: 1rem;
-  left: 50px;
-  top: 10px;
+  left: 13px;
+  top: 9px;
   color: white;
 }
 
 .list-heart {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 0.6rem;
+}
+
+.edit-remove {
   position: absolute;
-  left: 125px;
+  display: inline-flex;
+  right: 0;
   top: 10px;
   font-size: 0.6rem;
 }
@@ -147,7 +171,8 @@
 .desciption-company {
   width: 80%;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
+  height: 100px;
   margin: 8px auto 0;
 
   font-style: normal;
@@ -158,7 +183,12 @@
   text-align: center;
 
   color: rgba(0, 0, 0, 0.73);
+  overflow: hidden;
+}
 
+.show {
+  overflow: visible;
+  height: auto;
 }
 
 .img-google {
@@ -186,7 +216,7 @@ agm-map {
   width: 100%;
   margin: 0 auto;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   font-style: normal;
   font-weight: 300;
   font-size: 1.7rem;
@@ -200,16 +230,22 @@ agm-map {
 .container-events {
   width: 100%;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 20px auto 0;
 }
 
-.categories-buttons {
+.categories-buttons, .code-clothe {
   width: 80%;
   text-align: center;
   max-width: 700px;
   min-width: 320px;
   margin: 0 auto;
+}
+
+.code-clothe {
+  width: 90%;
+  margin-top: 40px;
+  max-width: 1200px;
 }
 
 .categories-buttons .my-button {
@@ -237,9 +273,45 @@ agm-map {
   color: #FFFFFF;
 }
 
+
+.code-clothe .my-button {
+
+  width: 28%;
+  max-width: 145px;
+  height: 45px;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 2.1rem;
+
+  color: rgba(37, 36, 39, 0.5);
+  background: #FAFAFA;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+
+  margin: 7px 7px 10px;
+}
+
+.code-clothe .button-select {
+  background: rgba(37, 36, 39, 0.8);
+  color: #FFFFFF;
+}
+
+.code-clothe p {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  color: #252427;
+  margin-bottom: 10px;
+
+}
+
 .event-date {
   width: 80%;
-  max-width: 1300px;
+  max-width: 1200px;
   min-width: 288px;
   margin: 0 auto;
 }
@@ -274,31 +346,6 @@ agm-map {
   margin: 60px auto 70px;
 }
 
-.carousel {
-  width: 100%;
-  min-width: 288px;
-  max-width: 1300px;
-  margin: 20px auto 0;
-}
-
-.carousel-cell {
-  margin: 10px;
-  background-color: #3a3b3c;
-  overflow: hidden;
-  border-radius: 20px;
-  width: 90vw;
-  height: auto;
-}
-
-.carousel-cell img {
-  width: 100%;
-  height: 271px;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-
 .opinions {
   width: 90%;
   margin: 40px auto 0;
@@ -309,7 +356,7 @@ agm-map {
   display: flex;
   justify-content: space-between;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 10px;
   border-bottom: 1px solid #252427;
@@ -347,7 +394,7 @@ agm-map {
 .opinions .my-califications {
   width: 100%;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 30px auto 0;
 }
 
@@ -356,7 +403,7 @@ agm-map {
   width: 90%;
   justify-content: space-between;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto 20px;
   align-items: center;
 }
@@ -421,7 +468,7 @@ agm-map {
   width: 100%;
   justify-content: space-between;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   height: auto;
   margin: 0 auto;
   border-bottom: 1px solid #252427;
@@ -456,7 +503,7 @@ agm-map {
   width: 100%;
   justify-content: space-between;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 5px auto 0;
 }
 
@@ -479,7 +526,7 @@ agm-map {
 
 .user-comment {
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   font-style: normal;
   font-weight: 300;
   font-size: 0.75rem;
@@ -490,41 +537,77 @@ agm-map {
 
 .my-pagination {
   width: 90%;
-  max-width: 1300px;
+  max-width: 1200px;
   min-width: 288px;
 
   text-align: center;
   margin: 0 auto;
 }
 
-.my-pagination a{
+.my-pagination a {
   cursor: pointer;
 }
 
 @media (min-width: 481px) {
-
   .followers {
     position: absolute;
-    left: 47px;
-    top: 6px;
+    left: 12px;
+    top: 8px;
     color: white;
   }
 
-  .carousel-cell {
-    width: 45vw;
-    background: white;
-  }
-
-  .carousel-cell img {
-    height: 300px;
+  .heart {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 
 @media (min-width: 1025px) {
 
+  .img-container {
+    height: 40vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+    border-radius: 0;
+  }
+
+  .info-company {
+    padding-top: 100px;
+  }
+
+  .my-img {
+    visibility: initial;
+    position: absolute;
+
+    width: 100%;
+    height: 400px;
+    top: -350px;
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+  }
+
+  .date-str {
+    text-align: left;
+  }
+
+  .info-company h1, #categories {
+    text-align: left;
+  }
+
   .followers {
     position: absolute;
-    left: 47px;
+    left: 14px;
     top: 8px;
     color: white;
   }
@@ -533,10 +616,66 @@ agm-map {
     position: absolute;
     width: 50px;
     height: 50px;
-    left: 32px;
+    left: 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+
+  .list-heart {
+    margin-left: 70px;
+    text-align: left;
+  }
+
+  .list-heart fa-icon {
+    margin-left: 8px;
+  }
+
+  .img-iter-category {
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0 0;
+    grid-template-areas:
+    "img-google img-google desciption-company desciption-company"
+    "img-google img-google categories-buttons categories-buttons";
+    margin: 40px auto 0;
+  }
+
+  .my-show {
+    visibility: hidden;
+  }
+
+  .img-google {
+    width: 90%;
+    grid-area: img-google;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  agm-map {
+    height: 100%;
+    width: 100%;
+  }
+
+  .desciption-company {
+    width: 100%;
+    height: 186px;
+    grid-area: desciption-company;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+    padding-top: 15px;
+    overflow-y: auto
+  }
+
+  .categories-buttons {
+    grid-area: categories-buttons;
   }
 
   .event-date {
@@ -548,12 +687,11 @@ agm-map {
     width: 400px;
   }
 
-  .carousel-cell {
-    width: 32vw;
-    background: white;
+  .code-clothe {
+    margin-top: 50px;
   }
 
-  .carousel-cell img {
-    height: 400px;
+  .code-clothe {
+    text-align: left;
   }
 }

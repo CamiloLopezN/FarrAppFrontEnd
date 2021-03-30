@@ -1,21 +1,22 @@
-<div class="my-establishment">
+<div class="my-establishment" *ngIf="event">
   <header>
-    <section class="img-container"
-             [style.background-image]="'url(https://cdn.pixabay.com/photo/2015/11/22/19/04/crowd-1056764_960_720.jpg)'">
-    </section>
+    <div style="background-color: black">
+      <section class="img-container"
+               [style.background-image]="'url(' + photos[0]+')'">
+      </section>
+    </div>
     <section class="info-company">
-      <img src="assets/icons/1616694016609.jpg" alt="logo">
-      <div>
-        <p id="discoteque">
-          <fa-icon [icon]="faClock"></fa-icon>
-          19:00 - 22:00
-        </p>
-        <h1>Saturday Night party</h1>
-        <p id="categories" class="text-uppercase">+20 -
-          <fa-icon [icon]="faUser"></fa-icon>
-          128 - Calle 23 # 12
-        </p>
+      <div class="my-img" [style.background-image]="'url(' + photos[0]+')'">
       </div>
+      <p class="date-str">
+        {{getDate(event.startDate)}} {{event.startDate | date:'HH:mm'}}
+        - {{getDate(event.endDate)}} {{event.endDate | date:'HH:mm'}}
+      </p>
+      <h1>{{event.eventName}}</h1>
+      <p class="city text-uppercase">
+        <fa-icon [icon]="faGps"></fa-icon>
+         {{event.city}} - {{event.address}}</p>
+      <p class="city text-uppercase">{{getCategories()}}</p>
     </section>
     <section class="interactions">
       <img src="http://pngimg.com/uploads/heart/heart_PNG51337.png" class="heart" alt="heart">
@@ -28,11 +29,17 @@
           <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
         </div>
       </div>
+      <div class="edit-remove" *ngIf="rol == 'company' && isMyEvent">
+        <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
+                 (click)="edit()"></fa-icon>
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"></fa-icon>
+      </div>
     </section>
-    <div class="description-img">
-      <div class="desciption-company">
-        <p>Descripción del evento: en este apartado podra observarse la descripción que se establece al crear el
-          evento.</p>
+    <div class="img-iter-category text-center">
+      <div #divHidden class="desciption-company" [class.show]="show">{{event.description}}
+      </div>
+      <div *ngIf="isHidden(divHidden) || (!isHidden(divHidden) && show)">
+        <a class="my-show" (click)="show = !show">{{ show ? 'Ver menos' : 'Ver más' }}</a>
       </div>
       <section class="img-google">
         <agm-map [latitude]="10" [longitude]="10" [zoom]="15" *ngIf="!production">
@@ -41,54 +48,26 @@
           </agm-marker>
         </agm-map>
       </section>
+      <section class="categories-buttons">
+        <button class="my-button">Categoría</button>
+        <button class="my-button">Categoría</button>
+        <button class="my-button">Categoría</button>
+        <button class="my-button">Categoría</button>
+        <button class="my-button button-select">Selección</button>
+        <button class="my-button">Categoría</button>
+        <button class="my-button">Categoría</button>
+        <button class="my-button">Categoría</button>
+      </section>
     </div>
   </header>
   <main>
-    <section class="categories-buttons">
-      <button class="my-button">Categoría</button>
-      <button class="my-button">Categoría</button>
-      <button class="my-button">Categoría</button>
-      <button class="my-button">Categoría</button>
-      <button class="my-button button-select">Selección</button>
-      <button class="my-button">Categoría</button>
-      <button class="my-button">Categoría</button>
-      <button class="my-button">Categoría</button>
+    <section class="code-clothe">
+      <p>¡La fiesta tiene este estilo!</p>
+      <button class="my-button button-select">Formal</button>
+      <button class="my-button button-select">Informal</button>
     </section>
-    <section class="event-date">
-      <div>
-        <p class="title-date">Fecha de inicio</p>
-        <p class="date-event-p">18/03/2021</p>
-      </div>
-      <div>
-        <p class="title-date">Fecha de fin</p>
-        <p class="date-event-p">29/04/2021</p>
-      </div>
-    </section>
-    <section class="images-event">
-      <div class="carousel">
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/orange-tree.jpg" alt="orange tree"/>
-        </div>
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade"/>
-        </div>
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle"/>
-        </div>
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/cat-nose.jpg" alt="cat nose"/>
-        </div>
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/contrail.jpg" alt="contrail"/>
-        </div>
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/golden-hour.jpg" alt="golden hour"/>
-        </div>
-        <div class="carousel-cell">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/flight-formation.jpg" alt="flight formation"/>
-        </div>
-      </div>
-
+    <section class="images-event" *ngIf="photos.length != 0">
+      <app-imgs-carousel [photos]="photos"></app-imgs-carousel>
     </section>
     <section #target class="opinions">
       <section class="opinions-title">

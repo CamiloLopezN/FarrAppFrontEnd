@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {faStar as fs, faUser, faStarHalfAlt} from '@fortawesome/free-solid-svg-icons';
+import {faStar as fs, faUser, faStarHalfAlt, faEdit, faTrash, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {faStar, faClock} from '@fortawesome/free-regular-svg-icons';
 import {MyComment, Opinion} from '../../../model/opinion';
-
-declare var $: any;
+import {UserService} from '../../../services/user.service';
+import {ActivatedRoute, Params} from '@angular/router';
+import {AuthService} from '../../../services/auth.service';
+import {getDateEventPerfil} from '../../../model/RelojTest';
 
 @Component({
   selector: 'app-event-perfil',
@@ -16,7 +18,10 @@ export class EventPerfilComponent implements OnInit {
   faStart = faStar;
   faStartMedia = faStarHalfAlt;
   faClock = faClock;
+  faGps = faMapMarkerAlt;
   faUser = faUser;
+  faEdit = faEdit;
+  faTrash = faTrash;
   production = false;
   comments: MyComment[];
   comments2: MyComment[];
@@ -24,9 +29,15 @@ export class EventPerfilComponent implements OnInit {
   opinion: Opinion[];
   finishPage = 5;
   actualPage: number;
+  rol: string;
+  isMyEvent = true;
+  show = false;
+  event: any;
+  photos: string[];
 
-  constructor() {
+  constructor(private userS: UserService, private route: ActivatedRoute, private authService: AuthService) {
     this.actualPage = 1;
+    this.photos = [];
     this.comments = [
       {
         author: 'Juan funito',
@@ -109,32 +120,13 @@ export class EventPerfilComponent implements OnInit {
         percentage: this.getPercentege(i)
       });
     }
+    this.authService.roled.subscribe(rol => {
+      this.rol = rol;
+    });
   }
 
   ngOnInit(): void {
-
-    const $carousel = $('.carousel').flickity({
-      imagesLoaded: true,
-      percentPosition: false,
-      autoPlay: 2000,
-      initialIndex: 1
-    });
-
-    const $imgs = $carousel.find('.carousel-cell img');
-// get transform property
-    const docStyle = document.documentElement.style;
-    const transformProp = typeof docStyle.transform === 'string' ?
-      'transform' : 'WebkitTransform';
-// get Flickity instance
-    const flkty = $carousel.data('flickity');
-    $carousel.on('scroll.flickity', () => {
-      flkty.slides.forEach((slide, i) => {
-        const img = $imgs[i];
-        const x = (slide.target + flkty.x) * -1 / 3;
-        img.style[transformProp] = 'translateX(' + x + 'px)';
-      });
-    });
-
+    this.getUser();
   }
 
   addComment(): void {
@@ -214,6 +206,58 @@ export class EventPerfilComponent implements OnInit {
 
   scroll(target: HTMLElement): void {
     target.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+
+  private getUser(): void {
+    this.route.params.forEach((params: Params) => {
+      const id = params.id;
+      this.userS.getEventById(id).subscribe(res => {
+        this.event = res.event;
+        this.photos = res.event.photos;
+        console.log(this.event);
+        this.event.startDate = new Date(this.event.startDate);
+        this.event.endDate = new Date(this.event.endDate);
+      });
+    });
+  }
+
+  getDate(date: Date): string {
+    return getDateEventPerfil(date);
+  }
+
+
+  isHidden(divHidden: HTMLDivElement): boolean {
+    const curOverf = divHidden.style.overflow;
+
+    if (!curOverf || curOverf === 'visible') {
+      divHidden.style.overflow = 'hidden';
+    }
+
+    const isOverflowing = divHidden.clientWidth < divHidden.scrollWidth
+      || divHidden.clientHeight < divHidden.scrollHeight;
+
+    divHidden.style.overflow = curOverf;
+
+    if (!isOverflowing && !this.show) {
+      divHidden.style.height = 'auto';
+    }
+
+    return isOverflowing;
+  }
+
+  edit(): void {
+  }
+
+  remove(): void {
+
+  }
+
+  getCategories(): string {
+    let myStr = '';
+    this.event.category.forEach(category => {
+      myStr += category.name + ' - ';
+    });
+    return myStr.slice(0, -2);
   }
 
 }

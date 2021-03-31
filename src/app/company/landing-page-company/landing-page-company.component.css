@@ -33,7 +33,7 @@
 .header-company{
   width: 90%;
   min-width: 280px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 20px auto 0;
 
 }
@@ -90,7 +90,7 @@ h4 {
   width: 90%;
   justify-content: space-between;
   min-width: 280px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -117,7 +117,7 @@ h4 {
 .container-events{
   width: 90%;
   min-width: 288px;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 20px auto 0;
 }
 @media screen and (max-width: 1024px) {

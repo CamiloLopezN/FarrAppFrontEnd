@@ -1,4 +1,5 @@
 import {ChangeDetectorRef, Component, HostListener, Input, OnInit} from '@angular/core';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {EventView} from '../../../model/company';
 
 declare const $: any;
@@ -16,12 +17,18 @@ export class EventsCompanyComponent implements OnInit {
   @Input() typeEvent: string;
   @Input() tittle: string;
   @Input() index: string;
+  @Input() hasShowMore: boolean;
+
+  faChevronRight = faChevronRight;
 
   constructor(private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.onResize();
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 
   @HostListener('window:resize', [])
@@ -35,43 +42,47 @@ export class EventsCompanyComponent implements OnInit {
           initialIndex: 1
         });
         const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
+        if ($imgs.style !== undefined) {
 // get transform property
-        const docStyle = document.documentElement.style;
-        const transformProp = typeof docStyle.transform === 'string' ?
-          'transform' : 'WebkitTransform';
+          const docStyle = document.documentElement.style;
+          const transformProp = typeof docStyle.transform === 'string' ?
+            'transform' : 'WebkitTransform';
 // get Flickity instance
-        const flkty = $carousel.data('flickity');
+          const flkty = $carousel.data('flickity');
 
-        $carousel.on('scroll.flickity', () => {
-          flkty.slides.forEach((slide, i) => {
-            const img = $imgs[i];
-            const x = (slide.target + flkty.x) * -1 / 3;
-            img.style[transformProp] = 'translateX(' + x + 'px)';
+          $carousel.on('scroll.flickity', () => {
+            flkty.slides.forEach((slide, i) => {
+              const img = $imgs[i];
+              const x = (slide.target + flkty.x) * -1 / 3;
+              img.style[transformProp] = 'translateX(' + x + 'px)';
+            });
           });
-        });
+        }
       });
     } else {
       document.querySelectorAll('.carousel' + this.index).forEach(() => {
         const $carousel = $('.carousel' + this.index).flickity({
           imagesLoaded: true,
           percentPosition: false,
-          initialIndex: 1
+          initialIndex: 1,
         });
         const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
+        if ($imgs.style !== undefined) {
 // get transform property
-        const docStyle = document.documentElement.style;
-        const transformProp = typeof docStyle.transform === 'string' ?
-          'transform' : 'WebkitTransform';
+          const docStyle = document.documentElement.style;
+          const transformProp = typeof docStyle.transform === 'string' ?
+            'transform' : 'WebkitTransform';
 // get Flickity instance
-        const flkty = $carousel.data('flickity');
+          const flkty = $carousel.data('flickity');
 
-        $carousel.on('scroll.flickity', () => {
-          flkty.slides.forEach((slide, i) => {
-            const img = $imgs[i];
-            const x = (slide.target + flkty.x) * -0.001;
-            img.style[transformProp] = 'translateX(' + x + 'px)';
+          $carousel.on('scroll.flickity', () => {
+            flkty.slides.forEach((slide, i) => {
+              const img = $imgs[i];
+              const x = (slide.target + flkty.x) * -0.001;
+              img.style[transformProp] = 'translateX(' + x + 'px)';
+            });
           });
-        });
+        }
       });
     }
   }

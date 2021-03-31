@@ -31,8 +31,8 @@
       </div>
       <div class="edit-remove" *ngIf="rol == 'company' && isMyEvent">
         <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
-                 (click)="edit()"></fa-icon>
-        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"></fa-icon>
+                 (click)="edit()" data-toggle="tooltip" data-placement="top" title="Editar"></fa-icon>
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()" data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
       </div>
     </section>
   </header>

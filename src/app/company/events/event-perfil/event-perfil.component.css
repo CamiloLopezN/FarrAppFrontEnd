@@ -16,6 +16,7 @@
   --gray: #BABABA;
   --off-white: #FAF8F7;
   --just-white: #ffffff;
+  --max-width: 1200px;
 }
 
 * {
@@ -41,8 +42,12 @@
   text-align: center;
 }
 
+.my-img {
+  visibility: hidden;
+}
+
 .info-company {
-  display: flex;
+  position: relative;
   width: 90%;
   min-width: 288px;
   max-width: 1200px;
@@ -51,42 +56,55 @@
   align-items: center;
 }
 
-.info-company img {
-  width: 115px;
-  height: 115px;
-  box-shadow: 2px 2px 25px rgba(0, 0, 0, 0.25);
-  border-radius: 150px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-right: 10px;
+.date-str {
+
+  font-family: Lovelo, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.85rem;
+  line-height: 1rem;
+  text-align: left;
+  color: rgba(37, 36, 39, 0.6);
 }
 
-#discoteque {
+.date-hour {
+  font-family: Lovelo, sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 1rem;
-  line-height: .5rem;
-  color: rgba(37, 36, 39, 0.6);
+  font-weight: 900;
+  font-size: 0.85rem;
+  line-height: 1rem;
 
-  margin-bottom: 15px;
+  color: rgba(37, 36, 39, 0.6);
 }
 
 .info-company h1 {
   font-style: normal;
-  font-weight: normal;
-  font-size: 2.7rem;
-  line-height: 2.5rem;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 2rem;
   color: #252427;
 
-  margin-bottom: 15px;
-  text-align: center;
+  margin-bottom: 8px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.city {
+  font-family: Lovelo, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: #827a85;
+  text-align: left;
+
+  margin-bottom: 20px;
 }
 
 #categories {
   font-style: normal;
   font-weight: normal;
-  font-size: 1.2rem;
+  font-size: 0.85rem;
   line-height: 1.2rem;
   color: #000000;
   text-align: center;
@@ -107,7 +125,7 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 37px;
+  left: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,14 +134,21 @@
 .followers {
   position: absolute;
   font-size: 1rem;
-  left: 50px;
-  top: 10px;
+  left: 13px;
+  top: 9px;
   color: white;
 }
 
 .list-heart {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 0.6rem;
+}
+
+.edit-remove {
   position: absolute;
-  left: 125px;
+  display: inline-flex;
+  right: 0;
   top: 10px;
   font-size: 0.6rem;
 }
@@ -143,10 +168,42 @@
   color: red;
 }
 
+.description-com {
+  width: 90%;
+  min-width: 288px;
+  max-width: 1200px;
+
+  margin: 15px auto 30px;
+}
+
+.divhidden {
+  width: 100%;
+  height: 4.5rem;
+  overflow: hidden;
+}
+
+.description-com h2 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  color: #252427;
+  margin-bottom: 10px;
+
+}
+
+.my-show{
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 2rem;
+  color: #82a3ae;
+}
+
 .desciption-company {
   width: 80%;
   min-width: 288px;
   max-width: 1200px;
+  height: 100px;
   margin: 8px auto 0;
 
   font-style: normal;
@@ -157,14 +214,80 @@
   text-align: center;
 
   color: rgba(0, 0, 0, 0.73);
+  overflow: hidden;
+}
 
+.show {
+  overflow: visible;
+  height: auto;
+}
+
+.carac-event {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  min-width: 288px;
+  margin: 0 auto;
+}
+
+.card-carac {
+  position: relative;
+  margin: 3px;
+  width: 7.5rem;
+  height: 5rem;
+  border: 1px solid rgba(37, 36, 39, 0.6);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 1.5rem 0.5rem 0.5rem;
+}
+
+.column-card{
+  display: flex;
+  align-items: center;
+}
+
+.header-carac {
+  margin-right: 5px;
+}
+
+.name-carac {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.type-carac {
+  position: absolute;
+  top: -20px;
+  width: 80%;
+  height: 2.2rem;
+  left: calc(50% - 40%);
+  border: 1px solid rgba(37, 36, 39, 0.6);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  font-family: Lovelo, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background: white;
 }
 
 .img-google {
   width: 80%;
   min-width: 288px;
   max-width: 1000px;
-  margin: 30px auto 0 !important;
+  margin: 30px auto 30px;
   border-radius: 20px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -201,6 +324,118 @@ agm-map {
   min-width: 288px;
   max-width: 1200px;
   margin: 20px auto 0;
+}
+
+.categories-buttons, .code-clothe {
+  width: 80%;
+  text-align: center;
+  max-width: 700px;
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+.code-clothe {
+  width: 90%;
+  margin-top: 40px;
+  max-width: 1200px;
+}
+
+.categories-buttons .my-button {
+
+  width: 28%;
+  max-width: 145px;
+  height: 45px;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 2.1rem;
+
+  color: rgba(37, 36, 39, 0.5);
+  background: #FAFAFA;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+
+  margin: 7px 7px 10px;
+}
+
+.categories-buttons .button-select {
+  background: rgba(37, 36, 39, 0.8);
+  color: #FFFFFF;
+}
+
+
+.code-clothe .my-button {
+
+  width: 28%;
+  max-width: 145px;
+  height: 45px;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 2.1rem;
+
+  color: rgba(37, 36, 39, 0.5);
+  background: #FAFAFA;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+
+  margin: 7px 7px 10px;
+}
+
+.code-clothe .button-select {
+  background: rgba(37, 36, 39, 0.8);
+  color: #FFFFFF;
+}
+
+.code-clothe p {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  color: #252427;
+  margin-bottom: 10px;
+
+}
+
+.event-date {
+  width: 80%;
+  max-width: 1200px;
+  min-width: 288px;
+  margin: 0 auto;
+}
+
+.event-date div {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.title-date {
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.date-event-p {
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  padding: 13px 13px 13px 20px;
+
+  background: #FF1A43;
+  border-radius: 30px;
+  color: #FAFAFA;
+
+}
+
+.images-event {
+  width: 90%;
+  margin: 60px auto 70px;
 }
 
 .opinions {
@@ -286,46 +521,13 @@ agm-map {
   min-width: 220px;
   max-width: 850px;
   height: 20px;
-}
-
-.progress-bar-empty {
-  width: 100%;
   background: rgba(37, 36, 39, 0.9);
   border-radius: 20px;
-}
-
-.progress-bar-5 {
-  width: 57%;
-}
-
-.progress-bar-5-5 {
-  width: 43%;
-}
-
-.progress-bar-4 {
-  width: 26%;
-}
-
-.progress-bar-4-4 {
-  width: 74%;
-}
-
-.progress-bar-3 {
-  width: 18%;
-}
-
-.progress-bar-3-3 {
-  width: 82%;
 }
 
 .red-progress {
   background: #FF1A43;
   border-radius: 20px 0 0 20px;
-}
-
-.black-progress {
-  background: rgba(37, 36, 39, 0.9);
-  border-radius: 0 20px 20px 0;
 }
 
 .n-iterations {
@@ -425,20 +627,71 @@ agm-map {
   color: #252427;
 }
 
+.my-pagination {
+  width: 90%;
+  max-width: 1200px;
+  min-width: 288px;
+
+  text-align: center;
+  margin: 0 auto;
+}
+
+.my-pagination a {
+  cursor: pointer;
+}
+
 @media (min-width: 481px) {
   .followers {
     position: absolute;
-    left: 47px;
-    top: 6px;
+    left: 12px;
+    top: 8px;
     color: white;
+  }
+
+  .heart {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
+
+  .img-container {
+    height: 40vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+    border-radius: 0;
+  }
+
+  .info-company {
+    padding-top: 100px;
+  }
+
+  .my-img {
+    visibility: initial;
+    position: absolute;
+
+    width: 100%;
+    height: 400px;
+    top: -350px;
+    border-radius: 20px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+  }
 
   .followers {
     position: absolute;
-    left: 47px;
+    left: 14px;
     top: 8px;
     color: white;
   }
@@ -447,9 +700,58 @@ agm-map {
     position: absolute;
     width: 50px;
     height: 50px;
-    left: 32px;
+    left: 0;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+
+  .list-heart {
+    margin-left: 70px;
+    text-align: left;
+  }
+
+  .list-heart fa-icon {
+    margin-left: 8px;
+  }
+
+  .desc-card{
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .desciption-company {
+    width: 100%;
+    height: 186px;
+    grid-area: desciption-company;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
+    padding-top: 15px;
+    overflow-y: auto
+  }
+
+  .categories-buttons {
+    grid-area: categories-buttons;
+  }
+
+  .event-date {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .event-date div {
+    width: 400px;
+  }
+
+  .code-clothe {
+    margin-top: 50px;
+  }
+
+  .code-clothe {
+    text-align: left;
   }
 }

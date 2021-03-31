@@ -22,6 +22,7 @@ import {LandingPageCompanyComponent} from './company/landing-page-company/landin
 import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
 import {AllestablishmentCompanyComponent} from './company/establishments/allestablishment-company/allestablishment-company.component';
 import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
+import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.component';
 
 const routes: Routes = [
   {
@@ -48,10 +49,13 @@ const routes: Routes = [
     path: 'company/events', canActivate: [CompanySesionGuard], component: AlleventsCompanyComponent
   },
   {
+    path: 'company/events/:id', component: EventPerfilComponent
+  },
+  {
     path: 'company/establishments', canActivate: [CompanySesionGuard], component: AllestablishmentCompanyComponent
   },
   {
-    path: 'company/establishments/:id', canActivate: [CompanySesionGuard], component: EstablishmentPerfilComponent
+    path: 'company/establishments/:id', component: EstablishmentPerfilComponent
   },
   {
     path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent
@@ -86,7 +90,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled', useHash: true})
   ],
   exports: [RouterModule]
 })

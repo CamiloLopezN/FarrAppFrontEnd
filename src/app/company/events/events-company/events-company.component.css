@@ -37,29 +37,18 @@
 }
 
 
-.events{
+.events {
   font-style: normal;
   font-weight: 500;
-  font-size: 40px;
-  line-height: 41px;
+  font-size: 1.4rem;
+  line-height: 1rem;
   color: #252427;
 }
 
-.events2{
+.events2 {
   font-style: normal;
   font-weight: 300;
-  font-size: 23px;
-  line-height: 21px;
+  font-size: 1rem;
+  line-height: 1rem;
   color: rgba(37, 36, 39, 0.6);
-}
-
-
-@media screen and (max-width: 1024px) {
-  .events{
-    font-size: 35px;
-  }
-
-  .events2{
-    font-size: 18px;
-  }
 }

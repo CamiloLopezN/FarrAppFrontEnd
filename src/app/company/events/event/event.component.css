@@ -89,6 +89,10 @@
   color: rgba(174, 216, 229, 0.9);
 }
 
+.icons{
+  font-size: 0.6rem;
+}
+
 @media screen and (max-width: 1024px) {
   .card {
     width: 41vw;

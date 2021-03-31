@@ -151,3 +151,8 @@ export interface EstablishmentView {
   name: string;
   photo: string[];
 }
+
+export interface RemoveItem {
+  id: string;
+  name: string;
+}

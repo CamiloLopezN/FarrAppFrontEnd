@@ -1,11 +1,22 @@
 import {Component, OnInit} from '@angular/core';
-import {faStar as fs, faUser, faStarHalfAlt, faEdit, faTrash, faMapMarkerAlt, faTshirt, faBan} from '@fortawesome/free-solid-svg-icons';
+import {
+    faStar as fs,
+    faUser,
+    faStarHalfAlt,
+    faEdit,
+    faTrash,
+    faMapMarkerAlt,
+    faTshirt,
+    faBan,
+    faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
 import {faStar} from '@fortawesome/free-regular-svg-icons';
 import {MyComment, Opinion} from '../../../model/opinion';
 import {UserService} from '../../../services/user.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {getDateEventPerfil} from '../../../model/RelojTest';
+import {EventRemoveService} from '../../../services/event-remove.service';
 
 declare var $: any;
 
@@ -37,8 +48,10 @@ export class EventPerfilComponent implements OnInit {
     show = false;
     event: any;
     photos: string[];
+    faExclamationTriangle = faExclamationTriangle;
 
-    constructor(private userS: UserService, private route: ActivatedRoute, private authService: AuthService) {
+    constructor(private userS: UserService, private route: ActivatedRoute,
+                private authService: AuthService, private ers: EventRemoveService) {
         this.actualPage = 1;
         this.photos = [];
         this.comments = [
@@ -220,10 +233,15 @@ export class EventPerfilComponent implements OnInit {
                 console.log(this.event);
                 this.event.startDate = new Date(this.event.startDate);
                 this.event.endDate = new Date(this.event.endDate);
-            }, () => {}, () => {
-              $(() => {
-                $('[data-toggle="tooltip"]').tooltip();
-              });
+            }, () => {
+            }, () => {
+                $(() => {
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+                this.ers.eventSelect.next({
+                    id: this.event._id,
+                    name: this.event.eventName
+                });
             });
         });
     }
@@ -253,7 +271,7 @@ export class EventPerfilComponent implements OnInit {
     }
 
     remove(): void {
-
+        $('#removeEvent').modal('show');
     }
 
     getCategories(): string {
@@ -264,4 +282,7 @@ export class EventPerfilComponent implements OnInit {
         return myStr.slice(0, -2);
     }
 
+    removeCompany(): void {
+
+    }
 }

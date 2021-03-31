@@ -53,6 +53,7 @@ import {AllestablishmentCompanyComponent} from './company/establishments/allesta
 import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
 import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.component';
 import { ImgsCarouselComponent } from './company/events/imgs-carousel/imgs-carousel.component';
+import { RemoveEventModalComponent } from './company/remove-event-modal/remove-event-modal.component';
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { ImgsCarouselComponent } from './company/events/imgs-carousel/imgs-carou
     AllestablishmentCompanyComponent,
     EstablishmentPerfilComponent,
     EventPerfilComponent,
-    ImgsCarouselComponent
+    ImgsCarouselComponent,
+    RemoveEventModalComponent
   ],
   imports: [
     BrowserModule,

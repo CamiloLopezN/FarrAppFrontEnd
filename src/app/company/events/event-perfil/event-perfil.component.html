@@ -15,7 +15,7 @@
       <h1>{{event.eventName}}</h1>
       <p class="city text-uppercase">
         <fa-icon [icon]="faGps"></fa-icon>
-         {{event.city}} - {{event.address}}</p>
+        {{event.city}} - {{event.address}}</p>
       <p class="city text-uppercase">{{getCategories()}}</p>
     </section>
     <section class="interactions">
@@ -35,36 +35,48 @@
         <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"></fa-icon>
       </div>
     </section>
-    <div class="img-iter-category text-center">
-      <div #divHidden class="desciption-company" [class.show]="show">{{event.description}}
-      </div>
-      <div *ngIf="isHidden(divHidden) || (!isHidden(divHidden) && show)">
-        <a class="my-show" (click)="show = !show">{{ show ? 'Ver menos' : 'Ver más' }}</a>
-      </div>
-      <section class="img-google">
-        <agm-map [latitude]="10" [longitude]="10" [zoom]="15" *ngIf="!production">
-          <agm-marker [latitude]="10" [longitude]="10">
-            <agm-info-window>Saturday Night party</agm-info-window>
-          </agm-marker>
-        </agm-map>
-      </section>
-      <section class="categories-buttons">
-        <button class="my-button">Categoría</button>
-        <button class="my-button">Categoría</button>
-        <button class="my-button">Categoría</button>
-        <button class="my-button">Categoría</button>
-        <button class="my-button button-select">Selección</button>
-        <button class="my-button">Categoría</button>
-        <button class="my-button">Categoría</button>
-        <button class="my-button">Categoría</button>
-      </section>
-    </div>
   </header>
   <main>
-    <section class="code-clothe">
-      <p>¡La fiesta tiene este estilo!</p>
-      <button class="my-button button-select">Formal</button>
-      <button class="my-button button-select">Informal</button>
+    <div class="desc-card">
+      <section class="description-com" [class.show]="show">
+        <h2>Descripción</h2>
+        <div #divHidden class="divhidden" [class.show]="show" id="divhid">
+          <p>{{event.description}}</p>
+        </div>
+        <div *ngIf="isHidden(divHidden) || (!isHidden(divHidden) && show)">
+          <a class="my-show" (click)="show = !show">{{ show ? 'Ver menos' : 'Ver más' }}</a>
+        </div>
+      </section>
+      <section class="carac-event">
+        <div class="card-carac">
+          <div class="column-card" *ngFor="let code of event.dressCode">
+            <fa-icon class="header-carac" [icon]="faTshirt"></fa-icon>
+            <p class="name-carac">{{code.name}}</p>
+          </div>
+          <p class="type-carac">Código de vestimenta</p>
+        </div>
+        <div class="card-carac">
+          <div class="column-card">
+            <fa-icon class="header-carac" [icon]="faBan"></fa-icon>
+            <p class="name-carac">{{event.minAge}}+</p>
+          </div>
+          <p class="type-carac">Edad mínima</p>
+        </div>
+        <div class="card-carac">
+          <div class="column-card">
+            <fa-icon class="header-carac" [icon]="faUser"></fa-icon>
+            <p class="name-carac">{{event.capacity}}</p>
+          </div>
+          <p class="type-carac">Capacidad máxima</p>
+        </div>
+      </section>
+    </div>
+    <section class="img-google">
+      <agm-map [latitude]="10" [longitude]="10" [zoom]="15" *ngIf="!production">
+        <agm-marker [latitude]="10" [longitude]="10">
+          <agm-info-window>Saturday Night party</agm-info-window>
+        </agm-marker>
+      </agm-map>
     </section>
     <section class="images-event" *ngIf="photos.length != 0">
       <app-imgs-carousel [photos]="photos"></app-imgs-carousel>
@@ -115,8 +127,8 @@
       </div>
     </section>
     <section class="my-pagination">
-      <a class="text-center" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
-      <a class="text-center" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
+      <a class="text-center my-show" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
+      <a class="text-center my-show" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
     </section>
   </main>
 </div>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {faStar as fs, faUser, faStarHalfAlt, faEdit, faTrash, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import {faStar, faClock} from '@fortawesome/free-regular-svg-icons';
+import {faStar as fs, faUser, faStarHalfAlt, faEdit, faTrash, faMapMarkerAlt, faTshirt, faBan} from '@fortawesome/free-solid-svg-icons';
+import {faStar} from '@fortawesome/free-regular-svg-icons';
 import {MyComment, Opinion} from '../../../model/opinion';
 import {UserService} from '../../../services/user.service';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -17,8 +17,9 @@ export class EventPerfilComponent implements OnInit {
   faStartSolid = fs;
   faStart = faStar;
   faStartMedia = faStarHalfAlt;
-  faClock = faClock;
   faGps = faMapMarkerAlt;
+  faTshirt = faTshirt;
+  faBan = faBan;
   faUser = faUser;
   faEdit = faEdit;
   faTrash = faTrash;
@@ -226,7 +227,7 @@ export class EventPerfilComponent implements OnInit {
   }
 
 
-  isHidden(divHidden: HTMLDivElement): boolean {
+  isHidden(divHidden: HTMLDivElement | HTMLElement): boolean {
     const curOverf = divHidden.style.overflow;
 
     if (!curOverf || curOverf === 'visible') {
@@ -238,9 +239,6 @@ export class EventPerfilComponent implements OnInit {
 
     divHidden.style.overflow = curOverf;
 
-    if (!isOverflowing && !this.show) {
-      divHidden.style.height = 'auto';
-    }
 
     return isOverflowing;
   }

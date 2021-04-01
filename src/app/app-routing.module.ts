@@ -23,10 +23,14 @@ import {AlleventsCompanyComponent} from './company/allevents-company/allevents-c
 import {AllestablishmentCompanyComponent} from './company/establishments/allestablishment-company/allestablishment-company.component';
 import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
 import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.component';
+import {EventsUserComponent} from './users/events/events-user/events-user.component';
 
 const routes: Routes = [
   {
     path: 'landing-page', component: LandingPageComponent
+  },
+  {
+    path: 'users/events', component: EventsUserComponent
   },
   {
     path: 'client/profile', canActivate: [InitSesionGuard], component: ProfileClientComponent

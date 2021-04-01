@@ -53,6 +53,9 @@ import {AllestablishmentCompanyComponent} from './company/establishments/allesta
 import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
 import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.component';
 import { ImgsCarouselComponent } from './company/events/imgs-carousel/imgs-carousel.component';
+import { EventsUserComponent } from './users/events/events-user/events-user.component';
+import { EventUserComponent } from './users/events/event-user/event-user.component';
+import { FilterEventModalComponent } from './users/events/filter-event-modal/filter-event-modal.component';
 
 
 @NgModule({
@@ -95,7 +98,10 @@ import { ImgsCarouselComponent } from './company/events/imgs-carousel/imgs-carou
     AllestablishmentCompanyComponent,
     EstablishmentPerfilComponent,
     EventPerfilComponent,
-    ImgsCarouselComponent
+    ImgsCarouselComponent,
+    EventsUserComponent,
+    EventUserComponent,
+    FilterEventModalComponent
   ],
   imports: [
     BrowserModule,

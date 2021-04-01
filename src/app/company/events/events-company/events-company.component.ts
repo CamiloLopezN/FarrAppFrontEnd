@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, HostListener, Input, OnInit} from '@angular/core';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {EventView} from '../../../model/company';
+import {Router} from '@angular/router';
 
 declare const $: any;
 
@@ -21,7 +22,7 @@ export class EventsCompanyComponent implements OnInit {
 
   faChevronRight = faChevronRight;
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -87,4 +88,8 @@ export class EventsCompanyComponent implements OnInit {
     }
   }
 
+  redirect(): void {
+    $('#showMore').tooltip('hide');
+    this.router.navigate(['users/events']);
+  }
 }

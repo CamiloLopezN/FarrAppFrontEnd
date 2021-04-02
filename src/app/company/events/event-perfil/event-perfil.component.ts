@@ -8,9 +8,10 @@ import {
   faMapMarkerAlt,
   faTshirt,
   faBan,
-  faExclamationTriangle
+  faExclamationTriangle,
+  faHeart as fh
 } from '@fortawesome/free-solid-svg-icons';
-import {faStar} from '@fortawesome/free-regular-svg-icons';
+import {faHeart, faStar} from '@fortawesome/free-regular-svg-icons';
 import {MyComment, Opinion} from '../../../model/opinion';
 import {UserService} from '../../../services/user.service';
 import {ActivatedRoute, Params} from '@angular/router';
@@ -36,6 +37,8 @@ export class EventPerfilComponent implements OnInit {
   faUser = faUser;
   faEdit = faEdit;
   faTrash = faTrash;
+  faHeart = faHeart;
+  faHeartSolid = fh;
   production = false;
   comments: MyComment[];
   comments2: MyComment[];
@@ -49,7 +52,9 @@ export class EventPerfilComponent implements OnInit {
   event: any;
   photos: string[];
   faExclamationTriangle = faExclamationTriangle;
+
   isClient = true;
+  isLike = false;
 
   constructor(private userS: UserService, private route: ActivatedRoute,
               private authService: AuthService, private ers: EventEmmiterService) {

@@ -12,6 +12,13 @@
         {{getDate(event.startDate)}} {{event.startDate | date:'HH:mm'}}
         - {{getDate(event.endDate)}} {{event.endDate | date:'HH:mm'}}
       </p>
+      <section *ngIf="isClient" class="like-pc">
+        <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+          <fa-icon [icon]="faHeart"></fa-icon>Me gusta</button>
+
+        <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+          <fa-icon [icon]="faHeartSolid"></fa-icon>Me gusta</button>
+      </section>
       <h1>{{event.eventName}}</h1>
       <p class="city text-uppercase">
         <fa-icon [icon]="faGps"></fa-icon>
@@ -35,6 +42,13 @@
         <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"
                  data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
       </div>
+    </section>
+    <section *ngIf="isClient" class="like-mobile">
+      <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+        <fa-icon [icon]="faHeart"></fa-icon>Me gusta</button>
+
+      <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+        <fa-icon [icon]="faHeartSolid"></fa-icon>Me gusta</button>
     </section>
   </header>
   <main>

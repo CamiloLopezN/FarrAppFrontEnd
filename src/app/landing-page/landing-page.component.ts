@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {EventC} from '../model/company';
+import {EventView} from '../model/company';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,10 +10,35 @@ export class LandingPageComponent implements OnInit {
 
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
   prevScrollpos = window.pageYOffset;
-  events: EventC[];
+  events: EventView[];
 
   constructor() {
-    this.events = [];
+    this.events = [
+      {
+        eventName : 'Paquita la del barrio',
+        endDate: new Date(),
+        startDate : new Date(),
+        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
+        _id: 'asdasdas',
+        city: 'Tunja'
+      },
+      {
+        eventName : 'Paquita la del barrio',
+        endDate: new Date(),
+        startDate : new Date(),
+        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
+        _id: 'asdasdas',
+        city: 'Tunja'
+      },
+      {
+        eventName : 'Paquita la del barrio',
+        endDate: new Date(),
+        startDate : new Date(),
+        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
+        _id: 'asdasdas',
+        city: 'Tunja'
+      }
+    ];
   }
 
 

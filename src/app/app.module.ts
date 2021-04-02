@@ -55,6 +55,10 @@ import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.c
 import { ImgsCarouselComponent } from './company/events/imgs-carousel/imgs-carousel.component';
 import { RemoveEventModalComponent } from './company/remove-event-modal/remove-event-modal.component';
 import { UserCommentModalComponent } from './users/events/user-comment-modal/user-comment-modal.component';
+import { EventsUserComponent } from './users/events/events-user/events-user.component';
+import { EventUserComponent } from './users/events/event-user/event-user.component';
+import { FilterEventModalComponent } from './users/events/filter-event-modal/filter-event-modal.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -99,7 +103,10 @@ import { UserCommentModalComponent } from './users/events/user-comment-modal/use
     EventPerfilComponent,
     ImgsCarouselComponent,
     RemoveEventModalComponent,
-    UserCommentModalComponent
+    UserCommentModalComponent,
+    EventsUserComponent,
+    EventUserComponent,
+    FilterEventModalComponent
   ],
   imports: [
     BrowserModule,
@@ -108,14 +115,15 @@ import { UserCommentModalComponent } from './users/events/user-comment-modal/use
     FontAwesomeModule,
     HttpClientModule,
     NgxPaginationModule,
-    BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     NgProgressModule,
     NgProgressHttpModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDj7S6KshIWY1rgkzv03ymsaABDr8W63g4'
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [DatePipe,
     {

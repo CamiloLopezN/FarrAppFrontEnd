@@ -1,0 +1,167 @@
+.filter-container {
+  width: 97%;
+  margin: 0 auto;
+}
+
+mat-slider {
+  width: 100%;
+}
+
+.mat-slider-horizontal {
+  height: 30px;
+}
+
+.filter-title {
+  font-family: Lovelo, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.3rem;
+  line-height: 1rem;
+
+  text-align: left;
+  color: #FF1A43;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+
+  margin-top: 30px;
+}
+
+.order-title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1rem;
+
+  text-align: left;
+
+  color: #252427;
+
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+
+.list-buttons-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-filter {
+
+  width: 8.5rem;
+  height: 2.5rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+  outline: none;
+  border: none;
+
+  background: rgba(37, 36, 39, 0.8);
+  border-radius: 30px;
+
+  margin: 0.8rem 0.8rem 0;
+}
+
+.min-age-title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1rem;
+
+  text-align: left;
+
+  color: #252427;
+
+  margin-top: 30px;
+}
+
+.category-title {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1rem;
+
+  text-align: left;
+
+  color: #252427;
+
+  margin-top: 30px;
+}
+
+.btn-category {
+  width: 6rem;
+  height: 2.5rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.8rem;
+  line-height: 1rem;
+
+  color: rgba(37, 36, 39, 0.5);
+  background: #FAFAFA;
+  border-radius: 30px;
+
+  outline: none;
+  border: none;
+
+  margin: 0.8rem 0.5rem 0;
+}
+
+.input-date{
+  width: 100%;
+  background: #FAFAFA;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.8rem;
+  line-height: 1rem;
+
+  color: #252427;
+
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+}
+
+.input-text{
+  width: 100%;
+  background: #FAFAFA;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.8rem;
+  line-height: 1rem;
+
+  color: #252427;
+
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+.btn-filter-aplicate{
+  width: 10rem;
+  height: 2.5rem;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.9rem;
+  line-height: 1rem;
+
+  outline: none;
+  border: none;
+
+  color: #FFFFFF;
+
+
+  background: rgba(255, 26, 67, 0.8);
+  border-radius: 30px;
+
+  margin-top: 30px;
+}

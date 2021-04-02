@@ -72,3 +72,15 @@ img {
 .my-button:hover::before {
   background-position: 100% 0;
 }
+
+.container-events{
+  width: 90%;
+  min-width: 288px;
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+
+.event-landing-page{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}

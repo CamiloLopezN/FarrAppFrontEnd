@@ -11,8 +11,25 @@
       </div>
       <div class="ralewayFont modal-body text-center border-content-register">
         <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
-        <h2 class="title-name"></h2>
-        <h2 class="title-lastname"></h2>
+        <div class="titles">
+          <p class="event-title-1">¡Hola! Julián</p>
+          <p class="event-title-2">ROMERO</p>
+        </div>
+        <p class="event-title-3">Nos interesa tu opinión.</p>
+        <p class="event-title-4">¡Dale una calificación al pasado evento!</p>
+        <div class="list-heart">
+          <p class="qualification">{{qualification}}</p>
+          <div style=" display: inline-flex;cursor: pointer;margin-left: 0.5rem;animation-duration: 0.2s"
+               *ngFor="let star of stars; index as i" (click)="setStarsClick(i)">
+            <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="star == false"></fa-icon>
+            <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="star == true"></fa-icon>
+          </div>
+        </div>
+        <section class="description-text">
+          <p class="event-title-5">Cuéntanos cómo te fue</p>
+          <textarea rows="5" class="txt-area"></textarea>
+        </section>
+        <button class="btn-send-comment">Enviar comentario</button>
       </div>
     </div>
   </div>

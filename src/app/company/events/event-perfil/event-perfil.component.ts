@@ -281,7 +281,12 @@ export class EventPerfilComponent implements OnInit {
   }
 
   comment(): void {
-    $('#commentEventModal').modal('show');
+    if (this.rol !== 'norole') {
+      $('#commentEventModal').modal('show');
+    } else {
+      this.authService.inLog.next(true);
+      $('#login-modal').modal('show');
+    }
   }
 
   getCategories(): string {

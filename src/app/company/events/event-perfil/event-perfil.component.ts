@@ -18,6 +18,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {getDateEventPerfil} from '../../../model/RelojTest';
 import {EventEmmiterService} from '../../../services/event-remove.service';
+import {NotificationService} from '../../../services/notification.service';
 
 declare var $: any;
 
@@ -53,11 +54,10 @@ export class EventPerfilComponent implements OnInit {
   photos: string[];
   faExclamationTriangle = faExclamationTriangle;
 
-  isClient = true;
   isLike = false;
 
   constructor(private userS: UserService, private route: ActivatedRoute,
-              private authService: AuthService, private ers: EventEmmiterService) {
+              private authService: AuthService, private ers: EventEmmiterService, private ns: NotificationService) {
     this.actualPage = 1;
     this.photos = [];
     this.comments = [
@@ -298,5 +298,19 @@ export class EventPerfilComponent implements OnInit {
 
   isAfter(): boolean {
     return this.event.endDate < new Date();
+  }
+
+  like(): void {
+    if (this.rol !== 'norole') {
+      if (!this.isLike) {
+        this.ns.succesFavorite(this.event.eventName);
+      } else {
+        this.ns.succesNotFavorite(this.event.eventName);
+      }
+      this.isLike = !this.isLike;
+    } else {
+      this.authService.inLog.next(true);
+      $('#login-modal').modal('show');
+    }
   }
 }

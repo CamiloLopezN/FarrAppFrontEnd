@@ -1,11 +1,11 @@
-<div class="card" (click)="redirect()" style="cursor: pointer">
-    <img class="card-img-top"
+<div class="card" style="cursor: pointer">
+    <img class="card-img-top" (click)="redirect()"
          src="{{event.photos[0]}}" alt="Card image cap">
-    <button class="like-event-like" id="like{{event._id}}" (click)="like()"
-            *ngIf="isClient == 'client' || isClient == 'norole'">
-      <fa-icon [icon]="faLike"></fa-icon>
-    </button>
-    <div class="card-body">
+    <div class="card-body position-relative">
+      <button class="like-event-like" id="like{{event._id}}" (click)="like()"
+              *ngIf="isClient == 'client' || isClient == 'norole'">
+        <fa-icon [icon]="faLike"></fa-icon>
+      </button>
       <div>
         <div class="float-left date-event">
           <p>{{getDate()}}</p>

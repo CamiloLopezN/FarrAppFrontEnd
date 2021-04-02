@@ -12,11 +12,11 @@
         {{getDate(event.startDate)}} {{event.startDate | date:'HH:mm'}}
         - {{getDate(event.endDate)}} {{event.endDate | date:'HH:mm'}}
       </p>
-      <section *ngIf="isClient" class="like-pc">
-        <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+      <section *ngIf="rol == 'client' || rol == 'norole'" class="like-pc" >
+        <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="like()" style="animation-duration: 0.5s;">
           <fa-icon [icon]="faHeart"></fa-icon>Me gusta</button>
 
-        <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+        <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="like()" style="animation-duration: 0.5s;">
           <fa-icon [icon]="faHeartSolid"></fa-icon>Me gusta</button>
       </section>
       <h1>{{event.eventName}}</h1>
@@ -43,11 +43,11 @@
                  data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
       </div>
     </section>
-    <section *ngIf="isClient" class="like-mobile">
-      <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+    <section *ngIf="rol == 'client' || rol == 'norole'" class="like-mobile" >
+      <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="like()" style="animation-duration: 0.5s;">
         <fa-icon [icon]="faHeart"></fa-icon>Me gusta</button>
 
-      <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="isLike = !isLike" style="animation-duration: 0.5s;">
+      <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="like()" style="animation-duration: 0.5s;">
         <fa-icon [icon]="faHeartSolid"></fa-icon>Me gusta</button>
     </section>
   </header>
@@ -146,7 +146,7 @@
         <a class="text-center my-show" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
         <a class="text-center my-show" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
       </section>
-      <section class="comment-user" *ngIf="isClient">
+      <section class="comment-user" *ngIf="rol == 'client' || rol == 'norole'">
         <button class="comment-button" (click)="comment()">¡Deja un comentario!</button>
       </section>
     </div>

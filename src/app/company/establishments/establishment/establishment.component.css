@@ -21,20 +21,6 @@
   margin: 0 auto;
 }
 
-.like-event-like {
-  position: absolute;
-  background: #fefefe;
-  border: none;
-  border-radius: 5px;
-  font-size: 20px;
-  top: 19.2vw;
-  right: 2vw;
-  width: 45px;
-  height: 45px;
-  transition: 0.2s;
-  outline: none;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
-}
 
 .like-event-like:hover {
   color: red;

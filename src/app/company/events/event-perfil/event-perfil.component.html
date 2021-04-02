@@ -32,7 +32,8 @@
       <div class="edit-remove" *ngIf="rol == 'company' && isMyEvent">
         <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
                  (click)="edit()" data-toggle="tooltip" data-placement="top" title="Editar"></fa-icon>
-        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()" data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"
+                 data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
       </div>
     </section>
   </header>
@@ -81,54 +82,59 @@
     <section class="images-event" *ngIf="photos.length != 0">
       <app-imgs-carousel [photos]="photos"></app-imgs-carousel>
     </section>
-    <section #target class="opinions">
-      <section class="opinions-title">
-        <p class="opinions-text">Opiniones</p>
-        <div class="list-hear-opinions">
-          <p>{{average}}</p>
-          <div *ngFor="let start of getStars(average)" style="display: inline-flex">
-            <fa-icon [icon]="faStartMedia" size=2x class="checked" *ngIf="start == undefined"></fa-icon>
-            <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start == true"></fa-icon>
-            <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
+    <div *ngIf="isAfter()">
+      <section #target class="opinions">
+        <section class="opinions-title">
+          <p class="opinions-text">Opiniones</p>
+          <div class="list-hear-opinions">
+            <p>{{average}}</p>
+            <div *ngFor="let start of getStars(average)" style="display: inline-flex">
+              <fa-icon [icon]="faStartMedia" size=2x class="checked" *ngIf="start == undefined"></fa-icon>
+              <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start == true"></fa-icon>
+              <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
+            </div>
           </div>
+        </section>
+        <section class="my-califications">
+          <div *ngFor="let op of opinion">
+            <div class="opinion-calification">
+              <div class="clasification-left">
+                <p class="calification">{{op.nStart}}</p>
+                <fa-icon [icon]="faStartSolid" size=2x class="checked"></fa-icon>
+              </div>
+              <div class="progress">
+                <p class="red-progress" [style.width]="op.percentage"></p>
+              </div>
+              <p class="n-iterations">{{op.coincidence}}</p>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section class="comments" *ngFor="let comment of comments2">
+        <div class="comment">
+          <div class="title-comment">
+            <p>{{comment.title}}</p>
+            <div class="tittle-comment-list-heart">
+              <div *ngFor="let start of getStars(comment.nStar)">
+                <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start"></fa-icon>
+                <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="!start"></fa-icon>
+              </div>
+            </div>
+          </div>
+          <div class="user-date-comment">
+            <p class="name-user">{{comment.author}}</p>
+            <p class="date-user">{{comment.date}}</p>
+          </div>
+          <p class="user-comment">{{comment.comment}}</p>
         </div>
       </section>
-      <section class="my-califications">
-        <div *ngFor="let op of opinion">
-          <div class="opinion-calification">
-            <div class="clasification-left">
-              <p class="calification">{{op.nStart}}</p>
-              <fa-icon [icon]="faStartSolid" size=2x class="checked"></fa-icon>
-            </div>
-            <div class="progress">
-              <p class="red-progress" [style.width]="op.percentage"></p>
-            </div>
-            <p class="n-iterations">{{op.coincidence}}</p>
-          </div>
-        </div>
+      <section class="my-pagination">
+        <a class="text-center my-show" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
+        <a class="text-center my-show" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
       </section>
-    </section>
-    <section class="comments" *ngFor="let comment of comments2">
-      <div class="comment">
-        <div class="title-comment">
-          <p>{{comment.title}}</p>
-          <div class="tittle-comment-list-heart">
-            <div *ngFor="let start of getStars(comment.nStar)">
-              <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start"></fa-icon>
-              <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="!start"></fa-icon>
-            </div>
-          </div>
-        </div>
-        <div class="user-date-comment">
-          <p class="name-user">{{comment.author}}</p>
-          <p class="date-user">{{comment.date}}</p>
-        </div>
-        <p class="user-comment">{{comment.comment}}</p>
-      </div>
-    </section>
-    <section class="my-pagination">
-      <a class="text-center my-show" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
-      <a class="text-center my-show" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
-    </section>
+      <section class="comment-user" *ngIf="isClient">
+        <button class="comment-button" (click)="comment()">¡Deja un comentario!</button>
+      </section>
+    </div>
   </main>
 </div>

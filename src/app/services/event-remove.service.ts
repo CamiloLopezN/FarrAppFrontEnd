@@ -5,10 +5,9 @@ import {RemoveItem} from '../model/company';
 @Injectable({
   providedIn: 'root'
 })
-export class EventRemoveService {
+export class EventEmmiterService {
 
   public eventSelect = new BehaviorSubject<RemoveItem>(undefined);
-
   constructor() {
   }
 

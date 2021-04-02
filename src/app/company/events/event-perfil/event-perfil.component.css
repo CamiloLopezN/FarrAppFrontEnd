@@ -627,6 +627,31 @@ agm-map {
   color: #252427;
 }
 
+.comment-user{
+  width: 90%;
+  margin: 30px auto 0;
+  text-align: center;
+}
+
+.comment-button{
+
+  width: 14rem;
+  height: 3rem;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+
+  outline: none;
+  border: none;
+
+  background: rgba(255, 26, 67, 0.8);
+  border-radius: 30px;
+}
+
 .my-pagination {
   width: 90%;
   max-width: 1200px;

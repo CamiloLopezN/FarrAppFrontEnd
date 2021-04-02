@@ -7,7 +7,7 @@ import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {AuthService} from '../../../services/auth.service';
 import {NotificationService} from '../../../services/notification.service';
 import {Router} from '@angular/router';
-import {EventRemoveService} from '../../../services/event-remove.service';
+import {EventEmmiterService} from '../../../services/event-remove.service';
 
 declare var $: any;
 
@@ -29,7 +29,7 @@ export class EventComponent implements OnInit {
   isLike = false;
   isClient: string;
 
-  constructor(private authService: AuthService, private ns: NotificationService, public router: Router, private ers: EventRemoveService) {
+  constructor(private authService: AuthService, private ns: NotificationService, public router: Router, private ers: EventEmmiterService) {
     this.authService.roled.subscribe(rol => {
       this.isClient = rol;
     });

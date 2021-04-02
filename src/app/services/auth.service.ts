@@ -83,9 +83,10 @@ export class AuthService {
     );
   }
 
+  // tslint:disable-next-line:variable-name
   retrievePass(e_mail: string): Observable<any> {
     const req = {
-      e_mail: e_mail
+      e_mail
     };
     return this.httpClient.put(`${environment.backend}/api/user/recover-pass`, req).pipe(
       map((res: any) => {

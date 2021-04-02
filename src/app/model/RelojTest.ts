@@ -5,6 +5,9 @@ const monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
 const dayNames = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'
 ];
 
+const dayNames2 = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'
+];
+
 const monthNames2 = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
   'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
 ];
@@ -91,3 +94,9 @@ export function getDateEvent(date: Date): string {
   // tslint:disable-next-line:max-line-length
   return dayNames[date.getDay()] + ', ' + date.getDate() + ' de ' + monthNames2[date.getMonth()];
 }
+
+export function getDateEventPerfil(date: Date): string {
+  // tslint:disable-next-line:max-line-length
+  return dayNames2[date.getDay()] + ', ' + date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
+}
+

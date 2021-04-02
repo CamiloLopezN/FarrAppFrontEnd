@@ -1,0 +1,134 @@
+<div class="my-establishment" *ngIf="event">
+  <header>
+    <div style="background-color: black">
+      <section class="img-container"
+               [style.background-image]="'url(' + photos[0]+')'">
+      </section>
+    </div>
+    <section class="info-company">
+      <div class="my-img" [style.background-image]="'url(' + photos[0]+')'">
+      </div>
+      <p class="date-str">
+        {{getDate(event.startDate)}} {{event.startDate | date:'HH:mm'}}
+        - {{getDate(event.endDate)}} {{event.endDate | date:'HH:mm'}}
+      </p>
+      <h1>{{event.eventName}}</h1>
+      <p class="city text-uppercase">
+        <fa-icon [icon]="faGps"></fa-icon>
+        {{event.city}} - {{event.address}}</p>
+      <p class="city text-uppercase">{{getCategories()}}</p>
+    </section>
+    <section class="interactions">
+      <img src="http://pngimg.com/uploads/heart/heart_PNG51337.png" class="heart" alt="heart">
+      <p class="followers">30</p>
+      <div class="list-heart">
+        <p class="calification">{{average}}</p>
+        <div *ngFor="let start of getStars(average)" style="display: inline-flex">
+          <fa-icon [icon]="faStartMedia" size=2x class="checked" *ngIf="start == undefined"></fa-icon>
+          <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start == true"></fa-icon>
+          <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
+        </div>
+      </div>
+      <div class="edit-remove" *ngIf="rol == 'company' && isMyEvent">
+        <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
+                 (click)="edit()" data-toggle="tooltip" data-placement="top" title="Editar"></fa-icon>
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()" data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
+      </div>
+    </section>
+  </header>
+  <main>
+    <div class="desc-card">
+      <section class="description-com" [class.show]="show">
+        <h2>Descripción</h2>
+        <div #divHidden class="divhidden" [class.show]="show" id="divhid">
+          <p>{{event.description}}</p>
+        </div>
+        <div *ngIf="isHidden(divHidden) || (!isHidden(divHidden) && show)">
+          <a class="my-show" (click)="show = !show">{{ show ? 'Ver menos' : 'Ver más' }}</a>
+        </div>
+      </section>
+      <section class="carac-event">
+        <div class="card-carac">
+          <div class="column-card" *ngFor="let code of event.dressCode">
+            <fa-icon class="header-carac" [icon]="faTshirt"></fa-icon>
+            <p class="name-carac">{{code.name}}</p>
+          </div>
+          <p class="type-carac">Código de vestimenta</p>
+        </div>
+        <div class="card-carac">
+          <div class="column-card">
+            <fa-icon class="header-carac" [icon]="faBan"></fa-icon>
+            <p class="name-carac">{{event.minAge}}+</p>
+          </div>
+          <p class="type-carac">Edad mínima</p>
+        </div>
+        <div class="card-carac">
+          <div class="column-card">
+            <fa-icon class="header-carac" [icon]="faUser"></fa-icon>
+            <p class="name-carac">{{event.capacity}}</p>
+          </div>
+          <p class="type-carac">Capacidad máxima</p>
+        </div>
+      </section>
+    </div>
+    <section class="img-google">
+      <agm-map [latitude]="10" [longitude]="10" [zoom]="15" *ngIf="!production">
+        <agm-marker [latitude]="10" [longitude]="10">
+          <agm-info-window>Saturday Night party</agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </section>
+    <section class="images-event" *ngIf="photos.length != 0">
+      <app-imgs-carousel [photos]="photos"></app-imgs-carousel>
+    </section>
+    <section #target class="opinions">
+      <section class="opinions-title">
+        <p class="opinions-text">Opiniones</p>
+        <div class="list-hear-opinions">
+          <p>{{average}}</p>
+          <div *ngFor="let start of getStars(average)" style="display: inline-flex">
+            <fa-icon [icon]="faStartMedia" size=2x class="checked" *ngIf="start == undefined"></fa-icon>
+            <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start == true"></fa-icon>
+            <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
+          </div>
+        </div>
+      </section>
+      <section class="my-califications">
+        <div *ngFor="let op of opinion">
+          <div class="opinion-calification">
+            <div class="clasification-left">
+              <p class="calification">{{op.nStart}}</p>
+              <fa-icon [icon]="faStartSolid" size=2x class="checked"></fa-icon>
+            </div>
+            <div class="progress">
+              <p class="red-progress" [style.width]="op.percentage"></p>
+            </div>
+            <p class="n-iterations">{{op.coincidence}}</p>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section class="comments" *ngFor="let comment of comments2">
+      <div class="comment">
+        <div class="title-comment">
+          <p>{{comment.title}}</p>
+          <div class="tittle-comment-list-heart">
+            <div *ngFor="let start of getStars(comment.nStar)">
+              <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start"></fa-icon>
+              <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="!start"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div class="user-date-comment">
+          <p class="name-user">{{comment.author}}</p>
+          <p class="date-user">{{comment.date}}</p>
+        </div>
+        <p class="user-comment">{{comment.comment}}</p>
+      </div>
+    </section>
+    <section class="my-pagination">
+      <a class="text-center my-show" (click)="onScroll()" *ngIf="actualPage != finishPage">Ver más</a>
+      <a class="text-center my-show" (click)="hide(target)" *ngIf="actualPage == finishPage">Ocultar</a>
+    </section>
+  </main>
+</div>

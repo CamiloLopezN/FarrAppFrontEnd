@@ -1,7 +1,7 @@
 <div class="animate__animated animate__fadeInRight myDiv" *ngIf="company">
-  <div class="p-4">
-    <label class="name-company d-block m-0 p-0">{{company.name}}</label>
-    <label class="nit-company m-0 p-0">{{company.nit}}</label>
+  <div class="header-company">
+    <h1 class="name-company d-block m-0 p-0">{{company.name}}</h1>
+    <h2 class="nit-company m-0 p-0">{{company.nit}}</h2>
   </div>
   <div class="d-flex justify-content-end">
     <div style="padding-right: 8rem;">
@@ -15,47 +15,52 @@
       </div>
     </div>
   </div>
-  <div style="padding: 6vh">
+  <div style="padding: 60px">
   </div>
-  <div class="accions-company-icons">
-    <div class="row p-3 text-center justify-content-center">
-      <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white" [routerLink]="['/company/profile']">
-          <fa-icon [icon]="faUser" size="3x">
-          </fa-icon>
-        </button>
-        <div>
-          Mi perfil
-        </div>
-      </div>
-      <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white" [routerLink]="['/company/events']">
-          <fa-icon [icon]="faCalendar" size="3x">
-          </fa-icon>
-        </button>
-        <div>
-          Eventos
-        </div>
-      </div>
-      <div class="col col-4" style="font-size: 0.85rem">
-        <button class="btn my-btn text-white" [routerLink]="['/company/establishments']">
-          <fa-icon [icon]="faBuilding" size="3x">
-          </fa-icon>
-        </button>
-        <div>
-          Establecimientos
-        </div>
-      </div>
+  <section class="accions-company-icons">
+    <div class="text-center">
+      <button class="btn my-btn text-white" [routerLink]="['/company/profile']">
+        <fa-icon [icon]="faUser" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Mi perfil
+      </p>
     </div>
-  </div>
+    <div class="text-center">
+      <button class="btn my-btn text-white" [routerLink]="['/company/events']">
+        <fa-icon [icon]="faCalendar" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Eventos
+      </p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn my-btn text-white" [routerLink]="['/company/establishments']">
+        <fa-icon [icon]="faBuilding" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Establecimientos
+      </p>
+    </div>
+
+  </section>
   <div style="padding: 2.5vh">
   </div>
-  <div class="p-2" *ngIf="eventss.length != 0">
-    <app-events-company [events]="eventss" [typeEvent]="'¡Tus próximos eventos!'" [index]="'0'"
-                        [tittle]="'Eventos'"></app-events-company>
+
+  <section class="events-proximate mb-5" *ngIf="eventss.length != 0">
+    <div class="container-events">
+      <app-events-company [events]="eventss" [typeEvent]="'¡Tus próximos eventos!'" [index]="'0'"
+                          [tittle]="'Eventos'"></app-events-company>
+    </div>
+  </section>
+  <section class="events-proximate mb-5"  *ngIf="establishments.length != 0">
+  <div class="container-events">
+    <app-establishments-company [establishments]="establishments" [tittle]="'Tus establecimientos'" [typeEstablishment]="'Estos son tus establecimientos'"></app-establishments-company>
   </div>
-  <div class="pt-5" *ngIf="establishments.length != 0">
-    <app-establishments-company [establishments]="establishments"></app-establishments-company>
-  </div>
+  </section>
   <div *ngIf="establishments.length == 0 && eventss.length == 0" style="padding: 25vh"></div>
 </div>

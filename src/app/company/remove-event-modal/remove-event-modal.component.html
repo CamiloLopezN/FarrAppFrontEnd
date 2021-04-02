@@ -1,0 +1,36 @@
+<div class="modal fade" id="removeEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="removeItem">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="ralewayFont modal-title" id="exampleModalLabel">Eliminación de evento</h4>
+        <button type="button" class="close p-0 pr-3" data-dismiss="modal" aria-label="Close" style="font-size: 60px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="text-center">
+        <fa-icon [icon]="faExclamationTriangle" class="fa-9x text-warning"></fa-icon>
+        <div class="ralewayFont modal-body">
+          <h5>
+            ¿Estas seguro que deseas eliminar
+            <b>{{removeItem.name}}</b> de tus eventos?
+          </h5>
+          <h6 style="opacity: 50%">
+            Está acción no se podra revertir
+          </h6>
+        </div>
+      </div>
+      <div class="ralewayFont p-4">
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn border-circ btn-danger w-100" data-dismiss="modal" (click)="removeCompany()">Borrar
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn border-circ btn-dark w-100" data-dismiss="modal">Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

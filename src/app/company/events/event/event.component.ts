@@ -1,11 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {faClock, faHeartBroken} from '@fortawesome/free-solid-svg-icons';
+import {faClock, faEdit, faHeartBroken, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {EventView} from '../../../model/company';
 import {getDateEvent} from '../../../model/RelojTest';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import {AuthService} from '../../../services/auth.service';
 import {NotificationService} from '../../../services/notification.service';
+import {Router} from '@angular/router';
+import {EventRemoveService} from '../../../services/event-remove.service';
 
 declare var $: any;
 
@@ -20,18 +22,27 @@ export class EventComponent implements OnInit {
   faMap = faMapMarkerAlt;
   faLike = faHeart;
   faDislike = faHeartBroken;
+  faTrash = faTrash;
+  faEdit = faEdit;
 
   @Input() event: EventView;
   isLike = false;
   isClient: string;
 
-  constructor(private authService: AuthService, private ns: NotificationService) {
+  constructor(private authService: AuthService, private ns: NotificationService, public router: Router, private ers: EventRemoveService) {
     this.authService.roled.subscribe(rol => {
       this.isClient = rol;
     });
   }
 
   ngOnInit(): void {
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    this.ers.eventSelect.next({
+      id: this.event._id,
+      name: this.event.eventName
+    });
   }
 
   getDate(): string {
@@ -58,4 +69,24 @@ export class EventComponent implements OnInit {
     return `${date.getHours()}:${date.getMinutes()}`;
   }
 
+  redirect(): void {
+    this.router.navigate(['/company/events/', this.event._id]);
+  }
+
+  edit(): void {
+
+  }
+
+  remove(): void {
+    try {
+      this.ers.eventSelect.next({
+        id: this.event._id,
+        name: this.event.eventName
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      $('#removeEvent').modal('show');
+    }
+  }
 }

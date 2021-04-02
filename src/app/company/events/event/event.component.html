@@ -1,29 +1,37 @@
-<div class="card">
+<div class="card" style="cursor: pointer">
   <img class="card-img-top"
-       src="{{event.photos[0]}}" alt="Card image cap">
-  <button class="like-event-like" id="like{{event._id}}" (click)="like()" *ngIf="isClient == 'client' || isClient == 'norole'">
+       src="{{event.photos[0]}}" alt="Card image cap" (click)="redirect()">
+  <button class="like-event-like" id="like{{event._id}}" (click)="like()"
+          *ngIf="isClient == 'client' || isClient == 'norole'">
     <fa-icon [icon]="faLike"></fa-icon>
   </button>
   <div class="card-body">
     <div>
-      <div class="float-left">
+      <div class="float-left date-event">
         <p>{{getDate()}}</p>
       </div>
-      <div class="float-right">
+      <div class="float-right hour-event">
         <p>
           <fa-icon [icon]="faClock"></fa-icon>
           {{event.startDate | date:'HH:mm'}} - {{event.endDate | date:'HH:mm'}}</p>
       </div>
       <div class="clearfix"></div>
     </div>
-    <div>
-      <p class="title-event">{{event.eventName}}</p>
+    <div class="text-wr">
+      <p class="title-event" data-toggle="tooltip" data-placement="top"
+         title="{{event.eventName}}">{{event.eventName}}</p>
     </div>
     <div>
-      <label class="city-title">
+      <a class="city-title m-0">
         <fa-icon [icon]="faMap"></fa-icon>
         {{event.city}}
-      </label>
+      </a>
+      <div class="float-right icons" *ngIf="router.url == '/company/landing-page'">
+        <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
+                 (click)="edit()"></fa-icon>
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"></fa-icon>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </div>
 </div>

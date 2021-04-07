@@ -25,6 +25,14 @@
             <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="star == true"></fa-icon>
           </div>
         </div>
+        <div class="input-group mt-4">
+          <div class="input-group-prepend">
+            <div class="input-group-text icon">
+              <fa-icon [icon]="faStart"></fa-icon>
+            </div>
+          </div>
+          <input type="text" class="form-control" placeholder="Título de la opinión" required>
+        </div>
         <section class="description-text">
           <p class="event-title-5">Cuéntanos cómo te fue</p>
           <textarea rows="5" class="txt-area"></textarea>

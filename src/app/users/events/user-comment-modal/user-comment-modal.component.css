@@ -78,6 +78,35 @@
   color: #ff7b7b;
 }
 
+.input-group{
+  width: 80%;
+  margin: 0 auto;
+}
+
+.icon{
+  background: #FAFAFA;
+  border: 1px solid rgba(37, 36, 39, 0.6);
+  box-sizing: border-box;
+  border-radius: 10px 0 0 10px;
+}
+
+.form-control{
+  background: #FAFAFA;
+  border: 1px solid rgba(37, 36, 39, 0.6);
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline: none;
+  box-shadow: none;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #252427;
+
+}
+
 .description-text{
   width: 80%;
   margin: 1rem auto 0;

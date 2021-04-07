@@ -6,6 +6,7 @@ import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {CitiesService} from '../../../services/cities.service';
 import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../../services/notification.service';
+import {IsShowModalService} from '../../../services/is-show-modal.service';
 
 declare var $: any;
 
@@ -66,10 +67,15 @@ export class CreateEventModalComponent implements OnInit {
 
   eventReg: EventRegister;
   @ViewChild('formEvent') formC: NgForm;
+  isEdit = false;
 
   constructor(private comps: CompanyService, private cs: CitiesService,
-              private changeDetectorRef: ChangeDetectorRef, private nS: NotificationService) {
+              private changeDetectorRef: ChangeDetectorRef, private nS: NotificationService, private ism: IsShowModalService
+  ) {
     this.init();
+    this.ism.isEditEvent.subscribe(bool => {
+      this.isEdit = bool;
+    });
   }
 
   private init(): void {
@@ -143,6 +149,9 @@ export class CreateEventModalComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
         this.getEstablishment();
         this.citySelect = 'Tunja';
+        this.getEvent();
+      }).on('show.bs.hidden', () => {
+        this.ism.isEventEdit.next(false);
       });
     });
   }
@@ -455,5 +464,9 @@ export class CreateEventModalComponent implements OnInit {
       this.marker.lng = this.establishmentSelect.longitude;
       this.address = this.establishmentSelect.address;
     }
+  }
+
+  private getEvent(): void {
+
   }
 }

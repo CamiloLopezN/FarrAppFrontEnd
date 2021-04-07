@@ -31,8 +31,8 @@
           <div class="mt-4 text-left" *ngIf="establishments">
             <h5>Establecimiento *</h5>
             <select class="custom-select" aria-label="Default select example" style="border-radius: 20px"  #stablish="ngModel"
-                    [(ngModel)]="establishmentSelect" name="stablish">
-              <option *ngFor="let establishment of establishments" [ngValue]="establishment" (click)="change()">
+                    [(ngModel)]="establishmentSelect" name="stablish" (click)="change()">
+              <option *ngFor="let establishment of establishments" [ngValue]="establishment">
                 {{establishment.name}}
               </option>
             </select>

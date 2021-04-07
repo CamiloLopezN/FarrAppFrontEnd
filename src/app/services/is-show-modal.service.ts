@@ -8,6 +8,7 @@ export class IsShowModalService {
 
   public isEstablishment = new BehaviorSubject<boolean>(false);
   public isEvent = new BehaviorSubject<boolean>(false);
+  public isEventEdit = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }
@@ -18,5 +19,9 @@ export class IsShowModalService {
 
   get establishment(): Observable<boolean> {
     return this.isEstablishment.asObservable();
+  }
+
+  get isEditEvent(): Observable<boolean>{
+    return this.isEventEdit;
   }
 }

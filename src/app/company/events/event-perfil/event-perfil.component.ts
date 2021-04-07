@@ -19,6 +19,7 @@ import {AuthService} from '../../../services/auth.service';
 import {getDateEventPerfil} from '../../../model/RelojTest';
 import {EventEmmiterService} from '../../../services/event-remove.service';
 import {NotificationService} from '../../../services/notification.service';
+import {IsShowModalService} from '../../../services/is-show-modal.service';
 
 declare var $: any;
 
@@ -57,7 +58,8 @@ export class EventPerfilComponent implements OnInit {
   isLike = false;
 
   constructor(private userS: UserService, private route: ActivatedRoute,
-              private authService: AuthService, private ers: EventEmmiterService, private ns: NotificationService) {
+              private authService: AuthService, private ers: EventEmmiterService,
+              private ns: NotificationService, private ism: IsShowModalService) {
     this.actualPage = 1;
     this.photos = [];
     this.comments = [
@@ -248,6 +250,7 @@ export class EventPerfilComponent implements OnInit {
           id: this.event._id,
           name: this.event.eventName
         });
+        this.ism.isEvent.next(true);
       });
     });
   }
@@ -274,6 +277,14 @@ export class EventPerfilComponent implements OnInit {
   }
 
   edit(): void {
+    try {
+      this.ism.isEvent.next(true);
+      this.ism.isEventEdit.next(true);
+    } catch {
+
+    } finally {
+      $('#register-event-modal').modal('show');
+    }
   }
 
   remove(): void {

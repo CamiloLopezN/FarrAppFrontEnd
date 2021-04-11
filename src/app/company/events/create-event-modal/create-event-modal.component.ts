@@ -7,6 +7,8 @@ import {CitiesService} from '../../../services/cities.service';
 import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../../services/notification.service';
 import {IsShowModalService} from '../../../services/is-show-modal.service';
+import {UserService} from '../../../services/user.service';
+import {EventEmmiterService} from '../../../services/event-remove.service';
 
 declare var $: any;
 
@@ -69,7 +71,7 @@ export class CreateEventModalComponent implements OnInit {
   @ViewChild('formEvent') formC: NgForm;
   isEdit = false;
 
-  constructor(private comps: CompanyService, private cs: CitiesService,
+  constructor(private comps: CompanyService, private cs: CitiesService, private ers: EventEmmiterService, private userS: UserService,
               private changeDetectorRef: ChangeDetectorRef, private nS: NotificationService, private ism: IsShowModalService
   ) {
     this.init();
@@ -149,7 +151,9 @@ export class CreateEventModalComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
         this.getEstablishment();
         this.citySelect = 'Tunja';
-        this.getEvent();
+        if (this.isEdit) {
+          this.getEvent();
+        }
       }).on('show.bs.hidden', () => {
         this.ism.isEventEdit.next(false);
       });
@@ -467,6 +471,13 @@ export class CreateEventModalComponent implements OnInit {
   }
 
   private getEvent(): void {
-
+    this.ers.event.subscribe(ev => {
+      const id = ev.id;
+      this.userS.getEventById(id).subscribe(res => {
+        console.log(res);
+      }, error => {
+        console.log(error);
+      });
+    });
   }
 }

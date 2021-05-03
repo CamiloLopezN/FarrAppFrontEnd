@@ -9,10 +9,10 @@
   </div>
   <div class="d-flex justify-content-end">
     <div style="padding-right: 8rem;">
-      <div class="position-absolute info-company text-white" style="padding-top: 150px">
+      <div class="position-absolute info-company text-white">
         <div class="options text-right">
           <label class="title-top m-0 p-0">Establecimientos</label>
-          <h4 class="m-0 p-0">90</h4>
+          <h4 class="m-0 p-0">{{establishments.length}}</h4>
           <label class="title-top m-0 p-0">Asistentes</label>
           <h4 class="m-0 p-0">1200</h4>
         </div>
@@ -20,7 +20,8 @@
     </div>
   </div>
   <div class="text-center pt-3">
-    <button class="btn my-btn text-white" (click)="establishment()">
+    <button class="btn my-btn text-white" (click)="establishment()" data-toggle="modal"
+            data-target="#register-establishment-modal">
       <fa-icon [icon]="faCalendarPlus" size="3x">
       </fa-icon>
     </button>
@@ -29,12 +30,19 @@
     </div>
   </div>
 
-  <section class="events-proximate mb-5" *ngIf="establishmentActive.length != 0">
-    <div class="container-events">
-      <app-establishments-company [establishments]="establishmentActive" [tittle]="'Tus establecimientos'" [index]="'0'"
-                                  [typeEstablishment]="'¡Estos son tus establecimientos!'"></app-establishments-company>
+  <div *ngIf="establishments.length != 0">
+    <div class="left-div">
+      <p class="events"><b>Tus establecimientos</b></p>
+      <p class="events2">Estos son tus establecimientos</p>
     </div>
-  </section>
+    <section class="all-event">
+      <div *ngFor="let establishment of establishments">
+        <app-establishment-card [establishment]="establishment"></app-establishment-card>
+      </div>
+    </section>
+    <div style="padding: 25vh"
+         *ngIf="establishments.length == 0"></div>
+  </div>
   <div style="padding: 25vh"
-       *ngIf="establishmentActive.length == 0"></div>
+       *ngIf="establishments.length == 0"></div>
 </div>

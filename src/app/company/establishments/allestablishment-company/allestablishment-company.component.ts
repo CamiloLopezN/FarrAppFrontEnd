@@ -3,6 +3,7 @@ import {EstablishmentView} from '../../../model/company';
 import {IsShowModalService} from '../../../services/is-show-modal.service';
 import {faBuilding} from '@fortawesome/free-solid-svg-icons';
 import {CompanyService} from '../../../services/company.service';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-allestablishment-company',
@@ -11,22 +12,21 @@ import {CompanyService} from '../../../services/company.service';
 })
 export class AllestablishmentCompanyComponent implements OnInit {
 
-  establishmentActive: EstablishmentView[];
-  establishmentInactive: EstablishmentView[];
+  establishments: EstablishmentView[];
   faCalendarPlus = faBuilding;
 
-  constructor(private serviceShow: IsShowModalService, private companyS: CompanyService) {
-    this.establishmentActive = [];
-    this.establishmentInactive = [];
+  constructor(private serviceShow: IsShowModalService, private companyS: CompanyService, private authS: AuthService) {
+    this.establishments = [];
   }
 
   ngOnInit(): void {
-    this.companyS.getParcialEstablishment().subscribe(res => {
-      this.establishmentActive = res;
-      console.log(res);
-    }, error => {
-      console.log(error);
-    });
+    this.companyS.getEstablishment().subscribe((res) => {
+        this.establishments = res.message.establishments;
+      },
+      () => {
+        this.authS.logoutExpired();
+      }
+    );
   }
 
   establishment(): void {

@@ -93,6 +93,7 @@
 }
 
 
+
 .interactions {
   position: relative;
   width: 90%;
@@ -107,7 +108,7 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 37px;
+  left: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -115,17 +116,68 @@
 
 .followers {
   position: absolute;
-  font-size: 1rem;
-  left: 50px;
-  top: 10px;
-  color: white;
+  font-size: 2rem;
+  line-height: 2rem;
+  color: red;
 }
 
 .list-heart {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 0.6rem;
+}
+
+.edit-remove {
   position: absolute;
-  left: 125px;
+  display: inline-flex;
+  right: 0;
   top: 10px;
   font-size: 0.6rem;
+}
+
+.like-event, .publish-event {
+  width: 8.5rem;
+  height: 3rem;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #FF1A43;
+
+  background: white;
+
+  border: 1px solid #FF1A43;
+  box-sizing: border-box;
+  border-radius: 30px;
+  outline: none;
+
+  display: flex;
+  align-items: center;
+
+  margin: 0 auto;
+
+  transition: 0.3s;
+}
+
+.like-select {
+  color: white;
+  background: #FF1A43;
+}
+
+.like-event fa-icon {
+  font-size: 1.7rem;
+  margin-left: 0.9rem;
+  margin-right: 0.6rem;
+}
+
+.publish-event{
+  justify-content: center;
+}
+
+.publish-event fa-icon {
+  font-size: 1.2rem;
+  margin-right: 0.6rem;
 }
 
 .calification {
@@ -286,46 +338,13 @@ agm-map {
   min-width: 220px;
   max-width: 850px;
   height: 20px;
-}
-
-.progress-bar-empty {
-  width: 100%;
   background: rgba(37, 36, 39, 0.9);
   border-radius: 20px;
-}
-
-.progress-bar-5 {
-  width: 57%;
-}
-
-.progress-bar-5-5 {
-  width: 43%;
-}
-
-.progress-bar-4 {
-  width: 26%;
-}
-
-.progress-bar-4-4 {
-  width: 74%;
-}
-
-.progress-bar-3 {
-  width: 18%;
-}
-
-.progress-bar-3-3 {
-  width: 82%;
 }
 
 .red-progress {
   background: #FF1A43;
   border-radius: 20px 0 0 20px;
-}
-
-.black-progress {
-  background: rgba(37, 36, 39, 0.9);
-  border-radius: 0 20px 20px 0;
 }
 
 .n-iterations {
@@ -425,31 +444,99 @@ agm-map {
   color: #252427;
 }
 
-@media (min-width: 481px) {
-  .followers {
-    position: absolute;
-    left: 47px;
-    top: 6px;
-    color: white;
-  }
+.comment-user {
+  width: 90%;
+  margin: 30px auto 0;
+  text-align: center;
 }
 
-@media (min-width: 1024px) {
+.comment-button {
 
-  .followers {
+  width: 14rem;
+  height: 3rem;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.2rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+
+  outline: none;
+  border: none;
+
+  background: rgba(255, 26, 67, 0.8);
+  border-radius: 30px;
+}
+
+.my-pagination {
+  width: 90%;
+  max-width: 1200px;
+  min-width: 288px;
+
+  text-align: center;
+  margin: 0 auto;
+}
+
+.my-pagination a {
+  cursor: pointer;
+}
+
+.like-pc {
+  position: absolute;
+  visibility: hidden;
+}
+
+.like-mobile {
+  visibility: visible;
+}
+
+@media (min-width: 1025px) {
+
+  .like-pc{
     position: absolute;
-    left: 47px;
-    top: 8px;
-    color: white;
+    top: 0;
+    right: 0;
+    visibility: visible;
   }
 
-  .heart {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    left: 32px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+  .like-mobile{
+    visibility: hidden;
+  }
+
+  .list-heart {
+    margin-left: 90px;
+    text-align: left;
+  }
+
+  .list-heart fa-icon {
+    margin-left: 8px;
+  }
+
+  .desc-card {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .categories-buttons {
+    grid-area: categories-buttons;
+  }
+
+  .event-date {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .event-date div {
+    width: 400px;
+  }
+
+  .code-clothe {
+    margin-top: 50px;
+  }
+
+  .code-clothe {
+    text-align: left;
   }
 }

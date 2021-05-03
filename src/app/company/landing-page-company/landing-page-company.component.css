@@ -88,10 +88,11 @@ h4 {
 .accions-company-icons{
   display: flex;
   width: 90%;
-  justify-content: space-between;
+  justify-content: center;
   min-width: 280px;
   max-width: 1200px;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .accions-company-icons div{

@@ -18,8 +18,8 @@ export class ProfileClientComponent implements OnInit {
   public faExclamationTriangle = faExclamationTriangle;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
+    private route: ActivatedRoute,
+    private router: Router,
     private clientS: ClientService,
     private datePipe: DatePipe,
     private authS: AuthService
@@ -31,15 +31,13 @@ export class ProfileClientComponent implements OnInit {
   }
 
   getUser(): void {
-    this.clientS.getUser().subscribe((res) => {
-        const bdate = res.dateConverter.split('-');
+    this.clientS.getUser().subscribe(res => {
         // tslint:disable-next-line:radix
-        const date = new Date(Number.parseInt(bdate[2]), Number.parseInt(bdate[1]), Number.parseInt(bdate[0]));
         this.client = {
-          name: res.search.name,
-          lastname: res.search.lastname,
-          birthdate: this.datePipe.transform(date, 'yyyy-MM-dd'),
-          gender: res.search.gender
+          firstName: res.message.firstName,
+          lastName: res.message.lastName,
+          birthdate: new Date(res.message.birthdate),
+          gender: res.message.gender
         };
       },
       () => {
@@ -53,7 +51,7 @@ export class ProfileClientComponent implements OnInit {
   }
 
   edit(): void {
-    this._router.navigate(['client/edit']);
+    this.router.navigate(['client/edit']);
   }
 
 

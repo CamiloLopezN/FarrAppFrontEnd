@@ -13,14 +13,14 @@
               <strong>
                 Nombre
               </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{client.name}}</h5>
+            <h5 class="profile-font text-center text-white crow2">{{client.firstName}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
               <strong>
                 Apellido
               </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{client.lastname}}</h5>
+            <h5 class="profile-font text-center text-white crow2">{{client.lastName}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
@@ -34,7 +34,7 @@
               <strong>
                 Fecha de nacimiento
               </strong></label>
-            <h5 class="profile-font text-center text-white">{{client.birthdate}}</h5>
+            <h5 class="profile-font text-center text-white">{{client.birthdate | date:'longDate'}}</h5>
           </div>
         </div>
 

@@ -1,3 +1,21 @@
+.div-flex{
+  display: flex;
+}
+
+.left-div{
+}
+
+.right-chevron{
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-chevron fa-icon{
+  font-size: 1rem;
+}
+
 .carousel-mine {
   background: #ffffff;
 }
@@ -9,7 +27,7 @@
 
 .events {
   font-style: normal;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 1.4rem;
   line-height: 1rem;
   color: #252427;

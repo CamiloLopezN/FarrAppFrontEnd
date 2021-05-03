@@ -1,5 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {EstablishmentView} from '../../../model/company';
+import {Router} from '@angular/router';
 
 declare var $: any;
 
@@ -14,10 +16,17 @@ export class EstablishmentsCompanyComponent implements OnInit {
   @Input() typeEstablishment: string;
   @Input() tittle: string;
   @Input() index: string;
-  constructor(private cdr: ChangeDetectorRef) {
+  @Input() hasShowMore: boolean;
+
+  faChevronRight = faChevronRight;
+
+  constructor(private cdr: ChangeDetectorRef, private router: Router) {
   }
 
   ngOnInit(): void {
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
     this.cdr.detectChanges();
     document.querySelectorAll('.carousel-mine').forEach(() => {
       $('.carousel-mine').flickity({
@@ -28,4 +37,8 @@ export class EstablishmentsCompanyComponent implements OnInit {
     });
   }
 
+  redirect(): void {
+    $('#showMore2').tooltip('hide');
+    this.router.navigate(['users/establishments']);
+  }
 }

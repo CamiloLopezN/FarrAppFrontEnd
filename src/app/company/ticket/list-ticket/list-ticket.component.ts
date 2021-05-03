@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {Ticket2} from '../../../model/company';
+import {Ticket} from '../../../model/company';
 
 import {EventEmitter} from 'events';
 import {faChevronDown} from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +15,7 @@ export class ListTicketComponent implements OnInit {
   // tslint:disable-next-line:no-output-on-prefix
   @Output() public onDelete: EventEmitter<any> = new EventEmitter();
 
-  @Input() tickets: Ticket2[];
+  @Input() tickets: Ticket[];
   faChevronUp = faChevronUp;
   faChevronDown = faChevronDown;
   isVisible = false;
@@ -35,7 +35,7 @@ export class ListTicketComponent implements OnInit {
     this.isVisible = true;
   }
 
-  addTicket(ticket: Ticket2): void {
+  addTicket(ticket: Ticket): void {
     this.tickets.push(ticket);
     this.isVisible = false;
     document.getElementById('divTickets').scrollIntoView({behavior: 'smooth', block: 'nearest'});

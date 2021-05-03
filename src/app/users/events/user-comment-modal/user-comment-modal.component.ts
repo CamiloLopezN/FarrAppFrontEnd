@@ -37,7 +37,7 @@ export class UserCommentModalComponent implements OnInit {
               private route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef, public loaderService: SpinnerService) {
     this.stars = [true, false, false, false, false];
     this.authS.getName.subscribe(nam => {
-      this.name = nam.split(',')[0] + ' Ismael';
+      this.name = nam.split(',')[0];
       this.lastName = nam.split(',')[1];
     });
   }

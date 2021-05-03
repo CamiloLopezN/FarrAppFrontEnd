@@ -188,7 +188,7 @@ export class EstablishmentPerfilComponent implements OnInit {
           this.ns.succesFavorite(this.establishment.establishmentName);
         } else {
           this.establishment.followers--;
-          const index = this.clientConnect.interests.indexOf(this.establishment._id, 0);
+          const index = this.clientConnect.follows.indexOf(this.establishment._id, 0);
           if (index > -1) {
             this.clientConnect.follows.splice(index, 1);
           }

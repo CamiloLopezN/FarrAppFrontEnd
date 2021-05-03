@@ -199,7 +199,7 @@ export class RegisterModalComponent implements OnInit {
         this.redirect2();
       }
     }, error => {
-      if (error.status === 403 || error.status === 400) {
+      if (error.status === 403 || error.status === 400 || error.status === 401) {
         this.errorMessage = 'Primero debe verificar su correo';
       } else if (error.status === 500) {
         this.errorMessage = 'Error en el servidor, intente más tarde';

@@ -18,6 +18,8 @@ export class EpayService {
   }
 
   buyPlan(plan: Subscription): void {
+    const host = window.location.host;
+    const protocol = window.location.protocol;
     const data = {
       name: plan.planName,
       description: `Membresía de ${plan.intervalCount} ${plan.intervalUnit}`,
@@ -29,7 +31,7 @@ export class EpayService {
       country: 'co',
       lang: 'es',
 
-      response: 'http://localhost:4200/#/company/subscription/response',
+      response: `${protocol}//${host}/#/company/subscription/response`,
 
       extra1: plan.planId,
 

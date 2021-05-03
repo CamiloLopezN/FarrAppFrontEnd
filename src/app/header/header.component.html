@@ -29,7 +29,7 @@
           <div class="dropdown-item" style="cursor: pointer" (click)="landingPage()">
             <div>
               <fa-icon class="icon-mine mr-2" [icon]="faUserCircle" size="2x"></fa-icon>
-              <label class="align-middle">{{name}}</label>
+              <label class="align-middle overflow-hidden">{{name}}</label>
             </div>
           </div>
           <div class="dropdown-divider" style="border-color: #e2e4e5"></div>
@@ -66,12 +66,11 @@
         <div class="dropdown-item" style="cursor: pointer" *ngIf="isLogged" (click)="landingPage()">
           <div>
             <fa-icon class="icon-mine mr-2" [icon]="faUserCircle" size="2x"></fa-icon>
-            <label class="align-middle" style="cursor: pointer">{{name}}</label>
+            <label class="align-middle overflow-hidden" style="cursor: pointer">{{name}}</label>
           </div>
         </div>
         <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
-        <button class="dropdown-item" type="button">Eventos</button>
-        <button class="dropdown-item" type="button" (click)="user()">Editar perfil</button>
+        <button class="dropdown-item" type="button" (click)="user()" *ngIf="isLogged">Editar perfil</button>
         <button class="dropdown-item" type="button" (click)="event()" *ngIf="isLogged && rol=='company'"
                 style="cursor: pointer">Publicar evento
         </button>

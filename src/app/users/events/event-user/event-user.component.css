@@ -11,6 +11,7 @@
 
 .card-img-top {
   width: 100%;
+  height: 12rem;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-position: center;

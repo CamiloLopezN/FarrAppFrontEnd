@@ -1,6 +1,6 @@
-<div class="card" style="cursor: pointer">
+<div class="card" style="cursor: pointer" (click)="redirect()">
   <img class="card-img-top"
-       src="{{event.photos[0]}}" alt="Card image cap">
+       src="{{event.imageUrl}}" alt="Card image cap">
   <div class="card-body">
     <div>
       <div class="float-left date-event">
@@ -9,7 +9,7 @@
       <div class="float-right hour-event">
         <p>
           <fa-icon [icon]="faClock"></fa-icon>
-          {{event.startDate | date:'HH:mm'}} - {{event.endDate | date:'HH:mm'}}</p>
+          {{event.start | date:'HH:mm'}} - {{event.end | date:'HH:mm'}}</p>
       </div>
       <div class="clearfix"></div>
     </div>

@@ -1,17 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {RemoveItem} from '../model/company';
+import {RemoveEstablishment, RemoveEvent} from '../model/company';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventEmmiterService {
 
-  public eventSelect = new BehaviorSubject<RemoveItem>(undefined);
+  public eventSelect = new BehaviorSubject<RemoveEvent>(undefined);
+  public establishmentSelect = new BehaviorSubject<RemoveEstablishment>(undefined);
+
   constructor() {
   }
 
-  get event(): Observable<RemoveItem> {
+  get event(): Observable<RemoveEvent> {
     return this.eventSelect.asObservable();
+  }
+
+  get establishment(): Observable<RemoveEstablishment> {
+    return this.establishmentSelect.asObservable();
   }
 }

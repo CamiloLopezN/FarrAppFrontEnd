@@ -42,13 +42,14 @@ export class SecurityClientComponent implements OnInit {
       },
       () => {
         this.authS.logoutExpired();
+        location.reload();
       }
     );
   }
 
   onSubmit(): void {
     this.client = {
-      e_mail: this.e_mail,
+      email: this.e_mail,
       password: this.password
     };
     this.clientService.changePass(this.client).subscribe(() => {

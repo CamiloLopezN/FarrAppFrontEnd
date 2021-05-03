@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
-     style="animation-duration: 0.2s" id="container" *ngIf="e_mail">
+     style="animation-duration: 0.2s" id="container" *ngIf="eMail">
   <div id="log-in">
     <div class="text-center pl-4 pr-4 pt-4 pb-4">
       <h4 class="text-white text-center mb-3">
@@ -15,7 +15,7 @@
               </div>
             </div>
             <input type="email" class="form-control color-gray" id="exampleInputEmail102" aria-describedby="emailHelp"
-                   placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+                   placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="eMail" email
                    pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" readonly>
           </div>
 

@@ -70,8 +70,7 @@
           </div>
         </div>
         <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
-        <button class="dropdown-item" type="button">Eventos</button>
-        <button class="dropdown-item" type="button" (click)="user()">Editar perfil</button>
+        <button class="dropdown-item" type="button" (click)="user()" *ngIf="isLogged">Editar perfil</button>
         <button class="dropdown-item" type="button" (click)="event()" *ngIf="isLogged && rol=='company'"
                 style="cursor: pointer">Publicar evento
         </button>

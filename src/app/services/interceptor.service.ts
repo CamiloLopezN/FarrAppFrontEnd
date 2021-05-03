@@ -13,9 +13,13 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.spinnerS.callSpinner();
+    this.spinnerS.isLoading.next(true);
+    this.spinnerS.hasShow.next(false);
     return next.handle(req).pipe(
-      finalize(() => this.spinnerS.stopSpinner())
+      finalize(() => {
+        this.spinnerS.isLoading.next(false);
+        this.spinnerS.hasShow.next(true);
+      })
     );
   }
 }

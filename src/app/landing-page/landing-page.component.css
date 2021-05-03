@@ -77,10 +77,9 @@ img {
   width: 90%;
   min-width: 288px;
   max-width: 1200px;
-  margin: 20px auto 0;
+  margin: 2rem auto 0;
 }
 
 .event-landing-page{
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 4rem;
 }

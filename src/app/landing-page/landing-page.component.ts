@@ -1,5 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {EventView} from '../model/company';
+import {EstablishmentView, EventView} from '../model/company';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -11,38 +12,17 @@ export class LandingPageComponent implements OnInit {
   /* When the user scrolls down, hide the navbar. When the user scrolls up, show the navbar */
   prevScrollpos = window.pageYOffset;
   events: EventView[];
+  establishments: EstablishmentView[];
 
-  constructor() {
-    this.events = [
-      {
-        eventName : 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate : new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      },
-      {
-        eventName : 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate : new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      },
-      {
-        eventName : 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate : new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      }
-    ];
+  constructor(private userService: UserService) {
+    this.events = [];
+    this.establishments = [];
   }
 
 
   ngOnInit(): void {
+    this.getEvents();
+    this.getEstablishments();
   }
 
 
@@ -58,6 +38,26 @@ export class LandingPageComponent implements OnInit {
   }
 
   scroll(target: HTMLDivElement): void {
-    target.scrollIntoView({behavior: 'smooth', block: 'center'});
+    target.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }
+
+  getEvents(): void {
+    this.userService.getEvents().subscribe(res => {
+      this.events = res[0].data.map(event => event.events);
+      this.events.forEach(ev => {
+        ev.start = new Date(ev.start);
+        ev.end = new Date(ev.end);
+      });
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  getEstablishments(): void {
+    this.userService.getEstablishments().subscribe(res => {
+      this.establishments = res[0].data.map(establishment => establishment.establishments);
+    }, error => {
+      console.log(error);
+    });
   }
 }

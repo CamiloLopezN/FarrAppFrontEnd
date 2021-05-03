@@ -4,8 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {AdminResponse} from '../model/admin';
-import {ClientAccount, ClientAdmin, ClientRegistration2} from '../model/client';
-import {CompanyRegistration2} from '../model/company';
+import {ClientAccount, ClientAdmin} from '../model/client';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +32,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/admin/clients`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/clients`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -110,38 +109,12 @@ export class AdminService {
       );
   }
 
-  postUser(client: ClientRegistration2): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.post<any>(`${environment.backend}/api/admin/client`, client, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  postCompany(company: CompanyRegistration2): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.post<any>(`${environment.backend}/api/admin/company`, company, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
   postAdmin(client: ClientAdmin): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend}/api/admin/`, client, {headers})
+    return this.http.post<any>(`${environment.backend2}/api/admins/`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;

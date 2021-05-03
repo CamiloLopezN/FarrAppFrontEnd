@@ -67,7 +67,7 @@
                      *ngIf="emailC.valid && emailC.touched && !isEmailLength()">El correo debe tener menos de 150 caracteres.</small>
             </div>
 
-            <div *ngIf="role != 'superAdmin'">
+            <div *ngIf="role != 'admin'">
             <div class="input-group mt-4">
               <div class="input-group-prepend">
                 <div class="input-group-text icon">

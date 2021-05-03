@@ -90,7 +90,7 @@ export class RegisterCompanyModalComponent implements OnInit {
 
     this.errorMessage = '';
     // tslint:disable-next-line:triple-equals
-    if (this.role != 'superAdmin') {
+    if (this.role != 'admin') {
       this.company = {
         companyName: this.name,
         address: this.address,
@@ -136,7 +136,7 @@ export class RegisterCompanyModalComponent implements OnInit {
   }
 
   isValidAll(): boolean {
-    if (this.role === 'superAdmin') {
+    if (this.role === 'admin') {
       return this.isNameLenght() && this.isNit() && this.isAddress() && this.isContactNumber() && this.isEmailLength();
     } else {
       return !this.isDifferentTo() && this.isValidPassLenght()

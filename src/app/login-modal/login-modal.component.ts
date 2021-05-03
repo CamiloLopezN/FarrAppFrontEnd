@@ -84,7 +84,7 @@ export class LoginModalComponent implements OnInit {
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
         console.log(this.rol);
-        if (this.rol === 'superAdmin') {
+        if (this.rol === 'admin') {
           this.notifyS.sucessLogin();
           this.redirectAdmin();
         } else if (this.rol === 'company') {

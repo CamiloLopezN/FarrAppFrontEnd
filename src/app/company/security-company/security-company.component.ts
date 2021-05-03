@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ClientAccount} from '../../model/client';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {AuthService} from '../../services/auth.service';
 import {faUserCircle, faUnlock, faLock} from '@fortawesome/free-solid-svg-icons';
-import {CompanyService} from '../../services/company.service';
+import {UserService} from '../../services/user.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 @Component({
   selector: 'app-security-company',
@@ -25,8 +26,9 @@ export class SecurityCompanyComponent implements OnInit {
   constructor(
     private router: Router,
     private notifyS: NotificationService,
-    private companyS: CompanyService,
-    private authS: AuthService
+    private companyS: UserService,
+    private authS: AuthService,
+    public loaderService: SpinnerService
   ) {
   }
 
@@ -35,11 +37,13 @@ export class SecurityCompanyComponent implements OnInit {
   }
 
   getUser(): void {
-    this.companyS.getCompanySecurity().subscribe((res) => {
-        this.e_mail = res.search.e_mail;
+    this.companyS.getUser().subscribe((res) => {
+        this.e_mail = res.email;
       },
-      () => {
+      error => {
+        console.log(error);
         this.authS.logoutExpired();
+        location.reload();
       }
     );
   }
@@ -49,7 +53,7 @@ export class SecurityCompanyComponent implements OnInit {
       email: this.e_mail,
       password: this.password
     };
-    this.companyS.changePassCompany(this.client).subscribe(() => {
+    this.companyS.changePassword(this.client).subscribe(() => {
         this.notifyS.succesChangePass();
         this.router.navigate(['/company/profile']);
       },

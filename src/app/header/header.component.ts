@@ -71,7 +71,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/client/profile']);
     } else if (this.rol === 'company') {
       this.router.navigate(['/company/profile']);
-    } else if (this.rol === 'superAdmin') {
+    } else if (this.rol === 'admin') {
       this.router.navigate(['/admin/profile']);
     }
   }
@@ -81,7 +81,7 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/client/landing-page']);
     } else if (this.rol === 'company') {
       this.router.navigate(['/company/landing-page']);
-    } else if (this.rol === 'superAdmin') {
+    } else if (this.rol === 'admin') {
       this.router.navigate(['/admin/landing-page']);
     }
   }

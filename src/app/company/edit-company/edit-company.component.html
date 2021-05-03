@@ -12,7 +12,7 @@
                 <div class="form-group">
                   <label for="nombre" class="text-white">Nombre</label>
                   <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name"
-                         [(ngModel)]="company.name" required>
+                         [(ngModel)]="company.companyName" required>
                   <small id="emailHelp1" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
                     este campo vacío.</small>
                   <small id="buildingHelp" class="form-text text-danger"
@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <label for="contactNumber" class="text-white">Número de contacto</label>
                   <input type="text" class="form-control color-gray" id="contactNumber" #contactNumber="ngModel" name="contactNumber"
-                         [(ngModel)]="company.contact_number" required>
+                         [(ngModel)]="company.contactNumber" required>
                   <small id="contactN" class="form-text text-danger"
                          *ngIf="!contactNumber.valid && contactNumber.touched">Debes
                     ingresar el número de contacto de tu empresa.</small>

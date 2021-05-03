@@ -6,8 +6,13 @@
 }
 
 .card-img-top{
+  width: 100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
 }
 p{
   font-family: Lovelo, serif;

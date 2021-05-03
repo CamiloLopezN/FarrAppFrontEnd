@@ -44,7 +44,7 @@ export class ProfileCompanyComponent implements OnInit {
 
   private getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-        this.company = res.search;
+        this.company = res.message;
       },
       () => {
         this.authS.logoutExpired();

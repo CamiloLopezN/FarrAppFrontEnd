@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {
   faUserPlus,
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   isLogged: boolean;
   rol: string;
   name: string;
-
+  showWarning: boolean;
   faUserCircle = faUserCircle;
   faElipsis = faEllipsisV;
   faUserPlus = faUserPlus;
@@ -51,7 +51,10 @@ export class HeaderComponent implements OnInit {
       this.rol = rol;
     });
     this.authService.getName.subscribe(name => {
-      this.name = name;
+      this.name = name.replace(',', ' ');
+    });
+    this.authService.subscribe.subscribe(sub => {
+      this.showWarning = sub;
     });
   }
 
@@ -61,20 +64,6 @@ export class HeaderComponent implements OnInit {
 
   edit(): void {
     this.router.navigate(['client/edit']);
-  }
-
-
-  @HostListener('window:scroll', ['$event']) // for window scroll events
-  onScroll(): void {
-    if (screen.width <= 1024) {
-      const currentScrollPos = window.pageYOffset;
-      if (this.prevScrollPos < currentScrollPos) {
-        document.getElementById('navbar').style.top = '-350px';
-      } else {
-        document.getElementById('navbar').style.top = '0';
-      }
-      this.prevScrollPos = currentScrollPos;
-    }
   }
 
   user(): void {
@@ -100,7 +89,7 @@ export class HeaderComponent implements OnInit {
   event(): void {
     this.serviceShow.isEvent.next(true);
     this.compS.getEstablishment().subscribe(res => {
-      if (res.establishments.length !== 0) {
+      if (res.message.establishments.length !== 0) {
         $('#register-event-modal').modal('show');
         this.serviceShow.isEstablishment.next(false);
       } else {
@@ -115,5 +104,9 @@ export class HeaderComponent implements OnInit {
   event2(): void {
     this.serviceShow.isEstablishment.next(true);
     this.serviceShow.isEvent.next(false);
+  }
+
+  hide(link: HTMLParagraphElement): void {
+    link.hidden = true;
   }
 }

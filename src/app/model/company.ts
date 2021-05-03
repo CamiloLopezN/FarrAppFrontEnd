@@ -1,25 +1,30 @@
 export interface CompanyRegistration {
-  e_mail: string;
+  email: string;
   password: string;
-  name: string;
+  companyName: string;
   address: string;
-  contact_number: string;
+  contactNumber: string;
   nit: string;
 }
 
 export interface CompanyRegistration2 {
-  e_mail: string;
-  name: string;
+  email: string;
+  companyName: string;
   address: string;
-  contact_number: string;
+  contactNumber: string;
   nit: string;
 }
 
 export interface CompanyResponse {
-  name: string;
   address: string;
-  contact_number: string;
+  companyName: string;
+  contactNumber: string;
+  establishments: EstablishmentView[];
+  events: EventView[];
   nit: string;
+  userId: string;
+  _id: string;
+  customerId?: string;
 }
 
 export interface CompanyResponseAdmin {
@@ -49,12 +54,15 @@ export interface EventC {
 }
 
 export interface EventView {
-  _id: string;
-  city: string;
+  establishmentId: string;
+  companyId: string;
+  eventId: string;
   eventName: string;
-  startDate: Date;
-  endDate: Date;
-  photos: string[];
+  city: string;
+  start: Date;
+  end: Date;
+  imageUrl: string;
+  status: string;
 }
 
 export interface Establishment {
@@ -64,7 +72,7 @@ export interface Establishment {
 }
 
 export interface Category {
-  name: string;
+  category: CategoryType;
   select: boolean;
 }
 
@@ -91,37 +99,129 @@ export interface Ticket2 {
 }
 
 export interface EstablishmentRegister {
-  typeEstablishment: string[];
-  categories: string [];
-  name: string;
-  logo: string;
+  establishmentTypes: string[];
+  categories: string[];
+  photoUrls: string[];
+  establishmentName: string;
   description: string;
-  photo: string[];
-  latitude: number;
-  longitude: number;
-  address: string;
-  city: string;
+  logoUrl: string;
   capacity: number;
+  location: Location;
 }
 
-export interface EventRegister {
-  eventName: string;
-  sDate: Date;
-  eDate: Date;
-  photos: string[];
-  eventCategory: string[];
+export interface EstablishmentPerfil {
+  averageRating: number;
+  followers: number;
+  capacity: number;
+  categories: string[];
+  company: Company;
   description: string;
-  dresCode: string[];
-  minAge: number;
-  establishmentId: string;
+  establishmentName: string;
+  establishmentTypes: EstablishmentTypeId[];
+  events: EventView[];
+  isActive: boolean;
+  location: LocationId;
+  logoUrl: string;
+  photoUrls: string[];
+  reviews: any[];
+  _id: string;
+}
+
+export interface Company {
+  companyId: string;
+  companyName: string;
+}
+
+export interface CategoryType {
+  establishmentCategoryName: string;
+  description: string;
+}
+
+export interface CategoryTypeId {
+  _id: string;
+  establishmentCategoryName: string;
+  description: string;
+}
+
+export interface EstablishmentTypeId {
+  _id: string;
+  establishmentTypeName: string;
+  description: string;
+}
+
+export interface EstablishmentType {
+  establishmentTypeName: string;
+  description: string;
+}
+
+export interface LocationId {
+  _id: string;
   latitude: number;
   longitude: number;
   address: string;
-  capacity: number;
   city: string;
-  tickets: Ticket2[];
-  status: string;
 }
+
+export interface Location {
+  latitude: number;
+  longitude: number;
+  address: string;
+  city: string;
+}
+
+
+export interface EventRegister {
+
+  eventName: string;
+  start: Date;
+  end: Date;
+  photoUrls: string[];
+  categories: string[];
+  description: string;
+  dressCodes: string[];
+  minAge: number;
+  location: Location;
+  capacity: number;
+  tickets: Ticket[];
+
+}
+
+export interface EventPerfil {
+  capacity: number;
+  categories: string[];
+  description: string;
+  dressCodes: string[];
+  end: Date;
+  eventName: string;
+  location: LocationId;
+  minAge: number;
+  photoUrls: string[];
+  reviews: any[];
+  start: Date;
+  status: string;
+  tickets: Ticket[];
+  _id: string;
+  interested: number;
+}
+
+export interface Ticket {
+  ticketName: string;
+  onlinePrice: number;
+  onDoorPrice: number;
+  isFastLine: boolean;
+  totalAvailable: number;
+  salesStart: Date;
+  salesEnd: Date;
+  description: string;
+  status: string;
+  maxPerPurchase: number;
+  minPerPurchase: number;
+  isTransferable: boolean;
+  otherInfo?: string;
+  promotionalCodes: CodePromotional[];
+
+}
+
 
 export interface Status {
   name: string;
@@ -129,25 +229,85 @@ export interface Status {
 }
 
 export interface CodePromotional {
-  code: string;
-  ammountExchanges: number;
+  codeString: string;
+  totalValidExchanges: number;
+  remainingValidExchanges: number;
   discountType: string;
   discountRate: number;
 }
 
-export interface Establishment2 {
-  _id: string;
-  address: string;
-  name: string;
-  photo: string[];
-  latitude: number;
-  longitude: number;
-  city: string;
-}
 
 export interface EstablishmentView {
+  companyId: string;
+  establishmentId: string;
+  establishmentName: string;
+  location: LocationId;
+  imageUrl: string;
+  status: boolean;
+}
+
+export interface EstablishmentViewId {
   _id: string;
-  address: string;
+  establishmentId: string;
+  establishmentName: string;
+  location: LocationId;
+  imageUrl: string;
+  status: boolean;
+}
+
+export interface RemoveEvent {
+  idCompany: string;
+  idEstablishment: string;
+  idEvent: string;
   name: string;
-  photo: string[];
+}
+
+export interface RemoveEstablishment {
+  idCompany: string;
+  idEstablishment: string;
+  name: string;
+}
+
+export interface Subscription {
+  select: boolean;
+  discount: number;
+
+  planId: string;
+  planName: string;
+  price: number;
+  intervalCount: number;
+  intervalUnit: string;
+  trialDays: number;
+  taxBase: number;
+  tax: number;
+}
+
+export interface Plan {
+  description: string;
+  price: number;
+  id: string;
+  currency: string;
+}
+
+export interface PayMethod {
+  desc: string;
+  select: boolean;
+}
+
+export interface Customer {
+
+  firstName: string;
+  lastName: string;
+  email: string;
+  city: string;
+  address: string;
+  phone?: string;
+  cellPhone: string;
+  cardNumber: string;
+  cardExpYear: string;
+  cardExpMonth: string;
+  cardCVC: string;
+  isDefaultCard: boolean;
+  companyId: string;
+
 }

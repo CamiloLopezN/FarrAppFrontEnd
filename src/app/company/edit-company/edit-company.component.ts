@@ -18,8 +18,8 @@ export class EditCompanyComponent implements OnInit {
   errorMessageName: string;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _router: Router,
+    private route: ActivatedRoute,
+    private router: Router,
     private companyS: CompanyService,
     private authService: AuthService,
     private ns: NotificationService
@@ -35,18 +35,18 @@ export class EditCompanyComponent implements OnInit {
     this.errorMessageNIT = '';
     this.errorMessageName = '';
     this.companyS.editCompany(this.company).subscribe(() => {
-      this._router.navigate(['/company/profile']);
+      this.router.navigate(['/company/profile']);
       this.ns.sucessEditCompany();
     }, error => {
-      if (error.status != 403) {
-        if (error.error.message == 'Ya existe una empresa registrada con ese identificador de NIT') {
+      if (error.status !== 403) {
+        if (error.error.message === 'Ya existe una empresa registrada con ese identificador de NIT') {
           this.errorMessageNIT = error.error.message;
-        } else if (error.error.message == 'Ya existe una empresa registrada con ese nombre') {
+        } else if (error.error.message === 'Ya existe una empresa registrada con ese nombre') {
           this.errorMessageName = error.error.message;
         } else {
           this.errorMessageEmail = error.error.message;
         }
-      }else{
+      } else {
         this.authService.logoutExpired();
       }
     });
@@ -57,9 +57,13 @@ export class EditCompanyComponent implements OnInit {
     this.companyS.getCompany().subscribe((res) => {
         this.company = {
           nit: res.nit,
-          contact_number: res.contact_number,
+          contactNumber: res.contact_number,
           address: res.address,
-          name: res.name
+          companyName: res.name,
+          userId: res.user,
+          events: res.events,
+          establishments: res.establishments,
+          _id: res.id
         };
       },
       () => {
@@ -74,7 +78,7 @@ export class EditCompanyComponent implements OnInit {
 
 
   isNameLenght(): boolean {
-    return this.company.name.length <= 150;
+    return this.company.companyName.length <= 150;
   }
 
   isAddress(): boolean {
@@ -82,7 +86,7 @@ export class EditCompanyComponent implements OnInit {
   }
 
   isContactNumber(): boolean {
-    return this.company.contact_number.length <= 50;
+    return this.company.contactNumber.length <= 50;
   }
 
   isNit(): boolean {

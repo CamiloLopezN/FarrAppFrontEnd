@@ -3,7 +3,8 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header m-0 p-0" style="border: none;">
-        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close" style="font-size: 70px; outline: none">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -14,6 +15,8 @@
           <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-login" class="m-0 p-0">
             <div class="border-login">
               <div class="mt-4 mb-4">
+                <small id="emailHelp321" class="form-text text-danger text-left mb-1"
+                       *ngIf="errorMessage">{{errorMessage}}</small>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <div class="input-group-text icon">
@@ -22,12 +25,12 @@
                   </div>
                   <input type="email" class="form-control" id="exampleInputEmail10" aria-describedby="emailHelp"
                          placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
-                         pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required (click)="errorMessage = ''">
+                         pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required
+                         (click)="errorMessage = ''">
                 </div>
                 <div class="text-left">
-                <small id="emailHelp123" class="form-text text-danger" *ngIf="!email.valid && email.touched">Debes ingresar un e-mail válido.</small>
-                <small id="emailHelp321" class="form-text text-danger"
-                       *ngIf="email.valid && email.touched && errorMessage && !isUserMail && isPass">{{errorMessage}}</small>
+                  <small id="emailHelp123" class="form-text text-danger" *ngIf="!email.valid && email.touched">Debes
+                    ingresar un e-mail válido.</small>
                 </div>
               </div>
               <div class="input-group">
@@ -45,13 +48,15 @@
                        #pass="ngModel" name="pass" [(ngModel)]="password" required (click)="errorMessage = ''">
               </div>
               <div class="text-left">
-                <small id="passHelp1" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar la contraseña.</small>
-                <small id="passHelp2" class="form-text text-danger"
-                       *ngIf="(pass.valid && errorMessage && !isPass && isUserMail )|| (pass.valid && pass.touched && errorMessage && !isPass && isUserMail)">{{errorMessage}}</small>
+                <small id="passHelp1" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar
+                  la contraseña.</small>
               </div>
             </div>
             <div class="text-center" id="Login">
-              <button type="submit" class="btn btn-outline-dark" style="border-radius: 30px" [disabled]="!formUser.form.valid">Iniciar sesión</button>
+              <button type="submit" class="btn btn-outline-dark position-relative btn-custom-width"
+                      [disabled]="!formUser.form.valid"
+                      [class.spinner]="loaderService.isLoading | async">
+                <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Iniciar sesión</p></button>
               <p id="PassRemember" class="mt-4 mb-4" (click)="authService.inLog.next(false)">
                 ¿Olvidó su contraseña?
               </p>
@@ -83,9 +88,10 @@
             </button>
           </div>
           <div class="col">
-            <button type="submit" class="btn btn-dark border-circ w-100" data-toggle="modal"
-                    data-target="#exclamationModal"
-                    data-dismiss="modal" [disabled]="!formRetrieve.form.valid" (click)="retrievePass()">Recuperar
+            <button type="submit" class="btn btn-dark border-circ btn-custom-width w-100"
+                    [disabled]="!formRetrieve.form.valid"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Recuperar contraseña</p>
             </button>
           </div>
         </div>

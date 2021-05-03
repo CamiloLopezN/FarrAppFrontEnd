@@ -18,7 +18,7 @@ export class SecurityAdminComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
   faUnlock = faUnlock;
   client: ClientAccount;
-  e_mail = '';
+  eMail = '';
   password = '';
   passWordConfirm = '';
   errorMessage: string;
@@ -37,7 +37,7 @@ export class SecurityAdminComponent implements OnInit {
 
   getUser(): void {
     this.adminService.getAdminSecurity().subscribe((res) => {
-        this.e_mail = res.search.e_mail;
+        this.eMail = res.search.email;
       },
       () => {
         this.authS.logoutExpired();
@@ -47,7 +47,7 @@ export class SecurityAdminComponent implements OnInit {
 
   onSubmit(): void {
     this.client = {
-      e_mail: this.e_mail,
+      email: this.eMail,
       password: this.password
     };
     this.adminService.changePassAdmin(this.client).subscribe(() => {

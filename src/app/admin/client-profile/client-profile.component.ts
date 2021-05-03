@@ -15,7 +15,7 @@ export class ClientProfileComponent implements OnInit {
   isActive: boolean;
   isReq: boolean;
 
-  constructor(private ns: NotificationService, private _route: ActivatedRoute,
+  constructor(private ns: NotificationService, private route: ActivatedRoute,
               private adminS: AdminService, private  authS: AuthService, private router: Router) {
   }
 
@@ -25,14 +25,14 @@ export class ClientProfileComponent implements OnInit {
 
 
   getUser(): void {
-    this._route.params.forEach((params: Params) => {
+    this.route.params.forEach((params: Params) => {
       const id = params.id;
       this.adminS.getUserById(id).subscribe(res => {
           this.client = res.client[0];
           this.isActive = res.client[0].user.active;
           this.isReq = res.client[0].user.reqDesactive;
           this.client._id = res.client[0].id_user;
-          this.client.e_mail = res.client[0].user.e_mail;
+          this.client.email = res.client[0].user.e_mail;
           const birthDates = this.client.birthdate.split('-');
           this.client.birthdate = `${birthDates[0]}-${birthDates[1]}-${birthDates[2].substr(0, 2)}`;
         },

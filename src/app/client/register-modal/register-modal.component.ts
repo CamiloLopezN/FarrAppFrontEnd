@@ -16,6 +16,7 @@ import {DatePipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
 import {AdminService} from '../../services/admin.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 declare var $: any;
 
@@ -59,7 +60,7 @@ export class RegisterModalComponent implements OnInit {
   clientAdmin: ClientAdmin;
 
   constructor(private notifyS: NotificationService, private authS: AuthService,
-              private router: Router, private clientService: ClientService,
+              private router: Router, private clientService: ClientService, public loaderService: SpinnerService,
               private changeDetectorRef: ChangeDetectorRef, private datePipe: DatePipe, private adminS: AdminService) {
     this.btnOther = 'btnOther';
     this.btnMasc = 'btnMasc';
@@ -77,51 +78,59 @@ export class RegisterModalComponent implements OnInit {
   onSubmit(): void {
 
     this.errorMessage = '';
-    if (this.role != 'superAdmin') {
+    if (this.role !== 'superAdmin') {
       const vBirth = this.birthdate.split('-');
       this.client = {
-        name: this.nameClient,
-        lastname: this.lastName,
+        firstName: this.nameClient,
+        lastName: this.lastName,
         birthdate: vBirth[2] + '-' + vBirth[1] + '-' + vBirth[0],
         gender: this.gender,
-        e_mail: this.email,
+        email: this.email,
         password: this.password
       };
       this.clientService.register(this.client).subscribe(() => {
           this.authS.inReg.next(true);
           this.clientLog = {
             password: this.password,
-            e_mail: this.email
+            email: this.email
           };
           this.formC.reset();
           this.changeDetectorRef.detectChanges();
         },
         error => {
-          this.errorMessage = error.error.message;
+          if (error.status === 400) {
+            this.errorMessage = 'Error en los datos ingresados';
+          } else if (error.status === 500) {
+            this.errorMessage = 'Error en el servidor, intente más tarde';
+          }
         }
       );
     } else if (!this.adminSelect) {
       const vBirth = this.birthdate.split('-');
       this.clientA = {
-        name: this.nameClient,
-        lastname: this.lastName,
+        firstName: this.nameClient,
+        lastName: this.lastName,
         birthdate: vBirth[2] + '-' + vBirth[1] + '-' + vBirth[0],
         gender: this.gender,
-        e_mail: this.email
+        email: this.email
       };
-      this.adminS.postUser(this.clientA).subscribe(() => {
+      this.clientService.register(this.clientA).subscribe(() => {
         $('#register-client-modal').modal('hide');
         this.notifyS.succesRegisterClient();
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
       }, error => {
-        this.errorMessage = error.error.message;
+        if (error.status === 400) {
+          this.errorMessage = 'Error en los datos ingresados';
+        } else if (error.status === 500) {
+          this.errorMessage = 'Error en el servidor, intente más tarde';
+        }
       });
     } else {
       this.clientAdmin = {
-        e_mail: this.email,
-        lastname: this.lastName,
-        name: this.nameClient,
+        email: this.email,
+        lastName: this.lastName,
+        firstName: this.nameClient,
         password: this.password
       };
       this.adminS.postAdmin(this.clientAdmin).subscribe(() => {
@@ -130,7 +139,11 @@ export class RegisterModalComponent implements OnInit {
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
       }, error => {
-        this.errorMessage = error.error.message;
+        if (error.status === 400) {
+          this.errorMessage = 'Error en los datos ingresados';
+        } else if (error.status === 500) {
+          this.errorMessage = 'Error en el servidor, intente más tarde';
+        }
       });
     }
   }
@@ -154,7 +167,7 @@ export class RegisterModalComponent implements OnInit {
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
 
-        if (this.role == 'superAdmin') {
+        if (this.role === 'superAdmin') {
           document.getElementById(this.btnAdmin).style.backgroundColor = '#fafafa';
           document.getElementById(this.btnAdmin).style.color = '#b6babd';
           document.getElementById(this.btnClient).style.backgroundColor = '#9edcf6';
@@ -180,20 +193,24 @@ export class RegisterModalComponent implements OnInit {
       this.authS.roled.subscribe(rol =>
         role = rol
       );
-      if (role == 'superAdmin') {
+      if (role === 'superAdmin') {
         this.redirectAdmin();
       } else {
         this.redirect2();
       }
     }, error => {
-      this.errorMessage = error.error.message;
+      if (error.status === 403 || error.status === 400) {
+        this.errorMessage = 'Primero debe verificar su correo';
+      } else if (error.status === 500) {
+        this.errorMessage = 'Error en el servidor, intente más tarde';
+      }
     });
   }
 
   isValidAll(): boolean {
-    if (this.role == 'superAdmin' && !this.adminSelect) {
-      return this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender != '';
-    } else if (this.role == 'superAdmin' && this.adminSelect) {
+    if (this.role === 'superAdmin' && !this.adminSelect) {
+      return this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender !== '';
+    } else if (this.role === 'superAdmin' && this.adminSelect) {
       return this.isEmailLength() && this.isLastNameLength() && this.isNameLength() && !this.isDifferentTo() && this.isValidPassLenght()
         && this.isEqual() && !this.contentSpaces()
         && this.contentDigits() && this.contentLower() && this.contentUpper();
@@ -201,7 +218,7 @@ export class RegisterModalComponent implements OnInit {
       return !this.isDifferentTo() && this.isValidPassLenght()
         && this.isEqual() && !this.contentSpaces()
         && this.contentDigits() && this.contentLower() && this.contentUpper() &&
-        this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender != '';
+        this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender !== '';
     }
   }
 
@@ -293,8 +310,7 @@ export class RegisterModalComponent implements OnInit {
   }
 
   redirect2(): void {
-    this.router.navigate(['']);
-
+    location.reload();
   }
 
   redirectAdmin(): void {
@@ -310,7 +326,7 @@ export class RegisterModalComponent implements OnInit {
   }
 
   isEmailLength(): boolean {
-    if (this.email != undefined) {
+    if (this.email !== undefined) {
       return this.email.length <= 150;
     } else {
       return false;

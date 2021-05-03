@@ -1,0 +1,38 @@
+<!-- Modal -->
+<div class="modal fade" id="warn-sub" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content-register filter-container">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <div class="titles">
+          <p class="event-title-1">Liberate de tus</p>
+          <p class="event-title-2">LIMITES.</p>
+        </div>
+        <p class="p-info">Disfruta de nuestros beneficios exclusivos</p>
+        <p class="p-info red-info">¡Adquiere un plan para eliminar los límites!</p>
+        <section class="info-options">
+          <div class="info-check">
+            <fa-icon [icon]="faCheckSolid" class="check-icon"></fa-icon>
+            <p class="info-options-p">Publica lo que quieras. Sin restricciones.</p>
+          </div>
+          <div class="info-check">
+            <fa-icon [icon]="faCheckSolid" class="check-icon"></fa-icon>
+            <p class="info-options-p">Cancela o cámbialo cuando quieras.</p>
+          </div>
+          <div class="info-check">
+            <fa-icon [icon]="faCheckSolid" class="check-icon"></fa-icon>
+            <p class="info-options-p">Crea establecimientos.</p>
+          </div>
+        </section>
+        <p class="p-info">¡Más gente se está uniendo a esta gran campaña!</p>
+        <button class="add-sub-btn" [routerLink]="['company/subscription']" data-dismiss="modal">Adquirir subscripción</button>
+      </div>
+    </div>
+  </div>
+</div>

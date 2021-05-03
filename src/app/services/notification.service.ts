@@ -215,4 +215,40 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  sucessPublish(eventName: string): void {
+    this.nService.success(eventName, 'Evento publicado', {
+      timeOut: 2000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  sucessHide(eventName: string): void {
+    this.nService.error(eventName, 'Evento ocultado', {
+      timeOut: 2000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  sucessRemoveEstablishment(name: string): void {
+    this.nService.error(name, 'Establecimiento eliminado correctamente', {
+      timeOut: 2000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  sucessRemoveEvent(name: string): void {
+    this.nService.error(name, 'Evento eliminado correctamente', {
+      timeOut: 2000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

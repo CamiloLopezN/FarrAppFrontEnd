@@ -1,57 +1,62 @@
 export class ClientRegistration {
-    name: string;
-    lastname: string;
-    birthdate: string;
-    gender: string;
-    e_mail: string;
-    password: string;
+  firstName: string;
+  lastName: string;
+  birthdate: string;
+  gender: string;
+  email: string;
+  password: string;
 }
 
 export interface ClientLogin {
-    e_mail: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export interface ClientAccount {
-    e_mail: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 export interface ClientResponse {
 
-    name: string;
-    lastname: string;
-    birthdate: string;
-    gender: string;
+  firstName: string;
+  lastName: string;
+  birthdate: string | Date;
+  gender: string;
 
 }
 
 export interface ClientResponseAdmin {
-    _id: string;
-    name: string;
-    lastname: string;
-    birthdate: string;
-    gender: string;
-    e_mail: string;
+  _id: string;
+  name: string;
+  lastname: string;
+  birthdate: string;
+  gender: string;
+  email: string;
 }
 
 export interface ClientResponseAdmin2 {
-    _id: string;
-    name: string;
-    lastname: string;
+  _id: string;
+  name: string;
+  lastname: string;
 }
 
 export class ClientRegistration2 {
-    name: string;
-    lastname: string;
-    birthdate: string;
-    gender: string;
-    e_mail: string;
+  firstName: string;
+  lastName: string;
+  birthdate: string;
+  gender: string;
+  email: string;
 }
 
 export class ClientAdmin {
-    name: string;
-    lastname: string;
-    e_mail: string;
-    password: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+export class ClientsInterest {
+  interests: string[];
+  follows: string[];
 }

@@ -4,6 +4,7 @@ import {faCalendarPlus} from '@fortawesome/free-solid-svg-icons';
 import {IsShowModalService} from '../../services/is-show-modal.service';
 import {CompanyService} from '../../services/company.service';
 import {NotificationService} from '../../services/notification.service';
+import {AuthService} from '../../services/auth.service';
 
 declare var $: any;
 
@@ -20,7 +21,8 @@ export class AlleventsCompanyComponent implements OnInit {
   eventsFinish: EventView[];
   faCalendarPlus = faCalendarPlus;
 
-  constructor(private serviceShow: IsShowModalService, private compS: CompanyService, private ns: NotificationService) {
+  constructor(private serviceShow: IsShowModalService, private compS: CompanyService,
+              private ns: NotificationService, private authS: AuthService) {
     this.eventsActive = [];
     this.eventsInactive = [];
     this.eventsPostpone = [];
@@ -28,12 +30,28 @@ export class AlleventsCompanyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.compS.getEvents().subscribe((res) => {
+        const events = res.message.events;
+        this.eventsActive = events.filter(ev => {
+          return ev.status === 'Activo' && new Date(ev.end) >= new Date();
+        });
+        this.eventsInactive = events.filter(ev => ev.status === 'Inactivo');
+        this.eventsPostpone = events.filter(ev => ev.status === 'Aplazado');
+        this.eventsFinish = events.filter(ev => {
+          return ev.status === 'Activo' && new Date(ev.end) < new Date();
+        });
+      },
+      () => {
+        this.authS.logoutExpired();
+        location.reload();
+      }
+    );
   }
 
   event(): void {
     this.serviceShow.isEvent.next(true);
     this.compS.getEstablishment().subscribe(res => {
-      if (res.establishments.length !== 0) {
+      if (res.message.establishments.length !== 0) {
         $('#register-event-modal').modal('show');
         this.serviceShow.isEstablishment.next(false);
       } else {

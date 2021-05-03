@@ -37,9 +37,10 @@ export class RegisterCodeComponent implements OnInit {
     } else {
       this.codePromotional = {
         discountRate: this.discountValue,
-        code: this.code,
+        codeString: this.code,
         discountType: this.typeDescount.find(item => item.isSelect === true).name,
-        ammountExchanges: this.canjVal
+        totalValidExchanges: this.canjVal,
+        remainingValidExchanges: 0
       };
       this.onAdd.emit(this.codePromotional);
     }

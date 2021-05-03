@@ -1,0 +1,111 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.card-sub {
+  display: flex;
+  border: 1px solid rgba(37, 36, 39, 0.6);
+  border-radius: 10px;
+  width: 21rem;
+  height: auto;
+
+  margin: 1rem auto;
+}
+
+.left-card {
+  display: flex;
+  background: rgba(37, 36, 39, 0.8);
+  border-radius: 10px 0 0 10px;
+  border: none;
+  width: 7rem;
+  height: auto;
+  min-height: 7rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.unity-time {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 3rem;
+
+  margin: 0;
+  padding: 0;
+
+  color: #FAFAFA;
+}
+
+.str-time {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+
+  margin: 0;
+  padding: 0;
+
+  color: #FFFFFF;
+
+}
+
+.center-card {
+  padding: 0.8rem;
+}
+
+.card-red{
+  background: rgba(255, 26, 67, 0.8);
+}
+
+.discount, .cancel {
+  width: 12rem;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
+
+  color: #FFFFFF;
+
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+
+  margin-bottom: 0.8rem;
+
+  background: rgba(2, 117, 216, 0.8);
+  border-radius: 5px;
+
+}
+
+.cancel{
+  color: rgba(255, 26, 67, 0.8);
+  background: #FFFFFF;
+  border: 1px solid rgba(255, 26, 67, 0.8);
+  transition: 0.3s;
+}
+
+.cancel:hover{
+
+  color: #FFFFFF;
+  background: rgba(255, 26, 67, 0.8);
+}
+
+.time-sub {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1rem;
+  color: #252427;
+
+  margin-bottom: 1rem;
+
+}
+@media screen and (min-width: 1258px) {
+  .card-sub{
+    width: 26rem;
+  }
+}

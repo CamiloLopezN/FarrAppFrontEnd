@@ -1,4 +1,19 @@
-.info-company{
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+.header-events {
+  width: 90%;
+  min-width: 280px;
+  max-width: 1200px;
+  margin: 20px auto 0;
+
+}
+
+.info-company {
   width: 170px;
   height: 233px;
   background: #252427;
@@ -9,43 +24,42 @@
   padding-top: 120px;
 }
 
-h4{
+h4 {
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 1rem;
+  line-height: 1rem;
 
   color: #FFFFFF;
 }
 
-.options{
+.options {
   transform: rotate(-70deg);
 }
 
-.title-top{
+.title-top {
   font-style: normal;
   font-weight: 275;
-  font-size: 15px;
-  line-height: 12px;
+  font-size: 0.8rem;
+  line-height: 1rem;
   color: rgba(255, 255, 255, 0.9);
 }
 
-.name-company{
+.name-company {
   font-style: normal;
   font-weight: 300;
-  font-size: 25px;
-  line-height: 170%;
+  font-size: 1.4rem;
+  line-height: 2rem;
   color: rgba(37, 36, 39, 0.8);
 }
 
-.nit-company{
+.nit-company {
   font-style: normal;
-  font-weight: 300;
-  font-size: 25px;
-  line-height: 35px;
-  text-align: center;
-
-  color: rgba(37, 36, 39, 0.6);
+  font-weight: 275;
+  font-size: 1.2rem;
+  line-height: 1rem;
+  color: rgba(37, 36, 39, 0.8);
+  margin-top: 100px;
 }
 
 .my-btn {
@@ -56,52 +70,7 @@ h4{
   height: 10vw;
 }
 
-@media screen and (max-width: 1024px) {
-  .my-btn{
-    width: 15vw;
-    height: 15vw;
-  }
-
-  .info-company{
-    width: 170px;
-    height: 233px;
-    background: #252427;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-    transform: rotate(70deg);
-    top: -86px;
-    padding-top: 130px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .my-btn{
-    width: 20vw;
-    height: 20vw;
-  }
-
-  .title-top{
-    font-style: normal;
-    font-weight: 275;
-    font-size: 10px;
-    line-height: 12px;
-    color: rgba(255, 255, 255, 0.9);
-  }
-  .info-company{
-    width: 170px;
-    height: 233px;
-    background: #252427;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-    transform: rotate(70deg);
-    top: -86px;
-    padding-top: 150px;
-  }
-
-}
-
-
-.options-label{
+.options-label {
   font-family: Lovelo, serif;
   font-style: normal;
   font-weight: 900;
@@ -112,4 +81,36 @@ h4{
   color: #FF1A43;
 
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.my-btn {
+  background: #FF1A43;
+  justify-self: center;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  width: 10vw;
+  max-width: 150px;
+  height: 10vw;
+  max-height: 150px;
+}
+
+.container-events{
+  width: 90%;
+  min-width: 288px;
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .my-btn {
+    width: 15vw;
+    height: 15vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .my-btn {
+    width: 20vw;
+    height: 20vw;
+  }
 }

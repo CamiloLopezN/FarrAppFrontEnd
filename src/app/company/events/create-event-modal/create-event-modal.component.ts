@@ -1,11 +1,24 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {Establishment2, EventC, EventRegister, Img, Status, Ticket2} from '../../../model/company';
+import {
+  EstablishmentViewId,
+  EventC,
+  EventRegister,
+  Img,
+  Status,
+  Ticket,
+} from '../../../model/company';
 import {faCalendarAlt, faImages} from '@fortawesome/free-regular-svg-icons';
 import {CompanyService} from '../../../services/company.service';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {CitiesService} from '../../../services/cities.service';
 import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../../services/notification.service';
+import {IsShowModalService} from '../../../services/is-show-modal.service';
+import {UserService} from '../../../services/user.service';
+import {EventEmmiterService} from '../../../services/event-remove.service';
+import {SpinnerService} from '../../../services/spinner.service';
+import {Router} from '@angular/router';
+import {AuthService} from '../../../services/auth.service';
 
 declare var $: any;
 
@@ -24,7 +37,6 @@ export class CreateEventModalComponent implements OnInit {
 
   nameEvent: string;
   dateInit: string;
-  dateInitHour: string;
   dateFin: string;
   dateFinHour: string;
   imgs: Img[];
@@ -32,11 +44,11 @@ export class CreateEventModalComponent implements OnInit {
   description: string;
   clotheCode: Status[];
   minAge: number;
-  tickets: Ticket2[];
+  tickets: Ticket[];
   capacity: number;
   address: string;
-  establishments: Establishment2[];
-  establishmentSelect: Establishment2;
+  establishments: EstablishmentViewId[];
+  establishmentSelect: EstablishmentViewId;
   lat: number;
   lng: number;
   zoom: number;
@@ -52,8 +64,6 @@ export class CreateEventModalComponent implements OnInit {
 
   typeUbication: Status[];
 
-  statusEvent: Status[];
-
   messageErrorDate: string;
   messageErrorEvent: string;
   messageErrorImage: string;
@@ -64,12 +74,23 @@ export class CreateEventModalComponent implements OnInit {
   messageNoTickets: string;
   isScroll: boolean;
 
+  idCompany: string;
+
   eventReg: EventRegister;
   @ViewChild('formEvent') formC: NgForm;
+  isEdit = false;
 
-  constructor(private comps: CompanyService, private cs: CitiesService,
-              private changeDetectorRef: ChangeDetectorRef, private nS: NotificationService) {
+  constructor(private comps: CompanyService, private cs: CitiesService, public loaderService: SpinnerService,
+              private ers: EventEmmiterService, private userS: UserService, private router: Router, private authS: AuthService,
+              private changeDetectorRef: ChangeDetectorRef, private nS: NotificationService, private ism: IsShowModalService
+  ) {
     this.init();
+    this.ism.isEditEvent.subscribe(bool => {
+      this.isEdit = bool;
+    });
+    this.authS.getRoleId.subscribe(res => {
+      this.idCompany = res;
+    });
   }
 
   private init(): void {
@@ -90,20 +111,6 @@ export class CreateEventModalComponent implements OnInit {
       date: `${year}-${month}-${day}`,
       city: ''
     };
-
-    this.statusEvent = [{
-      isSelect: false,
-      name: 'Activo'
-    },
-      {
-        isSelect: false,
-        name: 'Inactivo'
-      },
-      {
-        name: 'Aplazado',
-        isSelect: false
-      }
-    ];
 
     this.typeUbication = [{
       isSelect: false,
@@ -143,6 +150,11 @@ export class CreateEventModalComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
         this.getEstablishment();
         this.citySelect = 'Tunja';
+        if (this.isEdit) {
+          this.getEvent();
+        }
+      }).on('show.bs.hidden', () => {
+        this.ism.isEventEdit.next(false);
       });
     });
   }
@@ -150,31 +162,32 @@ export class CreateEventModalComponent implements OnInit {
   onSubmit(): void {
     if (this.ifValidate()) {
       this.eventReg = {
-        address: this.address,
+        location: {
+          longitude: this.marker.lng,
+          latitude: this.marker.lat,
+          city: this.eventC.city,
+          address: this.address
+        },
         capacity: this.capacity,
-        city: this.eventC.city,
         description: this.description,
-        dresCode: this.getNames(this.clotheCode),
-        eDate: this.makeDate(this.dateFin, this.eventC.hourFin),
-        establishmentId: this.establishmentSelect._id,
-        eventCategory: this.getNames(this.typeEvent),
+        dressCodes: this.getNames(this.clotheCode),
+        end: this.makeDate(this.dateFin, this.eventC.hourFin),
+        categories: this.getNames(this.typeEvent),
         eventName: this.eventC.name,
-        latitude: this.marker.lat,
-        longitude: this.marker.lng,
         minAge: this.minAge,
-        photos: [],
-        sDate: this.makeDate(this.eventC.date, this.eventC.hourInit),
-        tickets: this.tickets,
-        status: this.statusEvent.find(item => item.isSelect === true).name
+        photoUrls: [],
+        start: this.makeDate(this.eventC.date, this.eventC.hourInit),
+        tickets: this.tickets
       };
-
       this.comps.postPhotosEvent(this.imgs.map(myimg => myimg.imgFile)).subscribe(res => {
-        this.eventReg.photos = res.map(photoObj => photoObj.photo);
+        this.eventReg.photoUrls = res.map(photoObj => photoObj.photo);
       }, error => {
         console.log(error);
       }, () => {
-        this.comps.postEvent(this.eventReg).subscribe(() => {
+        this.comps.postEvent(this.eventReg, this.establishmentSelect.establishmentId).subscribe(res => {
           $('#register-event-modal').modal('hide');
+          this.router.navigate(
+            ['company', this.idCompany, 'establishments', this.establishmentSelect.establishmentId, 'events', res.eventId]);
           this.nS.sucessRegisterEvent();
           this.formC.reset();
           this.changeDetectorRef.detectChanges();
@@ -254,14 +267,6 @@ export class CreateEventModalComponent implements OnInit {
         this.isScroll = true;
       }
     }
-    if (!this.ifStatus()) {
-      this.messageErrorStatus = 'Debes seleccionar el estado del evento';
-      if (!this.isScroll) {
-        const target = document.getElementById('statusEvent');
-        target.scrollIntoView({behavior: 'smooth', block: 'center'});
-        this.isScroll = true;
-      }
-    }
     if (this.typeUbication[1].isSelect && this.marker.lat === null) {
       this.messageErrorUbication = 'Debes seleccionar la ubicación del evento';
       if (!this.isScroll) {
@@ -306,10 +311,6 @@ export class CreateEventModalComponent implements OnInit {
     return this.typeUbication.find(value => value.isSelect === true) !== undefined;
   }
 
-  ifStatus(): boolean {
-    return this.statusEvent.find(value => value.isSelect === true) !== undefined;
-  }
-
   ifTickets(): boolean {
     return this.tickets.length >= 1;
   }
@@ -335,9 +336,8 @@ export class CreateEventModalComponent implements OnInit {
 
   getEstablishment(): void {
     this.comps.getEstablishment().subscribe(res => {
-      this.establishments = res.establishments;
+      this.establishments = res.message.establishments;
       this.establishmentSelect = this.establishments[0];
-      console.log(this.establishments);
     }, error => {
       console.log(error);
     });
@@ -395,10 +395,10 @@ export class CreateEventModalComponent implements OnInit {
       this.messageErrorWhere = '';
     }
     if (option.name === 'Establecimiento') {
-      this.eventC.city = this.establishmentSelect.city;
-      this.marker.lat = this.establishmentSelect.latitude;
-      this.marker.lng = this.establishmentSelect.longitude;
-      this.address = this.establishmentSelect.address;
+      this.eventC.city = this.establishmentSelect.location.city;
+      this.marker.lat = this.establishmentSelect.location.latitude;
+      this.marker.lng = this.establishmentSelect.location.longitude;
+      this.address = this.establishmentSelect.location.address;
     } else if (option.name === 'Otro') {
       this.marker.lat = null;
       this.marker.lng = null;
@@ -450,10 +450,19 @@ export class CreateEventModalComponent implements OnInit {
 
   change(): void {
     if (this.typeUbication[0].isSelect) {
-      this.eventC.city = this.establishmentSelect.city;
-      this.marker.lat = this.establishmentSelect.latitude;
-      this.marker.lng = this.establishmentSelect.longitude;
-      this.address = this.establishmentSelect.address;
+      this.eventC.city = this.establishmentSelect.location.city;
+      this.marker.lat = this.establishmentSelect.location.latitude;
+      this.marker.lng = this.establishmentSelect.location.longitude;
+      this.address = this.establishmentSelect.location.address;
     }
+  }
+
+  private getEvent(): void {
+    this.ers.event.subscribe(ev => {
+      this.userS.getEventById(ev.idCompany, ev.idEstablishment, ev.idEvent).subscribe(() => {
+      }, error => {
+        console.log(error);
+      });
+    });
   }
 }

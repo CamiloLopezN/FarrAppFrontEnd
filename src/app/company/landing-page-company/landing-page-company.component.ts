@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
-import {CompanyResponse, EstablishmentView, EventC, EventView} from '../../model/company';
+import {CompanyResponse, EventView} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
 import {AuthService} from '../../services/auth.service';
-import {faUser, faCalendarCheck, faBuilding} from '@fortawesome/free-solid-svg-icons';
+import {faUser, faCalendarCheck, faBuilding, faMoneyCheckAlt, faCreditCard, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-landing-page-company',
@@ -14,55 +14,40 @@ export class LandingPageCompanyComponent implements OnInit {
   faUser = faUser;
   faCalendar = faCalendarCheck;
   faBuilding = faBuilding;
-  events: EventC[];
-  eventss: EventView[];
-  establishments: EstablishmentView[];
+  faMoneyCheck = faMoneyCheckAlt;
+  faCreditCard = faCreditCard;
+  faInfoCard = faInfoCircle;
+  isSubscribe: boolean;
+  eventsActive: EventView[];
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
-    this.eventss = [];
-    this.establishments = [];
-
   }
 
   ngOnInit(): void {
+    this.authS.subscribe.subscribe(sub => {
+      this.isSubscribe = sub;
+    });
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.getCompany();
-    this.getParcialEvents();
-    this.getEstablishments();
   }
 
   getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-        this.company = res.search;
+        this.company = {
+          contactNumber: res.message.contactNumber,
+          companyName: res.message.companyName,
+          nit: res.message.nit,
+          address: res.message.address,
+          _id: res.message._id,
+          establishments: res.message.establishments,
+          events: res.message.events,
+          userId: res.message.userId
+        };
+        this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
       },
       () => {
         this.authS.logoutExpired();
       }
     );
-  }
-
-  private getParcialEvents(): void {
-    this.companyS.getParcialEvents().subscribe(res => {
-      res.events.forEach(event => {
-        this.eventss.push({
-          startDate: new Date(event.startDate),
-          _id: event._id,
-          eventName: event.eventName,
-          city: event.city,
-          endDate: new Date(event.endDate),
-          photos: event.photos
-        });
-      });
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  private getEstablishments(): void {
-    this.companyS.getParcialEstablishment().subscribe(res => {
-      this.establishments = res;
-    }, error => {
-      console.log(error);
-    });
   }
 }

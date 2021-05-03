@@ -41,7 +41,8 @@
                 </div>
               </div>
             </div>
-
+            <small id="emailHelp321" class="form-text text-danger text-left"
+                   *ngIf="errorMessage">{{errorMessage}}</small>
             <div class="input-group mt-4">
               <div class="input-group-prepend">
                 <div class="input-group-text icon">
@@ -90,8 +91,6 @@
             <div class="text-left">
               <small id="emailHelp" class="form-text text-danger" *ngIf="!emailC.valid && emailC.touched">El correo
                 electrónico es inválido.</small>
-              <small id="emailHelp" class="form-text text-danger"
-                     *ngIf="emailC.valid && emailC.touched && errorMessage">{{errorMessage}}</small>
               <small id="emailHelp" class="form-text text-danger"
                      *ngIf="emailC.valid && emailC.touched && !isEmailLength()">El correo debe tener menos de 150
                 caracteres.</small>
@@ -157,55 +156,57 @@
               </div>
             </div>
             <div *ngIf="!adminSelect">
-            <div class="mt-4 text-left">
-              <h5>Género</h5>
-              <div class="row">
-                <div class="col">
-                  <button
-                    (click)="changeButtoms(btnMasc)"
-                    type="button"
-                    class="btn border-circ my-btn w-100"
-                    name="{{btnMasc}}"
-                    id="{{btnMasc}}">
-                    Hombre
-                  </button>
-                </div>
-                <div class="col">
-                  <button
-                    (click)="changeButtoms(btnFemale)"
-                    type="button"
-                    class="btn border-circ my-btn w-100"
-                    name="{{btnFemale}}"
-                    id="{{btnFemale}}">
-                    Mujer
-                  </button>
-                </div>
-                <div class="col">
-                  <button
-                    (click)="changeButtoms(btnOther)"
-                    type="button"
-                    class="btn border-circ my-btn w-100"
-                    name="{{btnOther}}"
-                    id="{{btnOther}}">
-                    Otro
-                  </button>
+              <div class="mt-4 text-left">
+                <h5>Género</h5>
+                <div class="row">
+                  <div class="col">
+                    <button
+                      (click)="changeButtoms(btnMasc)"
+                      type="button"
+                      class="btn border-circ my-btn w-100"
+                      name="{{btnMasc}}"
+                      id="{{btnMasc}}">
+                      Hombre
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      (click)="changeButtoms(btnFemale)"
+                      type="button"
+                      class="btn border-circ my-btn w-100"
+                      name="{{btnFemale}}"
+                      id="{{btnFemale}}">
+                      Mujer
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      (click)="changeButtoms(btnOther)"
+                      type="button"
+                      class="btn border-circ my-btn w-100"
+                      name="{{btnOther}}"
+                      id="{{btnOther}}">
+                      Otro
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="mt-4 text-left">
-              <h5>Fecha de nacimiento</h5>
-              <div>
-                <input type="date" class="form-control my-form"
-                       #bdate="ngModel" name="bdate" [(ngModel)]="birthdate" required
-                >
-                <small id="dateHelp" class="form-text text-danger" *ngIf="bdate.touched && !ifBefore()">Ingrese una
-                  fecha valida.</small>
+              <div class="mt-4 text-left">
+                <h5>Fecha de nacimiento</h5>
+                <div>
+                  <input type="date" class="form-control my-form"
+                         #bdate="ngModel" name="bdate" [(ngModel)]="birthdate" required
+                  >
+                  <small id="dateHelp" class="form-text text-danger" *ngIf="bdate.touched && !ifBefore()">Ingrese una
+                    fecha valida.</small>
+                </div>
               </div>
             </div>
-            </div>
-            <button type="submit" class="btn btn-outline-dark mt-4" style="border-radius: 30px"
-                    [disabled]="!formClient.form.valid || !isValidAll()">Crear cuenta
+            <button type="submit" class="btn btn-outline-dark mt-4 btn-custom-width" style="border-radius: 30px"
+                    [disabled]="!formClient.form.valid || !isValidAll()"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Crear cuenta</p>
             </button>
           </form>
         </div>
@@ -222,7 +223,9 @@
     <div class="text-left">
       <small id="errorMessageVerify" class="form-text text-danger mb-3" *ngIf="errorMessage">{{errorMessage}}</small>
     </div>
-    <button type="submit" class="btn btn-success border-circ w-100" (click)="redirect()">Ya verifiqué mi cuenta
+    <button type="submit" class="btn btn-success border-circ btn-custom-width w-100 position-relative" (click)="redirect()"
+            [class.spinner]="loaderService.isLoading | async">
+      <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Ya verifiqué mi cuenta</p>
     </button>
   </div>
 </ng-template>

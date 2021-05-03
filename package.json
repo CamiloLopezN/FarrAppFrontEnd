@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0",
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "~11.0.1",
     "@angular/cdk": "^11.2.4",
     "@angular/common": "~11.0.1",
@@ -28,6 +29,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "angular-cc-library": "^2.1.2",
     "angular2-notifications": "^9.0.0",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.5.3",
@@ -45,6 +47,7 @@
     "@angular-devkit/build-angular": "~0.1100.2",
     "@angular/cli": "~11.0.2",
     "@angular/compiler-cli": "~11.0.1",
+    "@angular/localize": "^11.0.3",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",

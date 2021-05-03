@@ -4,7 +4,6 @@ import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../services/notification.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {AdminService} from '../../services/admin.service';
 import {
   faLock,
   faUnlock,
@@ -16,6 +15,7 @@ import {
 import {faSlideshare} from '@fortawesome/free-brands-svg-icons';
 import {CompanyRegistration, CompanyRegistration2} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 declare var $: any;
 
@@ -45,9 +45,7 @@ export class RegisterCompanyModalComponent implements OnInit {
   email: string;
   password: string;
   passwordCon: string;
-  errorMessageEmail: string;
-  errorMessageNIT: string;
-  errorMessageName: string;
+  errorMessage: string;
   faUnlock = faUnlock;
 
   screenVerify: boolean;
@@ -59,7 +57,7 @@ export class RegisterCompanyModalComponent implements OnInit {
 
   constructor(private notifyS: NotificationService, private authS: AuthService,
               private router: Router, private companyService: CompanyService,
-              private changeDetectorRef: ChangeDetectorRef, private adminS: AdminService) {
+              private changeDetectorRef: ChangeDetectorRef, public loaderService: SpinnerService) {
     this.authS.roled.subscribe(roled => {
       this.role = roled;
     });
@@ -76,9 +74,7 @@ export class RegisterCompanyModalComponent implements OnInit {
         this.email = '';
         this.password = '';
         this.passwordCon = '';
-        this.errorMessageEmail = '';
-        this.errorMessageNIT = '';
-        this.errorMessageName = '';
+        this.errorMessage = '';
         this.nit = '';
         this.contactNumber = '';
         this.name = '';
@@ -92,16 +88,14 @@ export class RegisterCompanyModalComponent implements OnInit {
 
   onSubmit(): void {
 
-    this.errorMessageEmail = '';
-    this.errorMessageNIT = '';
-    this.errorMessageName = '';
+    this.errorMessage = '';
     // tslint:disable-next-line:triple-equals
     if (this.role != 'superAdmin') {
       this.company = {
-        name: this.name,
+        companyName: this.name,
         address: this.address,
-        contact_number: this.contactNumber,
-        e_mail: this.email,
+        contactNumber: this.contactNumber,
+        email: this.email,
         password: this.password,
         nit: this.nit
       };
@@ -111,42 +105,38 @@ export class RegisterCompanyModalComponent implements OnInit {
           this.changeDetectorRef.detectChanges();
         },
         error => {
-          if (error.error.message == 'Ya existe una empresa registrada con ese identificador de NIT') {
-            this.errorMessageNIT = error.error.message;
-          } else if (error.error.message == 'Ya existe una empresa registrada con ese nombre') {
-            this.errorMessageName = error.error.message;
-          } else {
-            this.errorMessageEmail = error.error.message;
+          if (error.status === 400) {
+            this.errorMessage = 'Datos inválidos.';
+          } else if (error.status === 500) {
+            this.errorMessage = 'Error en el servidor, intente más tarde';
           }
         }
       );
     } else {
       this.companyA = {
         nit: this.nit,
-        name: this.name,
-        e_mail: this.email,
-        contact_number: this.contactNumber,
+        companyName: this.name,
+        email: this.email,
+        contactNumber: this.contactNumber,
         address: this.address
       };
-      this.adminS.postCompany(this.companyA).subscribe(() => {
+      this.companyService.register(this.companyA).subscribe(() => {
         $('#register-company-modal').modal('hide');
         this.notifyS.succesRegisterCompany();
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
       }, error => {
-        if (error.error.message == 'Ya existe una empresa registrada con ese identificador de NIT') {
-          this.errorMessageNIT = error.error.message;
-        } else if (error.error.message == 'Ya existe una empresa registrada con ese nombre') {
-          this.errorMessageName = error.error.message;
-        } else {
-          this.errorMessageEmail = error.error.message;
+        if (error.status === 400) {
+          this.errorMessage = 'Datos inválidos.';
+        } else if (error.status === 500) {
+          this.errorMessage = 'Error en el servidor, intente más tarde';
         }
       });
     }
   }
 
   isValidAll(): boolean {
-    if (this.role == 'superAdmin') {
+    if (this.role === 'superAdmin') {
       return this.isNameLenght() && this.isNit() && this.isAddress() && this.isContactNumber() && this.isEmailLength();
     } else {
       return !this.isDifferentTo() && this.isValidPassLenght()
@@ -189,7 +179,7 @@ export class RegisterCompanyModalComponent implements OnInit {
   }
 
   isNameLenght(): boolean {
-    if (this.name != undefined) {
+    if (this.name !== undefined) {
       return this.name.length <= 150;
     } else {
       return false;

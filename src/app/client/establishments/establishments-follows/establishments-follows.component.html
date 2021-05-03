@@ -1,0 +1,21 @@
+<div class="all-events animate__animated animate__fadeInRight" *ngIf="establishments.length != 0" style="animation-duration: 0.2s;">
+  <header>
+    <div class="img-all-events"></div>
+    <div class="titles">
+      <p class="event-title-1">Establecimientos a tu</p>
+      <p class="event-title-2">ALTURA.</p>
+    </div>
+  </header>
+  <main class="margin-1200">
+    <div class="float-left">
+      <p class="events"><b>Establecimientos</b></p>
+      <p class="events2">¡Busca lo que te gusta!</p>
+    </div>
+    <div class="clearfix"></div>
+    <section class="all-event">
+      <div *ngFor="let establishment of establishments">
+        <app-establishment-card [establishment]="establishment"></app-establishment-card>
+      </div>
+    </section>
+  </main>
+</div>

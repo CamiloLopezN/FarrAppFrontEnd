@@ -1,7 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~animate.css/animate.min.css";
 
-.my-ticket-form{
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+.btn-custom-width {
+  position: relative;
+  border-radius: 30px !important;
+  width: 12rem;
+  height: 2.2rem;
+}
+
+.mar-pad-0{
+  margin: 0;
+  padding: 0;
+}
+
+.my-ticket-form {
   font-size: 1.1rem !important;
 }
 
@@ -91,6 +125,7 @@ html {
     padding-top: 35vh;
     padding-bottom: 35vh;
   }
+
   .crow2 {
     overflow: hidden;
     max-width: 80vw;
@@ -148,12 +183,12 @@ html {
 /* position outside */
 .carousel-mine .flickity-prev-next-button.previous {
   top: 110%;
-  left: 35%;
+  left: 25vw;
 }
 
 .carousel-mine .flickity-prev-next-button.next {
   top: 110%;
-  right: 35%;
+  right: 25vw;
 }
 
 .carousel-mine .flickity-button {
@@ -170,11 +205,11 @@ html {
 }
 
 .carousel0 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel0 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel0 .flickity-page-dots {
@@ -196,11 +231,11 @@ html {
 }
 
 .carousel1 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel1 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel1 .flickity-page-dots {
@@ -222,11 +257,11 @@ html {
 }
 
 .carousel2 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel2 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel2 .flickity-page-dots {
@@ -248,11 +283,11 @@ html {
 }
 
 .carousel3 .flickity-prev-next-button.previous {
-  left: 1%;
+  left: -2%;
 }
 
 .carousel3 .flickity-prev-next-button.next {
-  right: 1%;
+  right: -2%;
 }
 
 .carousel3 .flickity-page-dots {
@@ -265,4 +300,13 @@ html {
   width: 40px;
   margin: 0;
   border-radius: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

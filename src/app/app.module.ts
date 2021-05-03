@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -49,9 +49,34 @@ import {EventComponent} from './company/events/event/event.component';
 import {EstablishmentsCompanyComponent} from './company/establishments/establishments-company/establishments-company.component';
 import {EstablishmentComponent} from './company/establishments/establishment/establishment.component';
 import {AlleventsCompanyComponent} from './company/allevents-company/allevents-company.component';
-import { AllestablishmentCompanyComponent } from './company/establishments/allestablishment-company/allestablishment-company.component';
-import { EstablishmentPerfilComponent } from './company/establishments/establishment-perfil/establishment-perfil.component';
+import {AllestablishmentCompanyComponent} from './company/establishments/allestablishment-company/allestablishment-company.component';
+import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
+import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.component';
+import {ImgsCarouselComponent} from './company/events/imgs-carousel/imgs-carousel.component';
+import {RemoveEventModalComponent} from './company/remove-event-modal/remove-event-modal.component';
+import {UserCommentModalComponent} from './users/events/user-comment-modal/user-comment-modal.component';
+import {EventsUserComponent} from './users/events/events-user/events-user.component';
+import {EventUserComponent} from './users/events/event-user/event-user.component';
+import {FilterEventModalComponent} from './users/events/filter-event-modal/filter-event-modal.component';
+import {MatSliderModule} from '@angular/material/slider';
+import {SubscriptionComponent} from './company/subscriptions/subscription/subscription.component';
+import {SubscriptionCardComponent} from './company/subscriptions/subscription-card/subscription-card.component';
+import {ModalWarningComponent} from './company/subscriptions/modal-warning/modal-warning.component';
+import {PaymentPortalComponent} from './company/subscriptions/payment-portal/payment-portal.component';
+import {CreditCardDirectivesModule} from 'angular-cc-library';
+import {ResponsePayComponent} from './company/subscriptions/response-pay/response-pay.component';
+import {AddCustomerComponent} from './company/subscriptions/add-customer/add-customer.component';
+import {RemoveEstablishmentModalComponent} from './company/establishments/remove-establishment-modal/remove-establishment-modal.component';
+import {EstablishmentCardComponent} from './company/establishments/establishment-card/establishment-card.component';
 
+import es from '@angular/common/locales/es';
+import {registerLocaleData} from '@angular/common';
+import { EventsInterestsComponent } from './client/events/events-interests/events-interests.component';
+import { LandingPageClientComponent } from './client/landing-page-client/landing-page-client.component';
+import { EstablishmentsFollowsComponent } from './client/establishments/establishments-follows/establishments-follows.component';
+import { EstablishmentsUserComponent } from './users/establishments/establishments-user/establishments-user.component';
+
+registerLocaleData(es);
 
 @NgModule({
   declarations: [
@@ -91,7 +116,26 @@ import { EstablishmentPerfilComponent } from './company/establishments/establish
     CreateEstablishmentModalComponent,
     EventVisualComponent,
     AllestablishmentCompanyComponent,
-    EstablishmentPerfilComponent
+    EstablishmentPerfilComponent,
+    EventPerfilComponent,
+    ImgsCarouselComponent,
+    RemoveEventModalComponent,
+    UserCommentModalComponent,
+    EventsUserComponent,
+    EventUserComponent,
+    FilterEventModalComponent,
+    SubscriptionComponent,
+    SubscriptionCardComponent,
+    ModalWarningComponent,
+    PaymentPortalComponent,
+    ResponsePayComponent,
+    AddCustomerComponent,
+    RemoveEstablishmentModalComponent,
+    EstablishmentCardComponent,
+    EventsInterestsComponent,
+    LandingPageClientComponent,
+    EstablishmentsFollowsComponent,
+    EstablishmentsUserComponent
   ],
   imports: [
     BrowserModule,
@@ -100,19 +144,28 @@ import { EstablishmentPerfilComponent } from './company/establishments/establish
     FontAwesomeModule,
     HttpClientModule,
     NgxPaginationModule,
-    BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     NgProgressModule,
     NgProgressHttpModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
+    CreditCardDirectivesModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDj7S6KshIWY1rgkzv03ymsaABDr8W63g4'
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [DatePipe,
     {
       provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true
-    }],
+    },
+    {
+      provide: LOCALE_ID, useValue: 'es-*'
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE, useValue: 'COP'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

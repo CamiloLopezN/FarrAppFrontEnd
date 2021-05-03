@@ -138,10 +138,10 @@
       </button>
       <div class="clearfix"></div>
       <app-register-code *ngIf="isVisible" (onAdd)="addCode($event)"></app-register-code>
-      <div class="mt-4" *ngIf="codePromotionals" id="divPromotionals">
-        <div *ngFor="let code of codePromotionals; index as i">
+      <div class="mt-4" *ngIf="codePromotions" id="divPromotionals">
+        <div *ngFor="let code of codePromotions; index as i">
           <app-code-promotional-card (onDelete)="removeCode(i)" [codeP]="code"
-                                     id="my-card{{code.code}}"></app-code-promotional-card>
+                                     id="my-card{{code.codeString}}"></app-code-promotional-card>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ClientLogin} from '../model/client';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
@@ -17,9 +17,13 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(false);
   private role = new BehaviorSubject<string>('norole');
+  private roleId = new BehaviorSubject<string>('');
+  public customerId = new BehaviorSubject<string>('');
+  private userId = new BehaviorSubject<string>('');
   public inLog = new BehaviorSubject<boolean>(true);
   public inReg = new BehaviorSubject<boolean>(false);
   public inRegCompany = new BehaviorSubject<boolean>(false);
+  public isSubscribe = new BehaviorSubject<boolean>(true);
   private nameUser = new BehaviorSubject<string>('');
 
   constructor(private httpClient: HttpClient, private router: Router,
@@ -29,6 +33,10 @@ export class AuthService {
 
   get isLogged(): Observable<boolean> {
     return this.loggedIn.asObservable();
+  }
+
+  get subscribe(): Observable<boolean> {
+    return this.isSubscribe.asObservable();
   }
 
   get isLog(): Observable<boolean> {
@@ -47,8 +55,20 @@ export class AuthService {
     return this.role.asObservable();
   }
 
+  get getRoleId(): Observable<string> {
+    return this.roleId.asObservable();
+  }
+
+  get getUserId(): Observable<string> {
+    return this.userId.asObservable();
+  }
+
   get getName(): Observable<string> {
     return this.nameUser.asObservable();
+  }
+
+  get getCustomerId(): Observable<string> {
+    return this.customerId.asObservable();
   }
 
 
@@ -72,10 +92,17 @@ export class AuthService {
   }
 
   login(client: ClientLogin): Observable<any> {
-    return this.httpClient.post(`${environment.backend}/api/client/signin`, client).pipe(
+    console.log(client);
+    return this.httpClient.post(`${environment.backend2}/api/users/login`, client).pipe(
       map((res: any) => {
         if (res.token !== undefined) {
+          console.log(res);
           this.saveToken(res.token);
+          if (helper.decodeToken(localStorage.getItem('token')).role === 'company') {
+            this.saveName(res.userInfo.firstName);
+          } else {
+            this.saveName(`${res.userInfo.firstName},${res.userInfo.lastName}`);
+          }
           this.changeLogAndRole();
         }
         return res;
@@ -83,11 +110,35 @@ export class AuthService {
     );
   }
 
-  retrievePass(e_mail: string): Observable<any> {
+  refreshToken(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.httpClient.get<any>(`${environment.backend2}/api/users/refresh-token`, {headers})
+      .pipe(
+        map((res: any) => {
+          if (res.token !== undefined) {
+            this.logout();
+            this.saveToken(res.token);
+            if (helper.decodeToken(localStorage.getItem('token')).role === 'company') {
+              this.saveName(res.userInfo.firstName);
+            } else {
+              this.saveName(`${res.userInfo.firstName},${res.userInfo.lastName}`);
+            }
+            this.changeLogAndRole();
+          }
+          return res;
+        })
+      );
+  }
+
+  // tslint:disable-next-line:variable-name
+  retrievePass(email: string): Observable<any> {
     const req = {
-      e_mail: e_mail
+      email
     };
-    return this.httpClient.put(`${environment.backend}/api/user/recover-pass`, req).pipe(
+    return this.httpClient.post(`${environment.backend2}/api/users/recover-password`, req).pipe(
       map((res: any) => {
         return res;
       })
@@ -96,24 +147,29 @@ export class AuthService {
 
   changeLogAndRole(): void {
     this.loggedIn.next(true);
-    this.role.next(helper.decodeToken(localStorage.getItem('token')).role[0].name);
+    this.role.next(helper.decodeToken(localStorage.getItem('token')).role);
+    this.roleId.next(helper.decodeToken(localStorage.getItem('token')).roleId);
+    this.nameUser.next(localStorage.getItem('userName'));
+    this.customerId.next(helper.decodeToken(localStorage.getItem('token')).customerId);
   }
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('userName');
     this.loggedIn.next(false);
     this.role.next('norole');
+    this.roleId.next('');
+    this.nameUser.next('');
+    this.customerId.next('');
   }
 
   logoutSession(): void {
     this.logout();
-    this.router.navigate(['/landing-page']);
-    this.notifyS.logOut();
+    location.reload();
   }
 
   logoutExpired(): void {
     this.logout();
-    this.router.navigate(['/landing-page']);
     this.notifyS.logOutExpired();
   }
 
@@ -121,5 +177,10 @@ export class AuthService {
     this.logout();
     this.router.navigate(['/landing-page']);
     this.notifyS.logOutDesact();
+  }
+
+  saveName(userInfo): void {
+    localStorage.setItem('userName', userInfo);
+    this.nameUser.next(localStorage.getItem('userName'));
   }
 }

@@ -74,13 +74,3 @@ a.nav-item.nav-link:hover {
     padding: 6vh 0 !important;
   }
 }
-
-.loader-container {
-  position: absolute;
-  height: 76vh;
-  border-radius: 0 0 30px 30px;
-  width: 100%;
-  background: black;
-  opacity: 0.8;
-  z-index: 99;
-}

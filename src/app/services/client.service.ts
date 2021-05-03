@@ -3,14 +3,20 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {ClientAccount, ClientRegistration, ClientResponse} from '../model/client';
+import {ClientAccount, ClientRegistration, ClientRegistration2, ClientResponse} from '../model/client';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
-  constructor(private http: HttpClient) {
+  roleId: string;
+
+  constructor(private http: HttpClient, private authS: AuthService) {
+    this.authS.getRoleId.subscribe(res => {
+      this.roleId = res;
+    });
   }
 
   getUser(): Observable<any> {
@@ -18,7 +24,7 @@ export class ClientService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/client/profile`, {headers})
+    return this.http.get<any>(`${environment.backend2}/api/clients/${this.roleId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -31,7 +37,7 @@ export class ClientService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.put<any>(`${environment.backend}/api/client/`, client, {headers})
+    return this.http.post<any>(`${environment.backend2}/api/clients/${this.roleId}`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -64,8 +70,9 @@ export class ClientService {
         })
       );
   }
-  register(client: ClientRegistration): Observable<any> {
-    return this.http.post<any>(`${environment.backend}/api/client/`, client)
+
+  register(client: ClientRegistration | ClientRegistration2): Observable<any> {
+    return this.http.post<any>(`${environment.backend2}/api/clients/`, client)
       .pipe(
         map((res: any) => {
           return res;
@@ -86,4 +93,35 @@ export class ClientService {
       );
   }
 
+  like(eventId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const req = {
+      eventId
+    };
+    return this.http.post<any>(`${environment.backend2}/api/clients/event-interest`, req, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  follow(establishmentId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const req = {
+      establishmentId
+    };
+    return this.http.post<any>(`${environment.backend2}/api/clients/follow-establishment`, req, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

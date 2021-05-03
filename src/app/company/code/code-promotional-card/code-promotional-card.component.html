@@ -7,9 +7,9 @@
     <b>{{codeP.discountRate / 100 | percent}}</b>
   </p>
   <p class="mb-0">
-    <b>Código: {{codeP.code}}</b>
+    <b>Código: {{codeP.codeString}}</b>
   </p>
-  <p>Canjes disponibles: {{codeP.ammountExchanges}}</p>
+  <p>Canjes disponibles: {{codeP.totalValidExchanges}}</p>
   <div class="clearfix"></div>
   <button class="btn btn-danger float-right ml-2" style="border-radius: 50%" (click)="deleted()">
     <fa-icon [icon]="faMinus"></fa-icon>

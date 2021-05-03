@@ -1,0 +1,109 @@
+import {Component, OnInit} from '@angular/core';
+import {faCheckCircle, faChevronRight, faPlus, faReceipt, faShoppingCart, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {SubscriptionService} from '../../../services/subscription.service';
+import {CreditCard, SendCard} from '../../../model/creditCard';
+import {AuthService} from '../../../services/auth.service';
+
+@Component({
+  selector: 'app-payment-portal',
+  templateUrl: './payment-portal.component.html',
+  styleUrls: ['./payment-portal.component.css']
+})
+export class PaymentPortalComponent implements OnInit {
+
+  faShopping = faShoppingCart;
+  faReceipt = faReceipt;
+  faChevronRight = faChevronRight;
+  faPlus = faPlus;
+  faTimes = faTimes;
+  faCheckCircle = faCheckCircle;
+  showHistory = true;
+  showListHistory = true;
+  showPay = false;
+  cards: CreditCard[];
+  cardSelect: CreditCard;
+
+  customerId: string;
+
+  messageError: string;
+
+  constructor(private subscriptionS: SubscriptionService,
+              private authS: AuthService
+  ) {
+    this.cards = [];
+  }
+
+  ngOnInit(): void {
+    this.authS.getCustomerId.subscribe(res => {
+      this.customerId = res;
+    });
+    if (this.customerId !== undefined) {
+      this.getUser();
+    }
+  }
+
+  getUser(): void {
+    this.subscriptionS.getCustomer(this.customerId).subscribe(res => {
+      this.cards = res.cards;
+      this.cardSelect = this.cards.find(card => card.default === true);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  changeView(): void {
+    this.showHistory = !this.showHistory;
+  }
+
+  changeSelect(card: CreditCard): void {
+    this.subscriptionS.changeDefaultCard({
+      cardFranchise: card.franchise,
+      cardMask: card.mask,
+      cardToken: card.token
+    }, this.customerId).subscribe(() => {
+      this.cards.forEach(pm => pm.default = false);
+      card.default = true;
+      this.cardSelect = card;
+    }, error => {
+      console.log(error);
+    });
+
+  }
+
+  getLast4(card: CreditCard): string {
+    return card.mask.substring(this.cardSelect.mask.length - 4);
+  }
+
+
+  onClickRemove(event: MouseEvent, card: CreditCard): void {
+    event.stopPropagation();
+    if (this.cards.length !== 1) {
+      this.subscriptionS.deleteCard(card, this.customerId).subscribe(() => {
+        this.cards = this.cards.filter(item => item !== card);
+      }, error => {
+        console.log(error);
+      }, () => {
+        if (card.default) {
+          this.cards[0].default = true;
+          this.changeSelect(this.cards[0]);
+        }
+      });
+    }
+  }
+
+  addCard(card: SendCard): void {
+    this.subscriptionS.addCard(card, this.customerId).subscribe(() => {
+    }, error => {
+      console.log(error);
+    }, () => {
+      this.subscriptionS.getCustomer(this.customerId).subscribe(res => {
+        this.cards.forEach(crd => crd.default = false);
+        this.cards.push(res.cards.find(crd => crd.default === true));
+      }, error => {
+        console.log(error);
+      }, () => {
+        this.showPay = !this.showPay;
+      });
+    });
+  }
+}

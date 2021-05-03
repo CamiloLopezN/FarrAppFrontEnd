@@ -16,6 +16,8 @@
 
             <p id="createAccountTittle" class="h4 pt-2 pb-2">¡Registra tu empresa!</p>
 
+            <small id="buildingHelp" class="form-text text-danger text-left"
+                   *ngIf="errorMessage">{{errorMessage}}</small>
             <div class="input-group mt-4">
               <div class="input-group-prepend">
                 <div class="input-group-text icon">
@@ -30,8 +32,6 @@
                      *ngIf="!building.valid && building.touched">Debes ingresar el nombre de tu empresa.</small>
               <small id="buildingHelp" class="form-text text-danger"
                      *ngIf="building.valid && building.touched && !isNameLenght()">El nombre de la empresa debe tener menos de 150 caracteres</small>
-              <small id="buildingHelp2" class="form-text text-danger"
-                     *ngIf="building.valid && building.touched && errorMessageName">{{errorMessageName}}</small>
             </div>
 
             <div class="input-group mt-4">
@@ -59,12 +59,10 @@
               </div>
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                      placeholder="Correo electrónico" #emailC="ngModel" name="emailC" [(ngModel)]="email" email
-                     pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required (click)="errorMessageEmail=''">
+                     pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required (click)="errorMessage=''">
             </div>
             <div class="text-left">
               <small id="emailHelp" class="form-text text-danger" *ngIf="!emailC.valid && emailC.touched">Debes ingresar un correo válido</small>
-              <small id="emailHelp" class="form-text text-danger"
-                     *ngIf="emailC.valid && emailC.touched && errorMessageEmail">{{errorMessageEmail}}</small>
               <small id="emailHelp" class="form-text text-danger"
                      *ngIf="emailC.valid && emailC.touched && !isEmailLength()">El correo debe tener menos de 150 caracteres.</small>
             </div>
@@ -151,7 +149,7 @@
                 </div>
               </div>
               <input mdbInput type="text" class="form-control" placeholder="NIT"
-                     #nitng="ngModel" name="nitng" [(ngModel)]="nit" required (click)="errorMessageNIT=''">
+                     #nitng="ngModel" name="nitng" [(ngModel)]="nit" required (click)="errorMessage=''">
             </div>
             <div class="text-left">
               <small id="contactN" class="form-text text-danger"
@@ -159,12 +157,12 @@
                 ingresar el NIT de tu empresa.</small>
               <small id="emailHelp" class="form-text text-danger"
                      *ngIf="nitng.valid && nitng.touched && !isNit()">El NIT debe ser válido. Ej: 123456789-1</small>
-              <small id="emailHelp" class="form-text text-danger"
-                     *ngIf="nitng.valid && nitng.touched && errorMessageNIT">{{errorMessageNIT}}</small>
             </div>
 
-            <button type="submit" class="btn btn-outline-dark mt-4" style="border-radius: 30px"
-                    [disabled]="!formClient.form.valid || !isValidAll()">Registrar empresa
+            <button type="submit" class="btn-custom-width btn btn-outline-dark mt-4" style="border-radius: 30px"
+                    [disabled]="!formClient.form.valid || !isValidAll()"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Registrar empresa</p>
             </button>
           </form>
         </div>
@@ -175,6 +173,6 @@
 
 <ng-template #succesAccount>
   <div class="animate__animated animate__fadeIn ml-3 mr-3" style="animation-duration: 0.5s">
-    <div class="ralewayFont modal-body text-justify ml-0 mr-0 pl-0 pr-0 border-login">Se ha enviado la solicitud de registro de tu empresa con éxito, verificaremos tus datos y te avisaremos cuando el registro se haya realizado</div>
+    <div class="ralewayFont modal-body text-justify ml-0 mr-0 pl-0 pr-0 border-login">Se ha enviado la solicitud de registro de tu empresa con éxito, verificaremos tus datos y te avisaremos cuando el registro se haya realizado. Te hemos enviado un correo de verificación a tu correo</div>
   </div>
 </ng-template>

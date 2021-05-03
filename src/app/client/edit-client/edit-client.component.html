@@ -14,8 +14,8 @@
                 <div class="form-group">
                   <label for="nombre" class="text-white">Nombre</label>
                   <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name"
-                         [(ngModel)]="client.name" required>
-                  <small id="emailHelp" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
+                         [(ngModel)]="client.firstName" required>
+                  <small id="emailHelp1" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
                     este campo vacío.</small>
                   <small id="nameHelp" class="form-text text-danger"
                          *ngIf="name.valid && name.touched && !isNameLength()">Tu nombre debe tener menos de 150 caracteres.</small>
@@ -25,10 +25,10 @@
                 <div class="form-group">
                   <label for="lastName" class="text-white">Apellido</label>
                   <input type="text" class="form-control color-gray" id="lastName" #lastName="ngModel" name="lastName"
-                         [(ngModel)]="client.lastname" required>
-                  <small id="emailHelp" class="form-text text-danger" *ngIf="!lastName.valid && lastName.touched">No puedes dejar
+                         [(ngModel)]="client.lastName" required>
+                  <small id="emailHelp2" class="form-text text-danger" *ngIf="!lastName.valid && lastName.touched">No puedes dejar
                     este campo vacío.</small>
-                  <small id="nameHelp" class="form-text text-danger"
+                  <small id="nameHelp3" class="form-text text-danger"
                          *ngIf="lastName.valid && lastName.touched && !isLastNameLength()">Tu apellido debe tener menos de 150 caracteres.</small>
                 </div>
               </div>
@@ -83,7 +83,9 @@
               <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/client/profile']">Regresar</button>
             </div>
             <div class="col">
-              <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [disabled]="!formEdit.valid || !ifBefore() || !isLastNameLength() || !isNameLength()">Guardar</button>
+              <button type="submit" class="btn mt-3 border-circ btn-outline-primary position-relative btn-custom-width w-100" [disabled]="!formEdit.valid || !ifBefore() || !isLastNameLength() || !isNameLength()"
+                      [class.spinner]="loaderService.isLoading | async">
+                <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Guardar</p></button>
             </div>
           </div>
         </form>

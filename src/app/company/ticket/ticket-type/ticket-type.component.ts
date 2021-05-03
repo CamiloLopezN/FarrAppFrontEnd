@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {faChevronDown, faPlus, faChevronUp} from '@fortawesome/free-solid-svg-icons';
-import {CodePromotional, Status, Ticket2} from '../../../model/company';
+import {CodePromotional, Status, Ticket} from '../../../model/company';
 
 @Component({
   selector: 'app-ticket-type',
@@ -8,7 +8,7 @@ import {CodePromotional, Status, Ticket2} from '../../../model/company';
   styleUrls: ['./ticket-type.component.css']
 })
 export class TicketTypeComponent implements OnInit {
-  ticket: Ticket2;
+  ticket: Ticket;
 
   price: number;
   quantity: number;
@@ -20,7 +20,7 @@ export class TicketTypeComponent implements OnInit {
   priceDoor: number;
   fastLine = false;
   statusStr: string;
-  codePromotionals: CodePromotional[];
+  codePromotions: CodePromotional[];
   maxTicketNumber: number;
   minTicketNumber: number;
   ballotHolder: string;
@@ -53,7 +53,7 @@ export class TicketTypeComponent implements OnInit {
       {isSelect: false, name: 'Transferibles'},
       {isSelect: false, name: 'Nominativas'}
     ];
-    this.codePromotionals = [];
+    this.codePromotions = [];
     this.dateHourInit = '20:00';
     this.dateHourFin = '21:00';
   }
@@ -64,22 +64,24 @@ export class TicketTypeComponent implements OnInit {
   onSubmit(): void {
     if (this.ifValidate()) {
       this.ticket = {
-        transferable: this.transNorm[0].isSelect,
-        promotionalCode: this.codePromotionals,
-        endDateSale: this.makeDate(this.dateFin, this.dateHourFin),
-        startDateSale: this.makeDate(this.dateInit, this.dateHourInit),
+        isTransferable: this.transNorm[0].isSelect,
+        promotionalCodes: this.codePromotions,
+        salesEnd: this.makeDate(this.dateFin, this.dateHourFin),
+        salesStart: this.makeDate(this.dateInit, this.dateHourInit),
         description: this.description,
-        fastLine: this.fastLine,
-        otherInfo: this.infoExtra,
-        maxTicketPerTransfer: this.maxTicketNumber,
-        minTicketPerTransfer: this.minTicketNumber,
+        isFastLine: this.fastLine,
+        maxPerPurchase: this.maxTicketNumber,
+        minPerPurchase: this.minTicketNumber,
         onlinePrice: this.price,
-        doorPrice: this.priceDoor,
-        amountEntries: this.quantity,
-        statusTicket: this.status.find(item => item.isSelect === true).name,
+        onDoorPrice: this.priceDoor,
+        totalAvailable: this.quantity,
+        status: this.status.find(item => item.isSelect === true).name,
         ticketName: this.nameTicket
       };
-      console.log(this.fastLine);
+      if (this.infoExtra?.trim()) {
+        this.ticket.otherInfo = this.infoExtra;
+      }
+      console.log(this.ticket);
       this.addTicket.emit(this.ticket);
     }
   }
@@ -188,12 +190,12 @@ export class TicketTypeComponent implements OnInit {
   }
 
   removeCode(index: number): void {
-    this.codePromotionals.splice(index, 1);
+    this.codePromotions.splice(index, 1);
   }
 
   addCode(code: CodePromotional): void {
     this.isVisible = false;
-    this.codePromotionals.push(code);
+    this.codePromotions.push(code);
     document.getElementById('divPromotionals').scrollIntoView({behavior: 'smooth', block: 'nearest'});
   }
 

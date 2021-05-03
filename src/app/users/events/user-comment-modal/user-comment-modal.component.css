@@ -9,6 +9,11 @@
 
 }
 
+.margin-80 {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .event-title-1 {
   color: rgba(37, 36, 39, 0.6);
   text-align: left;
@@ -78,19 +83,19 @@
   color: #ff7b7b;
 }
 
-.input-group{
+.input-group {
   width: 80%;
   margin: 0 auto;
 }
 
-.icon{
+.icon {
   background: #FAFAFA;
   border: 1px solid rgba(37, 36, 39, 0.6);
   box-sizing: border-box;
   border-radius: 10px 0 0 10px;
 }
 
-.form-control{
+.form-control {
   background: #FAFAFA;
   border: 1px solid rgba(37, 36, 39, 0.6);
   box-sizing: border-box;
@@ -107,12 +112,12 @@
 
 }
 
-.description-text{
+.description-text {
   width: 80%;
   margin: 1rem auto 0;
 }
 
-.event-title-5{
+.event-title-5 {
   font-style: normal;
   font-weight: 300;
   font-size: 0.9rem;
@@ -121,7 +126,7 @@
   color: #FF1A43;
 }
 
-.txt-area{
+.txt-area {
 
   width: 100%;
 
@@ -139,7 +144,7 @@
   padding: 0.5rem;
 }
 
-.btn-send-comment{
+.btn-send-comment {
   width: 12rem;
   height: 2.2rem;
 
@@ -157,4 +162,8 @@
   border: none;
 
   margin-top: 2rem;
+}
+
+.btn-send-comment:disabled {
+  background: rgba(255, 91, 120, 0.8);
 }

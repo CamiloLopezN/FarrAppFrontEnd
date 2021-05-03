@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backend: 'https://farrapp-backend-stage.herokuapp.com'
+  backend: 'https://farrapp-backend-stage.herokuapp.com',
+  backend2: 'https://farrapp-api-v2.herokuapp.com'
 };
 
 /*

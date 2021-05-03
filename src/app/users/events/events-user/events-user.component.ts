@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {faSlidersH} from '@fortawesome/free-solid-svg-icons';
 import {EventView} from '../../../model/company';
+import {UserService} from '../../../services/user.service';
 
 declare var $: any;
 
@@ -14,55 +15,29 @@ export class EventsUserComponent implements OnInit {
   faSlider = faSlidersH;
   events: EventView[];
 
-  constructor() {
-    this.events = [
-      {
-        eventName: 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate: new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      },
-      {
-        eventName: 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate: new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      },
-      {
-        eventName: 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate: new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      },
-      {
-        eventName: 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate: new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      },
-      {
-        eventName: 'Paquita la del barrio',
-        endDate: new Date(),
-        startDate: new Date(),
-        photos: ['https://cdn.pixabay.com/photo/2018/07/04/00/19/champagne-3515140_960_720.jpg'],
-        _id: 'asdasdas',
-        city: 'Tunja'
-      }
-    ];
+  constructor(private userS: UserService) {
   }
 
 
   ngOnInit(): void {
-    $(() => {
-      $('[data-toggle="tooltip"]').tooltip();
+    this.getEvents();
+  }
+
+  getEvents(): void {
+    this.userS.getEvents().subscribe(res => {
+      this.events = res[0].data.map(event => event.events);
+      console.log(this.events);
+      this.events.forEach(ev => {
+        ev.start = new Date(ev.start);
+        ev.end = new Date(ev.end);
+      });
+      console.log(this.events);
+    }, error => {
+      console.log(error);
+    }, () => {
+      $(() => {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
     });
   }
 

@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
-import {RemoveItem} from '../../model/company';
 import {EventEmmiterService} from '../../services/event-remove.service';
+import {RemoveEvent} from '../../model/company';
+import {CompanyService} from '../../services/company.service';
+import {Router} from '@angular/router';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-remove-event-modal',
@@ -10,9 +13,10 @@ import {EventEmmiterService} from '../../services/event-remove.service';
 })
 export class RemoveEventModalComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
-  removeItem: RemoveItem;
+  removeItem: RemoveEvent;
 
-  constructor(private ers: EventEmmiterService) {
+  constructor(private ers: EventEmmiterService, private companyService: CompanyService,
+              private route: Router, private notifyS: NotificationService) {
     this.removeItem = undefined;
     ers.event.subscribe(value => {
       this.removeItem = value;
@@ -24,5 +28,16 @@ export class RemoveEventModalComponent implements OnInit {
 
   removeCompany(): void {
 
+    this.companyService.removeEvent(this.removeItem.idEstablishment, this.removeItem.idEvent).subscribe(() => {
+      this.notifyS.sucessRemoveEvent(this.removeItem.name);
+    }, error => {
+      console.log(error);
+    }, () => {
+      if (this.route.url !== '/company/landing-page') {
+        this.route.navigate(['/company/landing-page']);
+      } else {
+        location.reload();
+      }
+    });
   }
 }

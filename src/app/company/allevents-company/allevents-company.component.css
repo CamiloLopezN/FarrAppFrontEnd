@@ -94,6 +94,13 @@ h4 {
   max-height: 150px;
 }
 
+.container-events{
+  width: 90%;
+  min-width: 288px;
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+
 @media screen and (max-width: 1024px) {
   .my-btn {
     width: 15vw;

@@ -16,7 +16,6 @@ export class EventVisualComponent implements OnInit {
   @Input() event: EventC;
 
   constructor() {
-    console.log(this.event);
   }
 
   ngOnInit(): void {

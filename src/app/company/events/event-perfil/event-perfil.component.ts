@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {
   faStar as fs,
   faUser,
@@ -11,15 +11,20 @@ import {
   faExclamationTriangle,
   faHeart as fh
 } from '@fortawesome/free-solid-svg-icons';
-import {faHeart, faStar} from '@fortawesome/free-regular-svg-icons';
+import {faCalendarPlus, faCalendarTimes, faHeart, faStar} from '@fortawesome/free-regular-svg-icons';
 import {MyComment, Opinion} from '../../../model/opinion';
 import {UserService} from '../../../services/user.service';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../services/auth.service';
 import {getDateEventPerfil} from '../../../model/RelojTest';
 import {EventEmmiterService} from '../../../services/event-remove.service';
 import {NotificationService} from '../../../services/notification.service';
 import {IsShowModalService} from '../../../services/is-show-modal.service';
+import {EventPerfil} from '../../../model/company';
+import {CompanyService} from '../../../services/company.service';
+import {ClientService} from '../../../services/client.service';
+import {ClientConnectService} from '../../../services/client-connect.service';
+import {ClientsInterest} from '../../../model/client';
 
 declare var $: any;
 
@@ -35,6 +40,8 @@ export class EventPerfilComponent implements OnInit {
   faStartMedia = faStarHalfAlt;
   faGps = faMapMarkerAlt;
   faTshirt = faTshirt;
+  faCalendarPlus = faCalendarPlus;
+  faCalendarTimes = faCalendarTimes;
   faBan = faBan;
   faUser = faUser;
   faEdit = faEdit;
@@ -43,156 +50,48 @@ export class EventPerfilComponent implements OnInit {
   faHeartSolid = fh;
   production = false;
   comments: MyComment[];
-  comments2: MyComment[];
   average: string;
   opinion: Opinion[];
-  finishPage = 5;
   actualPage: number;
   rol: string;
-  isMyEvent = true;
   show = false;
-  event: any;
-  photos: string[];
+  event: EventPerfil;
   faExclamationTriangle = faExclamationTriangle;
 
-  isLike = false;
+  accumulateComment = 0;
 
-  constructor(private userS: UserService, private route: ActivatedRoute,
-              private authService: AuthService, private ers: EventEmmiterService,
-              private ns: NotificationService, private ism: IsShowModalService) {
-    this.actualPage = 1;
-    this.photos = [];
-    this.comments = [
-      {
-        author: 'Juan funito',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos. Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Excelente discoteca, pero muy caro'
-      },
-      {
-        author: 'Alfredo alcachofa',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 5,
-        title: '5 estrellas'
-      },
-      {
-        author: 'Sofía rarini',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Un poco de todo'
-      },
-      {
-        author: 'Sofía rarini',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Un poco de todo'
-      },
-      {
-        author: 'Sofía rarini',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 2,
-        title: 'Un poco de todo'
-      },
-      {
-        author: 'Sofía rarini',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 3,
-        title: 'Un poco de todo'
-      }
-    ];
-    this.comments2 = [
-      {
-        author: 'Juan funito',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos. Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Excelente discoteca, pero muy caro'
-      },
-      {
-        author: 'Alfredo alcachofa',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 5,
-        title: '5 estrellas'
-      },
-      {
-        author: 'Sofía rarini',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Un poco de todo'
-      }
-    ];
-    this.average = this.getPromedy().toFixed(1);
+  ACCUMULATE = 3;
+
+  isLike = false;
+  isPublish = false;
+  isMine: boolean;
+  clientConnect: ClientsInterest;
+
+  isSubscribe: boolean;
+
+  constructor(private userS: UserService, private route: ActivatedRoute, private router: Router,
+              private clientC: ClientConnectService,
+              private authService: AuthService, private ers: EventEmmiterService, private clientS: ClientService,
+              private detectCh: ChangeDetectorRef,
+              private ns: NotificationService, private ism: IsShowModalService, private companyS: CompanyService) {
     this.opinion = [];
-    for (let i = 5; i >= 1; i--) {
-      this.opinion.push({
-        coincidence: this.getCoincidenceStar(i),
-        nStart: i,
-        percentage: this.getPercentege(i)
-      });
-    }
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
+    });
+
+    this.clientC.client.subscribe(clientCon => {
+      this.clientConnect = clientCon;
     });
   }
 
   ngOnInit(): void {
-    this.getUser();
-  }
-
-  addComment(): void {
-    this.comments2.push({
-        author: 'Juan funito',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos. Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos Todo muy bonito pero el precio de los licores era supremamente alto, ' +
-          'esto le resta bastantes puntos',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Excelente discoteca, pero muy caro'
-      },
-      {
-        author: 'Alfredo alcachofa',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 5,
-        title: '5 estrellas'
-      },
-      {
-        author: 'Sofía rarini',
-        comment: 'Todo muy bonito pero el precio de los licores era supremamente alto, esto le resta bastantes puntos.',
-        date: '22/03/2021',
-        nStar: 4,
-        title: 'Un poco de todo'
-      });
-  }
-
-  onScroll(): void {
-    if (this.actualPage < this.finishPage) {
-      this.addComment();
-      this.actualPage++;
-    } else {
-      console.log('No more lines. Finish page!');
-    }
-  }
-
-  hide(target: HTMLElement): void {
-    this.comments2.splice(3, this.comments2.length - 3);
-    this.actualPage = 1;
-    this.scroll(target);
+    this.getEvent();
+    this.authService.getRoleId.subscribe(rolId => {
+      this.isMine = rolId === this.route.snapshot.params.idCompany;
+    });
+    this.authService.subscribe.subscribe(sub => {
+      this.isSubscribe = sub;
+    });
   }
 
   getStars(nStar: any): boolean[] {
@@ -215,7 +114,7 @@ export class EventPerfilComponent implements OnInit {
 
     let total = 0;
     this.comments.forEach(comment => {
-      total += comment.nStar;
+      total += comment.rating;
     });
     return total / this.comments.length;
   }
@@ -225,34 +124,63 @@ export class EventPerfilComponent implements OnInit {
   }
 
   getCoincidenceStar(nStart: number): number {
-    return this.comments.filter(comment => comment.nStar === nStart).length;
+    return this.comments.filter(comment => comment.rating === nStart).length;
   }
 
   scroll(target: HTMLElement): void {
     target.scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 
-  private getUser(): void {
-    this.route.params.forEach((params: Params) => {
-      const id = params.id;
-      this.userS.getEventById(id).subscribe(res => {
-        this.event = res.event;
-        this.photos = res.event.photos;
-        console.log(this.event);
-        this.event.startDate = new Date(this.event.startDate);
-        this.event.endDate = new Date(this.event.endDate);
-      }, () => {
-      }, () => {
+  private getEvent(): void {
+
+    const idCompany = this.route.snapshot.params.idCompany;
+    const idEstablishment = this.route.snapshot.params.idEstablishment;
+    const idEvent = this.route.snapshot.params.idEvent;
+    this.userS.getEventById(idCompany, idEstablishment, idEvent).subscribe(res => {
+      if (res.message.status === 'Inactivo' && !this.isMine) {
+        this.router.navigate(['/landing-page']);
+      } else {
+        this.event = res.message;
+        this.event.start = new Date(this.event.start);
+        this.event.end = new Date(this.event.end);
+      }
+      this.comments = res.message.reviews;
+      this.comments.sort((a, b) => {
+        return a.createdAt > b.createdAt ? -1 : 1;
+      });
+      this.accumulateComment = this.comments.length >= this.ACCUMULATE ? this.ACCUMULATE : this.comments.length;
+      this.average = res.message.averageRating.toFixed(1);
+    }, () => {
+      this.router.navigate(['/landing-page']);
+    }, () => {
+      this.refreshOpinions();
+      if (this.event !== undefined) {
+        if (this.rol === 'client') {
+          this.isLike = this.clientConnect.interests.find(ev => ev === this.event._id) !== undefined;
+        }
         $(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
         this.ers.eventSelect.next({
-          id: this.event._id,
+          idEvent: this.route.snapshot.params.idEvent,
+          idEstablishment: this.route.snapshot.params.idEstablishment,
+          idCompany: this.route.snapshot.params.idCompany,
           name: this.event.eventName
         });
         this.ism.isEvent.next(true);
-      });
+      }
     });
+  }
+
+  refreshOpinions(): void {
+    this.opinion = [];
+    for (let i = 5; i >= 1; i--) {
+      this.opinion.push({
+        coincidence: this.getCoincidenceStar(i),
+        nStart: i,
+        percentage: this.getPercentege(i)
+      });
+    }
   }
 
   getDate(date: Date): string {
@@ -302,31 +230,94 @@ export class EventPerfilComponent implements OnInit {
 
   getCategories(): string {
     let myStr = '';
-    this.event.category.forEach(category => {
-      myStr += category.name + ' - ';
+    this.event.categories.forEach(category => {
+      myStr += category + ' - ';
     });
     return myStr.slice(0, -2);
   }
 
-  removeCompany(): void {
-
-  }
 
   isAfter(): boolean {
-    return this.event.endDate < new Date();
+    return this.event.end < new Date();
   }
 
   like(): void {
     if (this.rol !== 'norole') {
-      if (!this.isLike) {
-        this.ns.succesFavorite(this.event.eventName);
-      } else {
-        this.ns.succesNotFavorite(this.event.eventName);
-      }
-      this.isLike = !this.isLike;
+      this.clientS.like(this.event._id).subscribe(() => {
+        if (!this.isLike) {
+          this.clientConnect.interests.push(this.event._id);
+          this.event.interested++;
+          this.ns.succesFavorite(this.event.eventName);
+        } else {
+          this.event.interested--;
+          const index = this.clientConnect.interests.indexOf(this.event._id, 0);
+          if (index > -1) {
+            this.clientConnect.interests.splice(index, 1);
+          }
+          this.ns.succesNotFavorite(this.event.eventName);
+        }
+        this.isLike = !this.isLike;
+      });
     } else {
       this.authService.inLog.next(true);
       $('#login-modal').modal('show');
     }
+  }
+
+
+  inactive(): void {
+    this.companyS.changeStatusEvent('Inactivo', this.route.snapshot.params.idEstablishment,
+      this.route.snapshot.params.idEvent).subscribe(() => {
+      this.event.status = 'Inactivo';
+      this.ns.sucessHide(this.event.eventName);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  active(): void {
+    if (this.isSubscribe) {
+      this.companyS.changeStatusEvent('Activo', this.route.snapshot.params.idEstablishment,
+        this.route.snapshot.params.idEvent).subscribe(() => {
+        this.event.status = 'Activo';
+        this.ns.sucessPublish(this.event.eventName);
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      $('#warn-sub').modal('show');
+    }
+  }
+
+  addComment(myRes: any): void {
+    try {
+      this.comments.unshift(myRes.comment);
+      this.average = myRes.averageRating.toFixed(1);
+      this.accumulateComment = this.comments.length <= this.ACCUMULATE ? this.comments.length : this.accumulateComment;
+      this.refreshOpinions();
+      this.detectCh.detectChanges();
+    } catch (e) {
+
+    } finally {
+      $(() => {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+      const target = document.getElementById(myRes.comment._id);
+      target.scrollIntoView({behavior: 'smooth', block: 'center'});
+    }
+  }
+
+  getList(): MyComment[] {
+    return this.comments.slice(0, this.accumulateComment);
+  }
+
+  hide(target: HTMLElement): void {
+    this.accumulateComment = this.comments.length >= this.ACCUMULATE ? this.ACCUMULATE : this.comments.length;
+    target.scrollIntoView({behavior: 'smooth', block: 'center'});
+  }
+
+  onScroll(): void {
+    this.accumulateComment = this.accumulateComment + this.ACCUMULATE >
+    this.comments.length ? this.comments.length : this.accumulateComment + this.ACCUMULATE;
   }
 }

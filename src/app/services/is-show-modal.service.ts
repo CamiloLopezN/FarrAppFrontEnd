@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class IsShowModalService {
 
   public isEstablishment = new BehaviorSubject<boolean>(false);
+  public isEstablishmentEdit = new BehaviorSubject<boolean>(false);
   public isEvent = new BehaviorSubject<boolean>(false);
   public isEventEdit = new BehaviorSubject<boolean>(false);
 
@@ -23,5 +24,9 @@ export class IsShowModalService {
 
   get isEditEvent(): Observable<boolean>{
     return this.isEventEdit;
+  }
+
+  get isEditEstablishment(): Observable<boolean>{
+    return this.isEstablishmentEdit;
   }
 }

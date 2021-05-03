@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {Category, EstablishmentRegister, Img} from '../../model/company';
+import {Category, EstablishmentRegister, EstablishmentType, Img} from '../../model/company';
 import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../services/notification.service';
 import {AuthService} from '../../services/auth.service';
@@ -8,6 +8,7 @@ import {CompanyService} from '../../services/company.service';
 import {AdminService} from '../../services/admin.service';
 import {faClipboardList, faGlassCheers, faImage, faImages, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {CitiesService} from '../../services/cities.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 
 declare var $: any;
@@ -63,26 +64,36 @@ export class CreateEstablishmentModalComponent implements OnInit {
     lng: null
   };
 
+  idCompany: string;
+
   cities: string[];
   citySelect = 'Tunja';
 
   constructor(private notifyS: NotificationService, private authS: AuthService,
-              private router: Router, private companyService: CompanyService,
+              private router: Router, private companyService: CompanyService, public loaderService: SpinnerService,
               private changeDetectorRef: ChangeDetectorRef, private adminS: AdminService, private cs: CitiesService) {
     this.authS.roled.subscribe(roled => {
       this.role = roled;
+    });
+    this.authS.getRoleId.subscribe(res => {
+      this.idCompany = res;
     });
     this.btnBar = 'btnBar';
     this.btnDiscotheque = 'btnDiscotheque';
     this.images = [];
     this.categories = [{
-      name: 'Campo abierto',
+      category: {
+        establishmentCategoryName: 'Campo abierto',
+        description: 'Es un campo abierto y divertido'
+      },
       select: false
     }, {
-      name: 'Encerrado',
+      category: {
+        establishmentCategoryName: 'Encerrado',
+        description: 'Es un campo cerrado y aburrido'
+      },
       select: false
-    }
-    ];
+    }];
     this.lat = 5.547408754375323;
     this.lng = -73.35709982734579;
     this.zoom = 15;
@@ -97,7 +108,6 @@ export class CreateEstablishmentModalComponent implements OnInit {
     });
     $(document).ready(() => {
       $('#register-establishment-modal').on('show.bs.modal', () => {
-        console.log('Hola');
         this.nameEst = '';
         this.desc = '';
         this.address = '';
@@ -122,13 +132,18 @@ export class CreateEstablishmentModalComponent implements OnInit {
         this.marker.lng = null;
 
         this.categories = [{
-          name: 'Campo abierto',
+          category: {
+            establishmentCategoryName: 'Campo abierto',
+            description: 'Es un campo abierto y divertido'
+          },
           select: false
         }, {
-          name: 'Encerrado',
+          category: {
+            establishmentCategoryName: 'Encerrado',
+            description: 'Es un campo cerrado y aburrido'
+          },
           select: false
-        }
-        ];
+        }];
 
         document.getElementById(this.btnBar).style.background = '#fafafa';
         document.getElementById(this.btnBar).style.color = '#c2c5c8';
@@ -171,11 +186,11 @@ export class CreateEstablishmentModalComponent implements OnInit {
     this.messageErrorCategory = '';
     category.select = !category.select;
     if (category.select) {
-      document.getElementById(category.name).style.background = 'black';
-      document.getElementById(category.name).style.color = 'white';
+      document.getElementById(category.category.establishmentCategoryName).style.background = 'black';
+      document.getElementById(category.category.establishmentCategoryName).style.color = 'white';
     } else {
-      document.getElementById(category.name).style.background = '#fafafa';
-      document.getElementById(category.name).style.color = '#c2c5c8';
+      document.getElementById(category.category.establishmentCategoryName).style.background = '#fafafa';
+      document.getElementById(category.category.establishmentCategoryName).style.color = '#c2c5c8';
     }
   }
 
@@ -186,7 +201,6 @@ export class CreateEstablishmentModalComponent implements OnInit {
     }
 
     const mimeType = files[0].type;
-    console.log(mimeType);
     if (mimeType.match(/image\/*/) == null || (!mimeType.match(/image\/png/) && !mimeType.match(/image\/jpeg/))) {
       this.message = 'Debes escoger un tipo de imagen válida.';
       this.imagePath = null;
@@ -255,43 +269,54 @@ export class CreateEstablishmentModalComponent implements OnInit {
 
   onSubmit(): void {
     if (this.validForm()) {
-      const typeEstablishments = [];
+      let typeEstablishments: EstablishmentType[];
+      typeEstablishments = [];
       if (this.isBar) {
-        typeEstablishments.push('Bar');
+        typeEstablishments.push({
+          description: 'Lugar donde se toma sabroso',
+          establishmentTypeName: 'Bar'
+        });
       }
       if (this.isDiscotheque) {
-        typeEstablishments.push('Discoteca');
+        typeEstablishments.push({
+          description: 'Lugar donde se baila sabroso',
+          establishmentTypeName: 'Discoteca'
+        });
       }
 
       this.establishmentR = {
-        address: this.address,
         capacity: this.capacity,
-        city: this.citySelect,
         description: this.desc,
-        name: this.nameEst,
-        categories: this.categories.filter(category => category.select === true).map(category => category.name),
-        latitude: this.marker.lat,
-        longitude: this.marker.lng,
-        typeEstablishment: typeEstablishments,
-        logo: '',
-        photo: []
+        establishmentName: this.nameEst,
+        categories: this.categories.filter(category => category.select === true)
+          .map(category => category.category.establishmentCategoryName),
+        establishmentTypes: typeEstablishments.map(establishment => establishment.establishmentTypeName),
+        logoUrl: '',
+        photoUrls: [],
+        location: {
+          address: this.address,
+          city: this.citySelect,
+          latitude: this.marker.lat,
+          longitude: this.marker.lng
+        }
       };
 
       this.companyService.postLogo(this.imagePath).subscribe(res => {
-        this.establishmentR.logo = res.logo;
+        this.establishmentR.logoUrl = res.logo;
       }, error => {
         console.log(error);
       }, () => {
         this.companyService.postPhotos(this.images.map(myimg => myimg.imgFile)).subscribe(res => {
-          this.establishmentR.photo = res.map(photoObj => photoObj.photo);
+          this.establishmentR.photoUrls = res.map(photoObj => photoObj.photo);
         }, error => {
           console.log(error);
         }, () => {
-          this.companyService.postEstablishment(this.establishmentR).subscribe(() => {
+          this.companyService.postEstablishment(this.establishmentR).subscribe(res => {
               $('#register-establishment-modal').modal('hide');
               this.notifyS.succesEstablishmentCreated();
               this.formC.reset();
               this.changeDetectorRef.detectChanges();
+              this.router.navigate(['company', this.idCompany, 'establishments', res.establishmentId]);
             }, error => {
               console.log(error);
             }

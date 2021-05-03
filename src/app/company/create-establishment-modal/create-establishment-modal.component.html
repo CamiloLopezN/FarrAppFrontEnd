@@ -75,7 +75,7 @@
             <button type="button" class="form-control text-left" (click)="open_file()"
                     style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Logotipo
             </button>
-            <img class="ml-2 logo" [src]="imgURL" *ngIf="imgURL" style="border-radius: 50%;">
+            <img class="ml-2 logo" [src]="imgURL" *ngIf="imgURL" style="border-radius: 50%;" alt="logo de establecimiento">
           </div>
           <div class="text-left">
             <small id="emailHelp" class="form-text text-danger" *ngIf="message">{{message}}</small>
@@ -90,9 +90,9 @@
                     (click)="selectCategorie(category)"
                     type="button"
                     class="btn border-circ my-btn w-100 mt-2"
-                    name="{{category.name}}"
-                    id="{{category.name}}">
-                    {{category.name}}</button>
+                    name="{{category.category.establishmentCategoryName}}"
+                    id="{{category.category.establishmentCategoryName}}">
+                    {{category.category.establishmentCategoryName}}</button>
                 </div>
               </div>
             </div>
@@ -139,7 +139,7 @@
             <div *ngFor="let img of images">
               <div class="col mt-4">
                 <div>
-                  <img class="img-my" [src]="img.imgUrl" width="170" height="170" style="border-radius: 20px">
+                  <img class="img-my" [src]="img.imgUrl" width="170" height="170" style="border-radius: 20px" alt="imagen de evento">
                   <button class="btn position-absolute text-white m-0 p-0 mybtn"
                           style="right: 10%;outline: none;border: none" (click)="removeImg(img)">&times;
                   </button>
@@ -205,8 +205,10 @@
                    *ngIf="!cpcity.valid && cpcity.touched">Debes ingresar un número válido</small>
           </div>
 
-          <button type="submit" class="btn btn-outline-dark mt-4" style="border-radius: 30px"
-                  [disabled]="!formEstablishment.form.valid || !isValidLength()">Registrar establecimiento
+          <button type="submit" class="btn btn-outline-dark mt-4 btn-custom-width w-100" style="border-radius: 30px"
+                  [disabled]="!formEstablishment.form.valid || !isValidLength()"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Registrar establecimiento</p>
           </button>
         </form>
       </div>

@@ -1,13 +1,22 @@
 export interface MyComment {
-  title: string;
-  author: string;
+  authorId: string;
+  authorName: string;
   comment: string;
-  date: string;
-  nStar: number;
+  createdAt: Date;
+  rating: number;
+  title: string;
+  updatedAt: Date;
+  _id: string;
 }
 
 export interface Opinion {
   percentage: string;
   nStart: number;
   coincidence: number;
+}
+
+export interface CommentSend {
+  comment: string;
+  rating: number;
+  title: string;
 }

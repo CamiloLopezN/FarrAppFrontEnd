@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {ClientAccount} from '../../model/client';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
@@ -47,7 +46,7 @@ export class SecurityCompanyComponent implements OnInit {
 
   onSubmit(): void {
     this.client = {
-      e_mail: this.e_mail,
+      email: this.e_mail,
       password: this.password
     };
     this.companyS.changePassCompany(this.client).subscribe(() => {

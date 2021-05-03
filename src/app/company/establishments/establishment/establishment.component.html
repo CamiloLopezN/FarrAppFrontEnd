@@ -1,14 +1,14 @@
 <div class="card" (click)="redirect()" style="cursor: pointer">
   <img class="card-img-top"
-       src="{{establishment.photo[0]}}" alt="Card image cap">
+       src="{{establishment.imageUrl}}" alt="Card image cap">
   <div class="card-body">
     <div class="text-wr">
       <p class="title-event" data-toggle="tooltip" data-placement="top"
-         title="{{establishment.name}}">{{establishment.name}}</p>
+         title="{{establishment.establishmentName}}">{{establishment.establishmentName}}</p>
     </div>
     <div class="text-wr">
       <p class="city-title m-0" data-toggle="tooltip" data-placement="top"
-         title="{{establishment.address}}">{{establishment.address}}</p>
+         title="{{establishment.location.address}}">{{establishment.location.address}}</p>
     </div>
   </div>
 </div>

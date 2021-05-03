@@ -3,6 +3,7 @@ import {EventView} from '../../../model/company';
 import {AuthService} from '../../../services/auth.service';
 import {getDateEvent} from '../../../model/RelojTest';
 import {faClock, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-user',
@@ -18,7 +19,7 @@ export class EventUserComponent implements OnInit {
   faClock = faClock;
   faMap = faMapMarkerAlt;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.authService.roled.subscribe(rol => {
       this.isClient = rol;
     });
@@ -28,6 +29,13 @@ export class EventUserComponent implements OnInit {
   }
 
   getDate(): string {
-    return getDateEvent(this.event.startDate);
+    return getDateEvent(new Date(this.event.start));
+  }
+
+  redirect(): void {
+    console.log(this.event);
+    this.router.navigate(['company', this.event.companyId,
+      'establishments', this.event.establishmentId,
+      'events', this.event.eventId]);
   }
 }

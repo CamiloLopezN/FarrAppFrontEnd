@@ -1,0 +1,157 @@
+.lbl-pay {
+  font-style: normal;
+  font-weight: 275;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: #FAFAFA;
+
+  margin-bottom: 1rem;
+
+}
+
+.title-method {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1rem;
+  color: #FAFAFA;
+
+}
+
+.my-select {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: #252427;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+
+  margin-bottom: 1.5rem;
+}
+
+.my-input-txt {
+
+  width: 100%;
+  height: 2rem;
+
+  padding-left: 0.5rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  border-radius: 5px;
+
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.85rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+  background: #252427;
+}
+
+.div-btns {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.title-options {
+  font-size: 1.4rem;
+  font-weight: bold;
+
+}
+
+.btn-pay, .btn-return {
+  width: 8rem;
+  height: 2rem;
+  border-radius: 30px;
+  outline: none;
+  border: none;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+
+
+}
+
+.btn-pay {
+  background: rgba(2, 117, 216, 0.8);
+}
+
+.btn-pay:disabled {
+  background: rgba(1, 75, 145, 0.8);
+  color: #c4c4c4;
+}
+
+.btn-return {
+  background: rgba(255, 26, 67, 0.8);
+}
+
+.p-info {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+  text-align: center;
+
+  color: #252427;
+}
+
+.red-info {
+  color: #FF1A43;
+}
+
+@media screen and (max-width: 1333px) {
+  .all-event {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 826px) {
+
+  .div-names {
+    display: flex;
+  }
+
+  .div-50 {
+    width: 50%;
+  }
+
+  .r-margin {
+    margin-right: 1.5rem;
+  }
+
+  .l-margin {
+    margin-left: 1.5rem;
+  }
+
+  .div-flex {
+    display: flex;
+  }
+
+  .div-width-45 {
+    width: 48%;
+  }
+
+  .div-width-27 {
+    width: 26%;
+  }
+
+  .r-margin-2 {
+    margin-right: 1rem;
+  }
+
+  .l-margin-2 {
+    margin-left: 1rem;
+  }
+
+}

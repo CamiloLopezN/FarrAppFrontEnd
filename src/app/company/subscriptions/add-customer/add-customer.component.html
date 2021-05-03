@@ -1,0 +1,96 @@
+<form #demoForm="ngForm">
+  <div *ngIf="!isAdd">
+    <div class="div-names">
+      <div class="div-50 r-margin mb-3">
+        <p class="lbl-pay">Nombre *</p>
+        <input type="text" class="my-input-txt" #nameCustomer="ngModel" name="nameCustomer"
+               [(ngModel)]="customer.firstName" required>
+        <small id="emailHelp1" class="form-text text-danger" *ngIf="!nameCustomer.valid && nameCustomer.touched">Debes
+          ingresar tu nombre.</small>
+      </div>
+      <div class="div-50 l-margin mb-3">
+        <p class="lbl-pay">Apellidos *</p>
+        <input type="text" class="my-input-txt" #lastNameCustomer="ngModel" name="lastNameCustomer"
+               [(ngModel)]="customer.lastName" required>
+        <small id="emailHelp1" class="form-text text-danger"
+               *ngIf="!lastNameCustomer.valid && lastNameCustomer.touched">Debes
+          ingresar tu apellido.</small>
+      </div>
+    </div>
+    <div class="mb-3">
+      <p class="lbl-pay">Email *</p>
+      <input type="email" class="my-input-txt" #emailCustomer="ngModel" name="emailCustomer"
+             [(ngModel)]="customer.email"
+             email
+             pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+      <small id="emailHelp1" class="form-text text-danger" *ngIf="!emailCustomer.valid && emailCustomer.touched">Debes
+        ingresar un correo válido.</small>
+    </div>
+    <div class="div-names">
+      <div class="div-50 r-margin mb-3">
+        <p class="lbl-pay">Celular *</p>
+        <input type="text" class="my-input-txt" #cellPhone="ngModel" name="cellPhone" [(ngModel)]="customer.cellPhone"
+               required>
+        <small id="emailHelp1" class="form-text text-danger" *ngIf="!cellPhone.valid && cellPhone.touched">Debes
+          ingresar tu número de celular.</small>
+      </div>
+      <div class="div-50 l-margin mb-3">
+        <p class="lbl-pay">Telefono</p>
+        <input type="text" class="my-input-txt" #phone="ngModel" name="phone" [(ngModel)]="customer.phone">
+      </div>
+    </div>
+
+    <div class="div-names">
+      <div class="div-50 r-margin mb-3">
+        <p class="lbl-pay">Ciudad *</p>
+        <input type="text" class="my-input-txt" #city="ngModel" name="city" [(ngModel)]="customer.city" required>
+        <small id="emailHelp1" class="form-text text-danger" *ngIf="!city.valid && city.touched">Debes
+          ingresar la ciudad.</small>
+      </div>
+      <div class="div-50 l-margin mb-3">
+        <p class="lbl-pay">Dirección *</p>
+        <input type="text" class="my-input-txt" #address="ngModel" name="address" [(ngModel)]="customer.address"
+               required>
+        <small id="emailHelp1" class="form-text text-danger" *ngIf="!address.valid && address.touched">Debes
+          ingresar tu dirección.</small>
+      </div>
+    </div>
+  </div>
+  <p class="title-method">Información de pago</p>
+
+  <form #demoForm2="ngForm">
+    <div class="div-flex">
+      <div class="div-width-45 r-margin-2 mb-3">
+        <p class="lbl-pay">Número de tarjeta *</p>
+        <input id="cc-number" class="my-input-txt" type="tel" autocomplete="cc-number" ccNumber #crdNumber="ngModel"
+               name="cardNumber" [(ngModel)]="cardNumber" required>
+        <small id="emailHelp1" class="form-text text-danger" *ngIf="!crdNumber.valid && crdNumber.touched">Debes
+          ingresar tu número de tarjeta.</small>
+      </div>
+      <div class="div-width-27 r-margin-2 l-margin-2 mb-3">
+        <p class="lbl-pay">Código de seguridad *</p>
+        <input id="cc-cvc" type="tel" class="my-input-txt" autocomplete="off" ccCVC placeholder="CVC" #cardCVC="ngModel"
+               name="cardCVC" [(ngModel)]="customer.cardCVC" required>
+        <small id="emailHelp2" class="form-text text-danger" *ngIf="!cardCVC.valid && cardCVC.touched">Debes ingresar el
+          código de seguridad de tu tarjeta.</small>
+      </div>
+      <div class="div-width-27 l-margin-2 mb-3">
+        <p class="lbl-pay">Fecha de expiración *</p>
+        <input id="cc-exp-date" class="my-input-txt" type="tel" autocomplete="cc-exp" ccExp placeholder="MM / YYYY"
+               #expiration="ngModel" name="expiration" [(ngModel)]="expirationDate" required>
+        <small id="emailHelp3" class="form-text text-danger" *ngIf="!expiration.valid && expiration.touched">Debes
+          ingresar la fecha de expiración de tu tarjeta.</small>
+      </div>
+    </div>
+    <div class="div-btns">
+      <button class="btn-return" (click)="previous()">Regresar</button>
+      <button type=submit class="btn-custom-width btn-pay" *ngIf="!isAdd"
+              [disabled]="!demoForm.form.valid || !demoForm2.form.valid"
+              [class.spinner]="loaderService.isLoading | async" (click)="addCustomer()">
+        <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Siguiente</p></button>
+      <button type=submit class="btn-custom-width btn-pay" *ngIf="isAdd" [disabled]="!demoForm2.form.valid"
+              [class.spinner]="loaderService.isLoading | async" (click)="addCard()">
+        <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Agregar</p></button>
+    </div>
+  </form>
+</form>

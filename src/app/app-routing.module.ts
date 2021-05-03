@@ -24,6 +24,13 @@ import {AllestablishmentCompanyComponent} from './company/establishments/allesta
 import {EstablishmentPerfilComponent} from './company/establishments/establishment-perfil/establishment-perfil.component';
 import {EventPerfilComponent} from './company/events/event-perfil/event-perfil.component';
 import {EventsUserComponent} from './users/events/events-user/events-user.component';
+import {SubscriptionComponent} from './company/subscriptions/subscription/subscription.component';
+import {PaymentPortalComponent} from './company/subscriptions/payment-portal/payment-portal.component';
+import {ResponsePayComponent} from './company/subscriptions/response-pay/response-pay.component';
+import {LandingPageClientComponent} from './client/landing-page-client/landing-page-client.component';
+import {EventsInterestsComponent} from './client/events/events-interests/events-interests.component';
+import {EstablishmentsFollowsComponent} from './client/establishments/establishments-follows/establishments-follows.component';
+import {EstablishmentsUserComponent} from './users/establishments/establishments-user/establishments-user.component';
 
 const routes: Routes = [
   {
@@ -31,6 +38,18 @@ const routes: Routes = [
   },
   {
     path: 'users/events', component: EventsUserComponent
+  },
+  {
+    path: 'users/establishments', component: EstablishmentsUserComponent
+  },
+  {
+    path: 'client/events', canActivate: [InitSesionGuard], component: EventsInterestsComponent
+  },
+  {
+    path: 'client/establishments', canActivate: [InitSesionGuard], component: EstablishmentsFollowsComponent
+  },
+  {
+    path: 'client/landing-page', canActivate: [InitSesionGuard], component: LandingPageClientComponent
   },
   {
     path: 'client/profile', canActivate: [InitSesionGuard], component: ProfileClientComponent
@@ -53,16 +72,25 @@ const routes: Routes = [
     path: 'company/events', canActivate: [CompanySesionGuard], component: AlleventsCompanyComponent
   },
   {
-    path: 'company/events/:id', component: EventPerfilComponent
+    path: 'company/:idCompany/establishments/:idEstablishment/events/:idEvent', component: EventPerfilComponent
   },
   {
     path: 'company/establishments', canActivate: [CompanySesionGuard], component: AllestablishmentCompanyComponent
   },
   {
-    path: 'company/establishments/:id', component: EstablishmentPerfilComponent
+    path: 'company/:idCompany/establishments/:id', component: EstablishmentPerfilComponent
   },
   {
     path: 'company/security', canActivate: [CompanySesionGuard], component: SecurityCompanyComponent
+  },
+  {
+    path: 'company/subscription', canActivate: [CompanySesionGuard], component: SubscriptionComponent
+  },
+  {
+    path: 'company/subscription/payment-portal', canActivate: [CompanySesionGuard], component: PaymentPortalComponent
+  },
+  {
+    path: 'company/subscription/response', canActivate: [CompanySesionGuard], component: ResponsePayComponent
   },
   {
     path: 'admin/dashboard', canActivate: [AdminSesionGuard], component: AdminDashboardComponent

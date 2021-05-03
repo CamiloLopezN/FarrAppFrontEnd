@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {NotificationService} from '../services/notification.service';
 import {NgForm} from '@angular/forms';
+import {SpinnerService} from '../services/spinner.service';
 
 
 declare var $: any;
@@ -25,8 +26,6 @@ export class LoginModalComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   e_mail = '';
   password = '';
-  isPass = true;
-  isUserMail = true;
   emailRetrieve: string;
   error: string;
   isError: boolean;
@@ -34,6 +33,7 @@ export class LoginModalComponent implements OnInit {
 
   isLogin: boolean;
   errorMessage: string;
+  isSub = false;
 
 
   @ViewChild('formUser') formRecipe: NgForm;
@@ -42,7 +42,8 @@ export class LoginModalComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     private notifyS: NotificationService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    public loaderService: SpinnerService
   ) {
   }
 
@@ -50,7 +51,14 @@ export class LoginModalComponent implements OnInit {
     this.authService.isLog.subscribe(login => {
       this.isLogin = login;
     });
-
+    this.authService.roled.subscribe(rol =>
+      this.rol = rol
+    );
+    $('#login-modal').on('hidden.bs.modal', () => {
+      if (this.rol === 'company') {
+        $('#warn-sub').modal('show');
+      }
+    });
     $(document).ready(() => {
       $('#login-modal').on('show.bs.modal', () => {
         this.emailRetrieve = '';
@@ -64,41 +72,35 @@ export class LoginModalComponent implements OnInit {
 
   onSubmit(): void {
     this.client = {
-      e_mail: this.e_mail,
+      email: this.e_mail,
       password: this.password
     };
     this.errorMessage = '';
-    this.authService.login(this.client).subscribe(() => {
-        this.isPass = true;
-        this.isUserMail = true;
+    this.authService.login(this.client).subscribe(res => {
+        console.log(res);
         $('#login-modal').modal('hide');
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
-        this.notifyS.sucessLogin();
-        this.authService.roled.subscribe(rol =>
-          this.rol = rol
-        );
+        this.formRecipe.reset();
+        this.changeDetectorRef.detectChanges();
+        console.log(this.rol);
         if (this.rol === 'superAdmin') {
+          this.notifyS.sucessLogin();
           this.redirectAdmin();
-        } else if (this.rol === 'company'){
+        } else if (this.rol === 'company') {
+          this.notifyS.sucessLogin();
           this.redirectCompany();
         } else {
           this.redirect();
         }
-        this.formRecipe.reset();
-        this.changeDetectorRef.detectChanges();
       },
       error => {
-        this.errorMessage = error.error.message;
-        if (this.errorMessage === '"e_mail" must be a valid email') {
-          this.errorMessage = 'Debes ingresar un e-mail válido';
-        }
-        if (this.errorMessage === 'Error la contraseña es incorrecta') {
-          this.isUserMail = true;
-          this.isPass = false;
-        } else {
-          this.isUserMail = false;
-          this.isPass = true;
+        if (error.status === 403) {
+          this.errorMessage = 'Primero debe verificar su correo';
+        } else if (error.status === 401 || error.status === 400) {
+          this.errorMessage = 'Usuario o contraseña incorrectos';
+        } else if (error.status === 500) {
+          this.errorMessage = 'Error en el servidor, intente más tarde';
         }
       }
     );
@@ -117,7 +119,7 @@ export class LoginModalComponent implements OnInit {
   }
 
   redirect(): void {
-    this.router.navigate(['']);
+    location.reload();
   }
 
   redirectCompany(): void {
@@ -132,8 +134,13 @@ export class LoginModalComponent implements OnInit {
   retrievePass(): void {
     this.authService.retrievePass(this.emailRetrieve).subscribe(() => {
       this.notifyS.sucessRetreivePass();
+      $('#login-modal').modal('hide');
     }, error => {
-      this.error = error.error.message;
+      if (error.status === 400) {
+        this.errorMessage = 'Ingrese un correo válido';
+      } else if (error.status === 500) {
+        this.errorMessage = 'Error en el servidor, intente más tarde';
+      }
     });
   }
 }

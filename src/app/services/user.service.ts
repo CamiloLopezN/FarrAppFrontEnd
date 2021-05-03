@@ -18,6 +18,19 @@ export class UserService {
     });
   }
 
+  getUser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend2}/api/users/${this.userId}`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   getEventById(idCompany: string, idEstablishment: string, idEvent: string): Observable<any> {
     let headers: any;
     if (idCompany === this.userId) {

@@ -3,20 +3,27 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {CompanyResponse, EstablishmentRegister, EventRegister} from '../model/company';
+import {CompanyRegistration2, CompanyResponse, EstablishmentRegister, EventRegister} from '../model/company';
 import {CompanyRegistration} from '../model/company';
 import {ClientAccount} from '../model/client';
+import {AuthService} from './auth.service';
+import {CommentSend} from '../model/opinion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  constructor(private http: HttpClient) {
+  private roleId: string;
+
+  constructor(private http: HttpClient, private authS: AuthService) {
+    this.authS.getRoleId.subscribe(roleId => {
+      this.roleId = roleId;
+    });
   }
 
-  register(company: CompanyRegistration): Observable<any> {
-    return this.http.post<any>(`${environment.backend}/api/company/`, company)
+  register(company: CompanyRegistration | CompanyRegistration2): Observable<any> {
+    return this.http.post<any>(`${environment.backend2}/api/companies/`, company)
       .pipe(
         map((res: any) => {
           return res;
@@ -29,7 +36,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/company/profile`, {headers})
+    return this.http.get<any>(`${environment.backend2}/api/companies/${this.roleId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -141,7 +148,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend}/api/company/establishment`, establishment, {headers})
+    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments`, establishment, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -154,19 +161,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/company/establishments`, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-  getEstablishmentById(id: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/company/establishment?establishmentId=${id}`, {headers})
+    return this.http.get<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -174,24 +169,12 @@ export class CompanyService {
       );
   }
 
-  postEvent(event: EventRegister): Observable<any> {
+  getEvents(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend}/api/company/event`, event, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-  getParcialEvents(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/company/events-cover`, {headers})
+    return this.http.get<any>(`${environment.backend2}/api/companies/${this.roleId}/events`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -199,12 +182,12 @@ export class CompanyService {
       );
   }
 
-  getParcialEstablishment(): Observable<any>{
+  removeEstablishment(idEstablishment: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/company/establishment-cover`, {headers})
+    return this.http.delete<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${idEstablishment}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -212,4 +195,71 @@ export class CompanyService {
       );
   }
 
+  removeEvent(idEstablishment: string, idEvent: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.delete<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${idEstablishment}/events/${idEvent}`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  postEvent(event: EventRegister, establishmentId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${establishmentId}/events`, event, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  changeStatusEvent(statusStr: string, establishmentId: string, eventId: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    const myStatus = {
+      status: statusStr
+    };
+    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${establishmentId}/events/${eventId}`, myStatus, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  sendCommentEvent(idEvent: any, comment: CommentSend): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend2}/api/events/${idEvent}/review`, comment, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  sendCommentEstablishment(idEstablishment: any, comment: CommentSend): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend2}/api/establishments/${idEstablishment}/review`, comment, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

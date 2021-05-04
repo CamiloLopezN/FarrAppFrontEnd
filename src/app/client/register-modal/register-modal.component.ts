@@ -78,7 +78,7 @@ export class RegisterModalComponent implements OnInit {
   onSubmit(): void {
 
     this.errorMessage = '';
-    if (this.role !== 'superAdmin') {
+    if (this.role !== 'admin') {
       const vBirth = this.birthdate.split('-');
       this.client = {
         firstName: this.nameClient,
@@ -167,7 +167,7 @@ export class RegisterModalComponent implements OnInit {
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
 
-        if (this.role === 'superAdmin') {
+        if (this.role === 'admin') {
           document.getElementById(this.btnAdmin).style.backgroundColor = '#fafafa';
           document.getElementById(this.btnAdmin).style.color = '#b6babd';
           document.getElementById(this.btnClient).style.backgroundColor = '#9edcf6';
@@ -193,7 +193,7 @@ export class RegisterModalComponent implements OnInit {
       this.authS.roled.subscribe(rol =>
         role = rol
       );
-      if (role === 'superAdmin') {
+      if (role === 'admin') {
         this.redirectAdmin();
       } else {
         this.redirect2();
@@ -208,9 +208,9 @@ export class RegisterModalComponent implements OnInit {
   }
 
   isValidAll(): boolean {
-    if (this.role === 'superAdmin' && !this.adminSelect) {
+    if (this.role === 'admin' && !this.adminSelect) {
       return this.ifBefore() && this.isEmailLength() && this.isNameLength() && this.isLastNameLength() && this.gender !== '';
-    } else if (this.role === 'superAdmin' && this.adminSelect) {
+    } else if (this.role === 'admin' && this.adminSelect) {
       return this.isEmailLength() && this.isLastNameLength() && this.isNameLength() && !this.isDifferentTo() && this.isValidPassLenght()
         && this.isEqual() && !this.contentSpaces()
         && this.contentDigits() && this.contentLower() && this.contentUpper();

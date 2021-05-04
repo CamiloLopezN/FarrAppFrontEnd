@@ -3,8 +3,9 @@ import {faUserCircle, faLock, faExclamationTriangle, faUnlock} from '@fortawesom
 import {Router} from '@angular/router';
 import {ClientAccount} from '../../model/client';
 import {NotificationService} from '../../services/notification.service';
-import {ClientService} from '../../services/client.service';
 import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../services/user.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 @Component({
   selector: 'app-security-client',
@@ -27,8 +28,9 @@ export class SecurityClientComponent implements OnInit {
   constructor(
     private router: Router,
     private notifyS: NotificationService,
-    private clientService: ClientService,
-    private authS: AuthService
+    private userService: UserService,
+    private authS: AuthService,
+    public loaderService: SpinnerService
   ) {
   }
 
@@ -37,10 +39,11 @@ export class SecurityClientComponent implements OnInit {
   }
 
   getUser(): void {
-    this.clientService.getUserSecurity().subscribe((res) => {
-        this.e_mail = res.search.e_mail;
+    this.userService.getUser().subscribe((res) => {
+        this.e_mail = res.email;
       },
-      () => {
+      error => {
+        console.log(error);
         this.authS.logoutExpired();
         location.reload();
       }
@@ -52,7 +55,7 @@ export class SecurityClientComponent implements OnInit {
       email: this.e_mail,
       password: this.password
     };
-    this.clientService.changePass(this.client).subscribe(() => {
+    this.userService.changePassword(this.client).subscribe(() => {
         this.notifyS.succesChangePass();
         this.router.navigate(['/client/profile']);
       },

@@ -4,7 +4,8 @@ import {Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 import {AuthService} from '../../services/auth.service';
 import {faUserCircle, faLock, faUnlock, faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
-import {AdminService} from '../../services/admin.service';
+import {SpinnerService} from '../../services/spinner.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-security-admin',
@@ -26,8 +27,9 @@ export class SecurityAdminComponent implements OnInit {
   constructor(
     private router: Router,
     private notifyS: NotificationService,
-    private adminService: AdminService,
-    private authS: AuthService
+    private adminService: UserService,
+    private authS: AuthService,
+    public loaderService: SpinnerService
   ) {
   }
 
@@ -36,11 +38,13 @@ export class SecurityAdminComponent implements OnInit {
   }
 
   getUser(): void {
-    this.adminService.getAdminSecurity().subscribe((res) => {
-        this.eMail = res.search.email;
+    this.adminService.getUser().subscribe((res) => {
+        this.eMail = res.email;
       },
-      () => {
+      error => {
+        console.log(error);
         this.authS.logoutExpired();
+        location.reload();
       }
     );
   }
@@ -50,7 +54,7 @@ export class SecurityAdminComponent implements OnInit {
       email: this.eMail,
       password: this.password
     };
-    this.adminService.changePassAdmin(this.client).subscribe(() => {
+    this.adminService.changePassword(this.client).subscribe(() => {
         this.notifyS.succesChangePass();
         this.router.navigate(['/admin/profile']);
       },

@@ -150,6 +150,7 @@ export class AuthService {
     this.role.next(helper.decodeToken(localStorage.getItem('token')).role);
     this.roleId.next(helper.decodeToken(localStorage.getItem('token')).roleId);
     this.nameUser.next(localStorage.getItem('userName'));
+    this.userId.next(helper.decodeToken(localStorage.getItem('token')).userId);
     this.customerId.next(helper.decodeToken(localStorage.getItem('token')).customerId);
   }
 
@@ -161,6 +162,7 @@ export class AuthService {
     this.roleId.next('');
     this.nameUser.next('');
     this.customerId.next('');
+    this.userId.next('');
   }
 
   logoutSession(): void {

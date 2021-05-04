@@ -23,7 +23,7 @@ export class AdminSesionGuard implements CanActivate {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
-    if (this.rol != 'superAdmin') {
+    if (this.rol !== 'admin') {
       this.router.navigate(['']);
       return false;
     }

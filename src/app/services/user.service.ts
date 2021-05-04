@@ -11,11 +11,31 @@ import {AuthService} from './auth.service';
 export class UserService {
 
   private userId: string;
+  private roleId: string;
 
   constructor(private http: HttpClient, private authS: AuthService) {
-    this.authS.getRoleId.subscribe(userId => {
-      this.userId = userId;
+    this.authS.getRoleId.subscribe(rol => {
+      this.roleId = rol;
+      console.log(this.roleId);
     });
+
+    this.authS.getUserId.subscribe(id => {
+      this.userId = id;
+      console.log(this.userId);
+    });
+  }
+
+  getUser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend2}/api/users/${this.userId}`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   getEventById(idCompany: string, idEstablishment: string, idEvent: string): Observable<any> {
@@ -42,7 +62,7 @@ export class UserService {
 
   getEstablishmentById(idCompany: string, id: string): Observable<any> {
     let headers: any;
-    if (idCompany === this.userId) {
+    if (idCompany === this.roleId) {
       headers = new HttpHeaders({
         'Content-type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -60,12 +80,12 @@ export class UserService {
       );
   }
 
-  changePassword(password: string): Observable<any> {
+  changePassword(user: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/users/${this.userId}`, password, {headers})
+    return this.http.post<any>(`${environment.backend2}/api/users/${this.userId}/update`, user, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -75,7 +95,7 @@ export class UserService {
 
   getEvents(): Observable<any> {
     let headers: any;
-    if (this.userId !== '') {
+    if (this.roleId !== '') {
       headers = new HttpHeaders({
         'Content-type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -95,7 +115,7 @@ export class UserService {
 
   getEstablishments(): Observable<any> {
     let headers: any;
-    if (this.userId !== '') {
+    if (this.roleId !== '') {
       headers = new HttpHeaders({
         'Content-type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`

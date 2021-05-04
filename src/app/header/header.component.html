@@ -15,7 +15,7 @@
          (click)="authService.inLog.next(true)">Iniciar sesión</a>
       <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#register-client-modal"
          *ngIf="!isLogged" (click)="authService.inReg.next(false)">Registrarse</a>
-      <a class="text-white mr-4" [routerLink]="['/admin/dashboard']" *ngIf="isLogged && rol=='superAdmin'">Panel de
+      <a class="text-white mr-4" [routerLink]="['/admin/dashboard']" *ngIf="isLogged && rol=='admin'">Panel de
         control</a>
       <div class="dropdown d-inline" *ngIf="isLogged">
         <button class="btn animate m-0 p-0 my-button" type="button" id="dropdownUser" data-toggle="dropdown"
@@ -89,7 +89,7 @@
         <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal"
                 data-target="#register-client-modal" (click)="authService.inReg.next(false)">Registrarse
         </button>
-        <button class="dropdown-item" type="button" *ngIf="isLogged && rol=='superAdmin'"
+        <button class="dropdown-item" type="button" *ngIf="isLogged && rol=='admin'"
                 [routerLink]="['admin/dashboard']">Panel de control
         </button>
         <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>

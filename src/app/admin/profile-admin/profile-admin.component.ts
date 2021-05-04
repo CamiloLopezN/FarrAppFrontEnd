@@ -22,8 +22,8 @@ export class ProfileAdminComponent implements OnInit {
   getAdmin(): void {
     this.adminS.getAdminProfile().subscribe(res => {
       this.admin = {
-        name: res.search.name,
-        lastname: res.search.lastname
+        name: res.firstName,
+        lastname: res.lastName
       };
     }, () => {
       this.authS.logoutExpired();

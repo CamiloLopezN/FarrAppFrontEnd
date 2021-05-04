@@ -85,9 +85,9 @@
                 </button>
               </div>
               <div class="col">
-                <button type="submit" class="btn btn-outline-primary w-100 border-circ"
-                        [disabled]="!formUser.form.valid || !isValidAll()">Guardar
-                </button>
+                <button type="submit" class="btn btn-outline-primary btn-custom-width w-100 border-circ"
+                        [disabled]="!formUser.form.valid || !isValidAll()" [class.spinner]="loaderService.isLoading | async">
+                  <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Guardar</p></button>
               </div>
             </div>
           </div>

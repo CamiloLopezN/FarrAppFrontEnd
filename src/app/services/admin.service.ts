@@ -5,13 +5,19 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {AdminResponse} from '../model/admin';
 import {ClientAccount, ClientAdmin} from '../model/client';
+import {AuthService} from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor(private http: HttpClient) {
+  rolId: string;
+
+  constructor(private http: HttpClient, private authS: AuthService) {
+    this.authS.getRoleId.subscribe(res => {
+      this.rolId = res;
+    });
   }
 
   getAdminProfile(): Observable<any> {
@@ -19,7 +25,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/admin/profile`, {headers})
+    return this.http.get<any>(`${environment.backend2}/api/admins/${this.rolId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;

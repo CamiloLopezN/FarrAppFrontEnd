@@ -5,6 +5,7 @@ import {ClientService} from '../../services/client.service';
 import {ClientResponse} from '../../model/client';
 import {DatePipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../services/user.service';
 
 @Component({
   selector: 'app-profile-client',
@@ -21,6 +22,7 @@ export class ProfileClientComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private clientS: ClientService,
+    private userS: UserService,
     private datePipe: DatePipe,
     private authS: AuthService
   ) {
@@ -56,7 +58,7 @@ export class ProfileClientComponent implements OnInit {
 
 
   sendReqRemove(): void {
-    this.clientS.removeUser().subscribe(() => {
+    this.userS.removeUser().subscribe(() => {
         this.authS.logoutSessionDesact();
       },
       () => {

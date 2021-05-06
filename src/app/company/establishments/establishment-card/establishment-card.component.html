@@ -4,7 +4,8 @@
   <div class="card-body">
     <div class="text-wr">
       <p class="title-event" data-toggle="tooltip" data-placement="top"
-         title="{{establishment.establishmentName}}">{{establishment.establishmentName}}</p>
+         title="{{establishment.establishmentName}}" (click)="hover($event)"
+         id="name{{establishment.establishmentId}}">{{establishment.establishmentName}}</p>
     </div>
     <div>
       <a class="city-title m-0" title="Popover title">

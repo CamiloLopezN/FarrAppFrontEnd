@@ -24,6 +24,9 @@ export class EstablishmentCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
     this.ers.establishmentSelect.next({
       idEstablishment: this.establishment.establishmentId,
       idCompany: this.establishment.companyId,
@@ -33,11 +36,12 @@ export class EstablishmentCardComponent implements OnInit {
   }
 
   redirect(): void {
+    $(`#name${this.establishment.establishmentId}`).tooltip('hide');
     this.router.navigate(['company', this.establishment.companyId, 'establishments', this.establishment.establishmentId]);
   }
 
   edit(event: MouseEvent): void {
-
+    console.log(event);
   }
 
   remove(mouseEvent: MouseEvent): void {
@@ -53,5 +57,9 @@ export class EstablishmentCardComponent implements OnInit {
     } finally {
       $('#removeEstablishment').modal('show');
     }
+  }
+
+  hover($event: MouseEvent): void {
+    $event.stopPropagation();
   }
 }

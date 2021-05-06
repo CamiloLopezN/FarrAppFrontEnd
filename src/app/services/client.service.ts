@@ -85,7 +85,7 @@ export class ClientService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend}/api/client/req-desactive`, {headers})
+    return this.http.get<any>(`${environment.backend2}/api/users/request-deactivation/`, {headers})
       .pipe(
         map((res: any) => {
           return res;

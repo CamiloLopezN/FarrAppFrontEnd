@@ -91,6 +91,7 @@ export class EventComponent implements OnInit {
   }
 
   redirect(): void {
+    $(`#name${this.event.eventId}`).tooltip('hide');
     this.router.navigate(['company', this.event.companyId,
       'establishments', this.event.establishmentId,
       'events', this.event.eventId]);
@@ -128,5 +129,9 @@ export class EventComponent implements OnInit {
     } finally {
       $('#removeEvent').modal('show');
     }
+  }
+
+  hover($event: MouseEvent): void {
+    $event.stopPropagation();
   }
 }

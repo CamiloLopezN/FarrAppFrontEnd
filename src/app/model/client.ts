@@ -36,9 +36,20 @@ export interface ClientResponseAdmin {
 }
 
 export interface ClientResponseAdmin2 {
+  birthdate: Date;
+  firstName: string;
+  gender: string;
+  lastName: string;
+  userId: UserResponseAdmin;
   _id: string;
-  name: string;
-  lastname: string;
+}
+
+export interface UserResponseAdmin {
+  email: string;
+  hasReqDeactivation: boolean;
+  isActive: boolean;
+  isVerified: boolean;
+  _id: string;
 }
 
 export class ClientRegistration2 {

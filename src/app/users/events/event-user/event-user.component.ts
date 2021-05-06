@@ -5,6 +5,8 @@ import {getDateEvent} from '../../../model/RelojTest';
 import {faClock, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 
+declare var $: any;
+
 @Component({
   selector: 'app-event-user',
   templateUrl: './event-user.component.html',
@@ -26,6 +28,9 @@ export class EventUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $(() => {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 
   getDate(): string {
@@ -33,9 +38,13 @@ export class EventUserComponent implements OnInit {
   }
 
   redirect(): void {
-    console.log(this.event);
+    $(`#title${this.event.eventId}`).tooltip('hide');
     this.router.navigate(['company', this.event.companyId,
       'establishments', this.event.establishmentId,
       'events', this.event.eventId]);
+  }
+
+  hover(mouseEvent: MouseEvent): void {
+    mouseEvent.stopPropagation();
   }
 }

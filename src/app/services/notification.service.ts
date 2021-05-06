@@ -6,6 +6,15 @@ import {NotificationsService} from 'angular2-notifications';
 })
 export class NotificationService {
 
+  success(title: string, desc: string): void {
+    this.nService.success(title, desc, {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
   constructor(private nService: NotificationsService) {
   }
 

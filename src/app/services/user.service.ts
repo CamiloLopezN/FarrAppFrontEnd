@@ -16,12 +16,10 @@ export class UserService {
   constructor(private http: HttpClient, private authS: AuthService) {
     this.authS.getRoleId.subscribe(rol => {
       this.roleId = rol;
-      console.log(this.roleId);
     });
 
     this.authS.getUserId.subscribe(id => {
       this.userId = id;
-      console.log(this.userId);
     });
   }
 
@@ -126,6 +124,19 @@ export class UserService {
       });
     }
     return this.http.get<any>(`${environment.backend2}/api/establishments`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  removeUser(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend2}/api/users/request-deactivation/${this.userId}`, {}, {headers})
       .pipe(
         map((res: any) => {
           return res;

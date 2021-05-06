@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {EstablishmentView} from '../../../model/company';
 import {Router} from '@angular/router';
-import {faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {EventEmmiterService} from '../../../services/event-remove.service';
 import {IsShowModalService} from '../../../services/is-show-modal.service';
 
@@ -29,6 +29,7 @@ export class EstablishmentComponent implements OnInit {
   }
 
   redirect(): void {
+    $(`#title${this.establishment.establishmentId}`, `#city${this.establishment.establishmentId}`).tooltip('hide');
     this.router.navigate(['company', this.establishment.companyId, 'establishments', this.establishment.establishmentId]);
   }
 
@@ -60,5 +61,9 @@ export class EstablishmentComponent implements OnInit {
     } finally {
       $('#removeEvent').modal('show');
     }
+  }
+
+  hover($event: MouseEvent): void {
+    $event.stopPropagation();
   }
 }

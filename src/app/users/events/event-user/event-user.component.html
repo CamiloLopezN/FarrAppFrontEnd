@@ -15,7 +15,7 @@
     </div>
     <div class="text-wr">
       <p class="title-event" data-toggle="tooltip" data-placement="top"
-         title="{{event.eventName}}">{{event.eventName}}</p>
+         title="{{event.eventName}}" id="title{{event.eventId}}" (click)="hover($event)">{{event.eventName}}</p>
     </div>
     <div>
       <a class="city-title m-0" title="Popover title">

@@ -13,16 +13,14 @@ import {AuthService} from '../../services/auth.service';
 export class ClientsAdminComponent implements OnInit {
 
   clients: ClientResponseAdmin2[];
-  client: ClientResponseAdmin2;
   faUser = faUser;
   p: number;
+  total: number;
+  itemsPerP: number;
+  clientSelected: string;
 
   constructor(private adminS: AdminService, private route: Router, private authS: AuthService) {
-    this.client = {
-      _id: '',
-      name: '',
-      lastname: '',
-    };
+    this.itemsPerP = 10;
     this.clients = [];
   }
 
@@ -31,78 +29,61 @@ export class ClientsAdminComponent implements OnInit {
   }
 
   getClients(): void {
-    this.adminS.getClients().subscribe(res => {
-      this.clients = [];
-      for (const client of res) {
-        if (client.user.active && !client.user.req_desactive) {
-          this.client = {
-            _id: client._id,
-            name: client.name,
-            lastname: client.lastname,
-          };
-          this.clients.push(this.client);
-        }
-      }
+    this.clientSelected = 'a';
+    this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, true).subscribe(res => {
+      console.log(res);
+      this.total = res.totalDocs;
+      this.clients = res.docs;
     }, () => {
       this.authS.logoutExpired();
     });
   }
 
-  profile(_id: string): void {
-    this.route.navigate([`admin/client/${_id}`]);
+  profile(id: string): void {
+    this.route.navigate([`admin/client/${id}`]);
   }
 
   getClientsD(): void {
-    this.adminS.getClients().subscribe(res => {
-      this.clients = [];
-      for (const client of res) {
-        if (!client.user.active && client.user.req_desactive) {
-          this.client = {
-            _id: client._id,
-            name: client.name,
-            lastname: client.lastname,
-          };
-          this.clients.push(this.client);
-        }
-      }
+    this.clientSelected = 'd';
+    this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, false, false, false).subscribe(res => {
+      this.total = res.totalDocs;
+      this.clients = res.docs;
     }, () => {
       this.authS.logoutExpired();
     });
   }
 
   getCompaniesPT(): void {
-    this.adminS.getClients().subscribe(res => {
-      this.clients = [];
-      for (const client of res) {
-        if (client.user.active && client.user.req_desactive) {
-          this.client = {
-            _id: client._id,
-            name: client.name,
-            lastname: client.lastname,
-          };
-          this.clients.push(this.client);
-        }
-      }
+    this.clientSelected = 'pt';
+    this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, true, true).subscribe(res => {
+      this.total = res.totalDocs;
+      this.clients = res.docs;
     }, () => {
       this.authS.logoutExpired();
     });
   }
 
   getClientsP(): void {
-    this.adminS.getClients().subscribe(res => {
-      this.clients = [];
-      for (const client of res) {
-        if (!client.user.active && !client.user.req_desactive) {
-          this.client = {
-            _id: client._id,
-            name: client.name,
-            lastname: client.lastname,
-          };
-          this.clients.push(this.client);
-        }
-      }
+    this.clientSelected = 'p';
+    this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, false).subscribe(res => {
+      this.total = res.totalDocs;
+      this.clients = res.docs;
     }, () => {
       this.authS.logoutExpired();
     });
+  }
+
+  pageChange($event: number): void {
+    this.p = $event;
+    if (this.clientSelected === 'a') {
+      this.getClients();
+    } else if (this.clientSelected === 'd') {
+      this.getClientsD();
+    } else if (this.clientSelected === 'p') {
+      this.getClientsP();
+    } else {
+      this.getCompaniesPT();
+    }
+
   }
 }

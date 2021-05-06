@@ -4,11 +4,11 @@
   <div class="card-body">
     <div class="text-wr">
       <p class="title-event" data-toggle="tooltip" data-placement="top"
-         title="{{establishment.establishmentName}}">{{establishment.establishmentName}}</p>
+         title="{{establishment.establishmentName}}" (click)="hover($event)" id="title{{establishment.establishmentId}}">{{establishment.establishmentName}}</p>
     </div>
     <div class="text-wr">
       <p class="city-title m-0" data-toggle="tooltip" data-placement="top"
-         title="{{establishment.location.address}}">{{establishment.location.address}}</p>
+         title="{{establishment.location.address}}" (click)="hover($event)" id="city{{establishment.establishmentId}}">{{establishment.location.address}}</p>
     </div>
   </div>
 </div>

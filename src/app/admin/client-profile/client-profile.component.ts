@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AdminService} from '../../services/admin.service';
-import {ClientResponseAdmin} from '../../model/client';
+import {ClientResponseAdmin2} from '../../model/client';
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
 
@@ -11,12 +11,14 @@ import {NotificationService} from '../../services/notification.service';
   styleUrls: ['./client-profile.component.css']
 })
 export class ClientProfileComponent implements OnInit {
-  client: ClientResponseAdmin;
+  client: ClientResponseAdmin2;
+  user: any;
   isActive: boolean;
   isReq: boolean;
+  isAnimate = true;
 
   constructor(private ns: NotificationService, private route: ActivatedRoute,
-              private adminS: AdminService, private  authS: AuthService, private router: Router) {
+              private adminS: AdminService, private authS: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,35 +27,31 @@ export class ClientProfileComponent implements OnInit {
 
 
   getUser(): void {
-    this.route.params.forEach((params: Params) => {
-      const id = params.id;
-      this.adminS.getUserById(id).subscribe(res => {
-          this.client = res.client[0];
-          this.isActive = res.client[0].user.active;
-          this.isReq = res.client[0].user.reqDesactive;
-          this.client._id = res.client[0].id_user;
-          this.client.email = res.client[0].user.e_mail;
-          const birthDates = this.client.birthdate.split('-');
-          this.client.birthdate = `${birthDates[0]}-${birthDates[1]}-${birthDates[2].substr(0, 2)}`;
-        },
-        this.authS.logoutExpired);
-    });
+    const id = this.route.snapshot.params.id;
+    this.adminS.getClientById(id).subscribe(res => {
+        this.client = res;
+      }, () => {
+        this.authS.logoutExpired();
+      }
+    );
   }
 
   active(): void {
-    this.adminS.activeCompany(this.client._id, true, false).subscribe(() => {
+    this.adminS.changeStatus(true, false, true, this.client.userId._id).subscribe(() => {
       this.router.navigate(['/admin/client']);
       this.ns.succesActivateClient();
-    }, () => {
+    }, error => {
+      console.log(error);
       this.authS.logoutExpired();
     });
   }
 
   desactive(): void {
-    this.adminS.activeCompany(this.client._id, false, true).subscribe(() => {
+    this.adminS.changeStatus(false, false, false, this.client.userId._id).subscribe(() => {
       this.router.navigate(['/admin/client']);
       this.ns.sucessDesactivateClient();
-    }, () => {
+    }, error => {
+      console.log(error);
       this.authS.logoutExpired();
     });
   }

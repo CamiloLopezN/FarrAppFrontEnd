@@ -1,3 +1,5 @@
+import {UserResponseAdmin} from './client';
+
 export interface CompanyRegistration {
   email: string;
   password: string;
@@ -29,19 +31,22 @@ export interface CompanyResponse {
 
 export interface CompanyResponseAdmin {
 
-  _id: string;
-  name: string;
+  address: string;
+  companyName: string;
+  contactNumber: string;
   nit: string;
+  user: UserResponseAdmin;
+  _id: string;
 }
 
 export interface CompanyResponseAdmin2 {
 
-  _id: string;
-  name: string;
+  companyName: string;
+  contactNumber: string;
   nit: string;
-  contact_number: string;
-  address: string;
-  active: boolean;
+  userId: UserResponseAdmin;
+  _id: string;
+  address;
 }
 
 export interface EventC {

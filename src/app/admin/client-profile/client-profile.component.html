@@ -11,7 +11,7 @@
               <strong>
                 Nombre
               </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{client.name}} {{client.lastname}}</h5>
+            <h5 class="profile-font text-center text-white crow2">{{client.firstName}} {{client.lastName}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
@@ -25,14 +25,14 @@
               <strong>
                 Fecha de nacimiento
               </strong></label>
-            <h5 class="profile-font text-center text-white">{{client.birthdate}}</h5>
+            <h5 class="profile-font text-center text-white">{{client.birthdate | date}}</h5>
           </div>
           <div class="border-profile mb-4">
             <label class="text-white ml-4">
               <strong>
                 E-mail
               </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{client.e_mail}}</h5>
+            <h5 class="profile-font text-center text-white crow2">{{client.userId.email}}</h5>
           </div>
         </div>
 
@@ -42,11 +42,14 @@
           <div class="col">
             <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/admin/client']">Regresar</button>
           </div>
-          <div class="col" *ngIf="(isActive && !isReq) || (isActive && isReq)">
+          <div class="col" *ngIf="(this.client.userId.isActive && !this.client.userId.hasReqDeactivation && this.client.userId.isVerified) || (this.client.userId.isActive && this.client.userId.hasReqDeactivation && this.client.userId.isVerified)">
             <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100" (click)="desactive()">Desactivar</button>
           </div>
-          <div class="col" *ngIf="!isActive && !isReq">
+          <div class="col" *ngIf="!this.client.userId.isActive && !this.client.userId.hasReqDeactivation && !this.client.userId.isVerified">
             <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" (click)="active()">Activar</button>
+          </div>
+          <div class="col" *ngIf="this.client.userId.isActive && !this.client.userId.hasReqDeactivation && !this.client.userId.isVerified">
+            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" (click)="active()">Verificar</button>
           </div>
         </div>
       </div>

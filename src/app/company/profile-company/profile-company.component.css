@@ -1,25 +1,15 @@
 .myDiv {
   background: white;
   animation-duration: 0.2s;
-  overflow: hidden
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
 
-.margin-1200, .margin-800 {
-  width: 80%;
-  max-width: 1200px;
-  min-width: 260px;
-  margin: 0 auto;
-}
-
-.margin-800 {
-  max-width: 800px;
-}
-
-.header-company{
+.header-company {
   width: 90%;
   min-width: 280px;
   max-width: 1200px;
-  margin: 2rem auto 2rem;
+  margin: 2rem auto 4rem;
 
 }
 
@@ -42,6 +32,18 @@ h4 {
   color: #FFFFFF;
 }
 
+.options {
+  transform: rotate(-70deg);
+}
+
+.title-top {
+  font-style: normal;
+  font-weight: 275;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 .name-company {
   font-style: normal;
   font-weight: 300;
@@ -56,6 +58,17 @@ h4 {
   font-size: 0.8rem;
   line-height: 1rem;
   color: rgba(37, 36, 39, 0.8);
+}
+
+.margin-1200, .margin-800 {
+  width: 80%;
+  max-width: 1200px;
+  min-width: 260px;
+  margin: 0 auto;
+}
+
+.margin-800 {
+  max-width: 800px;
 }
 
 .text-desc-profile, .text-desc-change {
@@ -118,7 +131,7 @@ h4 {
   border-radius: 20px;
 }
 
-.btn-red{
+.btn-red {
   background: rgba(255, 26, 67, 0.8);
   border: 1px solid rgba(255, 26, 67, 0.8);
   box-sizing: border-box;

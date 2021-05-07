@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyResponse} from '../../model/company';
+import {CompanyResponse, EventView} from '../../model/company';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {CompanyService} from '../../services/company.service';
@@ -15,6 +15,8 @@ export class ProfileCompanyComponent implements OnInit {
   public company: CompanyResponse;
   faExclamationTriangle = faExclamationTriangle;
   faInfoCard = faInfoCircle;
+  eventsActive: EventView[];
+  attendees: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,9 +43,11 @@ export class ProfileCompanyComponent implements OnInit {
     this.router.navigate(['company/edit']);
   }
 
-  private getCompany(): void {
+  getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
         this.company = res.message;
+        console.log(res.message);
+        this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
       },
       () => {
         this.authS.logoutExpired();

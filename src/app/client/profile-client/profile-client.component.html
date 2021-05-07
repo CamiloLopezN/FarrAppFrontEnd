@@ -1,62 +1,29 @@
-<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
-     style="animation-duration: 0.2s" id="container" *ngIf="client">
-  <div id="log-in">
-    <div class="text-center pl-4 pr-4 pt-4 pb-4">
-      <h4 class="text-white text-center mb-3">
-        MI PERFIL
-      </h4>
-      <div>
-        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
-        <div class="text-left mt-5">
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Nombre
-              </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{client.firstName}}</h5>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Apellido
-              </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{client.lastName}}</h5>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Género
-              </strong></label>
-            <h5 class="profile-font text-center text-white">{{client.gender}}</h5>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Fecha de nacimiento
-              </strong></label>
-            <h5 class="profile-font text-center text-white">{{client.birthdate | date:'longDate'}}</h5>
-          </div>
-        </div>
-
+<div *ngIf="client">
+  <header>
+    <section class="margin-1200 mt-5">
+      <p class="text-center text-name">¡Hola! {{client.firstName}}</p>
+      <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">{{client.lastName}}</p>
+      <div class="clearfix"></div>
+      <div class="text-center">
+        <p class="text-desc-profile">Este es tu perfil</p>
+        <p class="text-desc-change">¡Cámbialo cuando quieras!</p>
       </div>
-      <div class="mt-2">
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [routerLink]="['/client/edit']">Editar</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/client/security']">Seguridad</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100" data-toggle="modal" data-target="#exampleModal">Eliminar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <p>{{client.firstName}}</p>
+      <p>{{client.lastName}}</p>
+      <p>{{client.gender}}</p>
+      <p>{{client.birthdate | date}}</p>
+    </section>
+    <section class="margin-1200 btn-list">
+      <button class="btn-custom" [routerLink]="['/client/edit']">Editar</button>
+      <button class="btn-custom" [routerLink]="['/client/security']">Seguridad</button>
+      <button class="btn-custom btn-red" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta</button>
+    </section>
+  </main>
 </div>
-
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

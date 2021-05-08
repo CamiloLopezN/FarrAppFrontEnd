@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AdminService} from '../../services/admin.service';
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 declare var $: any;
 
@@ -24,6 +25,7 @@ export class CompanyProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private adminS: AdminService,
     private authS: AuthService,
+    public loaderService: SpinnerService,
     private router: Router) {
   }
 
@@ -44,7 +46,7 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   active(): void {
-    this.adminS.activeCompany(this.company._id, true, false).subscribe(() => {
+    this.adminS.changeStatus(true, false, true, this.company.userId._id).subscribe(() => {
       this.router.navigate(['/admin/company']);
       this.ns.sucessActivateCompany();
     }, () => {
@@ -53,7 +55,7 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   desactive(): void {
-    this.adminS.activeCompany(this.company._id, false, true).subscribe(() => {
+    this.adminS.changeStatus(false, false, false, this.company.userId._id).subscribe(() => {
       this.router.navigate(['/admin/company']);
       this.ns.sucessDesactivateCompany();
     }, () => {

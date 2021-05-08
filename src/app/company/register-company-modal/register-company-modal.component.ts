@@ -99,7 +99,7 @@ export class RegisterCompanyModalComponent implements OnInit {
         password: this.password,
         nit: this.nit
       };
-      this.companyService.register(this.company).subscribe(() => {
+      this.companyService.register(this.company, false).subscribe(() => {
           this.authS.inRegCompany.next(true);
           this.formC.reset();
           this.changeDetectorRef.detectChanges();
@@ -120,7 +120,7 @@ export class RegisterCompanyModalComponent implements OnInit {
         contactNumber: this.contactNumber,
         address: this.address
       };
-      this.companyService.register(this.companyA).subscribe(() => {
+      this.companyService.register(this.companyA, true).subscribe(() => {
         $('#register-company-modal').modal('hide');
         this.notifyS.succesRegisterCompany();
         this.formC.reset();

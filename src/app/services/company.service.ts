@@ -22,8 +22,14 @@ export class CompanyService {
     });
   }
 
-  register(company: CompanyRegistration | CompanyRegistration2): Observable<any> {
-    return this.http.post<any>(`${environment.backend2}/api/companies/`, company)
+  register(company: CompanyRegistration | CompanyRegistration2, isAdmin: boolean): Observable<any> {
+    const headers = isAdmin ? new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }) : new HttpHeaders({
+      'Content-type': 'application/json'
+    });
+    return this.http.post<any>(`${environment.backend2}/api/companies/`, company, {headers})
       .pipe(
         map((res: any) => {
           return res;

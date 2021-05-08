@@ -13,10 +13,15 @@ import {AuthService} from './auth.service';
 export class AdminService {
 
   rolId: string;
+  userId: string;
 
   constructor(private http: HttpClient, private authS: AuthService) {
     this.authS.getRoleId.subscribe(res => {
       this.rolId = res;
+    });
+
+    this.authS.getUserId.subscribe(res => {
+      this.userId = res;
     });
   }
 

@@ -1,42 +1,34 @@
-<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight" *ngIf="admin"
-     style="animation-duration: 0.2s" id="container">
-  <div id="log-in">
-    <div class="text-center pl-4 pr-4 pt-4 pb-4">
-      <h4 class="text-white text-center mb-4">MI PERFIL</h4>
-      <div>
-        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
-        <div class="text-left mt-5">
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Nombre
-              </strong></label>
-            <h4 class="profile-font text-center text-white crow2">{{admin.name}}</h4>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Apellido
-              </strong></label>
-            <h4 class="profile-font text-center text-white crow2">{{admin.lastname}}</h4>
-          </div>
-        </div>
-
-      </div>
-      <div class="mt-2">
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [routerLink]="['/admin/edit']">Editar</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/admin/security']">Seguridad</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100">Eliminar</button>
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="admin">
+  <header>
+    <section class="margin-1200 mt-5 mb-5">
+      <p class="text-left text-name">¡Bienvenido!</p>
+      <p class="text-left text-lastname overflow-hidden" style="margin-left: 6rem">ADMIN</p>
+    </section>
+    <div class="d-flex justify-content-end info-admin">
+      <div style="padding-right: 8rem;">
+        <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+          <div class="options text-right">
+            <label class="title-top m-0 p-0">Usuarios</label>
+            <h4 class="m-0 p-0">123</h4>
+            <label class="title-top m-0 p-0">Empresas</label>
+            <h4 class="m-0 p-0">1200</h4>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Cámbialo cuando quieras!</p>
+    </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <p>{{admin.name}}</p>
+      <p>{{admin.lastname}}</p>
+    </section>
+    <section class="margin-1200 btn-list">
+      <button class="btn-custom" [routerLink]="['/admin/edit']">Editar</button>
+      <button class="btn-custom" [routerLink]="['/admin/security']">Seguridad</button>
+    </section>
+  </main>
 </div>
-

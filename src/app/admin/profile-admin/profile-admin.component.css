@@ -13,37 +13,6 @@
 
 }
 
-.info-company {
-  width: 170px;
-  height: 233px;
-  background: #252427;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 1.5rem;
-  transform: rotate(70deg);
-  top: -86px;
-}
-
-h4 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1rem;
-  line-height: 1rem;
-
-  color: #FFFFFF;
-}
-
-.options {
-  transform: rotate(-70deg);
-}
-
-.title-top {
-  font-style: normal;
-  font-weight: 275;
-  font-size: 0.8rem;
-  line-height: 1rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
 .name-company {
   font-style: normal;
   font-weight: 300;

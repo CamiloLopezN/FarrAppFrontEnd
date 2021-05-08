@@ -28,7 +28,7 @@ export class UserService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/users/${this.userId}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/users/${this.userId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -49,7 +49,7 @@ export class UserService {
       });
     }
     console.log(localStorage.getItem('token'));
-    return this.http.get<any>(`${environment.backend2}/api/companies/${idCompany}/establishments/${idEstablishment}/events/${idEvent}`,
+    return this.http.get<any>(`${environment.backend}/api/companies/${idCompany}/establishments/${idEstablishment}/events/${idEvent}`,
       {headers})
       .pipe(
         map((res: any) => {
@@ -70,7 +70,7 @@ export class UserService {
         'Content-type': 'application/json'
       });
     }
-    return this.http.get<any>(`${environment.backend2}/api/companies/${idCompany}/establishments/${id}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/companies/${idCompany}/establishments/${id}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -83,7 +83,7 @@ export class UserService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/users/${this.userId}/update`, user, {headers})
+    return this.http.post<any>(`${environment.backend}/api/users/${this.userId}/update`, user, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -103,7 +103,7 @@ export class UserService {
         'Content-type': 'application/json'
       });
     }
-    return this.http.get<any>(`${environment.backend2}/api/events`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/events`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -123,7 +123,7 @@ export class UserService {
         'Content-type': 'application/json'
       });
     }
-    return this.http.get<any>(`${environment.backend2}/api/establishments`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/establishments`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -136,7 +136,7 @@ export class UserService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/users/request-deactivation/${this.userId}`, {}, {headers})
+    return this.http.post<any>(`${environment.backend}/api/users/request-deactivation/${this.userId}`, {}, {headers})
       .pipe(
         map((res: any) => {
           return res;

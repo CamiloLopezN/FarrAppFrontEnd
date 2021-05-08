@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {AdminResponse} from '../model/admin';
-import {ClientAccount, ClientAdmin} from '../model/client';
+import {ClientAdmin} from '../model/client';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -30,7 +30,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/admins/${this.rolId}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/admins/${this.rolId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -44,8 +44,8 @@ export class AdminService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     const params = `page=${page}&limit=${limit}&isActive=${isActive}&hasReqDeactivation=${hasReqDeactivation}&isVerified=${isVerified}`;
-    console.log(`${environment.backend2}/api/admins/clients?${params}`);
-    return this.http.get<any>(`${environment.backend2}/api/admins/clients?${params}`, {headers})
+    console.log(`${environment.backend}/api/admins/clients?${params}`);
+    return this.http.get<any>(`${environment.backend}/api/admins/clients?${params}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -58,7 +58,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/admins/${this.rolId}`, {
+    return this.http.post<any>(`${environment.backend}/api/admins/${this.rolId}`, {
       firstName: admin.name,
       lastName: admin.lastname
     }, {headers})
@@ -75,25 +75,8 @@ export class AdminService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     const params = `page=${page}&limit=${limit}&isActive=${isActive}&hasReqDeactivation=${hasReqDeactivation}&isVerified=${isVerified}`;
-    console.log(`${environment.backend2}/api/admins/companies?${params}`);
-    return this.http.get<any>(`${environment.backend2}/api/admins/companies?${params}`, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  activeCompany(id: string, action: boolean, reqDesactive: boolean): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    const req = {
-      active: action,
-      req_desactive: reqDesactive
-    };
-    return this.http.put<any>(`${environment.backend}/api/admin/activate?_id=${id}`, req, {headers})
+    console.log(`${environment.backend}/api/admins/companies?${params}`);
+    return this.http.get<any>(`${environment.backend}/api/admins/companies?${params}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -106,7 +89,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/admins/companies/${id}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/admins/companies/${id}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -119,7 +102,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/admins/clients/${id}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/admins/clients/${id}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -132,7 +115,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/users/${id}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/users/${id}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -145,20 +128,7 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/admins/`, client, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  getAdminSecurity(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/admin/account`, {headers})
+    return this.http.post<any>(`${environment.backend}/api/admins/`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -171,24 +141,11 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/users/${userId}/account-status`, {
+    return this.http.post<any>(`${environment.backend}/api/users/${userId}/account-status`, {
       isVerified,
       hasReqDeactivation,
       isActive
     }, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  changePassAdmin(admin: ClientAccount): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.put<any>(`${environment.backend}/api/admin/account`, admin, {headers})
       .pipe(
         map((res: any) => {
           return res;

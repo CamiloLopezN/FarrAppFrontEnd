@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
-import {ClientAccount, ClientRegistration, ClientRegistration2, ClientResponse} from '../model/client';
+import {ClientRegistration, ClientRegistration2, ClientResponse} from '../model/client';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ClientService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/clients/${this.roleId}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/clients/${this.roleId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -37,33 +37,7 @@ export class ClientService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/clients/${this.roleId}`, client, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  getUserSecurity(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/client/account`, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  changePass(client: ClientAccount): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.put<any>(`${environment.backend}/api/client/account`, client, {headers})
+    return this.http.post<any>(`${environment.backend}/api/clients/${this.roleId}`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -78,7 +52,7 @@ export class ClientService {
     }) : new HttpHeaders({
       'Content-type': 'application/json'
     });
-    return this.http.post<any>(`${environment.backend2}/api/clients/`, client, {headers})
+    return this.http.post<any>(`${environment.backend}/api/clients/`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -91,7 +65,7 @@ export class ClientService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/users/request-deactivation/`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/users/request-deactivation/`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -107,7 +81,7 @@ export class ClientService {
     const req = {
       eventId
     };
-    return this.http.post<any>(`${environment.backend2}/api/clients/event-interest`, req, {headers})
+    return this.http.post<any>(`${environment.backend}/api/clients/event-interest`, req, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -123,7 +97,7 @@ export class ClientService {
     const req = {
       establishmentId
     };
-    return this.http.post<any>(`${environment.backend2}/api/clients/follow-establishment`, req, {headers})
+    return this.http.post<any>(`${environment.backend}/api/clients/follow-establishment`, req, {headers})
       .pipe(
         map((res: any) => {
           return res;

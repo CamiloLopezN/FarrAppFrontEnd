@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../services/admin.service';
 import {AdminResponse} from '../../model/admin';
 import {AuthService} from '../../services/auth.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-profile-admin',
@@ -12,7 +13,7 @@ export class ProfileAdminComponent implements OnInit {
 
   admin: AdminResponse;
 
-  constructor(private adminS: AdminService, private authS: AuthService) {
+  constructor(private adminS: AdminService, private authS: AuthService, private notifyS: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -25,8 +26,12 @@ export class ProfileAdminComponent implements OnInit {
         name: res.firstName,
         lastname: res.lastName
       };
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 }

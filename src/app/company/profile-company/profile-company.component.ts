@@ -5,6 +5,7 @@ import {AuthService} from '../../services/auth.service';
 import {CompanyService} from '../../services/company.service';
 import {faExclamationTriangle, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../services/user.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-profile-company',
@@ -24,7 +25,8 @@ export class ProfileCompanyComponent implements OnInit {
     private router: Router,
     private companyS: CompanyService,
     private authS: AuthService,
-    private userS: UserService
+    private userS: UserService,
+    private ns: NotificationService
   ) {
   }
 
@@ -36,8 +38,12 @@ export class ProfileCompanyComponent implements OnInit {
     this.userS.removeUser().subscribe(() => {
         this.authS.logoutSessionDesact();
       },
-      () => {
-        this.authS.logoutExpired();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       });
   }
 
@@ -48,11 +54,14 @@ export class ProfileCompanyComponent implements OnInit {
   getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
         this.company = res.message;
-        console.log(res.message);
         this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
       },
-      () => {
-        this.authS.logoutExpired();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }

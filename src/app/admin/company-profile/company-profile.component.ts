@@ -17,7 +17,6 @@ declare var $: any;
 export class CompanyProfileComponent implements OnInit {
 
   company: CompanyResponseAdmin2;
-  isActive: boolean;
   isReq: boolean;
 
   constructor(
@@ -26,6 +25,7 @@ export class CompanyProfileComponent implements OnInit {
     private adminS: AdminService,
     private authS: AuthService,
     public loaderService: SpinnerService,
+    private notifyS: NotificationService,
     private router: Router) {
   }
 
@@ -49,17 +49,25 @@ export class CompanyProfileComponent implements OnInit {
     this.adminS.changeStatus(true, false, true, this.company.userId._id).subscribe(() => {
       this.router.navigate(['/admin/company']);
       this.ns.sucessActivateCompany();
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
-  desactive(): void {
+  deactivate(): void {
     this.adminS.changeStatus(false, false, false, this.company.userId._id).subscribe(() => {
       this.router.navigate(['/admin/company']);
       this.ns.sucessDesactivateCompany();
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 }

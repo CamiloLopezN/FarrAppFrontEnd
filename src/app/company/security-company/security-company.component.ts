@@ -41,9 +41,11 @@ export class SecurityCompanyComponent implements OnInit {
         this.e_mail = res.email;
       },
       error => {
-        console.log(error);
-        this.authS.logoutExpired();
-        location.reload();
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }
@@ -58,7 +60,11 @@ export class SecurityCompanyComponent implements OnInit {
         this.router.navigate(['/company/profile']);
       },
       error => {
-        this.errorMessage = error.error.message;
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }

@@ -92,7 +92,6 @@ export class AuthService {
   }
 
   login(client: ClientLogin): Observable<any> {
-    console.log(client);
     return this.httpClient.post(`${environment.backend}/api/users/login`, client).pipe(
       map((res: any) => {
         if (res.token !== undefined) {
@@ -183,5 +182,10 @@ export class AuthService {
   saveName(userInfo): void {
     localStorage.setItem('userName', userInfo);
     this.nameUser.next(localStorage.getItem('userName'));
+  }
+
+  logoutExpiredAndReload(): void {
+    this.logoutExpired();
+    location.reload();
   }
 }

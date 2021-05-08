@@ -4,6 +4,7 @@ import {IsShowModalService} from '../../../services/is-show-modal.service';
 import {faBuilding} from '@fortawesome/free-solid-svg-icons';
 import {CompanyService} from '../../../services/company.service';
 import {AuthService} from '../../../services/auth.service';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-allestablishment-company',
@@ -15,7 +16,8 @@ export class AllestablishmentCompanyComponent implements OnInit {
   establishments: EstablishmentView[];
   faCalendarPlus = faBuilding;
 
-  constructor(private serviceShow: IsShowModalService, private companyS: CompanyService, private authS: AuthService) {
+  constructor(private serviceShow: IsShowModalService, private companyS: CompanyService,
+              private authS: AuthService, private ns: NotificationService) {
     this.establishments = [];
   }
 
@@ -23,8 +25,12 @@ export class AllestablishmentCompanyComponent implements OnInit {
     this.companyS.getEstablishment().subscribe((res) => {
         this.establishments = res.message.establishments;
       },
-      () => {
-        this.authS.logoutExpired();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }

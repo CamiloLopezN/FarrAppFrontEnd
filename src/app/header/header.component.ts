@@ -82,7 +82,7 @@ export class HeaderComponent implements OnInit {
     } else if (this.rol === 'company') {
       this.router.navigate(['/company/landing-page']);
     } else if (this.rol === 'admin') {
-      this.router.navigate(['/admin/landing-page']);
+      this.router.navigate(['/admin/dashboard']);
     }
   }
 
@@ -97,7 +97,11 @@ export class HeaderComponent implements OnInit {
         this.ns.warnNotEstablishment();
       }
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authService.logoutExpiredAndReload();
+      }
     });
   }
 

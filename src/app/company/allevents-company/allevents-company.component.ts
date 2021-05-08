@@ -41,9 +41,12 @@ export class AlleventsCompanyComponent implements OnInit {
           return ev.status === 'Activo' && new Date(ev.end) < new Date();
         });
       },
-      () => {
-        this.authS.logoutExpired();
-        location.reload();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }
@@ -59,7 +62,11 @@ export class AlleventsCompanyComponent implements OnInit {
         this.ns.warnNotEstablishment();
       }
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 }

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ClientService} from '../../services/client.service';
 import {EstablishmentView, EventView} from '../../model/company';
 import {faBuilding, faCalendarCheck, faUser} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from '../../services/auth.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-landing-page-client',
@@ -18,7 +20,7 @@ export class LandingPageClientComponent implements OnInit {
   faBuilding = faBuilding;
   faUser = faUser;
 
-  constructor(private clientS: ClientService) {
+  constructor(private clientS: ClientService, private authS: AuthService, private notifyS: NotificationService) {
 
   }
 
@@ -32,7 +34,11 @@ export class LandingPageClientComponent implements OnInit {
       this.events = res.message.interests.filter(inter => inter.status === 'Activo');
       this.establishments = res.message.follows;
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 

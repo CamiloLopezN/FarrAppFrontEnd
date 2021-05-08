@@ -260,4 +260,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  serverError(): void {
+    this.nService.warn('Servidor', 'Error interno en el servidor.', {
+      timeOut: 2000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

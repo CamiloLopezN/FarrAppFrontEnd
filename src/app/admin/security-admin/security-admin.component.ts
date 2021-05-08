@@ -42,9 +42,11 @@ export class SecurityAdminComponent implements OnInit {
         this.eMail = res.email;
       },
       error => {
-        console.log(error);
-        this.authS.logoutExpired();
-        location.reload();
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }
@@ -59,7 +61,11 @@ export class SecurityAdminComponent implements OnInit {
         this.router.navigate(['/admin/profile']);
       },
       error => {
-        this.errorMessage = error.error.message;
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }

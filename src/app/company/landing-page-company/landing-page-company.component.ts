@@ -3,6 +3,7 @@ import {CompanyResponse, EventView} from '../../model/company';
 import {CompanyService} from '../../services/company.service';
 import {AuthService} from '../../services/auth.service';
 import {faUser, faCalendarCheck, faBuilding, faMoneyCheckAlt, faCreditCard, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-landing-page-company',
@@ -20,7 +21,8 @@ export class LandingPageCompanyComponent implements OnInit {
   isSubscribe: boolean;
   eventsActive: EventView[];
 
-  constructor(private elementRef: ElementRef, private companyS: CompanyService, private authS: AuthService) {
+  constructor(private elementRef: ElementRef, private companyS: CompanyService,
+              private authS: AuthService, private ns: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -45,8 +47,12 @@ export class LandingPageCompanyComponent implements OnInit {
         };
         this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
       },
-      () => {
-        this.authS.logoutExpired();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }

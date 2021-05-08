@@ -14,12 +14,10 @@ import {SpinnerService} from '../../services/spinner.service';
 export class ClientProfileComponent implements OnInit {
   client: ClientResponseAdmin2;
   user: any;
-  isActive: boolean;
   isReq: boolean;
-  isAnimate = true;
 
   constructor(private ns: NotificationService, private route: ActivatedRoute, public loaderService: SpinnerService,
-              private adminS: AdminService, private authS: AuthService, private router: Router) {
+              private adminS: AdminService, private authS: AuthService, private router: Router, private notifyS: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -31,8 +29,12 @@ export class ClientProfileComponent implements OnInit {
     const id = this.route.snapshot.params.id;
     this.adminS.getClientById(id).subscribe(res => {
         this.client = res;
-      }, () => {
-        this.authS.logoutExpired();
+      }, error => {
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }
@@ -42,18 +44,24 @@ export class ClientProfileComponent implements OnInit {
       this.router.navigate(['/admin/client']);
       this.ns.succesActivateClient();
     }, error => {
-      console.log(error);
-      this.authS.logoutExpired();
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
-  desactive(): void {
+  deactivate(): void {
     this.adminS.changeStatus(false, false, false, this.client.userId._id).subscribe(() => {
       this.router.navigate(['/admin/client']);
       this.ns.sucessDesactivateClient();
     }, error => {
-      console.log(error);
-      this.authS.logoutExpired();
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 }

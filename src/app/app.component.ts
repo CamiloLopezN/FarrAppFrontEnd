@@ -6,6 +6,7 @@ import {ClientConnectService} from './services/client-connect.service';
 import {ClientService} from './services/client.service';
 import {AuthService} from './services/auth.service';
 import {CompanyService} from './services/company.service';
+import {NotificationService} from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent implements AfterContentChecked {
   isEstablishment: boolean;
   cities: string[];
 
-  constructor(shms: IsShowModalService, private cs: CitiesService,
+  constructor(shms: IsShowModalService, private cs: CitiesService, private ns: NotificationService,
               private clientC: ClientConnectService, private compS: CompanyService,
               private cdref: ChangeDetectorRef, private clientS: ClientService, private authS: AuthService) {
     this.authS.roled.subscribe(rol => {
@@ -30,7 +31,11 @@ export class AppComponent implements AfterContentChecked {
             interests: res.message.interests.map(follow => follow.eventId)
           });
         }, error => {
-          console.log(error);
+          if (error.status === 500 || error.status === 503) {
+            this.ns.serverError();
+          } else if (error.status === 401 || error.status === 403) {
+            this.authS.logoutExpiredAndReload();
+          }
         });
       }
     });

@@ -5,6 +5,7 @@ import {EventEmmiterService} from '../../../services/event-remove.service';
 import {CompanyService} from '../../../services/company.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../../services/notification.service';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
   selector: 'app-remove-establishment-modal',
@@ -15,8 +16,8 @@ export class RemoveEstablishmentModalComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
   removeItem: RemoveEstablishment;
 
-  constructor(private ers: EventEmmiterService, private companyService: CompanyService,
-              private route: Router, private notifyS: NotificationService) {
+  constructor(private ers: EventEmmiterService, private companyService: CompanyService, private authService: AuthService,
+              private route: Router, private notifyS: NotificationService, private ns: NotificationService) {
     this.removeItem = undefined;
     ers.establishment.subscribe(value => {
       this.removeItem = value;
@@ -31,7 +32,11 @@ export class RemoveEstablishmentModalComponent implements OnInit {
       this.route.navigate(['/company/landing-page']);
       this.notifyS.sucessRemoveEstablishment(this.removeItem.name);
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authService.logoutExpiredAndReload();
+      }
     });
   }
 }

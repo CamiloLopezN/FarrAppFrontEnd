@@ -6,6 +6,7 @@ import {ClientResponse} from '../../model/client';
 import {DatePipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-profile-client',
@@ -24,7 +25,8 @@ export class ProfileClientComponent implements OnInit {
     private clientS: ClientService,
     private userS: UserService,
     private datePipe: DatePipe,
-    private authS: AuthService
+    private authS: AuthService,
+    private notifyS: NotificationService
   ) {
   }
 
@@ -42,8 +44,12 @@ export class ProfileClientComponent implements OnInit {
           gender: res.message.gender
         };
       },
-      () => {
-        this.authS.logoutExpired();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }
     );
   }
@@ -61,8 +67,12 @@ export class ProfileClientComponent implements OnInit {
     this.userS.removeUser().subscribe(() => {
         this.authS.logoutSessionDesact();
       },
-      () => {
-        this.authS.logoutExpired();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       });
   }
 }

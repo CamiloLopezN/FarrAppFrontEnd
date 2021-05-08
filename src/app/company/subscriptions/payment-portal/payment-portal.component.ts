@@ -3,6 +3,7 @@ import {faCheckCircle, faChevronRight, faPlus, faReceipt, faShoppingCart, faTime
 import {SubscriptionService} from '../../../services/subscription.service';
 import {CreditCard, SendCard} from '../../../model/creditCard';
 import {AuthService} from '../../../services/auth.service';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-payment-portal',
@@ -27,7 +28,7 @@ export class PaymentPortalComponent implements OnInit {
 
   messageError: string;
 
-  constructor(private subscriptionS: SubscriptionService,
+  constructor(private subscriptionS: SubscriptionService, private ns: NotificationService,
               private authS: AuthService
   ) {
     this.cards = [];
@@ -47,7 +48,11 @@ export class PaymentPortalComponent implements OnInit {
       this.cards = res.cards;
       this.cardSelect = this.cards.find(card => card.default === true);
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -65,7 +70,11 @@ export class PaymentPortalComponent implements OnInit {
       card.default = true;
       this.cardSelect = card;
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
 
   }
@@ -81,7 +90,11 @@ export class PaymentPortalComponent implements OnInit {
       this.subscriptionS.deleteCard(card, this.customerId).subscribe(() => {
         this.cards = this.cards.filter(item => item !== card);
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }, () => {
         if (card.default) {
           this.cards[0].default = true;
@@ -94,13 +107,21 @@ export class PaymentPortalComponent implements OnInit {
   addCard(card: SendCard): void {
     this.subscriptionS.addCard(card, this.customerId).subscribe(() => {
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     }, () => {
       this.subscriptionS.getCustomer(this.customerId).subscribe(res => {
         this.cards.forEach(crd => crd.default = false);
         this.cards.push(res.cards.find(crd => crd.default === true));
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }, () => {
         this.showPay = !this.showPay;
       });

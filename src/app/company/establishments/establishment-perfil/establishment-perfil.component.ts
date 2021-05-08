@@ -83,9 +83,9 @@ export class EstablishmentPerfilComponent implements OnInit {
     this.userS.getEstablishmentById(idCompany, idEstablishment).subscribe(res => {
       this.establishment = res.message;
       this.uncomingEvents = this.establishment.events.filter(event => new Date(event.end) > new Date() &&
-        ((event.status === 'Activo' && this.rol === 'client') || this.isMine));
+        ((event.status === 'Activo') || this.isMine));
       this.terminatedEvents = this.establishment.events.filter(event => new Date(event.end) <= new Date() &&
-        ((event.status === 'Activo' && this.rol === 'client') || this.isMine));
+        ((event.status === 'Activo') || this.isMine));
       this.comments = res.message.reviews;
       this.comments.sort((a, b) => {
         return a.createdAt > b.createdAt ? -1 : 1;

@@ -21,7 +21,6 @@ export class ProfileAdminComponent implements OnInit {
 
   getAdmin(): void {
     this.adminS.getAdminProfile().subscribe(res => {
-      console.log(res);
       this.admin = {
         name: res.firstName,
         lastname: res.lastName

@@ -32,7 +32,6 @@ export class ClientsAdminComponent implements OnInit {
     this.clientSelected = 'a';
     this.p = isChange ? 1 : this.p;
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, true).subscribe(res => {
-      console.log(res);
       this.total = res.totalDocs;
       this.clients = res.docs;
     }, () => {

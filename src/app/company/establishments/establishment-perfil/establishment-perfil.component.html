@@ -65,11 +65,14 @@
           </agm-marker>
         </agm-map>
       </section>
+      <section class="images-event" *ngIf="establishment.photoUrls.length != 0">
+        <app-imgs-carousel [photos]="establishment.photoUrls"></app-imgs-carousel>
+      </section>
     </div>
   </header>
   <main>
     <section class="events-proximate" *ngIf="uncomingEvents.length != 0">
-      <p class="event-proximante-title">!Próximos eventos!</p>
+      <p class="event-proximante-title">¡Próximos eventos!</p>
       <div class="container-events">
         <app-events-company [events]="uncomingEvents" [index]="'0'" [tittle]="''" [typeEvent]="''"></app-events-company>
       </div>

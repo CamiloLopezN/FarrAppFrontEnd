@@ -88,7 +88,7 @@ export class RegisterModalComponent implements OnInit {
         email: this.email,
         password: this.password
       };
-      this.clientService.register(this.client).subscribe(() => {
+      this.clientService.register(this.client, false).subscribe(() => {
           this.authS.inReg.next(true);
           this.clientLog = {
             password: this.password,
@@ -114,7 +114,7 @@ export class RegisterModalComponent implements OnInit {
         gender: this.gender,
         email: this.email
       };
-      this.clientService.register(this.clientA).subscribe(() => {
+      this.clientService.register(this.clientA, true).subscribe(() => {
         $('#register-client-modal').modal('hide');
         this.notifyS.succesRegisterClient();
         this.formC.reset();

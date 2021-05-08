@@ -71,8 +71,14 @@ export class ClientService {
       );
   }
 
-  register(client: ClientRegistration | ClientRegistration2): Observable<any> {
-    return this.http.post<any>(`${environment.backend2}/api/clients/`, client)
+  register(client: ClientRegistration | ClientRegistration2, isAdmin: boolean): Observable<any> {
+    const headers = isAdmin ? new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }) : new HttpHeaders({
+      'Content-type': 'application/json'
+    });
+    return this.http.post<any>(`${environment.backend2}/api/clients/`, client, {headers})
       .pipe(
         map((res: any) => {
           return res;

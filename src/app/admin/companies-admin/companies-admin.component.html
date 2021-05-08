@@ -11,15 +11,16 @@
     <nav>
       <div class="nav nav-tabs nav-fill nav-test" role="tablist">
         <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
-           aria-selected="true" (click)="getCompanies()">Aprobadas</a>
+           aria-selected="true" (click)="getCompanies(true)">Aprobadas</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getCompaniesP()">Pendientes</a>
+           aria-selected="false" (click)="getCompaniesP(true)">Pendientes</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getCompaniesD()">Desactivados</a>
+           aria-selected="false" (click)="getCompaniesD(true)">Desactivados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getCompaniesPT()">Peticiones</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#register-not-verify" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getCompaniesV()">No verificados</a>
+           aria-selected="false" (click)="getCompaniesPT(true)">Peticiones</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#register-not-verify" role="tab"
+           aria-controls="nav-historic"
+           aria-selected="false" (click)="getCompaniesV(true)">No verificados</a>
       </div>
     </nav>
     <div class="tab-content" style="background: #252427">

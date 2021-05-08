@@ -11,13 +11,13 @@
     <nav>
       <div class="nav nav-tabs nav-fill nav-test" role="tablist">
         <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
-           aria-selected="true" (click)="getClients()">Activados</a>
+           aria-selected="true" (click)="getClients(true)">Activados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getClientsP()">No verificados</a>
+           aria-selected="false" (click)="getClientsP(true)">No verificados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getClientsD()">Desactivados</a>
+           aria-selected="false" (click)="getClientsD(true)">Desactivados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getCompaniesPT()">Peticiones</a>
+           aria-selected="false" (click)="getCompaniesPT(true)">Peticiones</a>
       </div>
     </nav>
 

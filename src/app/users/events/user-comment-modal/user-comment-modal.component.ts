@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MyComment} from '../../../model/opinion';
 import {NgForm} from '@angular/forms';
 import {SpinnerService} from '../../../services/spinner.service';
+import {NotificationService} from '../../../services/notification.service';
 
 declare var $: any;
 
@@ -33,7 +34,7 @@ export class UserCommentModalComponent implements OnInit {
 
   @ViewChild('formComment') formRecipe: NgForm;
 
-  constructor(private authS: AuthService, private companyS: CompanyService,
+  constructor(private authS: AuthService, private companyS: CompanyService, private notifyS: NotificationService,
               private route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef, public loaderService: SpinnerService) {
     this.stars = [true, false, false, false, false];
     this.authS.getName.subscribe(nam => {
@@ -84,7 +85,11 @@ export class UserCommentModalComponent implements OnInit {
         this.addComment.emit(myRes);
         $('#commentEventModal').modal('hide');
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       });
     } else {
       this.companyS.sendCommentEstablishment(this.route.snapshot.params.id, {
@@ -100,7 +105,11 @@ export class UserCommentModalComponent implements OnInit {
         this.addComment.emit(myRes);
         $('#commentEventModal').modal('hide');
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       });
     }
   }

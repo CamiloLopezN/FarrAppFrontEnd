@@ -4,6 +4,7 @@ import {CompanyResponseAdmin} from '../../model/company';
 import {faUsers} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-companies-admin',
@@ -19,7 +20,7 @@ export class CompaniesAdminComponent implements OnInit {
   itemsPerP: number;
   companySelected: string;
 
-  constructor(private adminS: AdminService, private authS: AuthService, private route: Router) {
+  constructor(private adminS: AdminService, private authS: AuthService, private route: Router, private notifyS: NotificationService) {
     this.itemsPerP = 6;
     this.companies = [];
   }
@@ -34,8 +35,12 @@ export class CompaniesAdminComponent implements OnInit {
     this.adminS.getCompanies(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, true).subscribe(res => {
       this.total = res.totalDocs;
       this.companies = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -49,8 +54,12 @@ export class CompaniesAdminComponent implements OnInit {
     this.adminS.getCompanies(this.p === undefined ? 1 : this.p, this.itemsPerP, false, false, false).subscribe(res => {
       this.total = res.totalDocs;
       this.companies = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -60,8 +69,12 @@ export class CompaniesAdminComponent implements OnInit {
     this.adminS.getCompanies(this.p === undefined ? 1 : this.p, this.itemsPerP, true, true, true).subscribe(res => {
       this.total = res.totalDocs;
       this.companies = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -71,8 +84,12 @@ export class CompaniesAdminComponent implements OnInit {
     this.adminS.getCompanies(this.p === undefined ? 1 : this.p, this.itemsPerP, false, false, true).subscribe(res => {
       this.total = res.totalDocs;
       this.companies = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -82,8 +99,12 @@ export class CompaniesAdminComponent implements OnInit {
     this.adminS.getCompanies(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, false).subscribe(res => {
       this.total = res.totalDocs;
       this.companies = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 

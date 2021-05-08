@@ -4,6 +4,7 @@ import {ClientResponseAdmin2} from '../../model/client';
 import {faUser} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-clients-admin',
@@ -19,7 +20,7 @@ export class ClientsAdminComponent implements OnInit {
   itemsPerP: number;
   clientSelected: string;
 
-  constructor(private adminS: AdminService, private route: Router, private authS: AuthService) {
+  constructor(private adminS: AdminService, private route: Router, private authS: AuthService, private notifyS: NotificationService) {
     this.itemsPerP = 6;
     this.clients = [];
   }
@@ -34,8 +35,12 @@ export class ClientsAdminComponent implements OnInit {
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, true).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -49,8 +54,12 @@ export class ClientsAdminComponent implements OnInit {
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, false, false, false).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -60,8 +69,12 @@ export class ClientsAdminComponent implements OnInit {
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, true, true).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -71,8 +84,12 @@ export class ClientsAdminComponent implements OnInit {
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, false).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 

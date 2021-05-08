@@ -271,7 +271,11 @@ export class EventPerfilComponent implements OnInit {
       this.event.status = 'Inactivo';
       this.ns.sucessHide(this.event.eventName);
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authService.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -282,7 +286,11 @@ export class EventPerfilComponent implements OnInit {
         this.event.status = 'Activo';
         this.ns.sucessPublish(this.event.eventName);
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authService.logoutExpiredAndReload();
+        }
       });
     } else {
       $('#warn-sub').modal('show');

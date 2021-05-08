@@ -18,7 +18,7 @@ export class EditAdminComponent implements OnInit {
   faIdCard = faIdCard;
 
   constructor(private adminS: AdminService, private authS: AuthService,
-              public loaderService: SpinnerService,
+              public loaderService: SpinnerService, private notifyS: NotificationService,
               private router: Router, private ns: NotificationService) {
   }
 
@@ -28,8 +28,12 @@ export class EditAdminComponent implements OnInit {
         name: res.firstName,
         lastname: res.lastName
       };
-    }, () => {
-      this.authS.logoutExpired();
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -37,8 +41,12 @@ export class EditAdminComponent implements OnInit {
     this.adminS.editAdmin(this.admin).subscribe(() => {
         this.router.navigate(['/admin/profile']);
         this.ns.succesEditAdmin();
-      }, () => {
-        this.authS.logoutExpired();
+      }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
       }
     );
   }

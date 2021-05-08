@@ -90,13 +90,11 @@ export class EditClientComponent implements OnInit {
         };
         this.initButtons();
       },
-      () => {
-        try {
-          this.authService.logoutExpired();
-        } catch (e) {
-
-        } finally {
-          location.reload();
+      error => {
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authService.logoutExpiredAndReload();
         }
       }
     );
@@ -114,8 +112,12 @@ export class EditClientComponent implements OnInit {
     this.clientS.editUser(this.client).subscribe(() => {
       this.router.navigate(['/client/profile']);
       this.ns.succesEditClient();
-    }, err => {
-      console.log(err);
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authService.logoutExpiredAndReload();
+      }
     });
   }
 

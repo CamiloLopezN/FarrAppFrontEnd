@@ -141,7 +141,11 @@ export class CreateEventModalComponent implements OnInit {
       this.cities = res[5].ciudades;
       this.eventC.city = 'Tunja';
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.nS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
     $(document).ready(() => {
       $('#register-event-modal').on('show.bs.modal', () => {
@@ -182,7 +186,11 @@ export class CreateEventModalComponent implements OnInit {
       this.comps.postPhotosEvent(this.imgs.map(myimg => myimg.imgFile)).subscribe(res => {
         this.eventReg.photoUrls = res.map(photoObj => photoObj.photo);
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.nS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }, () => {
         this.comps.postEvent(this.eventReg, this.establishmentSelect.establishmentId).subscribe(res => {
           $('#register-event-modal').modal('hide');
@@ -192,7 +200,11 @@ export class CreateEventModalComponent implements OnInit {
           this.formC.reset();
           this.changeDetectorRef.detectChanges();
         }, error => {
-          console.log(error);
+          if (error.status === 500 || error.status === 503) {
+            this.nS.serverError();
+          } else if (error.status === 401 || error.status === 403) {
+            this.authS.logoutExpiredAndReload();
+          }
         });
       });
     }
@@ -339,7 +351,11 @@ export class CreateEventModalComponent implements OnInit {
       this.establishments = res.message.establishments;
       this.establishmentSelect = this.establishments[0];
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.nS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -461,7 +477,11 @@ export class CreateEventModalComponent implements OnInit {
     this.ers.event.subscribe(ev => {
       this.userS.getEventById(ev.idCompany, ev.idEstablishment, ev.idEvent).subscribe(() => {
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.nS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       });
     });
   }

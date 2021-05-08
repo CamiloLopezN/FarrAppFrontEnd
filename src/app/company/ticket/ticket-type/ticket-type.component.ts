@@ -81,7 +81,6 @@ export class TicketTypeComponent implements OnInit {
       if (this.infoExtra?.trim()) {
         this.ticket.otherInfo = this.infoExtra;
       }
-      console.log(this.ticket);
       this.addTicket.emit(this.ticket);
     }
   }

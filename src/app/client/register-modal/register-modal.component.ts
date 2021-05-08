@@ -124,6 +124,8 @@ export class RegisterModalComponent implements OnInit {
           this.errorMessage = 'Error en los datos ingresados';
         } else if (error.status === 500) {
           this.errorMessage = 'Error en el servidor, intente más tarde';
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
         }
       });
     } else {
@@ -143,6 +145,8 @@ export class RegisterModalComponent implements OnInit {
           this.errorMessage = 'Error en los datos ingresados';
         } else if (error.status === 500) {
           this.errorMessage = 'Error en el servidor, intente más tarde';
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
         }
       });
     }

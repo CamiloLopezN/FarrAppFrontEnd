@@ -23,7 +23,7 @@
       <p>{{company.userId.email}}</p>
       <div class="btn-list">
         <button class="btn-custom" [routerLink]="['/admin/company']">Regresar</button>
-        <button type="button" class="btn-red btn-custom-width" (click)="desactive()"
+        <button type="button" class="btn-red btn-custom-width" (click)="deactivate()"
                 *ngIf="(company.userId.isActive && !company.userId.hasReqDeactivation && company.userId.isVerified) || (company.userId.isActive && company.userId.hasReqDeactivation && company.userId.isVerified)" [class.spinner]="loaderService.isLoading | async">
           <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Desactivar</p>
         </button>

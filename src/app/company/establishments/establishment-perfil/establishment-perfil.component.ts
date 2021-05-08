@@ -92,8 +92,14 @@ export class EstablishmentPerfilComponent implements OnInit {
       });
       this.accumulateComment = this.comments.length >= this.ACCUMULATE ? this.ACCUMULATE : this.comments.length;
       this.average = res.message.averageRating.toFixed(1);
-    }, () => {
-      this.router.navigate(['/landing-page']);
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authService.logoutExpiredAndReload();
+      } else {
+        this.router.navigate(['/landing-page']);
+      }
     }, () => {
       this.refreshOpinions();
       if (this.rol === 'client') {
@@ -196,7 +202,11 @@ export class EstablishmentPerfilComponent implements OnInit {
         }
         this.isFollow = !this.isFollow;
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authService.logoutExpiredAndReload();
+        }
       });
     } else {
       this.authService.inLog.next(true);

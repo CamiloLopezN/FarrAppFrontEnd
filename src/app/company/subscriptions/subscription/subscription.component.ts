@@ -8,6 +8,7 @@ import {CreditCard, SendSubscribe} from '../../../model/creditCard';
 import {SubscriptionService} from '../../../services/subscription.service';
 import {ClientConnectService} from '../../../services/client-connect.service';
 import {SpinnerService} from '../../../services/spinner.service';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-subscription',
@@ -34,7 +35,7 @@ export class SubscriptionComponent implements OnInit {
   customerId: string;
 
   constructor(private epayS: EpayService, private authS: AuthService, private companyLogin: ClientConnectService,
-              private subscriptionS: SubscriptionService, public loaderService: SpinnerService) {
+              private subscriptionS: SubscriptionService, public loaderService: SpinnerService, private ns: NotificationService) {
     this.expirationDate = '';
     this.subs = [];
     this.cards = [];
@@ -92,15 +93,23 @@ export class SubscriptionComponent implements OnInit {
       this.subs = this.subs.sort((a, b) => b.price - a.price);
       this.subs[0].select = true;
       this.subSelect = this.subs[0];
-    }, (error) => {
-      console.log(error);
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     }, () => {
       if (this.customerId !== undefined) {
         this.subscriptionS.getCustomer(this.customerId).subscribe(res => {
           this.cards = res.cards;
           this.cardSelect = this.cards.find(card => card.default === true);
         }, error => {
-          console.log(error);
+          if (error.status === 500 || error.status === 503) {
+            this.ns.serverError();
+          } else if (error.status === 401 || error.status === 403) {
+            this.authS.logoutExpiredAndReload();
+          }
         });
       }
     });
@@ -126,21 +135,32 @@ export class SubscriptionComponent implements OnInit {
   }
 
   createCustomer(customer: Customer): void {
-    console.log(customer);
     this.subscriptionS.createCustomer(customer).subscribe(res => {
       this.authS.customerId.next(res.customerId);
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     }, () => {
       this.authS.refreshToken().subscribe(() => {
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.ns.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }, () => {
         this.subscriptionS.getCustomer(this.customerId).subscribe(res => {
           this.cards = res.cards;
           this.cardSelect = this.cards.find(card => card.default === true);
         }, error => {
-          console.log(error);
+          if (error.status === 500 || error.status === 503) {
+            this.ns.serverError();
+          } else if (error.status === 401 || error.status === 403) {
+            this.authS.logoutExpiredAndReload();
+          }
         }, () => {
         });
       });
@@ -158,7 +178,11 @@ export class SubscriptionComponent implements OnInit {
     this.subscriptionS.subscribePlan(this.subscription).subscribe(() => {
       this.authS.isSubscribe.next(false);
     }, error => {
-      console.error(error);
+      if (error.status === 500 || error.status === 503) {
+        this.ns.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 }

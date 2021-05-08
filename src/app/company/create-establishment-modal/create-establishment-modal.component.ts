@@ -103,8 +103,7 @@ export class CreateEstablishmentModalComponent implements OnInit {
   ngOnInit(): void {
     this.cs.getCities().subscribe(res => {
       this.cities = res[5].ciudades;
-    }, error => {
-      console.log(error);
+    }, () => {
     });
     $(document).ready(() => {
       $('#register-establishment-modal').on('show.bs.modal', () => {
@@ -304,12 +303,20 @@ export class CreateEstablishmentModalComponent implements OnInit {
       this.companyService.postLogo(this.imagePath).subscribe(res => {
         this.establishmentR.logoUrl = res.logo;
       }, error => {
-        console.log(error);
+        if (error.status === 500 || error.status === 503) {
+          this.notifyS.serverError();
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
+        }
       }, () => {
         this.companyService.postPhotos(this.images.map(myimg => myimg.imgFile)).subscribe(res => {
           this.establishmentR.photoUrls = res.map(photoObj => photoObj.photo);
         }, error => {
-          console.log(error);
+          if (error.status === 500 || error.status === 503) {
+            this.notifyS.serverError();
+          } else if (error.status === 401 || error.status === 403) {
+            this.authS.logoutExpiredAndReload();
+          }
         }, () => {
           this.companyService.postEstablishment(this.establishmentR).subscribe(res => {
               $('#register-establishment-modal').modal('hide');
@@ -318,7 +325,11 @@ export class CreateEstablishmentModalComponent implements OnInit {
               this.changeDetectorRef.detectChanges();
               this.router.navigate(['company', this.idCompany, 'establishments', res.establishmentId]);
             }, error => {
-              console.log(error);
+              if (error.status === 500 || error.status === 503) {
+                this.notifyS.serverError();
+              } else if (error.status === 401 || error.status === 403) {
+                this.authS.logoutExpiredAndReload();
+              }
             }
           );
         });

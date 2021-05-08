@@ -44,7 +44,6 @@ export class AdminService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     const params = `page=${page}&limit=${limit}&isActive=${isActive}&hasReqDeactivation=${hasReqDeactivation}&isVerified=${isVerified}`;
-    console.log(`${environment.backend}/api/admins/clients?${params}`);
     return this.http.get<any>(`${environment.backend}/api/admins/clients?${params}`, {headers})
       .pipe(
         map((res: any) => {
@@ -75,7 +74,6 @@ export class AdminService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     const params = `page=${page}&limit=${limit}&isActive=${isActive}&hasReqDeactivation=${hasReqDeactivation}&isVerified=${isVerified}`;
-    console.log(`${environment.backend}/api/admins/companies?${params}`);
     return this.http.get<any>(`${environment.backend}/api/admins/companies?${params}`, {headers})
       .pipe(
         map((res: any) => {

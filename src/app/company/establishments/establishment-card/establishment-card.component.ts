@@ -41,7 +41,6 @@ export class EstablishmentCardComponent implements OnInit {
   }
 
   edit(event: MouseEvent): void {
-    console.log(event);
   }
 
   remove(mouseEvent: MouseEvent): void {

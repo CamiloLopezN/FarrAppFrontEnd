@@ -130,6 +130,8 @@ export class RegisterCompanyModalComponent implements OnInit {
           this.errorMessage = 'Nombre o nit ya se encuentra registrado.';
         } else if (error.status === 500) {
           this.errorMessage = 'Error en el servidor, intente más tarde';
+        } else if (error.status === 401 || error.status === 403) {
+          this.authS.logoutExpiredAndReload();
         }
       });
     }

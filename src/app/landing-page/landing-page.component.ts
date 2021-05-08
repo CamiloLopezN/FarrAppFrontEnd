@@ -1,6 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {EstablishmentView, EventView} from '../model/company';
 import {UserService} from '../services/user.service';
+import {NotificationService} from '../services/notification.service';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -14,7 +16,7 @@ export class LandingPageComponent implements OnInit {
   events: EventView[];
   establishments: EstablishmentView[];
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private notifyS: NotificationService, private authS: AuthService) {
     this.events = [];
     this.establishments = [];
   }
@@ -49,7 +51,11 @@ export class LandingPageComponent implements OnInit {
         ev.end = new Date(ev.end);
       });
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 
@@ -57,7 +63,11 @@ export class LandingPageComponent implements OnInit {
     this.userService.getEstablishments().subscribe(res => {
       this.establishments = res[0].data.map(establishment => establishment.establishments);
     }, error => {
-      console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
   }
 }

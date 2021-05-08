@@ -48,7 +48,6 @@ export class UserService {
         'Content-type': 'application/json'
       });
     }
-    console.log(localStorage.getItem('token'));
     return this.http.get<any>(`${environment.backend}/api/companies/${idCompany}/establishments/${idEstablishment}/events/${idEvent}`,
       {headers})
       .pipe(

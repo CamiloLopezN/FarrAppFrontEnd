@@ -132,8 +132,7 @@ export class SubscriptionComponent implements OnInit {
     }, error => {
       console.log(error);
     }, () => {
-      this.authS.refreshToken().subscribe(res => {
-        console.log(res);
+      this.authS.refreshToken().subscribe(() => {
       }, error => {
         console.log(error);
       }, () => {
@@ -156,8 +155,7 @@ export class SubscriptionComponent implements OnInit {
       docType: this.documentSelect.id,
       planId: this.subSelect.planId
     };
-    this.subscriptionS.subscribePlan(this.subscription).subscribe(res => {
-      console.log(res);
+    this.subscriptionS.subscribePlan(this.subscription).subscribe(() => {
       this.authS.isSubscribe.next(false);
     }, error => {
       console.error(error);

@@ -76,8 +76,7 @@ export class LoginModalComponent implements OnInit {
       password: this.password
     };
     this.errorMessage = '';
-    this.authService.login(this.client).subscribe(res => {
-        console.log(res);
+    this.authService.login(this.client).subscribe(() => {
         $('#login-modal').modal('hide');
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();

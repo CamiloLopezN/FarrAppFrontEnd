@@ -82,7 +82,6 @@ export class EstablishmentPerfilComponent implements OnInit {
     const idEstablishment = this.route.snapshot.params.id;
     this.userS.getEstablishmentById(idCompany, idEstablishment).subscribe(res => {
       this.establishment = res.message;
-      console.log(res.message);
       this.uncomingEvents = this.establishment.events.filter(event => new Date(event.end) > new Date() &&
         ((event.status === 'Activo') || this.isMine));
       this.terminatedEvents = this.establishment.events.filter(event => new Date(event.end) <= new Date() &&

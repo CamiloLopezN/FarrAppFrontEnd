@@ -96,7 +96,6 @@ export class AuthService {
     return this.httpClient.post(`${environment.backend}/api/users/login`, client).pipe(
       map((res: any) => {
         if (res.token !== undefined) {
-          console.log(res);
           this.saveToken(res.token);
           if (helper.decodeToken(localStorage.getItem('token')).role === 'company') {
             this.saveName(res.userInfo.firstName);

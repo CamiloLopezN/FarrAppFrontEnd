@@ -23,8 +23,10 @@
   </header>
   <main>
     <section class="margin-800 text-info">
-      <p>{{admin.name}}</p>
-      <p>{{admin.lastname}}</p>
+      <label class="font-weight-bold">Nombre</label>
+      <p class="text-center">{{admin.name}}</p>
+      <label class="font-weight-bold">Apellido</label>
+      <p class="text-center">{{admin.lastname}}</p>
     </section>
     <section class="margin-1200 btn-list">
       <button class="btn-custom" [routerLink]="['/admin/edit']">Editar</button>

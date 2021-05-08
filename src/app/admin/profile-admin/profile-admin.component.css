@@ -18,7 +18,7 @@
   height: 233px;
   background: #252427;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 20px;
+  border-radius: 1.5rem;
   transform: rotate(70deg);
   top: -86px;
 }
@@ -115,11 +115,15 @@ h4 {
   margin-top: 3rem;
   font-style: normal;
   font-weight: 275;
-  font-size: 1.5rem;
-  line-height: 1.5rem;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
 
   color: #252427 !important;
 
+}
+
+.text-info label{
+  font-weight: bold;
 }
 
 .text-info p {
@@ -139,7 +143,7 @@ h4 {
 
   width: 9rem;
 
-  height: 2.1rem;
+  height: 2.5rem;
 
   font-style: normal;
   font-weight: normal;
@@ -151,14 +155,13 @@ h4 {
   color: #FAFAFA;
   background: rgba(37, 36, 39, 0.8);
   border: 1px solid rgba(37, 36, 39, 0.8);
-  border-radius: 20px;
+  border-radius: 1.5rem;
 }
 
 .btn-red {
   background: rgba(255, 26, 67, 0.8);
   border: 1px solid rgba(255, 26, 67, 0.8);
-  box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 1.5rem;
 }
 
 @media screen and (max-width: 360px) {

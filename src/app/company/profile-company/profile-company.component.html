@@ -1,57 +1,47 @@
-<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
-     style="animation-duration: 0.2s" id="container" *ngIf="company">
-  <div id="log-in">
-    <div class="text-center pl-4 pr-4 pt-4 pb-4 animate__animated">
-      <h4 class="text-white text-center mb-3">MI EMPRESA</h4>
-      <div>
-        <img src="assets/icons/UsersIcons.png" class="img-fluid" alt="iconUser" id="ImageUser">
-        <div class="text-left mt-5">
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Nombre
-              </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{company.companyName}}</h5>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                NIT
-              </strong></label>
-            <h5 class="profile-font text-center text-white">{{company.nit}}</h5>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Dirección
-              </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{company.address}}</h5>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Número de contacto
-              </strong></label>
-            <h5 class="profile-font text-center text-white crow2">{{company.contactNumber}}</h5>
-          </div>
-        </div>
-
-      </div>
-      <div class="mt-2">
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [routerLink]="['/company/edit']">Editar</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/company/security']">Seguridad</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100" data-toggle="modal" data-target="#exampleModal" >Eliminar</button>
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="company">
+  <header>
+    <div class="header-company">
+      <h1 class="name-company d-block m-0 p-0">{{company.companyName}}</h1>
+      <h2 class="nit-company m-0 p-0">{{company.nit}}</h2>
+      <p class="mt-2">Suscripción activa
+        <fa-icon [icon]="faInfoCard" style="color: #FF1A43; cursor: pointer;"
+                 [routerLink]="['/company/subscription']"></fa-icon>
+      </p>
+    </div>
+    <div class="d-flex justify-content-end">
+      <div style="padding-right: 8rem;">
+        <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+          <div class="options text-right">
+            <label class="title-top m-0 p-0">Eventos activos</label>
+            <h4 class="m-0 p-0">{{eventsActive.length}}</h4>
+            <label class="title-top m-0 p-0">Asistentes</label>
+            <h4 class="m-0 p-0">1200</h4>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Cámbialo cuando quieras!</p>
+    </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <label>Nombre</label>
+      <p>{{company.companyName}}</p>
+      <label>Dirección</label>
+      <p>{{company.address}}</p>
+      <label>Número de contacto</label>
+      <p>{{company.contactNumber}}</p>
+      <label>NIT</label>
+      <p>{{company.nit}}</p>
+    </section>
+    <section class="margin-1200 btn-list">
+      <button class="btn-custom" [routerLink]="['/company/edit']">Editar</button>
+      <button class="btn-custom" [routerLink]="['/company/security']">Seguridad</button>
+      <button class="btn-custom btn-red" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta</button>
+    </section>
+  </main>
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

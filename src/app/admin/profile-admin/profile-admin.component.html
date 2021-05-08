@@ -1,42 +1,24 @@
-<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight" *ngIf="admin"
-     style="animation-duration: 0.2s" id="container">
-  <div id="log-in">
-    <div class="text-center pl-4 pr-4 pt-4 pb-4">
-      <h4 class="text-white text-center mb-4">MI PERFIL</h4>
-      <div>
-        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
-        <div class="text-left mt-5">
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Nombre
-              </strong></label>
-            <h4 class="profile-font text-center text-white crow2">{{admin.name}}</h4>
-          </div>
-          <div class="border-profile mb-4">
-            <label class="text-white ml-4">
-              <strong>
-                Apellido
-              </strong></label>
-            <h4 class="profile-font text-center text-white crow2">{{admin.lastname}}</h4>
-          </div>
-        </div>
-
-      </div>
-      <div class="mt-2">
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-primary w-100" [routerLink]="['/admin/edit']">Editar</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/admin/security']">Seguridad</button>
-          </div>
-          <div class="col">
-            <button type="submit" class="btn mt-3 border-circ btn-outline-danger w-100">Eliminar</button>
-          </div>
-        </div>
-      </div>
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="admin">
+  <header>
+    <section class="margin-1200 mt-5 mb-5">
+      <p class="text-left text-name">¡Bienvenido!</p>
+      <p class="text-left text-lastname overflow-hidden" style="margin-left: 6rem">ADMIN</p>
+    </section>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Cámbialo cuando quieras!</p>
     </div>
-  </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <label>Nombre</label>
+      <p>{{admin.name}}</p>
+      <label>Apellido</label>
+      <p>{{admin.lastname}}</p>
+      <div class="btn-list">
+        <button class="btn-custom" [routerLink]="['/admin/edit']">Editar</button>
+        <button class="btn-custom" [routerLink]="['/admin/security']">Seguridad</button>
+      </div>
+    </section>
+  </main>
 </div>
-

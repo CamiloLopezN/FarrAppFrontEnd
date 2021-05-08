@@ -1,78 +1,104 @@
-#ImageUser {
-  max-width: 60%;
-  height: auto;
+.margin-1200, .margin-800 {
+  width: 80%;
+  max-width: 1200px;
+  min-width: 260px;
+  margin: 0 auto;
 }
 
-#LoginTitle {
+.margin-800 {
+  max-width: 800px;
+  margin-top: 4rem;
+}
+
+.text-name {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: rgba(37, 36, 39, 0.6);
+}
+
+.text-lastname {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 2rem;
+
+  color: #FF1A43;
+
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+
+  margin-bottom: 2rem;
+}
+
+.text-desc-profile, .text-desc-change {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #252427;
+
+  margin-bottom: 0;
+}
+
+.text-desc-change {
+  color: #FF1A43;
+
+}
+
+.btn-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 3.5rem;
+}
+
+.btn-red {
+
+  width: 7rem;
+  height: 2.5rem;
+  background: rgba(255, 26, 67, 0.8);
+  border: 1px solid rgba(255, 26, 67, 0.8);
+  border-radius: 1.5rem;
+
   font-style: normal;
   font-weight: normal;
-  font-size: 22px;
-  line-height: 19px;
-  color: #FFFFFF;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #FAFAFA;
+
 }
 
-.color-gray {
-  background: #D1D1D1;
+.btn-red:disabled {
+  background: rgba(217, 96, 116, 0.8);
 }
 
-.ralewayFont {
-  font-family: Raleway, serif !important;
-  font-weight: initial;
+.btn-custom {
+
+  width: 7rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(37, 36, 39, 0.8);
+  border-radius: 1.5rem;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: rgba(37, 36, 39, 0.8);
 }
 
-#form-edit {
-  padding-left: 5%;
-  padding-right: 5%;
+.border-circ{
+  border-radius: 1.5rem;
 }
 
-#log-in {
-  background: #37363e;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  border-radius: 30px;
-  box-shadow: 0 9px 15px 0 rgba(0, 0, 0, 0.4);
-}
-
-#container {
-  padding: 3%;
-}
-
-@media screen and (max-width: 1024px) {
-  #ImageUser {
-    max-width: 70%;
-  }
-
-  #form-edit {
-    padding-left: 4%;
-    padding-right: 4%;
-  }
-
-  #container {
-    padding: 7.5vh 5%;
+@media screen and (min-width: 1024px) {
+  .text-name, .text-lastname {
+    text-align: left !important;
   }
 }
-
-@media screen and (max-width: 480px) {
-  #ImageUser {
-    max-width: 100%;
-  }
-
-  #form-edit {
-    padding-left: 0 !important;
-    padding-right: 0 !important;;
-  }
-
-  #container {
-    padding: 8vh 5%;
-  }
-}
-
-
-.border-profile {
-  border-bottom: 3px solid #252427;
-}
-
-.border-circ {
-  border-radius: 30px;
-}
-

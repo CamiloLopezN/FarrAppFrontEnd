@@ -75,7 +75,7 @@
 
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 670px) {
   .card {
     width: 42vw;
     margin-bottom: 20px;

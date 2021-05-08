@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CompanyResponse} from '../../model/company';
+import {CompanyResponse, EventView} from '../../model/company';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {CompanyService} from '../../services/company.service';
-import {faExclamationTriangle} from '@fortawesome/free-solid-svg-icons';
+import {faExclamationTriangle, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-profile-company',
@@ -14,12 +14,13 @@ export class ProfileCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
   faExclamationTriangle = faExclamationTriangle;
+  faInfoCard = faInfoCircle;
+  eventsActive: EventView[];
+  attendees: number;
 
   constructor(
-    // tslint:disable-next-line:variable-name
-    private _route: ActivatedRoute,
-    // tslint:disable-next-line:variable-name
-    private _router: Router,
+    private route: ActivatedRoute,
+    private router: Router,
     private companyS: CompanyService,
     private authS: AuthService
   ) {
@@ -39,12 +40,14 @@ export class ProfileCompanyComponent implements OnInit {
   }
 
   edit(): void {
-    this._router.navigate(['company/edit']);
+    this.router.navigate(['company/edit']);
   }
 
-  private getCompany(): void {
+  getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
         this.company = res.message;
+        console.log(res.message);
+        this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
       },
       () => {
         this.authS.logoutExpired();

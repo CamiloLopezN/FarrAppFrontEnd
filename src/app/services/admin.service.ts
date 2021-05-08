@@ -13,10 +13,15 @@ import {AuthService} from './auth.service';
 export class AdminService {
 
   rolId: string;
+  userId: string;
 
   constructor(private http: HttpClient, private authS: AuthService) {
     this.authS.getRoleId.subscribe(res => {
       this.rolId = res;
+    });
+
+    this.authS.getUserId.subscribe(res => {
+      this.userId = res;
     });
   }
 
@@ -53,7 +58,10 @@ export class AdminService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.put<any>(`${environment.backend}/api/admin`, admin, {headers})
+    return this.http.post<any>(`${environment.backend2}/api/admins/${this.rolId}`, {
+      firstName: admin.name,
+      lastName: admin.lastname
+    }, {headers})
       .pipe(
         map((res: any) => {
           return res;

@@ -95,7 +95,12 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.put<any>(`${environment.backend}/api/company`, company, {headers})
+    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}`, {
+      companyName: company.companyName,
+      address: company.address,
+      contactNumber: company.contactNumber,
+      nit: company.nit
+    }, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -200,6 +205,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
+    // tslint:disable-next-line:max-line-length
     return this.http.delete<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${idEstablishment}/events/${idEvent}`, {headers})
       .pipe(
         map((res: any) => {
@@ -213,6 +219,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
+    // tslint:disable-next-line:max-line-length
     return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${establishmentId}/events`, event, {headers})
       .pipe(
         map((res: any) => {
@@ -229,6 +236,7 @@ export class CompanyService {
     const myStatus = {
       status: statusStr
     };
+    // tslint:disable-next-line:max-line-length
     return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${establishmentId}/events/${eventId}`, myStatus, {headers})
       .pipe(
         map((res: any) => {

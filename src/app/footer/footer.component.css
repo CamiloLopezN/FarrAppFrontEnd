@@ -1,3 +1,7 @@
+footer {
+  background: #252427 !important;
+}
+
 .iconSocial {
   color: #FAFAFA;
 }
@@ -15,13 +19,13 @@
 }
 
 #padre {
-  position: relative;    /* para poder posicionar el texto de forma absoluta */
+  position: relative; /* para poder posicionar el texto de forma absoluta */
   display: inline-block; /* para que solo ocupe el ancho de la imagen */
 }
 
 
 .card-title {
-  top: 0;             /* posicionada en la esquina inferior derecha */
+  top: 0; /* posicionada en la esquina inferior derecha */
 }
 
 img {

@@ -1,97 +1,116 @@
-<div class="d-flex align-items-center justify-content-center animate__animated animate__fadeInRight"
-     style="animation-duration: 0.2s" id="container" *ngIf="client">
-  <div id="log-in">
-    <div class="text-center pl-4 pr-4 pt-4 pb-4">
-      <h4 class="text-white text-center mb-3">
-        EDITAR
-      </h4>
-      <div>
-        <img src="assets/icons/UserIcon.png" class="img-fluid" alt="iconUser" id="ImageUser">
-        <form #formEdit="ngForm" (ngSubmit)="save()" id="form-edit">
-          <div class="text-left mt-3">
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="nombre" class="text-white">Nombre</label>
-                  <input type="text" class="form-control color-gray" id="nombre" #name="ngModel" name="name"
-                         [(ngModel)]="client.firstName" required>
-                  <small id="emailHelp1" class="form-text text-danger" *ngIf="!name.valid && name.touched">No puedes dejar
-                    este campo vacío.</small>
-                  <small id="nameHelp" class="form-text text-danger"
-                         *ngIf="name.valid && name.touched && !isNameLength()">Tu nombre debe tener menos de 150 caracteres.</small>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label for="lastName" class="text-white">Apellido</label>
-                  <input type="text" class="form-control color-gray" id="lastName" #lastName="ngModel" name="lastName"
-                         [(ngModel)]="client.lastName" required>
-                  <small id="emailHelp2" class="form-text text-danger" *ngIf="!lastName.valid && lastName.touched">No puedes dejar
-                    este campo vacío.</small>
-                  <small id="nameHelp3" class="form-text text-danger"
-                         *ngIf="lastName.valid && lastName.touched && !isLastNameLength()">Tu apellido debe tener menos de 150 caracteres.</small>
-                </div>
-              </div>
-            </div>
-            <label for="birthDate" class="text-white">Género</label>
-            <div class="row mb-3">
-              <div class="col m-0">
-                <button
-                  (click)="changeButtoms(btnMasc)"
-                  type="button"
-                  class="btn border-circ pl-0 pr-0 my-btn w-100"
-                  name="{{btnMasc}}"
-                  id="{{btnMasc}}">
-                  Hombre
-                </button>
-              </div>
-              <div class="col m-0">
-                <button
-                  (click)="changeButtoms(btnFemale)"
-                  type="button"
-                  class="btn border-circ pl-0 pr-0 my-btn w-100"
-                  name="{{btnFemale}}"
-                  id="{{btnFemale}}">
-                  Mujer
-                </button>
-              </div>
-              <div class="col m-0">
-                <button
-                  (click)="changeButtoms(btnOther)"
-                  type="button"
-                  class="btn border-circ pl-0 pr-0 my-btn w-100"
-                  name="{{btnOther}}"
-                  id="{{btnOther}}">
-                  Otro
-                </button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  <label for="birthDate" class="text-white">Fecha de nacimiento</label>
-                  <input type="date" class="form-control border-circ color-gray" id="birthDate" #fromDate="ngModel"
-                         [(ngModel)]="client.birthdate" name="fromDate">
-                  <small id="emailHelp" class="form-text text-danger" *ngIf="fromDate.touched && !ifBefore()">Ingrese una
-                    fecha valida.</small>
-                </div>
-              </div>
+<div class="animate__animated animate__fadeInRight mb-4" style="animation-duration: 0.2s;" *ngIf="client">
+  <header>
+    <section class="margin-1200 mt-5">
+      <p class="text-center text-name">Cámbialo cuando</p>
+      <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">quieras.</p>
+      <div class="text-center">
+        <p class="text-desc-profile">Eres dueño de tu información</p>
+        <p class="text-desc-change">¡Modifícalo a tu gusto!</p>
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="margin-800">
+      <form name="registerCLient" #formClient="ngForm" (ngSubmit)="save()" class="text-center pl-3 pr-3">
+        <p class="text-left mb-2 mt-4">
+          Nombre
+        </p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text icon">
+              <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
             </div>
           </div>
+          <input type="text" class="form-control " placeholder="Nombre"
+                 #firstNameClient="ngModel" name="firstNameClient" [(ngModel)]="client.firstName" required>
+        </div>
+        <div class="text-left">
+          <small id="nameHelp" class="form-text text-danger"
+                 *ngIf="!firstNameClient.valid && firstNameClient.touched">Debes ingresar tu nombre.</small>
+          <small id="nameHelp" class="form-text text-danger"
+                 *ngIf="firstNameClient.valid && firstNameClient.touched && !isNameLength()">Tu nombre debe tener
+            menos de 150 caracteres.</small>
+        </div>
+
+        <p class="text-left mb-2 mt-4">
+          Apellido
+        </p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text icon">
+              <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+            </div>
+          </div>
+          <input type="text" class="form-control" placeholder="Apellido"
+                 #lastNameClient="ngModel" name="lastNameClient" [(ngModel)]="client.lastName" required>
+        </div>
+        <div class="text-left">
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="!lastNameClient.valid && lastNameClient.touched">Debes
+            ingresar tu apellido.</small>
+          <small id="nameHelp" class="form-text text-danger"
+                 *ngIf="lastNameClient.valid && lastNameClient.touched && !isLastNameLength()">Tu apellido debe
+            tener menos de 150 caracteres.</small>
+        </div>
+
+        <div class="mt-4 text-left">
+          <p class="mb-2">
+            Género
+          </p>
           <div class="row">
             <div class="col">
-              <button type="submit" class="btn mt-3 border-circ btn-outline-info w-100" [routerLink]="['/client/profile']">Regresar</button>
+              <button
+                (click)="changeButtoms(btnMasc)"
+                type="button"
+                class="btn border-circ my-btn w-100"
+                name="{{btnMasc}}"
+                id="{{btnMasc}}">
+                Hombre
+              </button>
             </div>
             <div class="col">
-              <button type="submit" class="btn mt-3 border-circ btn-outline-primary position-relative btn-custom-width w-100" [disabled]="!formEdit.valid || !ifBefore() || !isLastNameLength() || !isNameLength()"
-                      [class.spinner]="loaderService.isLoading | async">
-                <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Guardar</p></button>
+              <button
+                (click)="changeButtoms(btnFemale)"
+                type="button"
+                class="btn border-circ my-btn w-100"
+                name="{{btnFemale}}"
+                id="{{btnFemale}}">
+                Mujer
+              </button>
+            </div>
+            <div class="col">
+              <button
+                (click)="changeButtoms(btnOther)"
+                type="button"
+                class="btn border-circ my-btn w-100"
+                name="{{btnOther}}"
+                id="{{btnOther}}">
+                Otro
+              </button>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
+        </div>
+
+        <div class="mt-4 text-left">
+          <p class="mb-2">Fecha de nacimiento</p>
+          <div>
+            <input type="date" class="form-control my-form"
+                   #bdate="ngModel" name="bdate" [(ngModel)]="client.birthdate" required
+            >
+            <small id="dateHelp" class="form-text text-danger" *ngIf="bdate.touched && !ifBefore()">Ingrese una
+              fecha valida.</small>
+          </div>
+        </div>
+
+        <div class="btn-list">
+          <button class="btn-custom" [routerLink]="['/client/profile']">Regresar</button>
+          <button type="submit" class="btn-red btn-custom-width" style="cursor: pointer"
+                  [disabled]="!formClient.form.valid || !isValidAll()"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Guardar</p>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
 </div>
-
-

@@ -6,6 +6,7 @@ import {DatePipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
 import {SpinnerService} from '../../services/spinner.service';
+import {faCalendarDay, faExclamationTriangle, faIdCard, faLock, faUnlock, faUser} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-edit-client',
@@ -17,10 +18,16 @@ export class EditClientComponent implements OnInit {
   public client: ClientResponse;
   public isRemove: boolean;
   private readonly actualDate: Date;
-  birthDate: string;
   btnOther: string;
   btnMasc: string;
   btnFemale: string;
+
+  faLock = faLock;
+  faUser = faUser;
+  faCalendarDay = faCalendarDay;
+  faIdCard = faIdCard;
+  faExclamationTriangle = faExclamationTriangle;
+  faUnlock = faUnlock;
 
   constructor(
     private route: ActivatedRoute,
@@ -152,4 +159,7 @@ export class EditClientComponent implements OnInit {
     return this.client.lastName.length <= 150;
   }
 
+  isValidAll(): boolean {
+    return this.ifBefore() && this.isNameLength() && this.isLastNameLength() && this.client.gender !== '';
+  }
 }

@@ -106,7 +106,7 @@ export class RegisterCompanyModalComponent implements OnInit {
         },
         error => {
           if (error.status === 400) {
-            this.errorMessage = 'Datos inválidos.';
+            this.errorMessage = 'Verifique sus datos.';
           } else if (error.status === 500) {
             this.errorMessage = 'Error en el servidor, intente más tarde';
           }

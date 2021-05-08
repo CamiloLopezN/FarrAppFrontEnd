@@ -106,7 +106,7 @@ export class RegisterCompanyModalComponent implements OnInit {
         },
         error => {
           if (error.status === 400) {
-            this.errorMessage = 'Verifique sus datos.';
+            this.errorMessage = 'Nombre o nit ya se encuentra registrado.';
           } else if (error.status === 500) {
             this.errorMessage = 'Error en el servidor, intente más tarde';
           }
@@ -127,7 +127,7 @@ export class RegisterCompanyModalComponent implements OnInit {
         this.changeDetectorRef.detectChanges();
       }, error => {
         if (error.status === 400) {
-          this.errorMessage = 'Datos inválidos.';
+          this.errorMessage = 'Nombre o nit ya se encuentra registrado.';
         } else if (error.status === 500) {
           this.errorMessage = 'Error en el servidor, intente más tarde';
         }

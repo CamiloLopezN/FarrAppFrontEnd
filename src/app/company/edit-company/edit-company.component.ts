@@ -4,6 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
 import {CompanyService} from '../../services/company.service';
+import {SpinnerService} from '../../services/spinner.service';
+import {faAt, faLocationArrow, faBuilding, faLock, faPhone} from '@fortawesome/free-solid-svg-icons';
+import {faSlideshare} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-edit-company',
@@ -13,16 +16,23 @@ import {CompanyService} from '../../services/company.service';
 export class EditCompanyComponent implements OnInit {
 
   public company: CompanyResponse;
-  errorMessageEmail: string;
-  errorMessageNIT: string;
-  errorMessageName: string;
+
+  faLock = faLock;
+  faBuilding = faBuilding;
+  faLocationArrow = faLocationArrow;
+  faAt = faAt;
+  faPhone = faPhone;
+  faSlideshare = faSlideshare;
+
+  errorMessage: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private companyS: CompanyService,
     private authService: AuthService,
-    private ns: NotificationService
+    private ns: NotificationService,
+    public loaderService: SpinnerService
   ) {
   }
 
@@ -31,23 +41,15 @@ export class EditCompanyComponent implements OnInit {
   }
 
   save(): void {
-    this.errorMessageEmail = '';
-    this.errorMessageNIT = '';
-    this.errorMessageName = '';
+    this.errorMessage = '';
     this.companyS.editCompany(this.company).subscribe(() => {
       this.router.navigate(['/company/profile']);
       this.ns.sucessEditCompany();
     }, error => {
-      if (error.status !== 403) {
-        if (error.error.message === 'Ya existe una empresa registrada con ese identificador de NIT') {
-          this.errorMessageNIT = error.error.message;
-        } else if (error.error.message === 'Ya existe una empresa registrada con ese nombre') {
-          this.errorMessageName = error.error.message;
-        } else {
-          this.errorMessageEmail = error.error.message;
-        }
-      } else {
-        this.authService.logoutExpired();
+      if (error.status === 400) {
+        this.errorMessage = 'Nombre o nit ya se encuentra registrado.';
+      } else if (error.status === 500) {
+        this.errorMessage = 'Error en el servidor, intente más tarde';
       }
     });
 
@@ -55,16 +57,7 @@ export class EditCompanyComponent implements OnInit {
 
   private getCompany(): void {
     this.companyS.getCompany().subscribe((res) => {
-        this.company = {
-          nit: res.nit,
-          contactNumber: res.contact_number,
-          address: res.address,
-          companyName: res.name,
-          userId: res.user,
-          events: res.events,
-          establishments: res.establishments,
-          _id: res.id
-        };
+        this.company = res.message;
       },
       () => {
         this.authService.logoutExpired();

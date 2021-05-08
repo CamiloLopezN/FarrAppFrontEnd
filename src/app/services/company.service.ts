@@ -5,7 +5,6 @@ import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {CompanyRegistration2, CompanyResponse, EstablishmentRegister, EventRegister} from '../model/company';
 import {CompanyRegistration} from '../model/company';
-import {ClientAccount} from '../model/client';
 import {AuthService} from './auth.service';
 import {CommentSend} from '../model/opinion';
 
@@ -29,7 +28,7 @@ export class CompanyService {
     }) : new HttpHeaders({
       'Content-type': 'application/json'
     });
-    return this.http.post<any>(`${environment.backend2}/api/companies/`, company, {headers})
+    return this.http.post<any>(`${environment.backend}/api/companies/`, company, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -42,7 +41,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/companies/${this.roleId}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/companies/${this.roleId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -58,7 +57,7 @@ export class CompanyService {
     const formData = new FormData();
     formData.append('logo', img);
 
-    return this.http.post<any>(`${environment.backend}/api/upload/establishment/logo`, formData, {headers})
+    return this.http.post<any>(`${environment.backend}/api/uploads/establishments/logo`, formData, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -73,7 +72,7 @@ export class CompanyService {
     const formData = new FormData();
     img.forEach(photo => formData.append('photo', photo));
 
-    return this.http.post<any>(`${environment.backend}/api/upload/establishment/photos`, formData, {headers})
+    return this.http.post<any>(`${environment.backend}/api/uploads/establishments/photos`, formData, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -88,7 +87,7 @@ export class CompanyService {
     const formData = new FormData();
     img.forEach(photo => formData.append('photo', photo));
 
-    return this.http.post<any>(`${environment.backend}/api/upload/event/photos`, formData, {headers})
+    return this.http.post<any>(`${environment.backend}/api/uploads/events/photos`, formData, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -101,7 +100,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}`, {
+    return this.http.post<any>(`${environment.backend}/api/companies/${this.roleId}`, {
       companyName: company.companyName,
       address: company.address,
       contactNumber: company.contactNumber,
@@ -114,52 +113,12 @@ export class CompanyService {
       );
   }
 
-  removeUser(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/company/req-desactive`, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-
-  getCompanySecurity(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<any>(`${environment.backend}/api/company/account`, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  changePassCompany(company: ClientAccount): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.put<any>(`${environment.backend}/api/company/account`, company, {headers})
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
   postEstablishment(establishment: EstablishmentRegister): Observable<any> {
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments`, establishment, {headers})
+    return this.http.post<any>(`${environment.backend}/api/companies/${this.roleId}/establishments`, establishment, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -172,7 +131,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/companies/${this.roleId}/establishments`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -185,7 +144,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/companies/${this.roleId}/events`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/companies/${this.roleId}/events`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -198,7 +157,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.delete<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${idEstablishment}`, {headers})
+    return this.http.delete<any>(`${environment.backend}/api/companies/${this.roleId}/establishments/${idEstablishment}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -212,7 +171,7 @@ export class CompanyService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     // tslint:disable-next-line:max-line-length
-    return this.http.delete<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${idEstablishment}/events/${idEvent}`, {headers})
+    return this.http.delete<any>(`${environment.backend}/api/companies/${this.roleId}/establishments/${idEstablishment}/events/${idEvent}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -226,7 +185,7 @@ export class CompanyService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     // tslint:disable-next-line:max-line-length
-    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${establishmentId}/events`, event, {headers})
+    return this.http.post<any>(`${environment.backend}/api/companies/${this.roleId}/establishments/${establishmentId}/events`, event, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -243,7 +202,7 @@ export class CompanyService {
       status: statusStr
     };
     // tslint:disable-next-line:max-line-length
-    return this.http.post<any>(`${environment.backend2}/api/companies/${this.roleId}/establishments/${establishmentId}/events/${eventId}`, myStatus, {headers})
+    return this.http.post<any>(`${environment.backend}/api/companies/${this.roleId}/establishments/${establishmentId}/events/${eventId}`, myStatus, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -256,7 +215,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/events/${idEvent}/review`, comment, {headers})
+    return this.http.post<any>(`${environment.backend}/api/events/${idEvent}/review`, comment, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -269,7 +228,7 @@ export class CompanyService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/establishments/${idEstablishment}/review`, comment, {headers})
+    return this.http.post<any>(`${environment.backend}/api/establishments/${idEstablishment}/review`, comment, {headers})
       .pipe(
         map((res: any) => {
           return res;

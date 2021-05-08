@@ -28,7 +28,7 @@ export class SubscriptionService {
 
     customer.companyId = this.companyId;
 
-    return this.http.post<any>(`${environment.backend2}/api/payments/customers`, customer, {headers})
+    return this.http.post<any>(`${environment.backend}/api/payments/customers`, customer, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -37,7 +37,7 @@ export class SubscriptionService {
   }
 
   getPlans(): Observable<any> {
-    return this.http.get<any>(`${environment.backend2}/api/payments/plans`)
+    return this.http.get<any>(`${environment.backend}/api/payments/plans`)
       .pipe(
         map((res: any) => {
           return res;
@@ -50,7 +50,7 @@ export class SubscriptionService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.get<any>(`${environment.backend2}/api/payments/customers/${customerId}`, {headers})
+    return this.http.get<any>(`${environment.backend}/api/payments/customers/${customerId}`, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -63,7 +63,7 @@ export class SubscriptionService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/payments/customers/subscriptions`, subscription, {headers})
+    return this.http.post<any>(`${environment.backend}/api/payments/customers/subscriptions`, subscription, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -76,7 +76,7 @@ export class SubscriptionService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/payments/customers/${customerId}/default-card`, creditCard, {headers})
+    return this.http.post<any>(`${environment.backend}/api/payments/customers/${customerId}/default-card`, creditCard, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -89,7 +89,7 @@ export class SubscriptionService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.post<any>(`${environment.backend2}/api/payments/customers/${customerId}/cards`, card, {headers})
+    return this.http.post<any>(`${environment.backend}/api/payments/customers/${customerId}/cards`, card, {headers})
       .pipe(
         map((res: any) => {
           return res;
@@ -102,7 +102,7 @@ export class SubscriptionService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.http.delete<any>(`${environment.backend2}/api/payments/customers/${customerId}/cards?franchise=${card.franchise}&mask=${card.mask}`, {headers})
+    return this.http.delete<any>(`${environment.backend}/api/payments/customers/${customerId}/cards?franchise=${card.franchise}&mask=${card.mask}`, {headers})
       .pipe(
         map((res: any) => {
           return res;

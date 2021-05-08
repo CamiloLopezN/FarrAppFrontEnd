@@ -93,7 +93,7 @@ export class AuthService {
 
   login(client: ClientLogin): Observable<any> {
     console.log(client);
-    return this.httpClient.post(`${environment.backend2}/api/users/login`, client).pipe(
+    return this.httpClient.post(`${environment.backend}/api/users/login`, client).pipe(
       map((res: any) => {
         if (res.token !== undefined) {
           console.log(res);
@@ -115,7 +115,7 @@ export class AuthService {
       'Content-type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
-    return this.httpClient.get<any>(`${environment.backend2}/api/users/refresh-token`, {headers})
+    return this.httpClient.get<any>(`${environment.backend}/api/users/refresh-token`, {headers})
       .pipe(
         map((res: any) => {
           if (res.token !== undefined) {
@@ -138,7 +138,7 @@ export class AuthService {
     const req = {
       email
     };
-    return this.httpClient.post(`${environment.backend2}/api/users/recover-password`, req).pipe(
+    return this.httpClient.post(`${environment.backend}/api/users/recover-password`, req).pipe(
       map((res: any) => {
         return res;
       })

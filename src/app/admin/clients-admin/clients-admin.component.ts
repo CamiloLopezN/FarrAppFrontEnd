@@ -20,16 +20,17 @@ export class ClientsAdminComponent implements OnInit {
   clientSelected: string;
 
   constructor(private adminS: AdminService, private route: Router, private authS: AuthService) {
-    this.itemsPerP = 10;
+    this.itemsPerP = 6;
     this.clients = [];
   }
 
   ngOnInit(): void {
-    this.getClients();
+    this.getClients(true);
   }
 
-  getClients(): void {
+  getClients(isChange: boolean): void {
     this.clientSelected = 'a';
+    this.p = isChange ? 1 : this.p;
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, true).subscribe(res => {
       console.log(res);
       this.total = res.totalDocs;
@@ -43,8 +44,9 @@ export class ClientsAdminComponent implements OnInit {
     this.route.navigate([`admin/client/${id}`]);
   }
 
-  getClientsD(): void {
+  getClientsD(isChange: boolean): void {
     this.clientSelected = 'd';
+    this.p = isChange ? 1 : this.p;
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, false, false, false).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
@@ -53,8 +55,9 @@ export class ClientsAdminComponent implements OnInit {
     });
   }
 
-  getCompaniesPT(): void {
+  getCompaniesPT(isChange: boolean): void {
     this.clientSelected = 'pt';
+    this.p = isChange ? 1 : this.p;
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, true, true).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
@@ -63,8 +66,9 @@ export class ClientsAdminComponent implements OnInit {
     });
   }
 
-  getClientsP(): void {
+  getClientsP(isChange: boolean): void {
     this.clientSelected = 'p';
+    this.p = isChange ? 1 : this.p;
     this.adminS.getClients(this.p === undefined ? 1 : this.p, this.itemsPerP, true, false, false).subscribe(res => {
       this.total = res.totalDocs;
       this.clients = res.docs;
@@ -76,13 +80,13 @@ export class ClientsAdminComponent implements OnInit {
   pageChange($event: number): void {
     this.p = $event;
     if (this.clientSelected === 'a') {
-      this.getClients();
+      this.getClients(false);
     } else if (this.clientSelected === 'd') {
-      this.getClientsD();
+      this.getClientsD(false);
     } else if (this.clientSelected === 'p') {
-      this.getClientsP();
+      this.getClientsP(false);
     } else {
-      this.getCompaniesPT();
+      this.getCompaniesPT(false);
     }
 
   }

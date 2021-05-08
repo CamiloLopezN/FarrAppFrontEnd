@@ -4,6 +4,7 @@ import {AdminService} from '../../services/admin.service';
 import {ClientResponseAdmin2} from '../../model/client';
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
+import {SpinnerService} from '../../services/spinner.service';
 
 @Component({
   selector: 'app-client-profile',
@@ -17,7 +18,7 @@ export class ClientProfileComponent implements OnInit {
   isReq: boolean;
   isAnimate = true;
 
-  constructor(private ns: NotificationService, private route: ActivatedRoute,
+  constructor(private ns: NotificationService, private route: ActivatedRoute, public loaderService: SpinnerService,
               private adminS: AdminService, private authS: AuthService, private router: Router) {
   }
 

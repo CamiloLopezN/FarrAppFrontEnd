@@ -1,18 +1,23 @@
-<div class="text-white animate__animated animate__fadeInRight container" style="animation-duration: 0.2s">
-  <h3 class="mt-4 mb-4 ml-2">
-    USUARIOS
-  </h3>
-  <div id="dashboard">
+<div class="animate__animated animate__fadeInRight div-cont" style="animation-duration: 0.2s">
+  <section class="margin-1200 mt-5 mb-4">
+    <p class="text-center text-name">Gestiona a tus</p>
+    <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">clientes</p>
+    <div class="text-center">
+      <p class="text-desc-profile">Estos son los usuarios</p>
+      <p class="text-desc-change">de FarrApp</p>
+    </div>
+  </section>
+  <div id="dashboard" class="margin-1200">
     <nav>
       <div class="nav nav-tabs nav-fill nav-test" role="tablist">
         <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
-           aria-selected="true" (click)="getClients()">Activados</a>
+           aria-selected="true" (click)="getClients(true)">Activados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getClientsP()">No verificados</a>
+           aria-selected="false" (click)="getClientsP(true)">No verificados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getClientsD()">Desactivados</a>
+           aria-selected="false" (click)="getClientsD(true)">Desactivados</a>
         <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
-           aria-selected="false" (click)="getCompaniesPT()">Peticiones</a>
+           aria-selected="false" (click)="getCompaniesPT(true)">Peticiones</a>
       </div>
     </nav>
 

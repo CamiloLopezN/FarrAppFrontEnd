@@ -228,6 +228,11 @@ agm-map {
   height: 30vh;
 }
 
+.images-event {
+  width: 90%;
+  margin: 60px auto 70px;
+}
+
 .events-proximate {
   width: 90%;
   margin: 60px auto 70px;

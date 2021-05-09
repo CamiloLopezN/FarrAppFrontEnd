@@ -30,8 +30,6 @@
         {{event.city}}
       </a>
       <div class="float-right icons" *ngIf="router.url == '/company/events'">
-        <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
-                 (click)="edit($event)" *ngIf="event.status != 'Aplazado'"></fa-icon>
         <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove($event)"></fa-icon>
       </div>
       <div class="clearfix"></div>

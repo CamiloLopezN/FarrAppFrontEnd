@@ -37,9 +37,9 @@
       </div>
       <div class="edit-remove" *ngIf="isMine">
         <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
-                 (click)="edit()" data-toggle="tooltip" data-placement="top" title="Editar"></fa-icon>
+                 (click)="edit()" data-toggle="tooltip" data-placement="top" title="Editar" id="edit{{establishment._id}}"></fa-icon>
         <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"
-                 data-toggle="tooltip" data-placement="top" title="Eliminar"></fa-icon>
+                 data-toggle="tooltip" data-placement="top" title="Eliminar" id="delete{{establishment._id}}"></fa-icon>
       </div>
     </section>
     <section *ngIf="rol == 'client' || rol == 'norole'" class="like-mobile">

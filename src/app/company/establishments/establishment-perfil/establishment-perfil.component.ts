@@ -179,6 +179,7 @@ export class EstablishmentPerfilComponent implements OnInit {
   }
 
   edit(): void {
+    $(`#edit${this.establishment._id}`).tooltip('hide');
     try {
       this.ism.isEstablishment.next(true);
       this.ism.isEstablishmentEdit.next(true);
@@ -188,6 +189,7 @@ export class EstablishmentPerfilComponent implements OnInit {
   }
 
   remove(): void {
+    $(`#delete${this.establishment._id}`).tooltip('hide');
     $('#removeEstablishment').modal('show');
   }
 

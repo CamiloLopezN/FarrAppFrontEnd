@@ -215,6 +215,7 @@ export class EventPerfilComponent implements OnInit {
   }
 
   remove(): void {
+    $(`#remove${this.event._id}`).tooltip('hide');
     $('#removeEvent').modal('show');
   }
 

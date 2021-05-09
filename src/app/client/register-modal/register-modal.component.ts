@@ -73,6 +73,9 @@ export class RegisterModalComponent implements OnInit {
     this.authS.roled.subscribe(roled => {
       this.role = roled;
     });
+    this.authS.reg.subscribe(reg => {
+      this.screenVerify = reg;
+    });
   }
 
   onSubmit(): void {
@@ -153,9 +156,6 @@ export class RegisterModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authS.reg.subscribe(reg => {
-      this.screenVerify = reg;
-    });
     $(document).ready(() => {
       $('#register-client-modal').on('show.bs.modal', () => {
         this.birthdate = this.datePipe.transform(this.getDateActual(), 'yyyy-MM-dd');
@@ -193,11 +193,7 @@ export class RegisterModalComponent implements OnInit {
     this.authS.login(this.clientLog).subscribe(() => {
       $('#register-client-modal').modal('hide');
       this.notifyS.sucessLogin();
-      let role = '';
-      this.authS.roled.subscribe(rol =>
-        role = rol
-      );
-      if (role === 'admin') {
+      if (this.role === 'admin') {
         this.redirectAdmin();
       } else {
         this.redirect2();

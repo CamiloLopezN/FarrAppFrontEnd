@@ -39,6 +39,12 @@ export class SubscriptionComponent implements OnInit {
     this.expirationDate = '';
     this.subs = [];
     this.cards = [];
+    this.authS.subscribe.subscribe(sub => {
+      this.isSubscribe = sub;
+    });
+    this.authS.getCustomerId.subscribe(res => {
+      this.customerId = res;
+    });
     this.documentType = [{
       name: 'CÉDULA DE CIUDADANÍA',
       id: 'CC'
@@ -69,12 +75,6 @@ export class SubscriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authS.subscribe.subscribe(sub => {
-      this.isSubscribe = sub;
-    });
-    this.authS.getCustomerId.subscribe(res => {
-      this.customerId = res;
-    });
     this.subscriptionS.getPlans().subscribe(res => {
       this.subs = res;
       const min = Math.min(...this.subs.map(s => s.price));

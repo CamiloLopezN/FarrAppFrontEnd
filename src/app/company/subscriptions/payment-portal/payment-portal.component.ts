@@ -31,13 +31,13 @@ export class PaymentPortalComponent implements OnInit {
   constructor(private subscriptionS: SubscriptionService, private ns: NotificationService,
               private authS: AuthService
   ) {
+    this.authS.getCustomerId.subscribe(res => {
+      this.customerId = res;
+    });
     this.cards = [];
   }
 
   ngOnInit(): void {
-    this.authS.getCustomerId.subscribe(res => {
-      this.customerId = res;
-    });
     if (this.customerId !== undefined) {
       this.getUser();
     }

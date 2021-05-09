@@ -45,15 +45,15 @@ export class LoginModalComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     public loaderService: SpinnerService
   ) {
-  }
-
-  ngOnInit(): void {
     this.authService.isLog.subscribe(login => {
       this.isLogin = login;
     });
     this.authService.roled.subscribe(rol =>
       this.rol = rol
     );
+  }
+
+  ngOnInit(): void {
     $('#login-modal').on('hidden.bs.modal', () => {
       if (this.rol === 'company') {
         $('#warn-sub').modal('show');

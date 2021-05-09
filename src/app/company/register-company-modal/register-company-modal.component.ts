@@ -61,14 +61,14 @@ export class RegisterCompanyModalComponent implements OnInit {
     this.authS.roled.subscribe(roled => {
       this.role = roled;
     });
+    this.authS.regComp.subscribe(reg => {
+      this.screenVerify = reg;
+    });
     this.password = '';
   }
 
 
   ngOnInit(): void {
-    this.authS.regComp.subscribe(reg => {
-      this.screenVerify = reg;
-    });
     $(document).ready(() => {
       $('#register-company-modal').on('show.bs.modal', () => {
         this.email = '';

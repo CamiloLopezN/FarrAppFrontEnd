@@ -8,6 +8,8 @@ import {AuthService} from './services/auth.service';
 import {CompanyService} from './services/company.service';
 import {NotificationService} from './services/notification.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,6 +25,7 @@ export class AppComponent implements AfterContentChecked {
   constructor(shms: IsShowModalService, private cs: CitiesService, private ns: NotificationService,
               private clientC: ClientConnectService, private compS: CompanyService,
               private cdref: ChangeDetectorRef, private clientS: ClientService, private authS: AuthService) {
+
     this.authS.roled.subscribe(rol => {
       if (rol === 'client') {
         this.clientS.getUser().subscribe(res => {
@@ -45,6 +48,9 @@ export class AppComponent implements AfterContentChecked {
     });
     shms.establishment.subscribe(est => {
       this.isEstablishment = est;
+      if (this.isEstablishment) {
+        $('#register-establishment-modal').modal('show');
+      }
     });
     this.cs.getCities().subscribe(res => {
       this.cities = res.find(obj => obj.departamento === 'Boyacá').ciudades;

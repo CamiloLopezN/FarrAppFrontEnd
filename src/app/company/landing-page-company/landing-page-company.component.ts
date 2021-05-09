@@ -23,12 +23,12 @@ export class LandingPageCompanyComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService,
               private authS: AuthService, private ns: NotificationService) {
-  }
-
-  ngOnInit(): void {
     this.authS.subscribe.subscribe(sub => {
       this.isSubscribe = sub;
     });
+  }
+
+  ngOnInit(): void {
     this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
     this.getCompany();
   }

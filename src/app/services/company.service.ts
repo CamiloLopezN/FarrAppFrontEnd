@@ -56,7 +56,6 @@ export class CompanyService {
 
     const formData = new FormData();
     formData.append('logo', img);
-
     return this.http.post<any>(`${environment.backend}/api/uploads/establishments/logo`, formData, {headers})
       .pipe(
         map((res: any) => {
@@ -229,6 +228,19 @@ export class CompanyService {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     });
     return this.http.post<any>(`${environment.backend}/api/establishments/${idEstablishment}/review`, comment, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  editEstablishment(establishmentR: EstablishmentRegister, idEstablishment: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/companies/${this.roleId}/establishments/${idEstablishment}`, establishmentR, {headers})
       .pipe(
         map((res: any) => {
           return res;

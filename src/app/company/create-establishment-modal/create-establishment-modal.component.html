@@ -208,7 +208,7 @@
           <button type="submit" class="btn btn-outline-dark mt-4 btn-custom-width w-100" style="border-radius: 30px"
                   [disabled]="!formEstablishment.form.valid || !isValidLength()"
                   [class.spinner]="loaderService.isLoading | async">
-            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Registrar establecimiento</p>
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">{{action}}</p>
           </button>
         </form>
       </div>

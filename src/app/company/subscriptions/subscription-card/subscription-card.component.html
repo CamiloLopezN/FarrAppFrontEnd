@@ -1,4 +1,4 @@
-<div class="card-sub" style="cursor: pointer">
+<div class="card-sub" style="cursor: pointer" *ngIf="sub">
   <div class="left-card" *ngIf="!sub.select">
     <p class="unity-time">{{sub.intervalCount}}</p>
     <p class="str-time">{{sub.intervalUnit}}</p>

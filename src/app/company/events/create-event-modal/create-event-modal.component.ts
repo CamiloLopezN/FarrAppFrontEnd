@@ -3,7 +3,7 @@ import {
   EstablishmentViewId,
   EventC,
   EventRegister,
-  Img,
+  Img, RemoveEvent,
   Status,
   Ticket,
 } from '../../../model/company';
@@ -80,6 +80,8 @@ export class CreateEventModalComponent implements OnInit {
   @ViewChild('formEvent') formC: NgForm;
   isEdit = false;
 
+  removeEvent: RemoveEvent;
+
   constructor(private comps: CompanyService, private cs: CitiesService, public loaderService: SpinnerService,
               private ers: EventEmmiterService, private userS: UserService, private router: Router, private authS: AuthService,
               private changeDetectorRef: ChangeDetectorRef, private nS: NotificationService, private ism: IsShowModalService
@@ -90,6 +92,9 @@ export class CreateEventModalComponent implements OnInit {
     });
     this.authS.getRoleId.subscribe(res => {
       this.idCompany = res;
+    });
+    this.ers.event.subscribe(ev => {
+      this.removeEvent = ev;
     });
   }
 
@@ -474,15 +479,15 @@ export class CreateEventModalComponent implements OnInit {
   }
 
   private getEvent(): void {
-    this.ers.event.subscribe(ev => {
-      this.userS.getEventById(ev.idCompany, ev.idEstablishment, ev.idEvent).subscribe(() => {
-      }, error => {
-        if (error.status === 500 || error.status === 503) {
-          this.nS.serverError();
-        } else if (error.status === 401 || error.status === 403) {
-          this.authS.logoutExpiredAndReload();
-        }
-      });
+
+    this.userS.getEventById(this.removeEvent.idCompany, this.removeEvent.idEstablishment, this.removeEvent.idEvent).subscribe(() => {
+    }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.nS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
     });
+
   }
 }

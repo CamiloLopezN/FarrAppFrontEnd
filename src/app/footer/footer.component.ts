@@ -19,12 +19,13 @@ export class FooterComponent implements OnInit {
   faInstagram = faInstagram;
   isLogged: boolean;
 
-  constructor(public authService: AuthService, public router: Router) { }
-
-  ngOnInit(): void {
+  constructor(public authService: AuthService, public router: Router) {
     this.authService.isLogged.subscribe(isLogged => {
       this.isLogged = isLogged;
     });
+  }
+
+  ngOnInit(): void {
   }
 
 }

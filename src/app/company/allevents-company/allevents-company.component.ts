@@ -20,6 +20,7 @@ export class AlleventsCompanyComponent implements OnInit {
   eventsPostpone: EventView[];
   eventsFinish: EventView[];
   faCalendarPlus = faCalendarPlus;
+  interested: number;
 
   constructor(private serviceShow: IsShowModalService, private compS: CompanyService,
               private ns: NotificationService, private authS: AuthService) {
@@ -40,6 +41,15 @@ export class AlleventsCompanyComponent implements OnInit {
         this.eventsFinish = events.filter(ev => {
           return ev.status === 'Activo' && new Date(ev.end) < new Date();
         });
+
+        this.interested = this.eventsActive.map(a => a.interested).reduce((a, b) => {
+          return a + b;
+        }, 0);
+
+        this.interested += this.eventsFinish.map(a => a.interested).reduce((a, b) => {
+          return a + b;
+        }, 0);
+
       },
       error => {
         if (error.status === 500 || error.status === 503) {

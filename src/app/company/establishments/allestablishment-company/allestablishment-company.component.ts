@@ -27,7 +27,7 @@ export class AllestablishmentCompanyComponent implements OnInit {
         this.establishments = res.message.establishments;
         this.interest = this.establishments.map(a => a.followers).reduce((a, b) => {
           return a + b;
-        });
+        }, 0);
       },
       error => {
         if (error.status === 500 || error.status === 503) {

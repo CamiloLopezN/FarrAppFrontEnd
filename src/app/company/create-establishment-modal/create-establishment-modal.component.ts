@@ -133,7 +133,6 @@ export class CreateEstablishmentModalComponent implements OnInit {
     });
     $(document).ready(() => {
       $('#register-establishment-modal').on('show.bs.modal', () => {
-        console.log(this.isEdit);
         this.init();
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
@@ -537,7 +536,11 @@ export class CreateEstablishmentModalComponent implements OnInit {
         this.marker.lat = establishment.message.location.latitude;
         this.marker.lng = establishment.message.location.longitude;
       }, error => {
-        console.log(error);
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
       }, () => {
       }
     );

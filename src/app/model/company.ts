@@ -68,6 +68,7 @@ export interface EventView {
   end: Date;
   imageUrl: string;
   status: string;
+  interested: number;
 }
 
 export interface Establishment {

@@ -20,6 +20,7 @@ export class LandingPageCompanyComponent implements OnInit {
   faInfoCard = faInfoCircle;
   isSubscribe: boolean;
   eventsActive: EventView[];
+  interested: number;
 
   constructor(private elementRef: ElementRef, private companyS: CompanyService,
               private authS: AuthService, private ns: NotificationService) {
@@ -46,6 +47,9 @@ export class LandingPageCompanyComponent implements OnInit {
           userId: res.message.userId
         };
         this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
+        this.interested = this.eventsActive.map(a => a.interested).reduce((a, b) => {
+          return a + b;
+        }, 0);
       },
       error => {
         if (error.status === 500 || error.status === 503) {

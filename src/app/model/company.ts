@@ -244,6 +244,7 @@ export interface CodePromotional {
 
 export interface EstablishmentView {
   companyId: string;
+  followers: number;
   establishmentId: string;
   establishmentName: string;
   location: LocationId;

@@ -33,12 +33,7 @@ export class AppComponent implements AfterContentChecked {
             follows: res.message.follows.map(follow => follow.establishmentId),
             interests: res.message.interests.map(follow => follow.eventId)
           });
-        }, error => {
-          if (error.status === 500 || error.status === 503) {
-            this.ns.serverError();
-          } else if (error.status === 401 || error.status === 403) {
-            this.authS.logoutExpiredAndReload();
-          }
+        }, () => {
         });
       }
     });

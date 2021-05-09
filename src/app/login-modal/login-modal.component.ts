@@ -80,8 +80,6 @@ export class LoginModalComponent implements OnInit {
         $('#login-modal').modal('hide');
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
-        this.formRecipe.reset();
-        this.changeDetectorRef.detectChanges();
         if (this.rol === 'admin') {
           this.notifyS.sucessLogin();
           this.redirectAdmin();

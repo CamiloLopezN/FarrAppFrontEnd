@@ -41,9 +41,6 @@ export class HeaderComponent implements OnInit {
               private clientS: ClientService, private router: Router, private compS: CompanyService,
               public serviceShow: IsShowModalService
   ) {
-  }
-
-  ngOnInit(): void {
     this.authService.isLogged.subscribe(isLogged => {
       this.isLogged = isLogged;
     });
@@ -56,6 +53,9 @@ export class HeaderComponent implements OnInit {
     this.authService.subscribe.subscribe(sub => {
       this.showWarning = sub;
     });
+  }
+
+  ngOnInit(): void {
   }
 
   logOut(): void {

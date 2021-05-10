@@ -49,6 +49,8 @@ export class EstablishmentPerfilComponent implements OnInit {
 
   isMine: boolean;
 
+  isShow: boolean;
+
   clientConnect: ClientsInterest;
 
   constructor(private userS: UserService, private detectCh: ChangeDetectorRef,
@@ -65,6 +67,7 @@ export class EstablishmentPerfilComponent implements OnInit {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
+    this.isShow = false;
   }
 
   ngOnInit(): void {
@@ -72,9 +75,13 @@ export class EstablishmentPerfilComponent implements OnInit {
     this.terminatedEvents = [];
     this.getEstablishment();
 
+    $('#commentEventModal').on('hidden.bs.modal', () => {
+      this.isShow = false;
+    });
+
     this.authService.getRoleId.subscribe(rolId => {
       this.isMine = rolId === this.route.snapshot.params.idCompany;
-    });
+    }).unsubscribe();
   }
 
   getEstablishment(): void {
@@ -113,7 +120,6 @@ export class EstablishmentPerfilComponent implements OnInit {
         idEstablishment: this.establishment._id,
         idCompany: this.establishment.company.companyId
       });
-      this.ism.isEstablishment.next(true);
     });
   }
 
@@ -159,6 +165,8 @@ export class EstablishmentPerfilComponent implements OnInit {
 
   comment(): void {
     if (this.rol !== 'norole') {
+      this.isShow = true;
+      this.detectCh.detectChanges();
       $('#commentEventModal').modal('show');
     } else {
       this.authService.inLog.next(true);
@@ -171,17 +179,17 @@ export class EstablishmentPerfilComponent implements OnInit {
   }
 
   edit(): void {
+    $(`#edit${this.establishment._id}`).tooltip('hide');
     try {
       this.ism.isEstablishment.next(true);
       this.ism.isEstablishmentEdit.next(true);
     } catch {
 
-    } finally {
-      $('#register-establishment-modal').modal('show');
     }
   }
 
   remove(): void {
+    $(`#delete${this.establishment._id}`).tooltip('hide');
     $('#removeEstablishment').modal('show');
   }
 

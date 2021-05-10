@@ -78,7 +78,9 @@ export class EventPerfilComponent implements OnInit {
     this.authService.roled.subscribe(rol => {
       this.rol = rol;
     });
-
+    this.authService.subscribe.subscribe(sub => {
+      this.isSubscribe = sub;
+    });
     this.clientC.client.subscribe(clientCon => {
       this.clientConnect = clientCon;
     });
@@ -88,10 +90,7 @@ export class EventPerfilComponent implements OnInit {
     this.getEvent();
     this.authService.getRoleId.subscribe(rolId => {
       this.isMine = rolId === this.route.snapshot.params.idCompany;
-    });
-    this.authService.subscribe.subscribe(sub => {
-      this.isSubscribe = sub;
-    });
+    }).unsubscribe();
   }
 
   getStars(nStar: any): boolean[] {
@@ -216,6 +215,7 @@ export class EventPerfilComponent implements OnInit {
   }
 
   remove(): void {
+    $(`#remove${this.event._id}`).tooltip('hide');
     $('#removeEvent').modal('show');
   }
 

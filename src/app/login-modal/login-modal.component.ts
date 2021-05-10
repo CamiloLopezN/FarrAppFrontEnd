@@ -45,18 +45,21 @@ export class LoginModalComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     public loaderService: SpinnerService
   ) {
-  }
-
-  ngOnInit(): void {
     this.authService.isLog.subscribe(login => {
       this.isLogin = login;
     });
     this.authService.roled.subscribe(rol =>
       this.rol = rol
     );
+    this.authService.subscribe.subscribe(sub => {
+      this.isSub = sub;
+    });
+  }
+
+  ngOnInit(): void {
     $('#login-modal').on('hidden.bs.modal', () => {
-      if (this.rol === 'company') {
-        $('#warn-sub').modal('show');
+      if (this.rol === 'company' && !this.isSub) {
+
       }
     });
     $(document).ready(() => {
@@ -77,9 +80,17 @@ export class LoginModalComponent implements OnInit {
     };
     this.errorMessage = '';
     this.authService.login(this.client).subscribe(() => {
+      },
+      error => {
+        if (error.status === 403) {
+          this.errorMessage = 'Primero debe verificar su correo';
+        } else if (error.status === 401 || error.status === 400) {
+          this.errorMessage = 'Usuario o contraseña incorrectos';
+        } else if (error.status === 500) {
+          this.errorMessage = 'Error en el servidor, intente más tarde';
+        }
+      }, () => {
         $('#login-modal').modal('hide');
-        this.formRecipe.reset();
-        this.changeDetectorRef.detectChanges();
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
         if (this.rol === 'admin') {
@@ -90,15 +101,6 @@ export class LoginModalComponent implements OnInit {
           this.redirectCompany();
         } else {
           this.redirect();
-        }
-      },
-      error => {
-        if (error.status === 403) {
-          this.errorMessage = 'Primero debe verificar su correo';
-        } else if (error.status === 401 || error.status === 400) {
-          this.errorMessage = 'Usuario o contraseña incorrectos';
-        } else if (error.status === 500) {
-          this.errorMessage = 'Error en el servidor, intente más tarde';
         }
       }
     );

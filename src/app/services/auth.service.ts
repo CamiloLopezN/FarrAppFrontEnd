@@ -23,7 +23,7 @@ export class AuthService {
   public inLog = new BehaviorSubject<boolean>(true);
   public inReg = new BehaviorSubject<boolean>(false);
   public inRegCompany = new BehaviorSubject<boolean>(false);
-  public isSubscribe = new BehaviorSubject<boolean>(true);
+  public isSubscribe = new BehaviorSubject<boolean>(false);
   private nameUser = new BehaviorSubject<string>('');
 
   constructor(private httpClient: HttpClient, private router: Router,
@@ -144,12 +144,18 @@ export class AuthService {
   }
 
   changeLogAndRole(): void {
-    this.loggedIn.next(true);
-    this.role.next(helper.decodeToken(localStorage.getItem('token')).role);
-    this.roleId.next(helper.decodeToken(localStorage.getItem('token')).roleId);
-    this.nameUser.next(localStorage.getItem('userName'));
-    this.userId.next(helper.decodeToken(localStorage.getItem('token')).userId);
-    this.customerId.next(helper.decodeToken(localStorage.getItem('token')).customerId);
+    try {
+      this.loggedIn.next(true);
+      this.roleId.next(helper.decodeToken(localStorage.getItem('token')).roleId);
+    } catch (e) {
+
+    } finally {
+      this.customerId.next(helper.decodeToken(localStorage.getItem('token')).customerId);
+      this.role.next(helper.decodeToken(localStorage.getItem('token')).role);
+      this.nameUser.next(localStorage.getItem('userName'));
+      this.userId.next(helper.decodeToken(localStorage.getItem('token')).userId);
+    }
+
   }
 
   logout(): void {

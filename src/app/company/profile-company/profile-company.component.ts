@@ -19,6 +19,8 @@ export class ProfileCompanyComponent implements OnInit {
   faInfoCard = faInfoCircle;
   eventsActive: EventView[];
   attendees: number;
+  isSubscribe: boolean;
+  interested: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +30,9 @@ export class ProfileCompanyComponent implements OnInit {
     private userS: UserService,
     private ns: NotificationService
   ) {
+    this.authS.subscribe.subscribe(res => {
+      this.isSubscribe = res;
+    });
   }
 
   ngOnInit(): void {
@@ -55,6 +60,9 @@ export class ProfileCompanyComponent implements OnInit {
     this.companyS.getCompany().subscribe((res) => {
         this.company = res.message;
         this.eventsActive = this.company.events.filter(ev => ev.status === 'Activo');
+        this.interested = this.eventsActive.map(a => a.interested).reduce((a, b) => {
+          return a + b;
+        }, 0);
       },
       error => {
         if (error.status === 500 || error.status === 503) {

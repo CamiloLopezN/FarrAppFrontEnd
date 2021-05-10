@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {Category, EstablishmentRegister, EstablishmentType, Img} from '../../model/company';
+import {Category, EstablishmentRegister, EstablishmentType, Img, RemoveEstablishment} from '../../model/company';
 import {NgForm} from '@angular/forms';
 import {NotificationService} from '../../services/notification.service';
 import {AuthService} from '../../services/auth.service';
@@ -9,6 +9,9 @@ import {AdminService} from '../../services/admin.service';
 import {faClipboardList, faGlassCheers, faImage, faImages, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {CitiesService} from '../../services/cities.service';
 import {SpinnerService} from '../../services/spinner.service';
+import {IsShowModalService} from '../../services/is-show-modal.service';
+import {UserService} from '../../services/user.service';
+import {EventEmmiterService} from '../../services/event-remove.service';
 
 
 declare var $: any;
@@ -68,8 +71,13 @@ export class CreateEstablishmentModalComponent implements OnInit {
 
   cities: string[];
   citySelect = 'Tunja';
+  isEdit: boolean;
+  action = 'Registrar establecimiento';
 
-  constructor(private notifyS: NotificationService, private authS: AuthService,
+  establishment: RemoveEstablishment;
+
+  constructor(private notifyS: NotificationService, private authS: AuthService, private ism: IsShowModalService,
+              private userS: UserService, private ers: EventEmmiterService,
               private router: Router, private companyService: CompanyService, public loaderService: SpinnerService,
               private changeDetectorRef: ChangeDetectorRef, private adminS: AdminService, private cs: CitiesService) {
     this.authS.roled.subscribe(roled => {
@@ -77,6 +85,16 @@ export class CreateEstablishmentModalComponent implements OnInit {
     });
     this.authS.getRoleId.subscribe(res => {
       this.idCompany = res;
+    });
+
+    this.ism.isEstablishmentEdit.subscribe(bool => {
+      this.isEdit = bool;
+      if (this.isEdit) {
+        this.getEstablishment();
+        this.action = 'Editar establecimiento';
+      } else {
+        this.action = 'Registrar establecimiento';
+      }
     });
     this.btnBar = 'btnBar';
     this.btnDiscotheque = 'btnDiscotheque';
@@ -97,64 +115,77 @@ export class CreateEstablishmentModalComponent implements OnInit {
     this.lat = 5.547408754375323;
     this.lng = -73.35709982734579;
     this.zoom = 15;
-  }
 
-
-  ngOnInit(): void {
+    this.ers.establishment.subscribe(res => {
+      this.establishment = res;
+    });
     this.cs.getCities().subscribe(res => {
       this.cities = res[5].ciudades;
     }, () => {
     });
+  }
+
+
+  ngOnInit(): void {
+    $('#register-establishment-modal').on('hidden.bs.modal', () => {
+      this.ism.isEstablishment.next(false);
+      this.ism.isEstablishmentEdit.next(false);
+    });
     $(document).ready(() => {
       $('#register-establishment-modal').on('show.bs.modal', () => {
-        this.nameEst = '';
-        this.desc = '';
-        this.address = '';
-        this.capacity = 0;
-
-        this.isBar = false;
-        this.isDiscotheque = false;
-        this.isSroll = false;
-
-        this.messageErrorType = '';
-        this.messageErrorCategory = '';
-        this.messageErrorPhotos = '';
-        this.messageErrorUbication = '';
-
-        this.imagePath = null;
-        this.imgURL = '';
-        this.message = '';
-        this.message2 = '';
-
-        this.images = [];
-        this.marker.lat = null;
-        this.marker.lng = null;
-
-        this.categories = [{
-          category: {
-            establishmentCategoryName: 'Campo abierto',
-            description: 'Es un campo abierto y divertido'
-          },
-          select: false
-        }, {
-          category: {
-            establishmentCategoryName: 'Encerrado',
-            description: 'Es un campo cerrado y aburrido'
-          },
-          select: false
-        }];
-
-        document.getElementById(this.btnBar).style.background = '#fafafa';
-        document.getElementById(this.btnBar).style.color = '#c2c5c8';
-
-        document.getElementById(this.btnDiscotheque).style.background = '#fafafa';
-        document.getElementById(this.btnDiscotheque).style.color = '#c2c5c8';
-
+        this.init();
         this.formC.reset();
         this.changeDetectorRef.detectChanges();
-        this.citySelect = 'Tunja';
+        if (!this.isEdit) {
+          this.citySelect = 'Tunja';
+        }
       });
     });
+  }
+
+  init(): void {
+    this.nameEst = '';
+    this.desc = '';
+    this.address = '';
+    this.capacity = 0;
+
+    this.isBar = false;
+    this.isDiscotheque = false;
+    this.isSroll = false;
+
+    this.messageErrorType = '';
+    this.messageErrorCategory = '';
+    this.messageErrorPhotos = '';
+    this.messageErrorUbication = '';
+
+    this.imagePath = null;
+    this.imgURL = '';
+    this.message = '';
+    this.message2 = '';
+
+    this.images = [];
+    this.marker.lat = null;
+    this.marker.lng = null;
+
+    this.categories = [{
+      category: {
+        establishmentCategoryName: 'Campo abierto',
+        description: 'Es un campo abierto y divertido'
+      },
+      select: false
+    }, {
+      category: {
+        establishmentCategoryName: 'Encerrado',
+        description: 'Es un campo cerrado y aburrido'
+      },
+      select: false
+    }];
+
+    document.getElementById(this.btnBar).style.background = '#fafafa';
+    document.getElementById(this.btnBar).style.color = '#c2c5c8';
+
+    document.getElementById(this.btnDiscotheque).style.background = '#fafafa';
+    document.getElementById(this.btnDiscotheque).style.color = '#c2c5c8';
   }
 
   selectBar(): void {
@@ -300,41 +331,85 @@ export class CreateEstablishmentModalComponent implements OnInit {
         }
       };
 
-      this.companyService.postLogo(this.imagePath).subscribe(res => {
-        this.establishmentR.logoUrl = res.logo;
-      }, error => {
-        if (error.status === 500 || error.status === 503) {
-          this.notifyS.serverError();
-        } else if (error.status === 401 || error.status === 403) {
-          this.authS.logoutExpiredAndReload();
-        }
-      }, () => {
-        this.companyService.postPhotos(this.images.map(myimg => myimg.imgFile)).subscribe(res => {
-          this.establishmentR.photoUrls = res.map(photoObj => photoObj.photo);
-        }, error => {
-          if (error.status === 500 || error.status === 503) {
-            this.notifyS.serverError();
-          } else if (error.status === 401 || error.status === 403) {
-            this.authS.logoutExpiredAndReload();
-          }
-        }, () => {
-          this.companyService.postEstablishment(this.establishmentR).subscribe(res => {
-              $('#register-establishment-modal').modal('hide');
-              this.notifyS.succesEstablishmentCreated();
-              this.formC.reset();
-              this.changeDetectorRef.detectChanges();
-              this.router.navigate(['company', this.idCompany, 'establishments', res.establishmentId]);
-            }, error => {
-              if (error.status === 500 || error.status === 503) {
-                this.notifyS.serverError();
-              } else if (error.status === 401 || error.status === 403) {
-                this.authS.logoutExpiredAndReload();
-              }
+      const promiseLogo = new Promise((resolve, reject) => {
+        if (this.imagePath !== null) {
+          this.companyService.postLogo(this.imagePath).subscribe(res => {
+            resolve(res.logo);
+          }, error => {
+            if (error.status === 500 || error.status === 503) {
+              this.notifyS.serverError();
+            } else if (error.status === 401 || error.status === 403) {
+              this.authS.logoutExpiredAndReload();
             }
-          );
-        });
+            reject(error.message);
+          });
+        } else {
+          resolve(this.imgURL as string);
+        }
       });
 
+      const promiseImages = new Promise((resolve, reject) => {
+        const imgs = [];
+        imgs.push(...this.images.filter(myImg => myImg.imgFile === undefined).map(img => img.imgUrl as string));
+        const photos = this.images.map(myimg => myimg.imgFile).filter(img => img !== undefined);
+        if (photos.length !== 0) {
+          this.companyService.postPhotos(photos).subscribe(res => {
+            imgs.push(...res.map(photoObj => photoObj.photo));
+            resolve(imgs);
+          }, error => {
+            if (error.status === 500 || error.status === 503) {
+              this.notifyS.serverError();
+            } else if (error.status === 401 || error.status === 403) {
+              this.authS.logoutExpiredAndReload();
+            }
+            reject(error.message);
+          });
+        } else {
+          resolve(imgs);
+        }
+      });
+
+      promiseLogo.then(logo => {
+        promiseImages.then(imgs => {
+          this.establishmentR.logoUrl = logo as string;
+          this.establishmentR.photoUrls = imgs as string[];
+          if (!this.isEdit) {
+            this.companyService.postEstablishment(this.establishmentR).subscribe(res => {
+                $('#register-establishment-modal').modal('hide');
+                this.notifyS.succesEstablishmentCreated();
+                this.formC.reset();
+                this.changeDetectorRef.detectChanges();
+                this.router.navigate(['company', this.idCompany, 'establishments', res.establishmentId]);
+              }, error => {
+                if (error.status === 500 || error.status === 503) {
+                  this.notifyS.serverError();
+                } else if (error.status === 401 || error.status === 403) {
+                  this.authS.logoutExpiredAndReload();
+                }
+              }
+            );
+          } else {
+            this.companyService.editEstablishment(this.establishmentR, this.establishment.idEstablishment).subscribe(() => {
+                $('#register-establishment-modal').modal('hide');
+                this.notifyS.succesEstablishmentEdited();
+                this.formC.reset();
+                this.changeDetectorRef.detectChanges();
+                this.router.navigate(['company', this.idCompany, 'establishments', this.establishment.idEstablishment]);
+              }, error => {
+                if (error.status === 500 || error.status === 503) {
+                  this.notifyS.serverError();
+                } else if (error.status === 401 || error.status === 403) {
+                  this.authS.logoutExpiredAndReload();
+                }
+              }, () => {
+                if (this.router.url !== '/company/establishments') {
+                  location.reload();
+                }
+              }
+            );
+          }
+        });
+      });
     }
   }
 
@@ -431,5 +506,44 @@ export class CreateEstablishmentModalComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  private getEstablishment(): void {
+    this.userS.getEstablishmentById(this.establishment.idCompany, this.establishment.idEstablishment).subscribe(establishment => {
+        this.imgURL = establishment.message.logoUrl;
+        establishment.message.photoUrls.forEach(
+          photo => this.images.push({
+            imgFile: undefined,
+            imgUrl: photo
+          })
+        );
+        this.capacity = establishment.message.capacity;
+        this.desc = establishment.message.description;
+        this.nameEst = establishment.message.establishmentName;
+        this.categories.forEach(category => {
+          if (establishment.message.categories.find(cat => cat === category.category.establishmentCategoryName) !== undefined) {
+            this.selectCategorie(category);
+          }
+        });
+        if (establishment.message.establishmentTypes.find(typ => typ === 'Bar') !== undefined) {
+          this.selectBar();
+        }
+        if (establishment.message.establishmentTypes.find(typ => typ === 'Discoteca') !== undefined) {
+          this.selectDiscotheque();
+        }
+        this.address = establishment.message.location.address;
+        this.citySelect = establishment.message.location.city;
+        this.marker.lat = establishment.message.location.latitude;
+        this.marker.lng = establishment.message.location.longitude;
+      }, error => {
+      if (error.status === 500 || error.status === 503) {
+        this.notifyS.serverError();
+      } else if (error.status === 401 || error.status === 403) {
+        this.authS.logoutExpiredAndReload();
+      }
+      }, () => {
+      }
+    );
+
   }
 }

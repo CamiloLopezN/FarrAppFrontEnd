@@ -32,7 +32,6 @@ export class EstablishmentCardComponent implements OnInit {
       idCompany: this.establishment.companyId,
       name: this.establishment.establishmentName
     });
-    this.ism.isEstablishment.next(true);
   }
 
   redirect(): void {
@@ -41,6 +40,18 @@ export class EstablishmentCardComponent implements OnInit {
   }
 
   edit(event: MouseEvent): void {
+    event.stopPropagation();
+    try {
+      this.ers.establishmentSelect.next({
+        idCompany: this.establishment.companyId,
+        idEstablishment: this.establishment.establishmentId,
+        name: this.establishment.establishmentName
+      });
+    } catch (error) {
+    } finally {
+      this.ism.isEstablishment.next(true);
+      this.ism.isEstablishmentEdit.next(true);
+    }
   }
 
   remove(mouseEvent: MouseEvent): void {
@@ -52,7 +63,6 @@ export class EstablishmentCardComponent implements OnInit {
         name: this.establishment.establishmentName
       });
     } catch (error) {
-      console.error(error);
     } finally {
       $('#removeEstablishment').modal('show');
     }

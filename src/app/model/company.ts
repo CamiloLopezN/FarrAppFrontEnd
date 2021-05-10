@@ -68,6 +68,7 @@ export interface EventView {
   end: Date;
   imageUrl: string;
   status: string;
+  interested: number;
 }
 
 export interface Establishment {
@@ -244,6 +245,7 @@ export interface CodePromotional {
 
 export interface EstablishmentView {
   companyId: string;
+  followers: number;
   establishmentId: string;
   establishmentName: string;
   location: LocationId;
@@ -315,4 +317,20 @@ export interface Customer {
   isDefaultCard: boolean;
   companyId: string;
 
+}
+
+export interface SubscriptionActual{
+  orderReference: string;
+  orderStatus: string;
+  orderDate: Date;
+  description: string;
+  periodStart: Date;
+  periodEnd: Date;
+  paymentType: string;
+  paymentMethod: string;
+  intervalCount: number;
+  interval: string;
+  price: number;
+  tax: number;
+  discount: number;
 }

@@ -269,4 +269,22 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  succesEstablishmentEdited(): void {
+    this.nService.success('Estado del establecimiento', '¡Se ha editado el establecimiento correctamente!', {
+      timeOut: 3000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
+
+  disapprovedSub(): void {
+    this.nService.error('Estado de transacción', 'La transacción no ha sido aprobada.', {
+      timeOut: 3000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

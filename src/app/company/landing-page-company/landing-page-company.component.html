@@ -2,8 +2,8 @@
   <div class="header-company">
     <h1 class="name-company d-block m-0 p-0">{{company.companyName}}</h1>
     <h2 class="nit-company m-0 p-0">{{company.nit}}</h2>
-    <p *ngIf="isSubscribe" class="mt-2">Suscripción inactiva</p>
-    <p *ngIf="!isSubscribe" class="mt-2">Suscripción activa
+    <p *ngIf="!isSubscribe" class="mt-2">Suscripción inactiva</p>
+    <p *ngIf="isSubscribe" class="mt-2">Suscripción activa
       <fa-icon [icon]="faInfoCard" style="color: #FF1A43; cursor: pointer;"
                [routerLink]="['/company/subscription']"></fa-icon>
     </p>

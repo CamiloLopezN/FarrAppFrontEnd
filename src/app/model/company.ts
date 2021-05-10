@@ -318,3 +318,19 @@ export interface Customer {
   companyId: string;
 
 }
+
+export interface SubscriptionActual{
+  orderReference: string;
+  orderStatus: string;
+  orderDate: Date;
+  description: string;
+  periodStart: Date;
+  periodEnd: Date;
+  paymentType: string;
+  paymentMethod: string;
+  intervalCount: number;
+  interval: string;
+  price: number;
+  tax: number;
+  discount: number;
+}

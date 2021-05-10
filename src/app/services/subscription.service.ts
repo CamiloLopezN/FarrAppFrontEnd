@@ -109,4 +109,45 @@ export class SubscriptionService {
         })
       );
   }
+
+  paidMembership(paymentRef: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post<any>(`${environment.backend}/api/payments/companies/${this.companyId}/paid-membership`, {
+      paymentRef
+    }, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getMembership(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/payments/companies/${this.companyId}/memberships/last`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getTransactions(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any>(`${environment.backend}/api/payments/companies/${this.companyId}/memberships`, {headers})
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

@@ -183,7 +183,7 @@ h4 {
 }
 
 .padding-in {
-  padding: 1.2rem 0 1.5rem 2.5rem;
+  padding: 1.2rem 0.4rem 1.5rem 2.5rem;
 }
 
 .padding-in-2 {
@@ -334,7 +334,7 @@ h4 {
   }
 
   .padding-in {
-    padding: 1.2rem 0 1.2rem 2.5rem;
+    padding: 1.2rem 0.4rem 1.2rem 2.5rem;
   }
 
   .left-transc, .right-transc {

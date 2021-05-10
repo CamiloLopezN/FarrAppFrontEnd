@@ -95,7 +95,7 @@
       </div>
     </div>
   </nav>
-  <div class="warning-subscription" *ngIf="rol == 'company' && showWarning">
+  <div class="warning-subscription" *ngIf="rol == 'company' && !showWarning">
     <p class="p-warning">Disfruta de una experiencia única adquiriendo nuestra <a
       [routerLink]="['/company/subscription']" class="my-link">suscripción</a>.</p>
     <span class="hide-span mr-2" (click)="showWarning = false">&times;</span>

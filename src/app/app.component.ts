@@ -7,6 +7,7 @@ import {ClientService} from './services/client.service';
 import {AuthService} from './services/auth.service';
 import {CompanyService} from './services/company.service';
 import {NotificationService} from './services/notification.service';
+import {SubscriptionService} from './services/subscription.service';
 
 declare var $: any;
 
@@ -22,8 +23,9 @@ export class AppComponent implements AfterContentChecked {
   isEstablishment: boolean;
   cities: string[];
 
+
   constructor(shms: IsShowModalService, private cs: CitiesService, private ns: NotificationService,
-              private clientC: ClientConnectService, private compS: CompanyService,
+              private clientC: ClientConnectService, private compS: CompanyService, private subS: SubscriptionService,
               private cdref: ChangeDetectorRef, private clientS: ClientService, private authS: AuthService) {
 
     this.authS.roled.subscribe(rol => {
@@ -33,6 +35,11 @@ export class AppComponent implements AfterContentChecked {
             follows: res.message.follows.map(follow => follow.establishmentId),
             interests: res.message.interests.map(follow => follow.eventId)
           });
+        }, () => {
+        });
+      } else if (rol === 'company') {
+        this.subS.getMembership().subscribe(() => {
+          this.authS.isSubscribe.next(true);
         }, () => {
         });
       }

@@ -4,6 +4,7 @@ import {SubscriptionService} from '../../../services/subscription.service';
 import {CreditCard, SendCard} from '../../../model/creditCard';
 import {AuthService} from '../../../services/auth.service';
 import {NotificationService} from '../../../services/notification.service';
+import {SubscriptionActual} from '../../../model/company';
 
 @Component({
   selector: 'app-payment-portal',
@@ -23,6 +24,8 @@ export class PaymentPortalComponent implements OnInit {
   showPay = false;
   cards: CreditCard[];
   cardSelect: CreditCard;
+  subscriptions: SubscriptionActual[];
+  subS: SubscriptionActual;
 
   customerId: string;
 
@@ -41,6 +44,7 @@ export class PaymentPortalComponent implements OnInit {
     if (this.customerId !== undefined) {
       this.getUser();
     }
+    this.getTransactions();
   }
 
   getUser(): void {
@@ -56,7 +60,8 @@ export class PaymentPortalComponent implements OnInit {
     });
   }
 
-  changeView(): void {
+  changeView(subSelect?: SubscriptionActual): void {
+    this.subS = subSelect;
     this.showHistory = !this.showHistory;
   }
 
@@ -125,6 +130,17 @@ export class PaymentPortalComponent implements OnInit {
       }, () => {
         this.showPay = !this.showPay;
       });
+    });
+  }
+
+  getTransactions(): void {
+    this.subscriptionS.getTransactions().subscribe(res => {
+      this.subscriptions = res;
+      this.subscriptions.sort((a, b) => {
+        return a.periodStart > b.periodEnd ? 1 : -1;
+      });
+    }, error => {
+      console.log(error);
     });
   }
 }

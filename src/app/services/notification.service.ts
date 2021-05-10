@@ -278,4 +278,13 @@ export class NotificationService {
       clickToClose: true
     });
   }
+
+  disapprovedSub(): void {
+    this.nService.error('Estado de transacción', 'La transacción no ha sido aprobada.', {
+      timeOut: 3000,
+      showProgressBar: false,
+      pauseOnHover: true,
+      clickToClose: true
+    });
+  }
 }

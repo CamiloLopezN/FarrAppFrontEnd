@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Subscription} from '../../../model/company';
+import {Subscription, SubscriptionActual} from '../../../model/company';
 
 @Component({
   selector: 'app-subscription-card',
@@ -8,7 +8,7 @@ import {Subscription} from '../../../model/company';
 })
 export class SubscriptionCardComponent implements OnInit {
 
-  @Input() sub: Subscription;
+  @Input() sub: Subscription | SubscriptionActual;
   @Input() isSub: boolean;
 
   constructor() {

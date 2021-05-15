@@ -1,0 +1,212 @@
+<div class="my-box pt-4 pb-4">
+  <form name="registerCLient" #formTicket="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
+
+    <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="namTicket" class="h5">Nombre *</label>
+        <input type="text" class="form-control"
+               #namTicket="ngModel" name="namTicket" [(ngModel)]="nameTicket" id="namTicket" required>
+        <small id="nameHelp" class="form-text text-danger" *ngIf="!namTicket.valid && namTicket.touched">Debes ingresar
+          el nombre del ticket.</small>
+
+      </div>
+    </div>
+
+    <div class="form-row mt-2 text-left">
+      <div class="form-group col">
+        <label for="myprice" class="h5">Precio *</label>
+        <input type="number" class="form-control"
+               #pric="ngModel" name="pric" [(ngModel)]="price" id="myprice" required>
+        <small id="priceHelp3" class="form-text text-danger" *ngIf="price">{{price | currency}}</small>
+        <small id="priceHelp" class="form-text text-danger" *ngIf="!pric.valid && pric.touched">Debes ingresar un número
+          válido</small>
+        <small id="priceHelp2" class="form-text text-danger"
+               *ngIf="pric.valid && pric.touched && !this.ifValidatePriceLength()">Debes ingresar un número mayor o
+          igual
+          a 0</small>
+      </div>
+      <div class="form-group col">
+        <label for="myquantity" class="h5">Cantidad *</label>
+        <input type="number" class="form-control"
+               #quantit="ngModel" name="quantit" [(ngModel)]="quantity" id="myquantity" required>
+        <small id="qntHelp" class="form-text text-danger" *ngIf="!quantit.valid && quantit.touched">Debes ingresar una
+          cantidad válida</small>
+        <small id="qntHelp2" class="form-text text-danger"
+               *ngIf="quantit.valid && quantit.touched && !this.ifValidateQuantityLength()">Debes ingresar un número
+          mayor a 0</small>
+      </div>
+    </div>
+    <div class="dropdown-divider"></div>
+
+    <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="dateInit" class="h5">Inicio de venta *</label>
+        <input type="date" class="form-control"
+               #dateIn="ngModel" name="dateIn" [(ngModel)]="dateInit" id="dateInit" required>
+        <small id="dataInHelp" class="form-text text-danger"
+               *ngIf="dateIn.valid && dateIn.touched && messageDate">{{messageDate}}</small>
+      </div>
+
+      <div class="form-group col">
+        <label for="dateHour" class="h5"><br></label>
+        <input type="time" class="form-control"
+               #dateHour="ngModel" name="dateHour" [(ngModel)]="dateHourInit" id="dateHour" required>
+      </div>
+    </div>
+    <div class="form-row text-left">
+      <div class="form-group col">
+        <label for="dateFin" class="h5">Fin de venta *</label>
+        <input type="date" class="form-control"
+               #datFin="ngModel" name="datFin" [(ngModel)]="dateFin" id="dateFin" required>
+      </div>
+      <div class="form-group col">
+        <label for="dateFinHr" class="h5"><br></label>
+        <input type="time" class="form-control"
+               #dateFinHr="ngModel" name="dateFinHr" [(ngModel)]="dateHourFin" id="dateFinHr" required>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="desc" class="h5">Descripción *</label>
+        <textarea type="date" class="form-control"
+                  #desc="ngModel" name="desc" [(ngModel)]="description" id="desc" required>
+      </textarea>
+        <small id="descHelp" class="form-text text-danger" *ngIf="!desc.valid && desc.touched">Debes ingresar la
+          descripción de la entrada.</small>
+
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="pricDoor" class="h5">Precio en puerta *</label>
+        <input type="number" class="form-control"
+               #pricDoor="ngModel" name="pricDoor" [(ngModel)]="priceDoor" id="pricDoor" required>
+        <small id="priceDoorHelp23" class="form-text text-danger" *ngIf="priceDoor">{{priceDoor | currency}}</small>
+        <small id="priceDoorHelp" class="form-text text-danger" *ngIf="!pricDoor.valid && pricDoor.touched">Debes
+          ingresar un número válido</small>
+        <small id="priceDoorHelp2" class="form-text text-danger"
+               *ngIf="pricDoor.valid && pricDoor.touched && !this.ifValidatePriceDoorLength()">Debes
+          ingresar un número ayor o igual a 0</small>
+      </div>
+      <div class="form-group col d-flex align-items-center">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customControlInline" #fastLin="ngModel" name="fastLin"
+                 [(ngModel)]="fastLine">
+          <label class="custom-control-label" for="customControlInline">Fila rápida</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="mt-4 text-left" id="status-ticket">
+      <h5>Estado *</h5>
+      <div class="row justify-content-center">
+        <div *ngFor="let state of status">
+          <div class="col">
+            <button
+              (click)="changeButton(state, status, messageStatus)"
+              type="button"
+              class="btn border-circ my-btn w-100 mt-2"
+              name="{{state.name}}"
+              id="{{state.name}}">
+              {{state.name}}</button>
+          </div>
+        </div>
+      </div>
+      <small id="statusHelp" class="form-text text-danger" *ngIf="messageStatus">{{messageStatus}}</small>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="mt-4 text-left">
+
+      <h5 class="float-left mb-2">Código promocional</h5>
+      <button class="btn btn-outline-secondary float-right" (click)="isVisible = true" *ngIf="!isVisible"
+              style="border-radius: 50%">
+        <fa-icon [icon]="faChevronDown"></fa-icon>
+      </button>
+      <button class="btn btn-outline-secondary float-right" (click)="isVisible = false" *ngIf="isVisible"
+              style="border-radius: 50%">
+        <fa-icon [icon]="faChevronUp"></fa-icon>
+      </button>
+      <div class="clearfix"></div>
+      <app-register-code *ngIf="isVisible" (onAdd)="addCode($event)"></app-register-code>
+      <div class="mt-4" *ngIf="codePromotions" id="divPromotionals">
+        <div *ngFor="let code of codePromotions; index as i">
+          <app-code-promotional-card (onDelete)="removeCode(i)" [codeP]="code"
+                                     id="my-card{{code.codeString}}"></app-code-promotional-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="tickMax" class="h5">Máximo de entradas *</label>
+        <input type="number" class="form-control"
+               #ticketMax="ngModel" name="ticketMax" [(ngModel)]="maxTicketNumber" id="tickMax" required>
+        <small id="ticketMaxHelp" class="form-text text-danger" *ngIf="!ticketMax.valid && ticketMax.touched">Debes
+          ingresar un número válido</small>
+        <small id="ticketMaxHelp1" class="form-text text-danger"
+               *ngIf="ticketMax.valid && ticketMax.touched && !ifValidateMaxLength()">Debes
+          ingresar un número mayor a 0</small>
+        <small id="ticketMaxHelp2" class="form-text text-danger"
+               *ngIf="ticketMax.valid && ticketMax.touched && ticketMin.valid && !ifValidateMaxMin()">El máximo número
+          de entradas debe ser
+          mayor al mínimo</small>
+      </div>
+      <div class="form-group col">
+        <label for="tickMin" class="h5">Mínimo de entradas *</label>
+        <input type="number" class="form-control"
+               #ticketMin="ngModel" name="ticketMin" [(ngModel)]="minTicketNumber" id="tickMin" required>
+        <small id="ticketMinHelp" class="form-text text-danger" *ngIf="!ticketMin.valid && ticketMin.touched">Debes
+          ingresar un número válido</small>
+        <small id="ticketMinHelp1" class="form-text text-danger"
+               *ngIf="ticketMin.valid && ticketMin.touched && !ifValidateMinLength()">Debes
+          ingresar un número mayor a 0</small>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="mt-4 text-left" id="ballot-holder">
+      <h5>Títular de boleta *</h5>
+      <div class="row justify-content-center">
+        <div *ngFor="let stat of transNorm">
+          <div class="col">
+            <button
+              (click)="changeButton(stat, transNorm, messageBallotHolder)"
+              type="button"
+              class="btn border-circ my-btn w-100 mt-2"
+              name="{{stat.name}}"
+              id="{{stat.name}}">
+              {{stat.name}}</button>
+          </div>
+        </div>
+      </div>
+      <small id="ballotHelp" class="form-text text-danger" *ngIf="messageBallotHolder">{{messageBallotHolder}}</small>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="form-row mt-4 text-left">
+      <div class="form-group col">
+        <label for="infoX" class="h5">Requisitos o información adicional</label>
+        <textarea type="date" class="form-control"
+                  #infoX="ngModel" name="infoX" [(ngModel)]="infoExtra" id="infoX">
+      </textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-outline-dark mt-4" style="border-radius: 30px"
+            [disabled]="!formTicket.form.valid || !ifValidateAll()">Crear entrada
+    </button>
+  </form>
+</div>

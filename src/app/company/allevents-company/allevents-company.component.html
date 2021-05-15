@@ -1,0 +1,60 @@
+<div style="background: white; animation-duration: 0.2s; overflow: hidden"
+     class="animate__animated animate__fadeInRight">
+  <div class="header-events">
+    <h1 class="name-company d-block">¡Tus eventos!</h1>
+    <h2 class="nit-company">Crea tus propias</h2>
+    <div class="pl-5 pt-0">
+      <label class="options-label">OPCIONES</label>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <div style="padding-right: 8rem;">
+      <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+        <div class="options text-right">
+          <label class="title-top m-0 p-0">Eventos activos</label>
+          <h4 class="m-0 p-0">{{eventsActive.length + eventsFinish.length}}</h4>
+          <label class="title-top m-0 p-0">Asistentes</label>
+          <h4 class="m-0 p-0">{{interested}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center pt-3">
+    <button class="btn my-btn text-white" (click)="event()">
+      <fa-icon [icon]="faCalendarPlus" size="3x">
+      </fa-icon>
+    </button>
+    <div>
+      Crear evento
+    </div>
+  </div>
+  <section class="events-proximate mb-5" *ngIf="eventsActive.length != 0">
+    <div class="container-events">
+      <app-events-company [events]="eventsActive" [typeEvent]="'¡Estos son tus próximos eventos!'" [index]="'0'"
+                          [tittle]="'Eventos activos'"></app-events-company>
+    </div>
+  </section>
+
+  <section class="events-proximate mb-5" *ngIf="eventsInactive.length != 0">
+    <div class="container-events">
+      <app-events-company [events]="eventsInactive" [typeEvent]="'¡Estos son tus eventos ocultos!'" [index]="'1'"
+                          [tittle]="'Eventos inactivos'"></app-events-company>
+    </div>
+  </section>
+
+  <section class="events-proximate mb-5" *ngIf="eventsPostpone.length != 0">
+    <div class="container-events">
+      <app-events-company [events]="eventsPostpone" [typeEvent]="'¡Estos son tus eventos aplazados!'" [index]="'2'"
+                          [tittle]="'Eventos aplazados'"></app-events-company>
+    </div>
+  </section>
+
+  <section class="events-proximate mb-5" *ngIf="eventsFinish.length != 0">
+    <div class="container-events">
+      <app-events-company [events]="eventsFinish" [typeEvent]="'¡Estos son tus eventos terminados!'" [index]="'3'"
+                          [tittle]="'Eventos terminados'"></app-events-company>
+    </div>
+  </section>
+  <div style="padding: 25vh"
+       *ngIf="eventsActive.length == 0 && eventsFinish.length == 0 && eventsPostpone.length == 0 && eventsInactive.length == 0"></div>
+</div>

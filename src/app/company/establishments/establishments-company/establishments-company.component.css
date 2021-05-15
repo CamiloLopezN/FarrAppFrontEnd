@@ -1,0 +1,42 @@
+.div-flex{
+  display: flex;
+}
+
+.left-div{
+}
+
+.right-chevron{
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-chevron fa-icon{
+  font-size: 1rem;
+}
+
+.carousel-mine {
+  background: #ffffff;
+}
+
+.carousel-cell-mine {
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.events {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.4rem;
+  line-height: 1rem;
+  color: #252427;
+}
+
+.events2 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+  color: rgba(37, 36, 39, 0.6);
+}

@@ -1,0 +1,64 @@
+<div class="animate__animated animate__fadeInRight" style="animation-duration: 0.2s;">
+  <section class="margin-1200 mt-5 mb-5">
+    <p class="text-center text-name">¡Bienvenido!</p>
+    <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">ADMIN</p>
+    <div class="text-center">
+      <p class="text-desc-profile">¡Vamos a trabajar</p>
+      <p class="text-desc-change">Estas son tus opciones</p>
+    </div>
+  </section>
+
+
+  <section class="accions-company-icons">
+    <div class="text-center mb-4">
+      <button class="btn my-btn text-white" [routerLink]="['/admin/profile']">
+        <fa-icon [icon]="faUserEdit" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Mi perfil
+      </p>
+    </div>
+    <div class="text-center mb-4">
+      <button class="btn my-btn text-white" [routerLink]="['/admin/client']">
+        <fa-icon [icon]="faUser" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Usuarios
+      </p>
+    </div>
+
+    <div class="text-center mb-4">
+      <button class="btn my-btn text-white" data-toggle="modal" data-target="#register-client-modal"
+              (click)="authS.inReg.next(false)">
+        <fa-icon [icon]="faUserPlus" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Crear usuario
+      </p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn my-btn text-white" [routerLink]="['/admin/company']">
+        <fa-icon [icon]="faUsers" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Empresas
+      </p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn my-btn text-white" data-toggle="modal" data-target="#register-company-modal"
+              (click)="authS.inRegCompany.next(false)">
+        <fa-icon [icon]="faUserPlus" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Crear empresa
+      </p>
+    </div>
+  </section>
+</div>

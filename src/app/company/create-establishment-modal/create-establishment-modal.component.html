@@ -1,0 +1,217 @@
+<!-- Modal -->
+<div class="modal fade" id="register-establishment-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content-register">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <form name="registerCLient" #formEstablishment="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
+
+          <p id="createAccountTittle" class="h4 pt-2 pb-2">¡Crea tu establecimiento!</p>
+
+          <div class="mt-4 text-left" id="type-establishment">
+            <h5>Tipo</h5>
+            <div class="row">
+              <div class="col">
+                <button
+                  (click)="selectBar()"
+                  type="button"
+                  class="btn border-circ my-btn w-100"
+                  name="{{btnBar}}"
+                  id="{{btnBar}}">
+                  Bar
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  (click)="selectDiscotheque()"
+                  type="button"
+                  class="btn border-circ my-btn w-100"
+                  name="{{btnDiscotheque}}"
+                  id="{{btnDiscotheque}}">
+                  Discoteca
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="text-left">
+            <small id="buildingHelp" class="form-text text-danger"
+                   *ngIf="messageErrorType">{{messageErrorType}}</small>
+          </div>
+
+          <div class="input-group mt-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text icon">
+                <fa-icon [icon]="faGlassCheers" class="fa-lg" style="margin-left:0; margin-right: 0"></fa-icon>
+              </div>
+            </div>
+            <input type="text" class="form-control " placeholder="Nombre"
+                   #nameEstablishment="ngModel" name="nameEstablishment" [(ngModel)]="nameEst" required>
+          </div>
+          <div class="text-left">
+            <small id="buildingHelp" class="form-text text-danger"
+                   *ngIf="!nameEstablishment.valid && nameEstablishment.touched">Debes ingresar el nombre de tu
+              establecimiento.</small>
+            <small id="buildingHelp" class="form-text text-danger"
+                   *ngIf="nameEstablishment.valid && nameEstablishment.touched && !isNameLength()">El nombre de tu
+              establecimiento debe tener menos de 150 caracteres.</small>
+          </div>
+
+          <div class="input-group mt-4" id="logo-establishment">
+            <input #file type="file" accept='image/*' class="custom-file-input" id="input_file"
+                   (change)="preview(file.files)" hidden>
+            <div class="input-group-prepend">
+              <div class="input-group-text icon"
+                   style="border-bottom-left-radius: 20px; border-top-left-radius: 20px">
+                <fa-icon [icon]="faImage" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+              </div>
+            </div>
+            <button type="button" class="form-control text-left" (click)="open_file()"
+                    style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Logotipo
+            </button>
+            <img class="ml-2 logo" [src]="imgURL" *ngIf="imgURL" style="border-radius: 50%;" alt="logo de establecimiento">
+          </div>
+          <div class="text-left">
+            <small id="emailHelp" class="form-text text-danger" *ngIf="message">{{message}}</small>
+          </div>
+
+          <div class="mt-4 text-left" id="category-establishment">
+            <h5>Categoría</h5>
+            <div class="row justify-content-center">
+              <div *ngFor="let category of categories">
+                <div class="col">
+                  <button
+                    (click)="selectCategorie(category)"
+                    type="button"
+                    class="btn border-circ my-btn w-100 mt-2"
+                    name="{{category.category.establishmentCategoryName}}"
+                    id="{{category.category.establishmentCategoryName}}">
+                    {{category.category.establishmentCategoryName}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-left">
+            <small id="buildingHelp" class="form-text text-danger"
+                   *ngIf="messageErrorCategory">{{messageErrorCategory}}</small>
+          </div>
+
+          <div class="mt-4 text-left">
+
+            <h5>Descripción</h5>
+            <textarea placeholder="Describe tu establecimiento" class="form-control" #description="ngModel"
+                      name="description" [(ngModel)]="desc" rows="4" required></textarea>
+          </div>
+          <div class="text-left">
+            <small id="description" class="form-text text-danger"
+                   *ngIf="!description.valid && description.touched">Debes ingresar la descripción de tu
+              empresa.</small>
+            <small id="description" class="form-text text-danger"
+                   *ngIf="description.valid && description.touched && !isDescriptionLength()">La descripción de tu
+              empresa debe tener menos de 1024 caracteres.</small>
+          </div>
+
+          <div class="input-group mt-4" id="photos-establishment">
+            <input #file2 type="file" accept='image/*' class="custom-file-input" id="input_file2"
+                   (change)="preview2(file2.files)" hidden>
+            <div class="input-group-prepend">
+              <div class="input-group-text icon"
+                   style="border-bottom-left-radius: 20px; border-top-left-radius: 20px">
+                <fa-icon [icon]="faImages" class="fa-lg" style="margin-left:2px; margin-right: 2px"></fa-icon>
+              </div>
+            </div>
+            <button type="button" class="form-control text-left" (click)="open_file2()"
+                    style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Fotos del sitio
+            </button>
+          </div>
+          <div class="text-left">
+            <small id="emailHelp" class="form-text text-danger" *ngIf="message2">{{message2}}</small>
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="messageErrorPhotos">{{messageErrorPhotos}}</small>
+          </div>
+          <div class="row justify-content-center">
+            <div *ngFor="let img of images">
+              <div class="col mt-4">
+                <div>
+                  <img class="img-my" [src]="img.imgUrl" width="170" height="170" style="border-radius: 20px" alt="imagen de evento">
+                  <button class="btn position-absolute text-white m-0 p-0 mybtn"
+                          style="right: 10%;outline: none;border: none" (click)="removeImg(img)">&times;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-left" id="ubication-establishment">
+            <h5>Ubicación</h5>
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                     (mapClick)="mapClicked($event.coords.lng, $event.coords.lat)">
+              <agm-marker [latitude]="marker.lat" [longitude]="marker.lng"
+                          *ngIf="marker.lat != null || marker.lng !=null">
+                <agm-info-window>{{nameEst}}</agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+          <div class="text-left">
+            <small id="emailHelp" class="form-text text-danger"
+                   *ngIf="messageErrorUbication">{{messageErrorUbication}}</small>
+          </div>
+
+
+          <div class="mt-4 text-left">
+            <h5>Ciudad</h5>
+            <select class="custom-select" aria-label="Default select example" style="border-radius: 20px"
+                    [(ngModel)]="citySelect" name="city">
+              <option *ngFor="let city of cities" [value]="city">
+                {{city}}
+              </option>
+            </select>
+          </div>
+
+          <div class="input-group mt-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text icon">
+                <fa-icon [icon]="faMarkerAlt" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+              </div>
+            </div>
+            <input type="text" class="form-control " placeholder="Dirección"
+                   #addr="ngModel" name="addr" [(ngModel)]="address" required>
+          </div>
+          <div class="text-left">
+            <small id="addr" class="form-text text-danger"
+                   *ngIf="!addr.valid && addr.touched">Debes ingresar la dirección de tu establecimiento.</small>
+            <small id="addr" class="form-text text-danger"
+                   *ngIf="addr.valid && addr.touched && !isAddressLength()">La dirección de tu establecimiento debe
+              tener menos de 150 caracteres.</small>
+          </div>
+
+          <div class="input-group mt-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text icon">
+                <fa-icon [icon]="faClipBoard" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+              </div>
+            </div>
+            <input type="number" class="form-control " placeholder="Capacidad"
+                   #cpcity="ngModel" name="cpcity" [(ngModel)]="capacity" pattern="(^[0-9]+)$" required>
+          </div>
+          <div class="text-left">
+            <small id="buildingHelp" class="form-text text-danger"
+                   *ngIf="!cpcity.valid && cpcity.touched">Debes ingresar un número válido</small>
+          </div>
+
+          <button type="submit" class="btn btn-outline-dark mt-4 btn-custom-width w-100" style="border-radius: 30px"
+                  [disabled]="!formEstablishment.form.valid || !isValidLength()"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">{{action}}</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

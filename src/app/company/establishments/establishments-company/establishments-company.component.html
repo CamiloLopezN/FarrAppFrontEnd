@@ -1,0 +1,16 @@
+<div *ngIf="tittle" class="div-flex">
+  <div class="left-div">
+    <p class="events"><b>{{tittle}}</b></p>
+    <p class="events2">{{typeEstablishment}}</p>
+  </div>
+  <div class="right-chevron" *ngIf="hasShowMore">
+    <fa-icon id="showMore2" (click)="redirect()" [icon]="faChevronRight" class="float-right" data-toggle="tooltip" data-placement="top" title="Ver más" style="cursor: pointer"></fa-icon>
+  </div>
+</div>
+<div class="carousel-mine">
+  <div class="carousel-cell-mine" *ngFor="let establishment of establishments">
+    <app-establishment [establishment]="establishment"></app-establishment>
+  </div>
+</div>
+<div class="p-5">
+</div>

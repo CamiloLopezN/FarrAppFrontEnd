@@ -1,0 +1,261 @@
+<!-- Modal -->
+<div class="modal fade" id="register-event-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body border-content-register">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0 text-center">FarrApp</h1>
+
+        <form name="registerCLient" #formEvent="ngForm" (ngSubmit)="onSubmit()">
+
+          <p id="createAccountTittle" class="h4 pt-2 pb-2 text-center">¡Diseña tu evento!</p>
+
+          <div class="input-group mt-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text icon">
+                <fa-icon [icon]="faCalendar" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+              </div>
+            </div>
+            <input type="text" class="form-control " placeholder="Nombre del evento"
+                   #namEvent="ngModel" name="namEvent" [(ngModel)]="eventC.name" required>
+          </div>
+          <small id="buildingHelp" class="form-text text-danger"
+                 *ngIf="!namEvent.valid && namEvent.touched">Debes ingresar el nombre de tu evento.</small>
+
+          <div class="mt-4 text-left" *ngIf="establishments">
+            <h5>Establecimiento *</h5>
+            <select class="custom-select" aria-label="Default select example" style="border-radius: 20px"  #stablish="ngModel"
+                    [(ngModel)]="establishmentSelect" name="stablish" (click)="change()">
+              <option *ngFor="let establishment of establishments" [ngValue]="establishment">
+                {{establishment.establishmentName}}
+              </option>
+            </select>
+          </div>
+
+          <div class="row mt-4 text-left" id="dateInitEvent">
+            <div class="col">
+              <h5>Fecha de inicio *</h5>
+              <div>
+                <input type="date" class="form-control my-form" #bdate="ngModel" name="bdate" [(ngModel)]="eventC.date"
+                       (click)="messageErrorDate=''" required>
+              </div>
+              <small id="dateHelp" class="form-text text-danger"
+                     *ngIf="messageErrorDate">{{messageErrorDate}}</small>
+
+            </div>
+            <div class="col">
+              <h5><br></h5>
+              <div>
+                <input type="time" class="form-control my-form"
+                       #btime="ngModel" name="btime" [(ngModel)]="eventC.hourInit" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4 text-left">
+            <div class="col">
+              <h5>Fecha de fin *</h5>
+              <div>
+                <input type="date" class="form-control my-form"
+                       #fdate="ngModel" name="fdate" [(ngModel)]="dateFin" required>
+              </div>
+            </div>
+            <div class="col">
+              <h5><br></h5>
+              <div>
+                <input type="time" class="form-control my-form"
+                       #ftime="ngModel" name="ftime" [(ngModel)]="eventC.hourFin" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="input-group mt-4" id="images-events">
+            <input #file type="file" accept='image/*' class="custom-file-input" id="input_file1"
+                   (change)="preview(file.files)" hidden>
+            <div class="input-group-prepend">
+              <div class="input-group-text icon"
+                   style="border-bottom-left-radius: 20px; border-top-left-radius: 20px">
+                <fa-icon [icon]="faImages" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+              </div>
+            </div>
+            <button type="button" class="form-control text-left" (click)="open_file()"
+                    style="border-bottom-right-radius: 20px; border-top-right-radius: 20px">Seleccionar imágenes
+            </button>
+          </div>
+          <div class="text-left">
+            <small id="imageHelp" class="form-text text-danger"
+                   *ngIf="messageErrorImage">{{messageErrorImage}}</small>
+          </div>
+          <div class="row justify-content-center">
+            <div *ngFor="let img of imgs">
+              <div class="col mt-4">
+                <div>
+                  <img class="img-my" [src]="img.imgUrl" width="170" height="170" style="border-radius: 20px" alt="my-img">
+                  <button class="btn position-absolute text-white m-0 p-0 mybtn"
+                          style="right: 10%;outline: none;border: none" (click)="removeImg(img)">&times;
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-left" id="category-event">
+            <h5>Identifica tu evento *</h5>
+            <div class="row justify-content-center">
+              <div *ngFor="let typeE of typeEvent">
+                <div class="col">
+                  <button
+                    (click)="selectEvent(typeE)"
+                    type="button"
+                    class="btn border-circ my-btn w-100 mt-2"
+                    name="{{typeE.name}}"
+                    id="{{typeE.name}}">
+                    {{typeE.name}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small id="categoryEvent" class="form-text text-danger"
+                 *ngIf="messageErrorEvent">{{messageErrorEvent}}</small>
+
+          <div class="mt-4 text-left">
+            <h5>Cuéntanos de qué trata tu evento *</h5>
+            <textarea placeholder="Descripción del evento" class="form-control" #desc="ngModel"
+                      name="desc" [(ngModel)]="description" rows="4" required></textarea>
+          </div>
+          <small id="descHelp" class="form-text text-danger"
+                 *ngIf="!desc.valid && desc.touched">Debes ingresar la descripción de tu evento.</small>
+
+          <div class="mt-4 text-left" id="codeClothe">
+            <h5>Código de vestimenta *</h5>
+            <div class="row justify-content-center">
+              <div *ngFor="let codeClothe of clotheCode">
+                <div class="col">
+                  <button
+                    (click)="selectEvent(codeClothe)"
+                    type="button"
+                    class="btn border-circ my-btn w-100 mt-2"
+                    name="{{codeClothe.name}}"
+                    id="{{codeClothe.name}}">
+                    {{codeClothe.name}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small id="codeClothe" class="form-text text-danger"
+                 *ngIf="messageErrorCodeClothe">{{messageErrorCodeClothe}}</small>
+          <div class="row mt-4 text-left">
+            <div class="col">
+              <h5>Edad mínima *</h5>
+              <div>
+                <input type="number" class="form-control my-form"
+                       #minimAge="ngModel" name="minimAge" [(ngModel)]="minAge" required>
+                <small id="minimAge" class="form-text text-danger"
+                       *ngIf="!minimAge.valid && minimAge.touched">Debes ingresar la edad mínima.</small>
+                <small id="minimAge1" class="form-text text-danger"
+                       *ngIf="minimAge.valid && minimAge.touched && !ifMinAge()">Debes ingresar un número mayor o igual
+                  a 0</small>
+              </div>
+            </div>
+            <div class="col">
+              <h5>Capacidad *</h5>
+              <div>
+                <input type="number" class="form-control my-form"
+                       #capacit="ngModel" name="capacit" [(ngModel)]="capacity" required>
+                <small id="Capacity" class="form-text text-danger"
+                       *ngIf="!capacit.valid && capacit.touched">Debes ingresar la capacidad.</small>
+                <small id="Capacity2" class="form-text text-danger"
+                       *ngIf="capacit.valid && capacit.touched && !ifCapacity()">Debes ingresar un número mayor a
+                  0</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4" id="ticketsList">
+            <app-list-ticket [tickets]="tickets"></app-list-ticket>
+          </div>
+          <small id="ticketsHelp" class="form-text text-danger"
+                 *ngIf="messageNoTickets">{{messageNoTickets}}</small>
+
+
+          <div class="mt-4 text-left" id="whereEvent">
+            <h5>¿Dónde será el evento? *</h5>
+            <div class="row justify-content-center">
+              <div *ngFor="let ubi of typeUbication">
+                <div class="col">
+                  <button
+                    (click)="select(ubi, typeUbication)"
+                    type="button"
+                    class="btn border-circ my-btn w-100 mt-2"
+                    name="{{ubi.name}}"
+                    id="{{ubi.name}}">
+                    {{ubi.name}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <small id="whereHelp" class="form-text text-danger"
+                 *ngIf="messageErrorWhere">{{messageErrorWhere}}</small>
+
+          <div *ngIf="typeUbication[1].isSelect">
+            <div class="mt-4 text-left" id="ubicationEvent">
+              <h5>Ubicación *</h5>
+              <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                       (mapClick)="mapClicked($event.coords.lng, $event.coords.lat)">
+                <agm-marker [latitude]="marker.lat" [longitude]="marker.lng"
+                            *ngIf="marker.lat != null || marker.lng !=null">
+                  <agm-info-window>{{eventC.name}}</agm-info-window>
+                </agm-marker>
+              </agm-map>
+            </div>
+            <small id="ubicationHelp" class="form-text text-danger"
+                   *ngIf="messageErrorUbication">{{messageErrorUbication}}</small>
+            <div class="mt-4 text-left">
+              <h5>Ciudad</h5>
+              <select class="custom-select" aria-label="Default select example" style="border-radius: 20px"
+                      [(ngModel)]="eventC.city" name="city">
+                <option *ngFor="let city of cities" [value]="city">
+                  {{city}}
+                </option>
+              </select>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faMarker" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+                </div>
+              </div>
+              <input type="text" class="form-control " placeholder="Dirección"
+                     #addr="ngModel" name="addr" [(ngModel)]="address" required>
+            </div>
+            <small id="addHelp" class="form-text text-danger"
+                   *ngIf="!addr.valid && addr.touched">Debes ingresar la dirección del evento.</small>
+          </div>
+
+          <div class="mt-4">
+            <h3>
+              Vista previa
+            </h3>
+            <p class="lead">
+              ¡Te ha quedado muy bien!
+            </p>
+            <app-event-visual [event]="eventC"></app-event-visual>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-outline-dark mt-4 btn-custom-width" style="border-radius: 30px"
+                    [disabled]="!formEvent.form.valid || !ifValidateAll()"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Crear evento</p>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

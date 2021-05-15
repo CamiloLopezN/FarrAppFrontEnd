@@ -1,0 +1,42 @@
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="company">
+  <header>
+    <section class="margin-1200 mt-5 mb-5">
+      <p class="text-center text-name">Gestiona a tus </p>
+      <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">empresas</p>
+    </section>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Puedes cambiar el estado de la empresa!</p>
+    </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <label>Nombre</label>
+      <p>{{company.companyName}}</p>
+      <label>Apellido</label>
+      <p>{{company.address}}</p>
+      <label>Género</label>
+      <p>{{company.contactNumber}}</p>
+      <label>Fecha de nacimiento</label>
+      <p>{{company.nit}}</p>
+      <label>Correo electrónico</label>
+      <p>{{company.userId.email}}</p>
+      <div class="btn-list">
+        <button class="btn-custom" [routerLink]="['/admin/company']">Regresar</button>
+        <button type="button" class="btn-red btn-custom-width" (click)="deactivate()"
+                *ngIf="(company.userId.isActive && !company.userId.hasReqDeactivation && company.userId.isVerified) || (company.userId.isActive && company.userId.hasReqDeactivation && company.userId.isVerified)" [class.spinner]="loaderService.isLoading | async">
+          <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Desactivar</p>
+        </button>
+        <button type="button" class="btn-active btn-custom-width" (click)="active()"
+                *ngIf="(!company.userId.isActive && !company.userId.hasReqDeactivation && !company.userId.isVerified) || (!company.userId.isActive && !company.userId.hasReqDeactivation && company.userId.isVerified)" [class.spinner]="loaderService.isLoading | async">
+          <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Activar</p>
+        </button>
+        <button type="button" class="btn-active btn-custom-width" (click)="active()"
+                *ngIf="company.userId.isActive && !company.userId.hasReqDeactivation && !company.userId.isVerified" [class.spinner]="loaderService.isLoading | async">
+          <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Verificar</p>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+

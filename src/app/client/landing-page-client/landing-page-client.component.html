@@ -1,0 +1,61 @@
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="client">
+  <div class="header-company">
+    <h1 class="name-company d-block m-0 p-0">¡{{client.firstName}} {{client.lastName}}!</h1>
+    <h2 class="nit-company">Crea tus propias</h2>
+    <div class="pl-5 pt-0">
+      <label class="options-label">OPCIONES</label>
+    </div>
+  </div>
+  <div style="padding: 2rem">
+  </div>
+  <section class="accions-company-icons">
+    <div class="text-center mb-2">
+      <button class="btn my-btn text-white" [routerLink]="['/client/profile']">
+        <fa-icon [icon]="faUser" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Mi perfil
+      </p>
+    </div>
+
+    <div class="text-center mb-2">
+      <button class="btn my-btn text-white" [routerLink]="['/client/events']" [disabled]="events.length == 0">
+        <fa-icon [icon]="faCalendar" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Eventos
+      </p>
+    </div>
+
+    <div class="text-center mb-2">
+      <button class="btn my-btn text-white" [routerLink]="['/client/establishments']" [disabled]="establishments.length == 0">
+        <fa-icon [icon]="faBuilding" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Establecimientos
+      </p>
+    </div>
+  </section>
+  <div style="padding: 2rem">
+  </div>
+
+  <div class="margin-1200" *ngIf="events.length != 0 || establishments.length != 0">
+    <p class="title-interest">¡Tus intereses!</p>
+    <p class="title-like">Estos son tus gustos</p>
+  </div>
+  <section class="events-proximate mb-5" *ngIf="events.length!= 0">
+    <div class="container-events">
+      <app-events-company [events]="events" [index]="'0'"
+                          [tittle]="'Eventos'"></app-events-company>
+    </div>
+  </section>
+  <section class="events-proximate mb-5" *ngIf="establishments.length != 0">
+    <div class="container-events">
+      <app-establishments-company [establishments]="establishments" [tittle]="'Establecimientos'"></app-establishments-company>
+    </div>
+  </section>
+  <div *ngIf="events.length == 0 && establishments.length == 0" style="padding: 25vh"></div>
+</div>

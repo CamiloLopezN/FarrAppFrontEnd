@@ -1,0 +1,155 @@
+<div class="all-events">
+  <div *ngIf="!isSubscribe else sub">
+    <header>
+      <div class="img-all-events"></div>
+      <div class="titles">
+        <p class="event-title-1">Planes a tu</p>
+        <p class="event-title-2">ALTURA.</p>
+      </div>
+    </header>
+    <main class="margin-1200">
+      <div *ngIf="!next else nextT" class="animate__animated animate__fadeInRight" style="animation-duration: 0.2s;">
+        <section class="info-options ">
+          <div class="info-check">
+            <fa-icon [icon]="faCheckSolid" class="check-icon"></fa-icon>
+            <p class="info-options-p">Publica lo que quieras. Sin restricciones.</p>
+          </div>
+          <div class="info-check">
+            <fa-icon [icon]="faCheckSolid" class="check-icon"></fa-icon>
+            <p class="info-options-p">Cancela o cámbialo cuando quieras.</p>
+          </div>
+          <div class="info-check">
+            <fa-icon [icon]="faCheckSolid" class="check-icon"></fa-icon>
+            <p class="info-options-p">Crea establecimientos.</p>
+          </div>
+        </section>
+        <div class="text-center">
+          <p class="title-options">Escoge una de las opciones para continuar:</p>
+        </div>
+        <section class="cards-subs" [class.spinner]="subs.length == 0">
+          <app-subscription-card *ngFor="let sub of subs" [sub]="sub" [isSub]="false"
+                                 (click)="changeBtns(sub)"></app-subscription-card>
+        </section>
+        <section class="btn-container">
+          <button class="pay-unique text-center" (click)="payUnique()">Pago único</button>
+          <p class="other-option">O también puedes</p>
+          <button class="continue-btn text-center" (click)="next = true">Suscribirme</button>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+
+<ng-template #nextT>
+  <div class="method-pay animate__animated animate__fadeInRight" style="animation-duration: 0.2s;">
+    <p class="lbl-pay">Estás comprando</p>
+    <p class="description-sub">Suscripción de {{subSelect.intervalCount}} {{subSelect.intervalUnit}}</p>
+    <p class="title-method">Información de la factura</p>
+    <small id="buildingHelp" class="form-text text-danger"
+           *ngIf="messageError">{{messageError}}</small>
+    <app-add-customer (next)="createCustomer($event)" (prev)="next = !next"
+                      *ngIf="!customerId else pay"></app-add-customer>
+  </div>
+</ng-template>
+
+<ng-template #sub>
+  <div class="animate__animated animate__fadeInRight" style="animation-duration: 0.2s;">
+    <header style="margin-bottom: 3rem">
+      <div class="img-all-events"></div>
+      <div class="titles">
+        <p class="event-title-1">No tienes</p>
+        <p class="event-title-2">LÍMITES.</p>
+      </div>
+    </header>
+    <main class="margin-1200">
+      <div class="text-center" style="margin-bottom: 3rem">
+        <p class="p-info">Alctualmente disfrutas de las siguiente suscripción</p>
+        <p class="p-info red-info">!Recuerda que puedes cancelarlo cuando quieras!</p>
+      </div>
+      <div *ngIf="subResponse">
+        <app-subscription-card [sub]="subResponse" [isSub]="true"></app-subscription-card>
+      </div>
+      <div class="text-center">
+        <button class="btn-return-2" style="margin-top: 3rem; margin-bottom: 3rem"
+                [routerLink]="['/company/landing-page']">Regresar
+        </button>
+      </div>
+    </main>
+  </div>
+</ng-template>
+
+<ng-template #pay>
+  <div *ngIf="cards.length !== 0">
+    <div class="div-names">
+      <div class="div-50 r-margin mb-3">
+        <p class="lbl-pay">Pagar con</p>
+        <select class="custom-select my-input-txt text-uppercase" #document="ngModel"
+                [(ngModel)]="cardSelect" name="cs">
+          <option *ngFor="let card of cards" [ngValue]="card" class="text-uppercase">
+            {{card.franchise}} {{getLast4(card)}}
+          </option>
+        </select>
+      </div>
+      <div class="div-50 l-margin mb-3">
+        <p class="lbl-pay">Detalles</p>
+        <input type="text" class="my-input-txt" #detail="ngModel" name="dtl" [(ngModel)]="cardSelect.mask"
+               [readOnly]="true">
+      </div>
+    </div>
+    <div class="div-names border-bot-trans">
+      <div class="div-50 r-margin mb-3">
+        <p class="lbl-pay">Tipo de documento</p>
+        <select class="custom-select my-input-txt" #document="ngModel"
+                [(ngModel)]="documentSelect" name="dcm">
+          <option *ngFor="let dc of documentType" [ngValue]="dc">
+            {{dc.name}}
+          </option>
+        </select>
+      </div>
+      <div class="div-50 l-margin mb-3">
+        <p class="lbl-pay">Número de documento</p>
+        <input type="text" class="my-input-txt" #ndoc="ngModel"
+               [(ngModel)]="documentStr" name="ndoc" required>
+        <small id="emailHelp1" class="form-text text-danger" *ngIf="!ndoc.valid && ndoc.touched">No puedes dejar este
+          campo vacío</small>
+      </div>
+    </div>
+    <div class="transc-card border-bot-trans">
+      <div style="width: 100%">
+        <div class="float-left">
+          <p class="date-transc">Producto(s)</p>
+          <p class="txt-transc">Suscripción de {{subSelect.intervalCount}} {{subSelect.intervalUnit}}</p>
+        </div>
+        <div class="float-right hidden-movil">
+          <p class="date-transc">Precio</p>
+          <p class="txt-transc">{{subSelect.taxBase|currency}}</p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <div class="transc-card">
+      <div style="width: 100%">
+        <div class="right-left">
+          <p class="date-transc float-left">Impuestos</p>
+          <p class="txt-transc float-right" style="line-height: 1rem">{{subSelect.tax|currency}}</p>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="right-left">
+          <p class="date-transc float-left">Total</p>
+          <p class="txt-transc float-right" style="line-height: 1rem">{{subSelect.price|currency}}</p>
+          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="div-btns">
+          <button class="btn-return" (click)="next = !next">Cancelar</button>
+          <button class="btn-custom-width btn-pay" (click)="subscribePlan()" [disabled]="!ndoc.valid"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Pagar</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

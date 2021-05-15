@@ -1,0 +1,204 @@
+<div class="my-establishment" *ngIf="event">
+  <header>
+    <div style="background-color: black" [class.gray-filter]="isAfter()">
+      <section class="img-container"
+               [style.background-image]="'url(' + event.photoUrls[0]+')'">
+        <p class="finish-event" *ngIf="isAfter()">
+          Finalizado
+        </p>
+      </section>
+    </div>
+    <section class="info-company">
+      <div class="my-img" [style.background-image]="'url(' + event.photoUrls[0]+')'" [class.gray-filter]="isAfter()">
+        <p class="finish-event" *ngIf="isAfter()">
+          Finalizado
+        </p>
+      </div>
+      <p class="date-str">
+        {{getDate(event.start)}} {{event.start | date:'HH:mm'}}
+        - {{getDate(event.end)}} {{event.end | date:'HH:mm'}}
+      </p>
+      <section *ngIf="rol == 'client' || rol == 'norole'" class="like-pc">
+        <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="like()"
+                style="animation-duration: 0.5s;">
+          <fa-icon [icon]="faHeart"></fa-icon>
+          Me gusta
+        </button>
+
+        <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="like()"
+                style="animation-duration: 0.5s;">
+          <fa-icon [icon]="faHeartSolid"></fa-icon>
+          Me gusta
+        </button>
+      </section>
+      <section *ngIf="isMine" class="like-pc">
+        <button class="publish-event like-select animate__animated animate__pulse" *ngIf="event.status == 'Inactivo'"
+                (click)="active()" style="animation-duration: 0.5s;">
+          <fa-icon [icon]="faCalendarPlus"></fa-icon>
+          Publicar
+        </button>
+
+        <button class="publish-event  animate__animated animate__pulse" *ngIf="event.status == 'Activo'"
+                (click)="inactive()" style="animation-duration: 0.5s;">
+          <fa-icon [icon]="faCalendarTimes"></fa-icon>
+          Ocultar
+        </button>
+      </section>
+      <h1>{{event.eventName}}</h1>
+      <p class="city text-uppercase">
+        <fa-icon [icon]="faGps"></fa-icon>
+        {{event.location.city}} - {{event.location.address}}</p>
+      <p class="city text-uppercase">{{getCategories()}}</p>
+    </section>
+    <section class="interactions">
+      <p class="followers">{{event.interested}}
+        <fa-icon [icon]="faHeartSolid" size="xs"></fa-icon>
+      </p>
+      <div class="list-heart" *ngIf="isAfter()">
+        <p class="calification">{{average}}</p>
+        <div *ngFor="let start of getStars(average)" style="display: inline-flex">
+          <fa-icon [icon]="faStartMedia" size=2x class="checked" *ngIf="start == undefined"></fa-icon>
+          <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start == true"></fa-icon>
+          <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
+        </div>
+      </div>
+      <div class="edit-remove" *ngIf="rol == 'company' && isMine">
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove()"
+                 data-toggle="tooltip" data-placement="top" title="Eliminar" id="remove{{event._id}}"></fa-icon>
+      </div>
+    </section>
+    <section *ngIf="rol == 'client' || rol == 'norole'" class="like-mobile">
+      <button class="like-event animate__animated animate__pulse" *ngIf="!isLike" (click)="like()"
+              style="animation-duration: 0.5s;">
+        <fa-icon [icon]="faHeart"></fa-icon>
+        Me gusta
+      </button>
+
+      <button class="like-event like-select animate__animated animate__pulse" *ngIf="isLike" (click)="like()"
+              style="animation-duration: 0.5s;">
+        <fa-icon [icon]="faHeartSolid"></fa-icon>
+        Me gusta
+      </button>
+    </section>
+
+    <section *ngIf="isMine" class="like-mobile">
+      <button class="publish-event like-select animate__animated animate__pulse" *ngIf="event.status == 'Inactivo'"
+              (click)="active()" style="animation-duration: 0.5s;">
+        <fa-icon [icon]="faCalendarPlus"></fa-icon>
+        Publicar
+      </button>
+
+      <button class="publish-event  animate__animated animate__pulse" *ngIf="event.status == 'Activo'"
+              (click)="inactive()" style="animation-duration: 0.5s;">
+        <fa-icon [icon]="faCalendarTimes"></fa-icon>
+        Ocultar
+      </button>
+    </section>
+  </header>
+  <main>
+    <div class="desc-card">
+      <section class="description-com" [class.show]="show">
+        <h2>Descripción</h2>
+        <div #divHidden class="divhidden" [class.show]="show" id="divhid">
+          <p>{{event.description}}</p>
+        </div>
+        <div *ngIf="isHidden(divHidden) || (!isHidden(divHidden) && show)">
+          <a class="my-show" (click)="show = !show">{{ show ? 'Ver menos' : 'Ver más' }}</a>
+        </div>
+      </section>
+      <section class="carac-event">
+        <div class="card-carac">
+          <div class="column-card" *ngFor="let code of event.dressCodes">
+            <fa-icon class="header-carac" [icon]="faTshirt"></fa-icon>
+            <p class="name-carac">{{code}}</p>
+          </div>
+          <p class="type-carac">Código de vestimenta</p>
+        </div>
+        <div class="card-carac">
+          <div class="column-card">
+            <fa-icon class="header-carac" [icon]="faBan"></fa-icon>
+            <p class="name-carac">{{event.minAge}}+</p>
+          </div>
+          <p class="type-carac">Edad mínima</p>
+        </div>
+        <div class="card-carac">
+          <div class="column-card">
+            <fa-icon class="header-carac" [icon]="faUser"></fa-icon>
+            <p class="name-carac">{{event.capacity}}</p>
+          </div>
+          <p class="type-carac">Capacidad máxima</p>
+        </div>
+      </section>
+    </div>
+    <section class="img-google">
+      <agm-map [latitude]="event.location.latitude" [longitude]="event.location.longitude" [zoom]="15"
+               *ngIf="!production">
+        <agm-marker [latitude]="event.location.latitude" [longitude]="event.location.longitude">
+          <agm-info-window>{{event.eventName}}</agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </section>
+    <section class="images-event" *ngIf="event.photoUrls.length != 0">
+      <app-imgs-carousel [photos]="event.photoUrls"></app-imgs-carousel>
+    </section>
+    <div *ngIf="isAfter()">
+      <section #target class="opinions">
+        <section class="opinions-title">
+          <p class="opinions-text">Opiniones</p>
+          <div class="list-hear-opinions">
+            <p>{{average}}</p>
+            <div *ngFor="let start of getStars(average)" style="display: inline-flex">
+              <fa-icon [icon]="faStartMedia" size=2x class="checked" *ngIf="start == undefined"></fa-icon>
+              <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start == true"></fa-icon>
+              <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="start == false"></fa-icon>
+            </div>
+          </div>
+        </section>
+        <section class="my-califications">
+          <div *ngFor="let op of opinion">
+            <div class="opinion-calification">
+              <div class="clasification-left">
+                <p class="calification">{{op.nStart}}</p>
+                <fa-icon [icon]="faStartSolid" size=2x class="checked"></fa-icon>
+              </div>
+              <div class="progress">
+                <p class="red-progress" [style.width]="op.percentage"></p>
+              </div>
+              <p class="n-iterations">{{op.coincidence}}</p>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section class="comments animate__animated animate__fadeInLeft" *ngFor="let comment of getList()"
+               id="{{comment._id}}">
+        <div class="comment">
+          <div class="title-comment">
+            <p>{{comment.title}}</p>
+            <div class="tittle-comment-list-heart">
+              <div *ngFor="let start of getStars(comment.rating)">
+                <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="start"></fa-icon>
+                <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="!start"></fa-icon>
+              </div>
+            </div>
+          </div>
+          <div class="user-date-comment">
+            <p class="name-user">{{comment.authorName}}</p>
+            <p class="date-user" style="cursor:pointer;" data-toggle="tooltip" data-placement="top"
+               title="{{comment.createdAt | date:'EEEE, MMMM d, y, h:mm a'}}">{{comment.createdAt | date:'longDate'}}</p>
+          </div>
+          <p class="user-comment">{{comment.comment}}</p>
+        </div>
+      </section>
+      <section class="my-pagination">
+        <a class="text-center my-show" (click)="onScroll()"
+           *ngIf="accumulateComment != comments.length && comments.length > ACCUMULATE">Ver más</a>
+        <a class="text-center my-show" (click)="hide(target)"
+           *ngIf="accumulateComment == comments.length && comments.length > ACCUMULATE">Ocultar</a>
+      </section>
+      <section class="comment-user" *ngIf="rol == 'client' || rol == 'norole'">
+        <button class="comment-button" (click)="comment()">¡Deja un comentario!</button>
+      </section>
+    </div>
+  </main>
+</div>
+<app-user-comment-modal (addComment)="addComment($event)" [isCommentEvent]="true"></app-user-comment-modal>

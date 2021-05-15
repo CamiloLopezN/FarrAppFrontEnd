@@ -1,0 +1,94 @@
+<div class="animate__animated animate__fadeInRight div-cont" style="animation-duration: 0.2s">
+  <section class="margin-1200 mt-5 mb-4">
+    <p class="text-center text-name">Gestiona a tus</p>
+    <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">clientes</p>
+    <div class="text-center">
+      <p class="text-desc-profile">Estos son los usuarios</p>
+      <p class="text-desc-change">de FarrApp</p>
+    </div>
+  </section>
+  <div id="dashboard" class="margin-1200">
+    <nav>
+      <div class="nav nav-tabs nav-fill nav-test" role="tablist">
+        <a class="nav-item nav-link active" data-toggle="tab" href="#aprobadas" role="tab" aria-controls="nav-proxims"
+           aria-selected="true" (click)="getClients(true)">Activados</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#poraprobar" role="tab" aria-controls="nav-historic"
+           aria-selected="false" (click)="getClientsP(true)">No verificados</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#desactivados" role="tab" aria-controls="nav-historic"
+           aria-selected="false" (click)="getClientsD(true)">Desactivados</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#peticiones" role="tab" aria-controls="nav-historic"
+           aria-selected="false" (click)="getCompaniesPT(true)">Peticiones</a>
+      </div>
+    </nav>
+
+
+    <div class="tab-content" style="background: #252427">
+      <div id="aprobadas" class="tab-pane fade in active show">
+        <div *ngIf="clients.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay clientes activos
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div id="poraprobar" class="tab-pane fade">
+        <div *ngIf="clients.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay clientes pendientes
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div id="desactivados" class="tab-pane fade">
+        <div *ngIf="clients.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay clientes desactivados
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div id="peticiones" class="tab-pane fade">
+        <div *ngIf="clients.length == 0 else list">
+          <div class="text-center list-companies-client"
+               style="background: #2b2a30;">
+            <h4>
+              No hay peticiones de clientes
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #list>
+  <div *ngFor="let client of clients | paginate: { itemsPerPage: itemsPerP, currentPage: p , totalItems:total}">
+    <div class="holi" (click)="profile(client._id)">
+      <div class="row h5" style="border-bottom: 3px solid #FAFAFA">
+        <div class="col-3">
+          <fa-icon [icon]="faUser" class="fa-2x">
+          </fa-icon>
+        </div>
+        <div class="col-9">
+          <div>
+            <div class="d-flex justify-content-start crow">
+              {{client.firstName}}
+            </div>
+            <div class="d-flex justify-content-end crow">
+              {{client.lastName}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-sm-right mt-4">
+    <pagination-controls (pageChange)="pageChange($event)" *ngIf="total>= itemsPerP"></pagination-controls>
+  </div>
+</ng-template>

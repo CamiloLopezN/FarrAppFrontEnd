@@ -1,0 +1,64 @@
+<!-- Modal -->
+<div class="modal fade" id="commentEventModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content-register">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <div class="titles">
+          <p class="event-title-1">¡Hola! {{name}}</p>
+          <p class="event-title-2 text-uppercase">{{lastName}}</p>
+        </div>
+        <p class="event-title-3">Nos interesa tu opinión.</p>
+        <p class="event-title-4">¡Dale una calificación al pasado evento!</p>
+        <div class="list-heart">
+          <p class="qualification">{{qualification}}</p>
+          <div style=" display: inline-flex;cursor: pointer;margin-left: 0.5rem;animation-duration: 0.2s"
+               *ngFor="let star of stars; index as i" (click)="setStarsClick(i)">
+            <fa-icon [icon]="faStart" size=2x class="checked" *ngIf="star == false"></fa-icon>
+            <fa-icon [icon]="faStartSolid" size=2x class="checked" *ngIf="star == true"></fa-icon>
+          </div>
+        </div>
+        <form #formComment="ngForm" (ngSubmit)="sendComment()" id="form-comment">
+          <div class="input-group mt-4">
+            <div class="input-group-prepend">
+              <div class="input-group-text icon">
+                <fa-icon [icon]="faStart"></fa-icon>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Título de la opinión" #titl="ngModel" name="titl"
+                   [(ngModel)]="title" required>
+          </div>
+          <div class="text-left margin-80">
+            <small id="emailHelp123" class="form-text text-danger" *ngIf="!titl.valid && titl.touched">Debes ingresar un
+              título.</small>
+            <small id="emailHelp1234" class="form-text text-danger"
+                   *ngIf="titl.valid && titl.touched && !isTitleComment()">El título debe tener máximo 65
+              caracteres.</small>
+          </div>
+          <section class="description-text">
+            <p class="event-title-5">Cuéntanos cómo te fue</p>
+            <textarea rows="5" class="txt-area" #comm="ngModel" name="comm" [(ngModel)]="comment" required></textarea>
+            <div class="text-left">
+              <small id="emailHelp123" class="form-text text-danger" *ngIf="!comm.valid && comm.touched">Debes ingresar
+                un comentario.</small>
+              <small id="emailHelp1234" class="form-text text-danger"
+                     *ngIf="comm.valid && comm.touched && !isValidateComment()">El comentario debe tener máximo 512
+                caracteres.</small>
+            </div>
+          </section>
+          <button class="btn-send-comment position-relative btn-custom-width" [disabled]="!formComment.form.valid || !this.isValidateAll()"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p *ngIf="loaderService.hasShow | async" style="margin: 0; padding: 0">Enviar comentario</p>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

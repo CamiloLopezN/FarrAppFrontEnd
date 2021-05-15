@@ -1,0 +1,73 @@
+.div-flex{
+  display: flex;
+}
+
+.left-div{
+}
+
+.right-chevron{
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-chevron fa-icon{
+  font-size: 1rem;
+}
+
+.carousel0 {
+  background: #ffffff;
+}
+
+.carousel-cell0 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+.carousel1 {
+  background: #ffffff;
+}
+
+.carousel-cell1 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+
+.carousel2 {
+  background: #ffffff;
+}
+
+.carousel-cell2 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+
+.carousel3 {
+  background: #ffffff;
+}
+
+.carousel-cell3 {
+  margin-right: 20px;
+  overflow: hidden;
+}
+
+
+.events {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 1rem;
+  color: #252427;
+}
+
+.events2 {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1rem;
+  color: rgba(37, 36, 39, 0.6);
+  margin: 0 0 1rem;
+}

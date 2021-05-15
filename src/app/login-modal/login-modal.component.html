@@ -1,0 +1,101 @@
+<!-- Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel10" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <div *ngIf="isLogin else retreivePass" class="animate__animated animate__fadeIn"
+             style="animation-duration: 0.5s">
+          <form #formUser="ngForm" (ngSubmit)="onSubmit()" id="form-login" class="m-0 p-0">
+            <div class="border-login">
+              <div class="mt-4 mb-4">
+                <small id="emailHelp321" class="form-text text-danger text-left mb-1"
+                       *ngIf="errorMessage">{{errorMessage}}</small>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text icon">
+                      <fa-icon [icon]="faUserCircle" class="fa-lg"></fa-icon>
+                    </div>
+                  </div>
+                  <input type="email" class="form-control" id="exampleInputEmail10" aria-describedby="emailHelp"
+                         placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+                         pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required
+                         (click)="errorMessage = ''">
+                </div>
+                <div class="text-left">
+                  <small id="emailHelp123" class="form-text text-danger" *ngIf="!email.valid && email.touched">Debes
+                    ingresar un e-mail válido.</small>
+                </div>
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text icon">
+                    <fa-icon [icon]="faUnlock" style="margin-left: 1px; margin-right: 1px"
+                             class="fa-lg" *ngIf="!isEmpty()"></fa-icon>
+                    <fa-icon [icon]="faLock" style="margin-left: 1px; margin-right: 1px" class="fa-lg"
+                             *ngIf="isEmpty()"
+                    ></fa-icon>
+                  </div>
+                </div>
+                <input type="password" class="form-control color-gray" id="exampleInputPassword10"
+                       placeholder="Contraseña"
+                       #pass="ngModel" name="pass" [(ngModel)]="password" required (click)="errorMessage = ''">
+              </div>
+              <div class="text-left">
+                <small id="passHelp1" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar
+                  la contraseña.</small>
+              </div>
+            </div>
+            <div class="text-center" id="Login">
+              <button type="submit" class="btn btn-outline-dark position-relative btn-custom-width"
+                      [disabled]="!formUser.form.valid"
+                      [class.spinner]="loaderService.isLoading | async">
+                <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Iniciar sesión</p></button>
+              <p id="PassRemember" class="mt-4 mb-4" (click)="authService.inLog.next(false)">
+                ¿Olvidó su contraseña?
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #retreivePass>
+  <div class="animate__animated animate__fadeIn ml-3 mr-3" style="animation-duration: 0.5s">
+    <div class="ralewayFont modal-body text-justify border-login">
+      Introduce tu correo electrónico, te enviaremos un correo con los pasos necesarios para recuperar tu cuenta.
+    </div>
+    <form #formRetrieve="ngForm" (ngSubmit)="retrievePass()">
+      <div class="form-group text-left">
+        <input type="email" class="form-control my-form" id="inputEmailRetrieve" aria-describedby="emailHelp"
+               placeholder="Correo electrónico" #emailR="ngModel" name="emailR" [(ngModel)]="emailRetrieve" email
+               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+        <small id="emaiHelpRetrievePass" class="form-text text-danger" *ngIf="!emailR.valid && emailR.touched">El correo
+          electrónico es inválido.</small>
+        <div class="row border-login">
+          <div class="col col-2">
+            <button type="button" class="btn btn-dark mr-2" data-dismiss="modal" style="border-radius: 50%"
+                    (click)="authService.inLog.next(true)">
+              <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </button>
+          </div>
+          <div class="col">
+            <button type="submit" class="btn btn-dark border-circ btn-custom-width w-100"
+                    [disabled]="!formRetrieve.form.valid"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Recuperar contraseña</p>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

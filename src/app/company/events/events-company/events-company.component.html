@@ -1,0 +1,14 @@
+<div *ngIf="tittle" class="div-flex">
+  <div class="left-div">
+    <p class="events"><b>{{tittle}}</b></p>
+    <p class="events2">{{typeEvent}}</p>
+  </div>
+  <div class="right-chevron" *ngIf="hasShowMore">
+    <fa-icon id="showMore" (click)="redirect()" [icon]="faChevronRight" class="float-right" data-toggle="tooltip" data-placement="top" title="Ver más" style="cursor: pointer"></fa-icon>
+  </div>
+</div>
+<div class="carousel{{index}}">
+  <div class="carousel-cell{{index}}" *ngFor="let event of events">
+    <app-event [event]="event"></app-event>
+  </div>
+</div>

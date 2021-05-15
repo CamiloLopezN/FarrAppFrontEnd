@@ -1,0 +1,63 @@
+<!-- Modal -->
+<div class="modal fade" id="event-filter-modal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content-register filter-container">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <h2 class="filter-title">FILTROS</h2>
+        <p class="category-title">Nombre del evento</p>
+        <input type="text" class="input-text">
+        <p class="order-title">Ordenar por</p>
+        <div class="list-buttons-filter">
+          <button (click)="changeBtnFilter(btn)" type="button"
+                  class="btn-filter"
+                  name="{{btn.name}}"
+                  id="{{btn.name}}" *ngFor="let btn of listButtons">{{btn.name}}</button>
+        </div>
+        <p class="min-age-title">Edad mínima</p>
+        <mat-slider [(ngModel)]="minAge"
+                    thumbLabel
+                    tickInterval="1"
+                    min="1"
+                    max="100"></mat-slider>
+        <p class="float-left" style="margin-bottom: 0">1</p>
+        <p class="float-right" style="margin-bottom: 0">100</p>
+        <div class="clearfix"></div>
+
+        <p class="category-title">Seleccione las categorías</p>
+        <div class="list-buttons-filter">
+          <button (click)="changeBtnList(btnC)" type="button"
+                  class="btn-category"
+                  name="{{btnC.name}}"
+                  id="{{btnC.name}}" *ngFor="let btnC of listButtonsCategory">{{btnC.name}}</button>
+        </div>
+        <p class="category-title">Ubicación</p>
+        <select class="custom-select" aria-label="Default select example" style="border-radius: 20px"
+                [(ngModel)]="citySelect" name="city">
+          <option *ngFor="let city of cities" [value]="city">
+            {{city}}
+          </option>
+        </select>
+        <p class="category-title">Seleccione los códigos de vestimenta</p>
+        <div class="list-buttons-filter">
+          <button (click)="changeBtnList(btnCode)" type="button"
+                  class="btn-category"
+                  name="{{btnCode.name}}"
+                  id="{{btnCode.name}}" *ngFor="let btnCode of listButtonsCode">{{btnCode.name}}</button>
+        </div>
+
+        <p class="category-title">Fecha de inicio desde</p>
+        <input type="date" class="form-control input-date">
+        <p class="category-title">Fecha de inicio hasta</p>
+        <input type="date" class="form-control input-date">
+        <button class="btn-filter-aplicate">Aplicar filtros</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="card" (click)="redirect()" style="cursor: pointer">
+  <img class="card-img-top"
+       src="{{establishment.imageUrl}}" alt="Card image cap">
+  <div class="card-body">
+    <div class="text-wr">
+      <p class="title-event" data-toggle="tooltip" data-placement="top"
+         title="{{establishment.establishmentName}}" (click)="hover($event)" id="title{{establishment.establishmentId}}">{{establishment.establishmentName}}</p>
+    </div>
+    <div class="text-wr">
+      <p class="city-title m-0" data-toggle="tooltip" data-placement="top"
+         title="{{establishment.location.address}}" (click)="hover($event)" id="city{{establishment.establishmentId}}">{{establishment.location.address}}</p>
+    </div>
+  </div>
+</div>

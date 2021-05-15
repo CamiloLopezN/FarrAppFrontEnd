@@ -1,0 +1,61 @@
+<footer class="font-small special-color-dark" *ngIf="router.url != '/landing-page'">
+  <div class="container" >
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item mt-4">
+        <a href="#" class="btn-floating btn-fb mr-4">
+          <fa-icon [icon]="faFacebook" class="iconSocial fa-2x"></fa-icon>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-tw mr-4">
+          <fa-icon [icon]="faTwitter" class="iconSocial fa-2x"></fa-icon>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" class="btn-floating btn-gplus">
+          <i ><fa-icon [icon]="faInstagram" class="iconSocial fa-2x"></fa-icon></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="footer-copyright text-center pb-4">
+    <a class="copyright">(c) 2020 FarrApp. All Rights Reserverd</a>
+    <a class="termsOfService" href="https://mdbootstrap.com/"> <br> Privacy Policy | Terms of Service</a>
+  </div>
+</footer>
+<footer *ngIf="router.url === '/landing-page'">
+  <div>
+    <img src="https://cdn.pixabay.com/photo/2018/01/15/21/50/concert-3084876_960_720.jpg" alt="footer-img">
+    <div class="container-fluid card-title position-absolute ">
+      <div class="container-fluid">
+        <div class="mt-4 mb-4 justify-content-center text-center">
+          <a class="btn btn-outline-light" *ngIf="!isLogged" data-toggle="modal" data-target="#register-company-modal"
+              (click)="authService.inRegCompany.next(false)">Registra tu empresa con nosotros</a>
+        </div>
+        <ul class="list-unstyled list-inline text-center">
+          <li class="list-inline-item mt-0">
+            <a href="#" class="btn-floating btn-fb mr-4 mt-2">
+              <fa-icon [icon]="faFacebook" class="iconSocial fa-2x"></fa-icon>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="btn-floating btn-tw mr-4 mt-2 ">
+              <fa-icon [icon]="faTwitter" class="iconSocial fa-2x"></fa-icon>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#" class="btn-floating btn-gplus">
+              <i>
+                <fa-icon [icon]="faInstagram" class="iconSocial fa-2x mt-2 "></fa-icon>
+              </i>
+            </a>
+          </li>
+        </ul>
+        <div class="footer-copyright text-center pb-4">
+          <a class="copyright">(c) 2020 FarrApp. All Rights Reserverd</a>
+          <a class="termsOfService" href="https://mdbootstrap.com/"> <br> Privacy Policy | Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

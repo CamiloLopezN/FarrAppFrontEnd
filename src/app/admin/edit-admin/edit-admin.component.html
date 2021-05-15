@@ -1,0 +1,67 @@
+<div class="animate__animated animate__fadeInRight" style="animation-duration: 0.2s;" *ngIf="admin">
+  <header>
+    <section class="margin-1200 mt-5">
+      <p class="text-center text-name">Cámbialo cuando</p>
+      <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">quieras.</p>
+      <div class="text-center">
+        <p class="text-desc-profile">Eres dueño de tu información</p>
+        <p class="text-desc-change">¡Modifícalo a tu gusto!</p>
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="margin-800">
+      <form name="registerCLient" #formClient="ngForm" (ngSubmit)="save()" class="text-center pl-3 pr-3">
+        <p class="text-left mb-2 mt-4">
+          Nombre
+        </p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text icon">
+              <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+            </div>
+          </div>
+          <input type="text" class="form-control " placeholder="Nombre"
+                 #firstNameClient="ngModel" name="firstNameClient" [(ngModel)]="admin.name" required>
+        </div>
+        <div class="text-left">
+          <small id="nameHelp" class="form-text text-danger"
+                 *ngIf="!firstNameClient.valid && firstNameClient.touched">Debes ingresar tu nombre.</small>
+          <small id="nameHelp" class="form-text text-danger"
+                 *ngIf="firstNameClient.valid && firstNameClient.touched && !isNameLength()">Tu nombre debe tener
+            menos de 150 caracteres.</small>
+        </div>
+
+        <p class="text-left mb-2 mt-4">
+          Apellido
+        </p>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text icon">
+              <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+            </div>
+          </div>
+          <input type="text" class="form-control" placeholder="Apellido"
+                 #lastNameClient="ngModel" name="lastNameClient" [(ngModel)]="admin.lastname" required>
+        </div>
+        <div class="text-left">
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="!lastNameClient.valid && lastNameClient.touched">Debes
+            ingresar tu apellido.</small>
+          <small id="nameHelp" class="form-text text-danger"
+                 *ngIf="lastNameClient.valid && lastNameClient.touched && !isLastNameLength()">Tu apellido debe
+            tener menos de 150 caracteres.</small>
+        </div>
+
+        <div class="btn-list">
+          <button class="btn-custom" [routerLink]="['/admin/profile']">Regresar</button>
+          <button type="submit" class="btn-red btn-custom-width" style="cursor: pointer"
+                  [disabled]="!formClient.form.valid || !isValidAll()"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Guardar</p>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>

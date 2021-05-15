@@ -1,0 +1,85 @@
+img {
+  float: top;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-duration: 2s;
+  transition-property: opacity;
+}
+
+.carousel-fade #carousel_id {
+  transition-duration: 0.5s;
+  transition-property: opacity;
+}
+
+.carousel-fade .carousel-item.active,
+.carousel-fade .carousel-item-next.carousel-item-left,
+.carousel-fade .carousel-item-prev.carousel-item-right {
+  opacity: 1;
+}
+
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-right {
+  opacity: 0;
+}
+
+.carousel-fade .carousel-item-next,
+.carousel-fade .carousel-item-prev,
+.carousel-fade .carousel-item.active,
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-prev {
+  transform: translate3d(0, 0, 0);
+}
+
+.carousel-caption {
+  bottom: initial;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  left: 0;
+}
+
+.my-button {
+  width: 10rem;
+  height: 3rem;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.8);
+  position: relative;
+  outline: none;
+  border: none;
+}
+
+.my-button::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  right: -3px;
+  left: -3px;
+  background: linear-gradient(to right, #ff1a43 20%, #bf72fb 30%, #bf72fb 70%, #ff1a43 80%);
+  z-index: -1;
+  background-size: 300% 100%;
+  transition: all 0.5s ease-in-out;
+  border-radius: 4px;
+}
+
+.my-button:hover::before {
+  background-position: 100% 0;
+}
+
+.container-events{
+  width: 90%;
+  min-width: 288px;
+  max-width: 1200px;
+  margin: 2rem auto 0;
+}
+
+.event-landing-page{
+  padding-bottom: 4rem;
+}

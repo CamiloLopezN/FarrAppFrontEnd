@@ -1,0 +1,24 @@
+<div class="p-0">
+  <div class="align-middle">
+    <h5 class="mt-2 mb-0 float-left" style="color: #36424a !important;">
+      Agrega tus entradas *
+    </h5>
+    <button class="btn btn-outline-secondary float-right" style="border-radius: 50%" *ngIf="!isVisible"
+            (click)="changeView()">
+      <fa-icon [icon]="faChevronDown"></fa-icon>
+    </button>
+    <button class="btn btn-outline-secondary float-right" style="border-radius: 50%" *ngIf="isVisible"
+            (click)="isVisible=false">
+      <fa-icon [icon]="faChevronUp"></fa-icon>
+    </button>
+  </div>
+  <div class="clearfix"></div>
+  <div class="p-2"></div>
+
+  <app-ticket-type *ngIf="isVisible" (addTicket)="addTicket($event)"></app-ticket-type>
+  <div class="mt-4" *ngIf="tickets" id="divTickets">
+    <div *ngFor="let ticket of tickets; index as i">
+      <app-card-ticket-type (onDelete)="removeTicket(i)" [ticket]="ticket"></app-card-ticket-type>
+    </div>
+  </div>
+</div>

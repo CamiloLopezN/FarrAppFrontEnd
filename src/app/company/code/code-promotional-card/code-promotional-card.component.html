@@ -1,0 +1,17 @@
+<div class="p-3 mb-5 my-box animate__animated animate__fadeInTopLeft"
+     style="animation-duration:0.4s;cursor:pointer;background: #ffffff;">
+  <p class="float-right" *ngIf="codeP.discountType=='Efectivo'">
+    <b>{{codeP.discountRate | currency}}</b>
+  </p>
+  <p class="float-right" *ngIf="codeP.discountType!='Efectivo'">
+    <b>{{codeP.discountRate / 100 | percent}}</b>
+  </p>
+  <p class="mb-0">
+    <b>Código: {{codeP.codeString}}</b>
+  </p>
+  <p>Canjes disponibles: {{codeP.totalValidExchanges}}</p>
+  <div class="clearfix"></div>
+  <button class="btn btn-danger float-right ml-2" style="border-radius: 50%" (click)="deleted()">
+    <fa-icon [icon]="faMinus"></fa-icon>
+  </button>
+</div>

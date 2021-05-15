@@ -1,1 +1,312 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~animate.css/animate.min.css";
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner .8s linear infinite;
+}
+
+.btn-custom-width {
+  position: relative;
+  border-radius: 30px !important;
+  width: 12rem;
+  height: 2.2rem;
+}
+
+.mar-pad-0 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.my-ticket-form {
+  font-size: 1.1rem !important;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 100px; /* Footer height */
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px; /* Footer height */
+}
+
+body {
+  background: #FFFFFF !important;
+  font-family: Raleway, serif !important;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.btn-group .btn {
+  width: 50%;
+}
+
+html {
+  font-size: 1.3rem;
+}
+
+.crow {
+  overflow: hidden;
+}
+
+.crow2 {
+  overflow: hidden;
+  max-width: 75vw;
+}
+
+.border-login {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+.border-content {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+.border-content-register {
+  padding-top: 1.4rem !important;
+  padding-bottom: 1.4rem !important;
+}
+
+
+.list-companies-client {
+  padding-top: 35vh;
+  padding-bottom: 35vh;
+}
+
+.modal-content {
+  border-radius: 4vh !important;
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 1.1rem;
+  }
+
+  .border-login {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .border-content {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .list-companies-client {
+    padding-top: 35vh;
+    padding-bottom: 35vh;
+  }
+
+  .crow2 {
+    overflow: hidden;
+    max-width: 80vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 0.9rem;
+  }
+
+  .modal-dialog {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-content {
+    height: auto;
+    min-height: 100%;
+    border-radius: 0;
+  }
+
+  .border-login {
+    padding-top: 3.8rem !important;
+    padding-bottom: 3.8rem !important;
+  }
+
+  .border-content {
+    padding-top: 7.5rem !important;
+    padding-bottom: 7.5rem !important;
+  }
+
+  .border-content-register {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .modal-content {
+    border-radius: 0 !important;
+  }
+
+  .list-companies-client {
+    padding-top: 32vh;
+    padding-bottom: 32vh;
+  }
+
+  .crow2 {
+    overflow: hidden;
+    width: 85vw;
+  }
+
+}
+
+/* position outside */
+.carousel-mine .flickity-prev-next-button.previous {
+  top: 110%;
+  left: 25vw;
+}
+
+.carousel-mine .flickity-prev-next-button.next {
+  top: 110%;
+  right: 25vw;
+}
+
+.carousel-mine .flickity-button {
+  background: #252427;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  color: white;
+}
+
+
+.carousel0 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel0 .flickity-prev-next-button.previous {
+  left: -2%;
+}
+
+.carousel0 .flickity-prev-next-button.next {
+  right: -2%;
+}
+
+.carousel0 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel0 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.carousel1 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel1 .flickity-prev-next-button.previous {
+  left: -2%;
+}
+
+.carousel1 .flickity-prev-next-button.next {
+  right: -2%;
+}
+
+.carousel1 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel1 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.carousel2 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel2 .flickity-prev-next-button.previous {
+  left: -2%;
+}
+
+.carousel2 .flickity-prev-next-button.next {
+  right: -2%;
+}
+
+.carousel2 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel2 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.carousel3 .flickity-button {
+  background: #FAFAFA;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #36424b;
+}
+
+.carousel3 .flickity-prev-next-button.previous {
+  left: -2%;
+}
+
+.carousel3 .flickity-prev-next-button.next {
+  right: -2%;
+}
+
+.carousel3 .flickity-page-dots {
+  bottom: -22px;
+}
+
+/* dots are lines */
+.carousel3 .flickity-page-dots .dot {
+  height: 4px;
+  width: 40px;
+  margin: 0;
+  border-radius: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

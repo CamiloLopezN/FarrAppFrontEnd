@@ -1,0 +1,83 @@
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="company">
+  <header>
+    <div class="header-company">
+      <h1 class="name-company d-block m-0 p-0">{{company.companyName}}</h1>
+      <h2 class="nit-company m-0 p-0">{{company.nit}}</h2>
+      <p *ngIf="!isSubscribe" class="mt-2">Suscripción inactiva</p>
+      <p *ngIf="isSubscribe" class="mt-2">Suscripción activa
+        <fa-icon [icon]="faInfoCard" style="color: #FF1A43; cursor: pointer;"
+                 [routerLink]="['/company/subscription']"></fa-icon>
+      </p>
+    </div>
+    <div class="d-flex justify-content-end">
+      <div style="padding-right: 8rem;">
+        <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+          <div class="options text-right">
+            <label class="title-top m-0 p-0">Eventos activos</label>
+            <h4 class="m-0 p-0">{{eventsActive.length}}</h4>
+            <label class="title-top m-0 p-0">Asistentes</label>
+            <h4 class="m-0 p-0">{{interested}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Cámbialo cuando quieras!</p>
+    </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <label>Nombre</label>
+      <p>{{company.companyName}}</p>
+      <label>Dirección</label>
+      <p>{{company.address}}</p>
+      <label>Número de contacto</label>
+      <p>{{company.contactNumber}}</p>
+      <label>NIT</label>
+      <p>{{company.nit}}</p>
+    </section>
+    <section class="margin-1200 btn-list">
+      <button class="btn-custom" [routerLink]="['/company/edit']">Editar</button>
+      <button class="btn-custom" [routerLink]="['/company/security']">Seguridad</button>
+      <button class="btn-custom btn-red" data-toggle="modal" data-target="#exampleModal">Eliminar cuenta</button>
+    </section>
+  </main>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="ralewayFont modal-title" id="exampleModalLabel">Eliminación de cuenta</h4>
+        <button type="button" class="close p-0 pr-3" data-dismiss="modal" aria-label="Close" style="font-size: 60px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="text-center">
+        <fa-icon [icon]="faExclamationTriangle" class="fa-9x text-warning"></fa-icon>
+        <div class="ralewayFont modal-body">
+          <h5>
+            ¿Está seguro que desea eliminar su cuenta?
+          </h5>
+          <h6 style="opacity: 50%">
+            Está acción no se podra revertir
+          </h6>
+        </div>
+      </div>
+      <div class="ralewayFont p-4">
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn border-circ btn-danger w-100" data-toggle="modal" data-target="#confimationModal"
+                    data-dismiss="modal" (click)="removeCompany()">Borrar
+            </button>
+          </div>
+          <div class="col">
+            <button type="button" class="btn border-circ btn-dark w-100" data-dismiss="modal">Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

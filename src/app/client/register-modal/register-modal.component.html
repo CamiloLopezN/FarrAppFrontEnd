@@ -1,0 +1,231 @@
+<!-- Modal -->
+<div class="modal fade" id="register-client-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content-register">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <div *ngIf="!screenVerify else verifyAccount">
+          <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
+
+            <p id="createAccountTittle" class="h4 pt-2 pb-2">Crear cuenta de usuario</p>
+
+
+            <div class="mt-4 text-left" *ngIf="role == 'admin'">
+              <h5>Rol</h5>
+              <div class="row">
+                <div class="col">
+                  <button
+                    (click)="changeButtoms2(btnClient)"
+                    type="button"
+                    class="btn border-circ my-btn w-100"
+                    name="{{btnClient}}"
+                    id="{{btnClient}}">
+                    Cliente
+                  </button>
+                </div>
+                <div class="col">
+                  <button
+                    (click)="changeButtoms2(btnAdmin)"
+                    type="button"
+                    class="btn border-circ my-btn w-100"
+                    name="{{btnAdmin}}"
+                    id="{{btnAdmin}}">
+                    Administrador
+                  </button>
+                </div>
+              </div>
+            </div>
+            <small id="emailHelp321" class="form-text text-danger text-left"
+                   *ngIf="errorMessage">{{errorMessage}}</small>
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+                </div>
+              </div>
+              <input type="text" class="form-control " placeholder="Nombre"
+                     #firstNameClient="ngModel" name="firstNameClient" [(ngModel)]="nameClient" required>
+            </div>
+            <div class="text-left">
+              <small id="nameHelp" class="form-text text-danger"
+                     *ngIf="!firstNameClient.valid && firstNameClient.touched">Debes ingresar tu nombre.</small>
+              <small id="nameHelp" class="form-text text-danger"
+                     *ngIf="firstNameClient.valid && firstNameClient.touched && !isNameLength()">Tu nombre debe tener
+                menos de 150 caracteres.</small>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faIdCard" class="fa-lg"></fa-icon>
+                </div>
+              </div>
+              <input mdbInput type="text" class="form-control" placeholder="Apellido"
+                     #lastNameClient="ngModel" name="lastNameClient" [(ngModel)]="lastName" required>
+            </div>
+            <div class="text-left">
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="!lastNameClient.valid && lastNameClient.touched">Debes
+                ingresar tu apellido.</small>
+              <small id="nameHelp" class="form-text text-danger"
+                     *ngIf="lastNameClient.valid && lastNameClient.touched && !isLastNameLength()">Tu apellido debe
+                tener menos de 150 caracteres.</small>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faUser" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+                </div>
+              </div>
+              <input type="email" class="form-control" id="exampleInputEmail14242" aria-describedby="emailHelp"
+                     placeholder="Correo electrónico" #emailC="ngModel" name="emailC" [(ngModel)]="email" email
+                     pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required>
+            </div>
+            <div class="text-left">
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!emailC.valid && emailC.touched">El correo
+                electrónico es inválido.</small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="emailC.valid && emailC.touched && !isEmailLength()">El correo debe tener menos de 150
+                caracteres.</small>
+            </div>
+
+            <div *ngIf="(role != 'admin') || role == 'admin' && adminSelect ">
+              <div class="input-group mt-4">
+                <div class="input-group-prepend">
+                  <div class="input-group-text icon">
+                    <fa-icon [icon]="faUnlock" style="margin-left: 3px; margin-right: 3px"
+                             class="fa-lg" *ngIf="password"></fa-icon>
+                    <fa-icon [icon]="faLock" style="margin-left: 3px; margin-right: 3px" class="fa-lg"
+                             *ngIf="!password"
+                    ></fa-icon>
+                  </div>
+                </div>
+                <input type="password" class="form-control color-gray" id="exampleInputPassword242"
+                       placeholder="Contraseña"
+                       #pass="ngModel" name="pass" [(ngModel)]="password" required>
+              </div>
+              <div class="text-left">
+                <small id="emailHelp" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar
+                  una
+                  contraseña.</small>
+                <small id="passHelp128" class="form-text text-danger"
+                       *ngIf="pass.valid && pass.touched && !contentUpper()">La contraseña debe tener al menos una <b>mayúscula.</b></small>
+                <small id="passHelp127" class="form-text text-danger"
+                       *ngIf="pass.valid && pass.touched && !contentLower()">La contraseña debe tener al menos una <b>minúscula.</b></small>
+                <small id="passHelp126" class="form-text text-danger"
+                       *ngIf="pass.valid && pass.touched && !contentDigits()">La contraseña debe tener al menos dos <b>dígitos.</b></small>
+                <small id="passHelp125" class="form-text text-danger"
+                       *ngIf="pass.valid && pass.touched &&contentSpaces()">La contraseña no debe tener
+                  <b>espacios.</b></small>
+                <small id="passHelp124" class="form-text text-danger"
+                       *ngIf="pass.valid && pass.touched &&!isValidPassLenght()">La contraseña debe tener entre 8 y 100
+                  <b>caracteres.</b></small>
+                <small id="passHelp123" class="form-text text-danger"
+                       *ngIf="pass.valid && pass.touched &&isDifferentTo()">La contraseña es muy fácil, intenta con
+                  otra</small>
+              </div>
+
+              <div class="input-group mt-4">
+                <div class="input-group-prepend">
+                  <div class="input-group-text icon">
+                    <fa-icon [icon]="faUnlock" style="margin-left: 3px; margin-right: 3px"
+                             class="fa-lg" *ngIf="passwordCon"></fa-icon>
+                    <fa-icon [icon]="faLock" style="margin-left: 3px; margin-right: 3px" class="fa-lg"
+                             *ngIf="!passwordCon"
+                    ></fa-icon>
+                  </div>
+                </div>
+                <input type="password" class="form-control color-gray" id="exampleInputPassword13232"
+                       placeholder="Confirmar contraseña"
+                       #passConf="ngModel" name="passConf" [(ngModel)]="passwordCon" required>
+              </div>
+              <div class="text-left">
+                <small id="emailHelp" class="form-text text-danger" *ngIf="!passConf.valid && passConf.touched">Debes
+                  confirmar la contraseña.</small>
+                <small id="passNotConfirm" class="form-text text-danger"
+                       *ngIf="passConf.valid && passConf.touched && pass.valid && password!=passwordCon">Las contraseñas
+                  no
+                  coinciden.</small>
+              </div>
+            </div>
+            <div *ngIf="!adminSelect">
+              <div class="mt-4 text-left">
+                <h5>Género</h5>
+                <div class="row">
+                  <div class="col">
+                    <button
+                      (click)="changeButtoms(btnMasc)"
+                      type="button"
+                      class="btn border-circ my-btn w-100"
+                      name="{{btnMasc}}"
+                      id="{{btnMasc}}">
+                      Hombre
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      (click)="changeButtoms(btnFemale)"
+                      type="button"
+                      class="btn border-circ my-btn w-100"
+                      name="{{btnFemale}}"
+                      id="{{btnFemale}}">
+                      Mujer
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button
+                      (click)="changeButtoms(btnOther)"
+                      type="button"
+                      class="btn border-circ my-btn w-100"
+                      name="{{btnOther}}"
+                      id="{{btnOther}}">
+                      Otro
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 text-left">
+                <h5>Fecha de nacimiento</h5>
+                <div>
+                  <input type="date" class="form-control my-form"
+                         #bdate="ngModel" name="bdate" [(ngModel)]="birthdate" required
+                  >
+                  <small id="dateHelp" class="form-text text-danger" *ngIf="bdate.touched && !ifBefore()">Ingrese una
+                    fecha valida.</small>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline-dark mt-4 btn-custom-width" style="border-radius: 30px"
+                    [disabled]="!formClient.form.valid || !isValidAll()"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Crear cuenta</p>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #verifyAccount>
+  <div class="animate__animated animate__fadeIn ml-3 mr-3" style="animation-duration: 0.5s">
+    <div class="ralewayFont modal-body text-justify ml-0 mr-0 pl-0 pr-0 border-login">
+      Te hemos enviado un correo de verificación, revisa tu bandeja de entrada.
+    </div>
+    <div class="text-left">
+      <small id="errorMessageVerify" class="form-text text-danger mb-3" *ngIf="errorMessage">{{errorMessage}}</small>
+    </div>
+    <button type="submit" class="btn btn-success border-circ btn-custom-width w-100 position-relative" (click)="redirect()"
+            [class.spinner]="loaderService.isLoading | async">
+      <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Ya verifiqué mi cuenta</p>
+    </button>
+  </div>
+</ng-template>

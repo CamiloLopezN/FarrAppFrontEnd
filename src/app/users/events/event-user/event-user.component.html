@@ -1,0 +1,27 @@
+<div class="card" style="cursor: pointer" (click)="redirect()">
+  <img class="card-img-top"
+       src="{{event.imageUrl}}" alt="Card image cap">
+  <div class="card-body">
+    <div>
+      <div class="float-left date-event">
+        <p>{{getDate()}}</p>
+      </div>
+      <div class="float-right hour-event">
+        <p>
+          <fa-icon [icon]="faClock"></fa-icon>
+          {{event.start | date:'HH:mm'}} - {{event.end | date:'HH:mm'}}</p>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="text-wr">
+      <p class="title-event" data-toggle="tooltip" data-placement="top"
+         title="{{event.eventName}}" id="title{{event.eventId}}" (click)="hover($event)">{{event.eventName}}</p>
+    </div>
+    <div>
+      <a class="city-title m-0" title="Popover title">
+        <fa-icon [icon]="faMap"></fa-icon>
+        {{event.city}}
+      </a>
+    </div>
+  </div>
+</div>

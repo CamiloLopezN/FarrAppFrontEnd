@@ -1,0 +1,42 @@
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="client">
+  <header>
+    <section class="margin-1200 mt-5 mb-5">
+      <p class="text-center text-name">Gestiona a tus </p>
+      <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">clientes</p>
+    </section>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Puedes cambiar el estado del usuario!</p>
+    </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <label>Nombre</label>
+      <p>{{client.firstName}}</p>
+      <label>Apellido</label>
+      <p>{{client.lastName}}</p>
+      <label>Género</label>
+      <p>{{client.gender}}</p>
+      <label>Fecha de nacimiento</label>
+      <p>{{client.birthdate | date}}</p>
+      <label>Correo electrónico</label>
+      <p>{{client.userId.email}}</p>
+      <div class="btn-list">
+        <button class="btn-custom" [routerLink]="['/admin/client']">Regresar</button>
+        <button type="button" class="btn-red btn-custom-width" (click)="deactivate()"
+                *ngIf="(this.client.userId.isActive && !this.client.userId.hasReqDeactivation && this.client.userId.isVerified) || (this.client.userId.isActive && this.client.userId.hasReqDeactivation && this.client.userId.isVerified)" [class.spinner]="loaderService.isLoading | async">
+          <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Desactivar</p>
+        </button>
+        <button type="button" class="btn-active btn-custom-width" (click)="active()"
+                *ngIf="(!this.client.userId.isActive && !this.client.userId.hasReqDeactivation && !this.client.userId.isVerified)" [class.spinner]="loaderService.isLoading | async">
+          <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Activar</p>
+        </button>
+        <button type="button" class="btn-active btn-custom-width" (click)="active()"
+                *ngIf="this.client.userId.isActive && !this.client.userId.hasReqDeactivation && !this.client.userId.isVerified" [class.spinner]="loaderService.isLoading | async">
+          <p class="mar-pad-0 border-0" *ngIf="loaderService.hasShow | async">Verificar</p>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+

@@ -1,0 +1,24 @@
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="admin">
+  <header>
+    <section class="margin-1200 mt-5 mb-5">
+      <p class="text-left text-name">¡Bienvenido!</p>
+      <p class="text-left text-lastname overflow-hidden" style="margin-left: 6rem">ADMIN</p>
+    </section>
+    <div class="text-center">
+      <p class="text-desc-profile">Este es tu perfil</p>
+      <p class="text-desc-change">¡Cámbialo cuando quieras!</p>
+    </div>
+  </header>
+  <main>
+    <section class="margin-800 text-info">
+      <label>Nombre</label>
+      <p>{{admin.name}}</p>
+      <label>Apellido</label>
+      <p>{{admin.lastname}}</p>
+      <div class="btn-list">
+        <button class="btn-custom" [routerLink]="['/admin/edit']">Editar</button>
+        <button class="btn-custom" [routerLink]="['/admin/security']">Seguridad</button>
+      </div>
+    </section>
+  </main>
+</div>

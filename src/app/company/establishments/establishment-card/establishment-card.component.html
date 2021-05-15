@@ -1,0 +1,23 @@
+<div class="card" style="cursor: pointer" (click)="redirect()">
+  <img class="card-img-top"
+       src="{{establishment.imageUrl}}" alt="Card image cap">
+  <div class="card-body">
+    <div class="text-wr">
+      <p class="title-event" data-toggle="tooltip" data-placement="top"
+         title="{{establishment.establishmentName}}" (click)="hover($event)"
+         id="name{{establishment.establishmentId}}">{{establishment.establishmentName}}</p>
+    </div>
+    <div>
+      <a class="city-title m-0" title="Popover title">
+        <fa-icon [icon]="faMap"></fa-icon>
+        {{establishment.location.city}}
+      </a>
+      <div class="float-right icons" *ngIf="router.url == '/company/establishments'">
+        <fa-icon [icon]="faEdit" size=2x class="mr-1" style="color:rgba(37, 36, 39, 0.6);cursor: pointer"
+                 (click)="edit($event)"></fa-icon>
+        <fa-icon [icon]="faTrash" size=2x style="color: #ff1a43; cursor: pointer" (click)="remove($event)"></fa-icon>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>

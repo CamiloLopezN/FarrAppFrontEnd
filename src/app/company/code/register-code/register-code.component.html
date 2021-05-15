@@ -1,0 +1,64 @@
+<div class="my-box p-3 mt-3 mb-3 animate__animated animate__fadeInDown" style="animation-duration: 0.4s" id="div-apar">
+  <form name="registerCLient" #formCode="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-row text-left">
+      <div class="form-group col">
+        <label for="mycode">Código</label>
+        <input type="text" class="form-control"
+               #mycode="ngModel" name="mycode" [(ngModel)]="code" id="mycode" required>
+        <small id="codeHelp" class="form-text text-danger" *ngIf="!mycode.valid && mycode.touched">Debes ingresar el
+          código promocional.</small>
+      </div>
+      <div class="form-group col">
+        <label for="canjValid">Canjes válidos</label>
+        <input type="number" class="form-control"
+               #canjValid="ngModel" name="canjValid" [(ngModel)]="canjVal" id="canjValid" required>
+        <small id="canjValHelp" class="form-text text-danger" *ngIf="!canjValid.valid && canjValid.touched">Debes
+          ingresar un número válido.</small>
+        <small id="disValHelp" class="form-text text-danger"
+               *ngIf="canjValid.valid && canjValid.touched && !isCanjVal()">Debes ingresar un
+          número mayor a 0.</small>
+      </div>
+    </div>
+    <label>Tipo de descuento</label>
+    <div class="row justify-content-center">
+      <div *ngFor="let stat of typeDescount">
+        <div class="col">
+          <button
+            (click)="changeButton(stat)"
+            type="button"
+            class="btn border-circ my-btn w-100 mt-2"
+            name="{{stat.name}}"
+            id="{{stat.name}}">
+            {{stat.name}}</button>
+        </div>
+      </div>
+    </div>
+    <small id="typeDiscHelp" class="form-text text-danger" *ngIf="messageDisTypeErr">{{messageDisTypeErr}}</small>
+    <div class="form-row text-left mt-2">
+      <div class="form-group col">
+        <label for="disVal">Valor de descuento</label>
+        <input type="number" class="form-control"
+               #disVal="ngModel" name="disVal" [(ngModel)]="discountValue" id="disVal" required>
+        <small id="num-1" class="form-text text-danger"
+               *ngIf="typeDescount[0].isSelect && !typeDescount[1].isSelect && discountValue">{{discountValue / 100 | percent}}</small>
+        <small id="num-2" class="form-text text-danger"
+               *ngIf="!typeDescount[0].isSelect && typeDescount[1].isSelect && discountValue">{{discountValue | currency}}</small>
+        <small id="disValHelp" class="form-text text-danger" *ngIf="!disVal.valid && disVal.touched">Debes ingresar un
+          número válido.</small>
+        <small id="disValHelp2" class="form-text text-danger"
+               *ngIf="disVal.valid && disVal.touched && !this.isEfectValidate()">Debes
+          ingresar un
+          número mayor a 0.</small>
+        <small id="disValHelp3" class="form-text text-danger"
+               *ngIf="disVal.valid && disVal.touched && !this.isPercentValidate()">Debes
+          ingresar un número entre 1 y 100</small>
+
+      </div>
+    </div>
+    <div class="mt-3 text-center">
+      <button class="btn btn-outline-success border-circ" [disabled]="!formCode.form.valid || !this.isVall()">Agregar
+        código
+      </button>
+    </div>
+  </form>
+</div>

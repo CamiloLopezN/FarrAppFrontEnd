@@ -1,0 +1,178 @@
+<!-- Modal -->
+<div class="modal fade" id="register-company-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header m-0 p-0" style="border: none;">
+        <button type="button" class="close mr-1" data-dismiss="modal" aria-label="Close"
+                style="font-size: 70px; outline: none">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="ralewayFont modal-body text-center border-content-register">
+        <h1 style="font-family: Lovelo,serif !important;" class="m-0 p-0">FarrApp</h1>
+        <div *ngIf="!screenVerify else succesAccount">
+          <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
+
+            <p id="createAccountTittle" class="h4 pt-2 pb-2">¡Registra tu empresa!</p>
+
+            <small id="buildingHelp" class="form-text text-danger text-left"
+                   *ngIf="errorMessage">{{errorMessage}}</small>
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faBuilding" class="fa-lg" style="margin-left:3px; margin-right: 3px"></fa-icon>
+                </div>
+              </div>
+              <input type="text" class="form-control " placeholder="Nombre"
+                     #building="ngModel" name="building" [(ngModel)]="name" required>
+            </div>
+            <div class="text-left">
+              <small id="buildingHelp" class="form-text text-danger"
+                     *ngIf="!building.valid && building.touched">Debes ingresar el nombre de tu empresa.</small>
+              <small id="buildingHelp" class="form-text text-danger"
+                     *ngIf="building.valid && building.touched && !isNameLenght()">El nombre de la empresa debe tener menos de 150 caracteres</small>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faLocationArrow" class="fa-lg" style="margin-left:2px; margin-right: 2px"></fa-icon>
+                </div>
+              </div>
+              <input mdbInput type="text" class="form-control" placeholder="Dirección física"
+                     #addr="ngModel" name="addr" [(ngModel)]="address" required>
+            </div>
+            <div class="text-left">
+              <small id="addrHelp" class="form-text text-danger"
+                     *ngIf="!addr.valid && addr.touched">Debes
+                ingresar la dirección física de tu empresa.</small>
+              <small id="contactN" class="form-text text-danger"
+                     *ngIf="addr.valid && addr.touched && !isAddress()">La dirección debe tener menos de 150 caracteres</small>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faAt" class="fa-lg" style="margin-left:2px; margin-right: 2px"></fa-icon>
+                </div>
+              </div>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                     placeholder="Correo electrónico" #emailC="ngModel" name="emailC" [(ngModel)]="email" email
+                     pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required (click)="errorMessage=''">
+            </div>
+            <div class="text-left">
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!emailC.valid && emailC.touched">Debes ingresar un correo válido</small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="emailC.valid && emailC.touched && !isEmailLength()">El correo debe tener menos de 150 caracteres.</small>
+            </div>
+
+            <div *ngIf="role != 'admin'">
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faUnlock" style="margin-left: 3px; margin-right: 3px"
+                           class="fa-lg" *ngIf="password"></fa-icon>
+                  <fa-icon [icon]="faLock" style="margin-left: 3px; margin-right: 3px" class="fa-lg"
+                           *ngIf="!password"
+                  ></fa-icon>
+                </div>
+              </div>
+              <input type="password" class="form-control color-gray" id="PassWordId12"
+                     placeholder="Contraseña"
+                     #pass="ngModel" name="pass" [(ngModel)]="password" required>
+            </div>
+            <div class="text-left">
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!pass.valid && pass.touched">Debes ingresar una
+                contraseña.</small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="pass.valid && pass.touched && !contentUpper()">La contraseña debe tener al menos una <b>mayúscula.</b></small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="pass.valid && pass.touched && !contentLower()">La contraseña debe tener al menos una <b>minúscula.</b></small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="pass.valid && pass.touched && !contentDigits()">La contraseña debe tener al menos dos <b>dígitos.</b></small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="pass.valid && pass.touched &&contentSpaces()">La contraseña no debe tener
+                <b>espacios.</b></small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="pass.valid && pass.touched &&!isValidPassLenght()">La contraseña debe tener entre 8 y 100
+                <b>caracteres.</b></small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="pass.valid && pass.touched &&isDifferentTo()">La contraseña es muy fácil, intenta con
+                otra</small>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faUnlock" style="margin-left: 3px; margin-right: 3px"
+                           class="fa-lg" *ngIf="passwordCon"></fa-icon>
+                  <fa-icon [icon]="faLock" style="margin-left: 3px; margin-right: 3px" class="fa-lg"
+                           *ngIf="!passwordCon"
+                  ></fa-icon>
+                </div>
+              </div>
+              <input type="password" class="form-control color-gray" id="inputPass232"
+                     placeholder="Confirmar contraseña"
+                     #passConf="ngModel" name="passConf" [(ngModel)]="passwordCon" required>
+            </div>
+            <div class="text-left">
+              <small id="emailHelp" class="form-text text-danger" *ngIf="!passConf.valid && passConf.touched">Debes
+                confirmar la contraseña.</small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="passConf.valid && passConf.touched && pass.valid && password!=passwordCon">Las contraseñas
+                no
+                coinciden.</small>
+            </div>
+            </div>
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faPhone" class="fa-lg" style="margin-left:2px; margin-right: 2px"></fa-icon>
+                </div>
+              </div>
+              <input mdbInput type="text" class="form-control" placeholder="Número de contacto"
+                     #contactN="ngModel" name="contactN" [(ngModel)]="contactNumber" required>
+            </div>
+            <div class="text-left">
+              <small id="contactN" class="form-text text-danger"
+                     *ngIf="!contactN.valid && contactN.touched">Debes
+                ingresar el número de contacto de tu empresa.</small>
+              <small id="contactN" class="form-text text-danger"
+                     *ngIf="contactN.valid && contactN.touched && !isContactNumber()">El número de contacto debe tener menos de 50 caracteres</small>
+            </div>
+
+            <div class="input-group mt-4">
+              <div class="input-group-prepend">
+                <div class="input-group-text icon">
+                  <fa-icon [icon]="faSlideshare" class="fa-lg" style="margin-left:2px; margin-right: 2px"></fa-icon>
+                </div>
+              </div>
+              <input mdbInput type="text" class="form-control" placeholder="NIT"
+                     #nitng="ngModel" name="nitng" [(ngModel)]="nit" required (click)="errorMessage=''">
+            </div>
+            <div class="text-left">
+              <small id="contactN" class="form-text text-danger"
+                     *ngIf="!nitng.valid && nitng.touched">Debes
+                ingresar el NIT de tu empresa.</small>
+              <small id="emailHelp" class="form-text text-danger"
+                     *ngIf="nitng.valid && nitng.touched && !isNit()">El NIT debe ser válido. Ej: 123456789-1</small>
+            </div>
+
+            <button type="submit" class="btn-custom-width btn btn-outline-dark mt-4" style="border-radius: 30px"
+                    [disabled]="!formClient.form.valid || !isValidAll()"
+                    [class.spinner]="loaderService.isLoading | async">
+              <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Registrar empresa</p>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #succesAccount>
+  <div class="animate__animated animate__fadeIn ml-3 mr-3" style="animation-duration: 0.5s">
+    <div class="ralewayFont modal-body text-justify ml-0 mr-0 pl-0 pr-0 border-login">Se ha enviado la solicitud de registro de tu empresa con éxito, verificaremos tus datos y te avisaremos cuando el registro se haya realizado. Te hemos enviado un correo de verificación a tu correo</div>
+  </div>
+</ng-template>

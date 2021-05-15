@@ -1,0 +1,198 @@
+<div class="animate__animated animate__fadeInRight myDiv">
+  <div class="titles">
+    <p class="event-title-1">Gestiona tus</p>
+    <p class="event-title-2">RECURSOS</p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <div style="padding-right: 8rem;">
+      <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+        <div class="options text-right">
+          <label class="title-top m-0 p-0">Transacciones</label>
+          <h4 class="m-0 p-0" *ngIf="subscriptions">{{subscriptions.length}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 1.5rem">
+  </div>
+  <section class="accions-company-icons">
+    <div class="text-center">
+      <button class="btn my-btn text-white btn-active" *ngIf="showListHistory" (click)="showListHistory = true">
+        <fa-icon [icon]="faReceipt" size="3x">
+        </fa-icon>
+      </button>
+      <button class="btn my-btn text-white" *ngIf="!showListHistory" (click)="showListHistory = true">
+        <fa-icon [icon]="faReceipt" size="3x">
+        </fa-icon>
+      </button>
+      <p *ngIf="showListHistory"><b>
+        Transacciones
+      </b>
+      </p>
+      <p *ngIf="!showListHistory">
+        Transacciones
+      </p>
+    </div>
+    <div class="text-center">
+      <button class="btn my-btn text-white btn-active" *ngIf="!showListHistory" (click)="showListHistory = false"
+              [disabled]="customerId !== ''">
+        <fa-icon [icon]="faShopping" size="3x">
+        </fa-icon>
+      </button>
+      <button class="btn my-btn text-white" *ngIf="showListHistory" (click)="showListHistory = false"
+              [disabled]="customerId !== ''">
+        <fa-icon [icon]="faShopping" size="3x">
+        </fa-icon>
+      </button>
+      <p *ngIf="!showListHistory"><b>
+        Formas de pago
+      </b>
+      </p>
+      <p *ngIf="showListHistory">
+        Formas de pago
+      </p>
+    </div>
+
+  </section>
+
+  <section class="transactions">
+    <div *ngIf="showListHistory else pay">
+      <p class="history-p">Historial de transacciones</p>
+      <div *ngIf="showHistory else transaction">
+        <div class="table-transactions">
+          <div class="header-table padding-in">
+            <p class="left-transc hidden-movil">Fecha</p>
+            <p class="left-transc">Compra</p>
+            <p class="left-transc hidden-movil">Total</p>
+            <p class="right-transc">Estado</p>
+            <p class="left-transc hidden-movil">ID del pedido</p>
+          </div>
+          <div class="list-transc">
+            <div class="transc-card padding-in border-bot-trans" *ngFor="let sub of subscriptions">
+              <div class="left-transc">
+                <p class="date-transc">{{sub.periodStart | date:'longDate'}}</p>
+                <p class="txt-transc hidden-pc">{{sub.description}}</p>
+              </div>
+              <p class="left-transc hidden-movil date-transc">{{sub.description}}</p>
+              <p class="left-transc hidden-movil date-transc">{{sub.price|currency}}</p>
+              <p class="left-transc hidden-movil date-transc">{{sub.orderStatus}}</p>
+              <a class="left-transc hidden-movil date-transc id_order overflow-hidden"
+                 (click)="changeView(sub)">{{sub.orderReference}}</a>
+              <div class="right-transc position-relative hidden-pc">
+                <a class="p-completed txt-transc" style="cursor: pointer" (click)="changeView(sub)">{{sub.orderStatus}}
+                  <fa-icon [icon]="faChevronRight" style="color: rgba(250, 250, 250, 0.5);"></fa-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<ng-template #transaction>
+  <div class="table-transactions">
+    <div class="header-table padding-in">
+      <p>PEDIDO N.º US614145120</p>
+    </div>
+    <div class="list-transc">
+      <div class="transc-card padding-in-2 border-bot-trans">
+        <div style="width: 100%">
+          <div class="first_transc">
+            <div class="div-transc mb-4">
+              <p class="date-transc width-10">Fecha del periodo</p>
+              <p class="txt-transc">{{subS.periodStart | date:'MMMM d, y, h:mm:ss a'}}</p>
+            </div>
+            <div class="right-transc-history mb-4">
+              <p class="date-transc width-10">Estado del pedido</p>
+              <p class="txt-transc">{{subS.orderStatus}}</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="div-transc">
+            <p class="date-transc width-10">Método de pago</p>
+            <p class="txt-transc">{{subS.paymentType}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="transc-card padding-in-2 border-bot-trans">
+        <div style="width: 100%">
+          <div class="float-left">
+            <p class="date-transc">Producto(s)</p>
+            <p class="txt-transc">{{subS.description}}</p>
+          </div>
+          <div class="float-right hidden-movil">
+            <p class="date-transc">Precio</p>
+            <p class="txt-transc">{{subS.price - subS.tax|currency}}</p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="transc-card padding-in-2">
+        <div style="width: 100%">
+          <div class="mb-4 right-left">
+            <p class="date-transc float-left">Impuestos</p>
+            <p class="txt-transc float-right" style="line-height: 1rem">{{subS.tax|currency}}</p>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="mb-4 right-left">
+            <p class="date-transc float-left">Total</p>
+            <p class="txt-transc float-right" style="line-height: 1rem">{{subS.price|currency}}</p>
+            <div class="clearfix"></div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="text-center mt-4">
+            <button (click)="changeView()" class="btn-return">Regresar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #pay>
+  <p class="history-p">Formas de pago</p>
+  <div *ngIf="showHistory else transaction">
+    <div *ngIf="!showPay else addPay">
+      <div class="table-transactions">
+        <div class="header-pay padding-in">
+          <p class="mb-1">TUS FORMAS DE PAGO</p>
+          <p class="add-pay" style="cursor: pointer" (click)="showPay = !showPay">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Añadir nueva forma de pago
+          </p>
+        </div>
+        <div class="list-transc">
+          <div class="transc-card padding-in border-bot-trans" *ngFor="let card of cards" (click)="changeSelect(card)"
+               style="cursor: pointer">
+            <div class="left-transc-pay">
+              <p class="date-transc">Formas de pago</p>
+              <p class="txt-transc text-uppercase">{{card.franchise}} {{getLast4(card)}}</p>
+              <p class="txt-remove d-inline-block" style="cursor: pointer" (click)="onClickRemove($event, card)">
+                <fa-icon [icon]="faTimes"></fa-icon>
+                ELIMINAR
+              </p>
+            </div>
+            <div class="right-transc-pay position-relative" *ngIf="card.default">
+              <p class="p-default p-completed">
+                <fa-icon [icon]="faCheckCircle"></fa-icon>
+                POR DEFECTO
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addPay>
+  <div class="method-pay animate__animated animate__fadeInRight" style="animation-duration: 0.2s;">
+    <small id="buildingHelp" class="form-text text-danger"
+           *ngIf="messageError">{{messageError}}</small>
+    <app-add-customer (prev)="showPay = !showPay" [isAdd]="true" (next)="addCard($event)"></app-add-customer>
+  </div>
+</ng-template>

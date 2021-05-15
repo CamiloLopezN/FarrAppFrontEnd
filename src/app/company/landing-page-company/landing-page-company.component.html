@@ -1,0 +1,92 @@
+<div class="animate__animated animate__fadeInRight myDiv" *ngIf="company">
+  <div class="header-company">
+    <h1 class="name-company d-block m-0 p-0">{{company.companyName}}</h1>
+    <h2 class="nit-company m-0 p-0">{{company.nit}}</h2>
+    <p *ngIf="!isSubscribe" class="mt-2">Suscripción inactiva</p>
+    <p *ngIf="isSubscribe" class="mt-2">Suscripción activa
+      <fa-icon [icon]="faInfoCard" style="color: #FF1A43; cursor: pointer;"
+               [routerLink]="['/company/subscription']"></fa-icon>
+    </p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <div style="padding-right: 8rem;">
+      <div class="position-absolute info-company text-white" style="padding-top: 150px;">
+        <div class="options text-right">
+          <label class="title-top m-0 p-0">Eventos activos</label>
+          <h4 class="m-0 p-0">{{eventsActive.length}}</h4>
+          <label class="title-top m-0 p-0">Asistentes</label>
+          <h4 class="m-0 p-0">{{interested}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="padding: 60px">
+  </div>
+  <section class="accions-company-icons">
+    <div class="text-center mb-4">
+      <button class="btn my-btn text-white" [routerLink]="['/company/profile']">
+        <fa-icon [icon]="faUser" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Mi perfil
+      </p>
+    </div>
+    <div class="text-center mb-4">
+      <button class="btn my-btn text-white" [routerLink]="['/company/events']">
+        <fa-icon [icon]="faCalendar" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Eventos
+      </p>
+    </div>
+
+    <div class="text-center mb-4">
+      <button class="btn my-btn text-white" [routerLink]="['/company/establishments']">
+        <fa-icon [icon]="faBuilding" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Establecimientos
+      </p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn my-btn text-white" [routerLink]="['/company/subscription']">
+        <fa-icon [icon]="faMoneyCheck" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Suscripción
+      </p>
+    </div>
+
+    <div class="text-center">
+      <button class="btn my-btn text-white" [routerLink]="['/company/subscription/payment-portal']">
+        <fa-icon [icon]="faCreditCard" size="3x">
+        </fa-icon>
+      </button>
+      <p>
+        Pagos
+      </p>
+    </div>
+
+  </section>
+  <div style="padding: 2.5vh">
+  </div>
+
+  <section class="events-proximate mb-5" *ngIf="eventsActive.length != 0">
+    <div class="container-events">
+      <app-events-company [events]="eventsActive" [typeEvent]="'¡Tus próximos eventos!'" [index]="'0'"
+                          [tittle]="'Eventos'"></app-events-company>
+    </div>
+  </section>
+  <section class="events-proximate mb-5" *ngIf="company.establishments.length != 0">
+    <div class="container-events">
+      <app-establishments-company [establishments]="company.establishments" [tittle]="'Tus establecimientos'"
+                                  [typeEstablishment]="'Estos son los establecimientos'"></app-establishments-company>
+    </div>
+  </section>
+  <div *ngIf="company.establishments.length == 0 && eventsActive.length == 0" style="padding: 25vh"></div>
+</div>

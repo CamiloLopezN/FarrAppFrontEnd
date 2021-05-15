@@ -1,0 +1,76 @@
+.card {
+  width: 90%;
+  min-width: 260px;
+  max-width: 370px;
+  min-height: 150px;
+  margin: 15px;
+  background-color: var(--black);
+  border-radius: 20px;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 12rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+
+}
+
+.card-body {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.date-event {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.65rem;
+  line-height: 1.2rem;
+
+  color: rgba(37, 36, 39, 0.6);
+}
+
+.hour-event {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.65rem;
+  line-height: 1.2rem;
+  /* identical to box height */
+
+
+  color: rgba(37, 36, 39, 0.6);
+
+}
+
+.text-wr{
+  display: flex;
+  justify-content: flex-start;
+
+}
+
+.title-event {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  color: #252427;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.city-title {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: rgba(174, 216, 229, 0.9);
+}

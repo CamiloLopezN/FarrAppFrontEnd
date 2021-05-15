@@ -1,0 +1,127 @@
+.testp {
+  font-style: inherit;
+  background: #252427;
+}
+
+.dropdown-divider {
+  border: 2px solid #2b2a30;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.holi :hover{
+  background-color: #3a3b3c;
+}
+
+.margin-1200 {
+  width: 80%;
+  max-width: 1200px;
+  min-width: 260px;
+  margin: 0 auto;
+}
+
+.text-name {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: rgba(37, 36, 39, 0.6);
+}
+
+.text-lastname {
+  font-family: Lovelo, serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 2rem;
+
+  color: #FF1A43;
+
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+
+  margin-bottom: 2rem;
+}
+
+.text-desc-profile, .text-desc-change {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.2rem;
+
+  color: #252427;
+
+  margin-bottom: 0;
+}
+
+.text-desc-change {
+  color: #FF1A43;
+
+}
+#dashboard{
+  border-radius: 30px;
+  box-shadow: 0 9px 15px 0 rgba(0,0,0,0.4);
+  background-color: #37363e;
+}
+
+.accions-company-icons{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  min-width: 280px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.accions-company-icons div{
+  width: 33%;
+}
+
+.accions-company-icons div p{
+  font-size: 0.8rem;
+}
+
+.accions-company-icons{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  min-width: 280px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.accions-company-icons div{
+  width: 33%;
+}
+
+.accions-company-icons div p{
+  font-size: 0.8rem;
+}
+
+
+.my-btn{
+  background: #FF1A43;
+  justify-self: center;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  width: 10vw;
+  max-width: 150px;
+  height: 10vw;
+  max-height: 150px;
+}
+
+@media screen and (max-width: 1024px) {
+  .my-btn{
+    width: 15vw;
+    height: 15vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .my-btn {
+    width: 20vw;
+    height: 20vw;
+  }
+}

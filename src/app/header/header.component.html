@@ -1,0 +1,103 @@
+<div class="sticky-top" id="nav">
+  <nav class="navbar navbar-expand-lg navbar-dark pl-3 pr-3 pt-2 pb-2" id="navbar">
+    <a class="navbar-brand d-none d-lg-inline" [routerLink]="['/landing-page']" style="font-family: Lovelo, sans-serif">
+      <h2 class="m-2 ml-3 p-0">FARRAPP</h2>
+    </a>
+    <div class="navbar-nav ml-auto d-none d-lg-inline">
+      <a class="text-white mr-4" [routerLink]="['/users/events']">Eventos</a>
+      <a class="text-white mr-4" [routerLink]="['/users/establishments']">Establecimientos</a>
+      <a class="text-white mr-4" (click)="event()" *ngIf="isLogged && rol=='company'" style="cursor: pointer">Publicar
+        evento</a>
+      <a class="text-white mr-4" data-toggle="modal" data-target="#register-establishment-modal"
+         *ngIf="isLogged && rol=='company'" style="cursor: pointer" (click)="event2()">Agregar
+        establecimiento</a>
+      <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#login-modal"
+         *ngIf="!isLogged"
+         (click)="authService.inLog.next(true)">Iniciar sesión</a>
+      <a class="text-white mr-4" style="cursor:pointer;" data-toggle="modal" data-target="#register-client-modal"
+         *ngIf="!isLogged" (click)="authService.inReg.next(false)">Registrarse</a>
+      <div class="dropdown d-inline" *ngIf="isLogged">
+        <button class="btn animate m-0 p-0 my-button" type="button" id="dropdownUser" data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false" style="color: #ffffff">
+          <fa-icon [icon]="faUserCircle" size="lg"></fa-icon>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right border-card animate__animated animate__fadeInRight"
+             style="animation-duration: 0.3s"
+             aria-labelledby="dropdownUser">
+          <div class="dropdown-item" style="cursor: pointer" (click)="landingPage()">
+            <div class="overflow-hidden">
+              <fa-icon class="icon-mine mr-2" [icon]="faUserCircle" size="2x"></fa-icon>
+              <label class="align-middle">{{name}}</label>
+            </div>
+          </div>
+          <div class="dropdown-divider" style="border-color: #e2e4e5"></div>
+          <button class="dropdown-item" type="button" (click)="user()" *ngIf="isLogged">Editar perfil</button>
+          <button class="dropdown-item" type="button" [routerLink]="['/company/subscription/payment-portal']"
+                  *ngIf="isLogged && rol=='company'">Pagos
+          </button>
+          <button class="dropdown-item" type="button" [routerLink]="['/company/subscription']"
+                  *ngIf="isLogged && rol=='company'">Suscripción
+          </button>
+          <div class="dropdown-divider" style="border-color: #e2e4e5"></div>
+          <button class="dropdown-item" type="button" (click)="logOut()">Cerrar sesión</button>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="navbar-nav mr-auto d-lg-none mr-5 ml-5">
+    </div>
+    <a class="navbar-brand mx-auto d-lg-none" [routerLink]="['/landing-page']" style="font-family: Lovelo, sans-serif">
+      <h2 class="m-0 p-0">FARRAPP</h2>
+    </a>
+
+    <div class="dropdown ml-auto d-lg-none" id="the-dropdown">
+      <button class="btn animate" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" style="color: #ffffff">
+        <fa-icon [icon]="faElipsis" style="font-size: 20px"></fa-icon>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right border-card animate__animated animate__fadeInRight"
+           style="animation-duration: 0.3s"
+           aria-labelledby="dropdownMenu2">
+        <div class="dropdown-item" style="cursor: pointer" *ngIf="isLogged" (click)="landingPage()">
+          <div class="overflow-hidden">
+            <fa-icon class="icon-mine mr-2" [icon]="faUserCircle" size="2x"></fa-icon>
+            <label class="align-middle" style="cursor: pointer">{{name}}</label>
+          </div>
+        </div>
+        <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
+        <button class="dropdown-item" type="button" (click)="user()" *ngIf="isLogged">Editar perfil</button>
+        <button class="dropdown-item" type="button" [routerLink]="['/users/events']">Eventos</button>
+        <button class="dropdown-item" type="button" [routerLink]="['/users/establishments']">Establecimientos</button>
+        <button class="dropdown-item" type="button" (click)="event()" *ngIf="isLogged && rol=='company'"
+                style="cursor: pointer">Publicar evento
+        </button>
+        <button class="dropdown-item" type="button" data-toggle="modal" data-target="#register-establishment-modal"
+                *ngIf="isLogged && rol=='company'" style="cursor: pointer" (click)="event2()">Agregar establecimiento
+        </button>
+        <button class="dropdown-item" type="button" [routerLink]="['/company/subscription/payment-portal']"
+                *ngIf="isLogged && rol=='company'">Pagos
+        </button>
+        <button class="dropdown-item" type="button" [routerLink]="['/company/subscription']"
+                *ngIf="isLogged && rol=='company'">Suscripción
+        </button>
+        <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal" data-target="#login-modal"
+                (click)="authService.inLog.next(true)">Iniciar sesión
+        </button>
+        <button class="dropdown-item" type="button" *ngIf="!isLogged" data-toggle="modal"
+                data-target="#register-client-modal" (click)="authService.inReg.next(false)">Registrarse
+        </button>
+        <div class="dropdown-divider" style="border-color: #e2e4e5" *ngIf="isLogged"></div>
+        <button class="dropdown-item" type="button" *ngIf="isLogged" (click)="logOut()">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+  <div class="warning-subscription" *ngIf="rol == 'company' && !showWarning">
+    <p class="p-warning">Disfruta de una experiencia única adquiriendo nuestra <a
+      [routerLink]="['/company/subscription']" class="my-link">suscripción</a>.</p>
+    <span class="hide-span mr-2" (click)="showWarning = false">&times;</span>
+  </div>
+</div>

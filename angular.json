@@ -24,9 +24,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/flickity/dist/flickity.min.css",
+              "node_modules/flickity/css/flickity.css",
+              "src/styles.css",
+              "src/assets/fonts/customfont.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/flickity/dist/flickity.pkgd.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -87,9 +97,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/flickity/dist/flickity.min.css",
+              "node_modules/flickity/css/flickity.css",
+              "src/styles.css",
+              "src/assets/fonts/customfont.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/flickity/dist/flickity.pkgd.min.js"
+            ]
           }
         },
         "lint": {
@@ -120,5 +140,8 @@
       }
     }
   },
-  "defaultProject": "farrap-frontend"
+  "defaultProject": "farrap-frontend",
+  "cli": {
+    "analytics": "41a2a959-7107-44ad-ae9a-149e8f6ee79c"
+  }
 }

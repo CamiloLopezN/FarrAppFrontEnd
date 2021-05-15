@@ -1,0 +1,21 @@
+<div class="all-events">
+  <header>
+    <div class="img-all-events"></div>
+    <div class="titles">
+      <p class="event-title-1">Eventos a tu</p>
+      <p class="event-title-2">ALTURA.</p>
+    </div>
+  </header>
+  <main class="margin-1200">
+    <div class="float-left">
+      <p class="events"><b>Eventos</b></p>
+      <p class="events2">¡Filtra lo que te gusta!</p>
+    </div>
+    <div class="clearfix"></div>
+    <section class="all-event">
+      <div *ngFor="let event of events">
+        <app-event-user [event]="event"></app-event-user>
+      </div>
+    </section>
+  </main>
+</div>

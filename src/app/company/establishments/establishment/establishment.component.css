@@ -1,0 +1,92 @@
+.card {
+  background: #FCFCFD;
+  border-radius: 20px;
+  width: 13.5rem;
+  margin: 5px;
+  height: auto;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 8rem;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+}
+
+.card-body{
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+.like-event-like:hover {
+  color: red;
+}
+
+.text-wr{
+  display: flex;
+  justify-content: flex-start;
+
+}
+
+.title-event {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: #252427;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.city-title {
+  font-family: Lovelo, serif;
+  font-weight: 900;
+  font-size: 0.7rem;
+  line-height: 1rem;
+  color: rgba(174, 216, 229, 0.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icons{
+  font-size: 0.6rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 28.2vw;
+    margin: 2px 2px 20px;
+    padding: 0;
+  }
+
+  .like-event-like {
+    top: 52.2vw;
+    right: 8vw;
+    width: 40px;
+    height: 40px;
+  }
+
+}
+
+@media screen and (max-width: 670px) {
+  .card {
+    width: 42vw;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  .like-event-like {
+    top: 52.2vw;
+    right: 8vw;
+    width: 40px;
+    height: 40px;
+  }
+
+}

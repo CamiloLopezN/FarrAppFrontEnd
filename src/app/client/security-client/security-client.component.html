@@ -1,0 +1,103 @@
+<div class="animate__animated animate__fadeInRight mb-4" style="animation-duration: 0.2s;" *ngIf="e_mail">
+  <header>
+    <section class="margin-1200 mt-5">
+      <p class="text-center text-name">Cámbialo cuando</p>
+      <p class="text-center text-lastname overflow-hidden" style="margin-left: 6rem">quieras.</p>
+      <div class="text-center">
+        <p class="text-desc-profile">Eres dueño de tu contraseña</p>
+        <p class="text-desc-change">¡Modifícala a tu gusto!</p>
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="margin-800">
+      <form name="registerCLient" #formClient="ngForm" (ngSubmit)="onSubmit()" class="text-center pl-3 pr-3">
+
+        <div class="input-group mt-4 mb-4">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <fa-icon [icon]="faUserCircle" class="fa-lg"></fa-icon>
+            </div>
+          </div>
+          <input type="email" class="form-control color-gray" id="exampleInputEmail102" aria-describedby="emailHelp"
+                 placeholder="Correo electrónico" #email="ngModel" name="email" [(ngModel)]="e_mail" email
+                 pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" readonly>
+        </div>
+
+        <h5 class="mt-4 mb-4 text-left">
+          Ingresa tu nueva contraseña
+        </h5>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <fa-icon [icon]="faUnlock" style="margin-left: 1px; margin-right: 1px"
+                       class="fa-lg" *ngIf="password"></fa-icon>
+              <fa-icon [icon]="faLock" style="margin-left: 1px; margin-right: 1px" class="fa-lg"
+                       *ngIf="!password"
+              ></fa-icon>
+            </div>
+          </div>
+          <input type="password" class="form-control color-gray" placeholder="Contraseña"
+                 #passwordClient="ngModel" name="passwordClient" [(ngModel)]="password" required>
+        </div>
+        <div class="text-left">
+          <small id="emailHelp" class="form-text text-danger" *ngIf="!passwordClient.valid && passwordClient.touched">Debes
+            ingresar una
+            contraseña.</small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordClient.valid && passwordClient.touched && !contentUpper()">La contraseña debe tener al
+            menos una <b>mayúscula.</b></small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordClient.valid && passwordClient.touched && !contentLower()">La contraseña debe tener al
+            menos una <b>minúscula.</b></small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordClient.valid && passwordClient.touched && !contentDigits()">La contraseña debe tener al
+            menos dos <b>dígitos.</b></small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordClient.valid && passwordClient.touched &&contentSpaces()">La contraseña no debe tener
+            <b>espacios.</b></small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordClient.valid && passwordClient.touched &&!isValidPassLenght()">La contraseña debe tener
+            entre 8 y 100
+            <b>caracteres.</b></small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordClient.valid && passwordClient.touched &&isDifferentTo()">La contraseña es muy fácil,
+            intenta con
+            otra</small>
+        </div>
+
+        <div class="input-group mt-4">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <fa-icon [icon]="faUnlock" style="margin-left: 1px; margin-right: 1px"
+                       class="fa-lg" *ngIf="passWordConfirm"></fa-icon>
+              <fa-icon [icon]="faLock" style=" margin-left: 1px; margin-right: 1px" class="fa-lg"
+                       *ngIf="!passWordConfirm"
+              ></fa-icon>
+            </div>
+          </div>
+          <input type="password" class="form-control color-gray" placeholder="Confirmar contraseña"
+                 #passwordConf="ngModel" name="passwordConf" [(ngModel)]="passWordConfirm" required>
+        </div>
+        <div class="text-left">
+          <small id="emailHelp" class="form-text text-danger" *ngIf="!passwordConf.valid && passwordConf.touched">Debes
+            confirmar la contraseña.</small>
+          <small id="emailHelp" class="form-text text-danger"
+                 *ngIf="passwordConf.valid && passwordConf.touched && passwordClient.valid && password!=passWordConfirm">Las
+            contraseñas
+            no
+            coinciden.</small>
+        </div>
+        <div class="btn-list">
+          <button class="btn-custom" [routerLink]="['/client/profile']">Regresar</button>
+          <button type="submit" class="btn-red btn-custom-width" style="cursor: pointer"
+                  [disabled]="!formClient.form.valid || !isValidAll()"
+                  [class.spinner]="loaderService.isLoading | async">
+            <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Guardar</p>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>

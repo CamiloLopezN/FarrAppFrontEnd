@@ -1,0 +1,16 @@
+<div class="card-sub" style="cursor: pointer" *ngIf="sub">
+  <div class="left-card" *ngIf="!sub.select">
+    <p class="unity-time">{{sub.intervalCount}}</p>
+    <p class="str-time">{{sub.intervalUnit}}</p>
+  </div>
+  <div class="left-card card-red" *ngIf="sub.select">
+    <p class="unity-time">{{sub.intervalCount}}</p>
+    <p class="str-time">{{sub.intervalUnit}}</p>
+  </div>
+  <div class="center-card">
+    <p class="discount" *ngIf="sub.discount != 0 && !isSub">Ahorra {{sub.discount | currency}}</p>
+    <p *ngIf="sub.discount == 0" style="margin-bottom: 0.8rem"><br></p>
+    <p class="time-sub">{{sub.planName}}</p>
+    <p class="desc-sub">Pago de {{sub.price | currency}}</p>
+  </div>
+</div>

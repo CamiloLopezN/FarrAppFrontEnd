@@ -1,0 +1,136 @@
+/*
+1. Posicionamiento
+2. Modelo caja (Box model)
+3. Tipografía
+4. Visuales
+5. Otros
+*/
+:root {
+  /* Colores */
+  --bitcoin-orange: #f7931a;
+  --soft-orange: #ffe9d5;
+  --secondary-blue: #1a9af7;
+  --soft-blue: #e7f5ff;
+  --warm-back: #201e1c;
+  --black: #282623;
+  --gray: #BABABA;
+  --off-white: #FAF8F7;
+  --just-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.myDiv {
+  background: white;
+  animation-duration: 0.2s;
+  overflow: hidden
+}
+
+.header-company{
+  width: 90%;
+  min-width: 280px;
+  max-width: 1200px;
+  margin: 20px auto 0;
+
+}
+
+.info-company {
+  width: 170px;
+  height: 233px;
+  background: #252427;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  transform: rotate(70deg);
+  top: -86px;
+}
+
+h4 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  color: #FFFFFF;
+}
+
+.options {
+  transform: rotate(-70deg);
+}
+
+.title-top {
+  font-style: normal;
+  font-weight: 275;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.name-company {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  color: rgba(37, 36, 39, 0.8);
+}
+
+.nit-company {
+  font-style: normal;
+  font-weight: 275;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: rgba(37, 36, 39, 0.8);
+}
+
+.accions-company-icons{
+  display: flex;
+  width: 90%;
+  justify-content: center;
+  min-width: 280px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.accions-company-icons div{
+  width: 33%;
+}
+
+.accions-company-icons div p{
+  font-size: 0.8rem;
+}
+
+
+.my-btn{
+  background: #FF1A43;
+  justify-self: center;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  width: 10vw;
+  max-width: 150px;
+  height: 10vw;
+  max-height: 150px;
+}
+
+.container-events{
+  width: 90%;
+  min-width: 288px;
+  max-width: 1200px;
+  margin: 20px auto 0;
+}
+@media screen and (max-width: 1024px) {
+  .my-btn{
+    width: 15vw;
+    height: 15vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .my-btn {
+    width: 20vw;
+    height: 20vw;
+  }
+}

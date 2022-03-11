@@ -12,7 +12,7 @@ export class EpayService {
 
   constructor() {
     this.handler = ePayco.checkout.configure({
-      key: '99a0645e3d56320bacab8d831ffa36f4',
+      key: 'e96db3f29936c17f251af1a72b297536',
       test: true
     });
   }

@@ -42,6 +42,8 @@ export class EventsCompanyComponent implements OnInit {
           percentPosition: false,
           initialIndex: 1
         });
+        console.log(this.index);
+        
         const $imgs = $carousel.find('.carousel-cell' + this.index + ' img');
         if ($imgs.style !== undefined) {
 // get transform property

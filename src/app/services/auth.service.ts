@@ -93,7 +93,7 @@ export class AuthService {
 
   login(client: ClientLogin): Observable<any> {
     return this.httpClient.post(`${environment.backend}/api/users/login`, client).pipe(
-      map((res: any) => {
+      map((res: any) => {        
         if (res.token !== undefined) {
           this.saveToken(res.token);
           if (helper.decodeToken(localStorage.getItem('token')).role === 'company') {

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backend: 'localhost:4000'
+  backend: 'https://warm-tor-95871.herokuapp.com'
 };

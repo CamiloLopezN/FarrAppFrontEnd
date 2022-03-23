@@ -1,8 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
@@ -68,14 +68,13 @@ import {ResponsePayComponent} from './company/subscriptions/response-pay/respons
 import {AddCustomerComponent} from './company/subscriptions/add-customer/add-customer.component';
 import {RemoveEstablishmentModalComponent} from './company/establishments/remove-establishment-modal/remove-establishment-modal.component';
 import {EstablishmentCardComponent} from './company/establishments/establishment-card/establishment-card.component';
-
+import { FacebookLoginProvider, SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import es from '@angular/common/locales/es';
 import {registerLocaleData} from '@angular/common';
 import { EventsInterestsComponent } from './client/events/events-interests/events-interests.component';
 import { LandingPageClientComponent } from './client/landing-page-client/landing-page-client.component';
 import { EstablishmentsFollowsComponent } from './client/establishments/establishments-follows/establishments-follows.component';
 import { EstablishmentsUserComponent } from './users/establishments/establishments-user/establishments-user.component';
-
 registerLocaleData(es);
 
 @NgModule({
@@ -135,7 +134,7 @@ registerLocaleData(es);
     EventsInterestsComponent,
     LandingPageClientComponent,
     EstablishmentsFollowsComponent,
-    EstablishmentsUserComponent
+    EstablishmentsUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -153,7 +152,9 @@ registerLocaleData(es);
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDj7S6KshIWY1rgkzv03ymsaABDr8W63g4'
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SocialLoginModule,
+    ReactiveFormsModule
   ],
   providers: [DatePipe,
     {
@@ -164,6 +165,20 @@ registerLocaleData(es);
     },
     {
       provide: DEFAULT_CURRENCY_CODE, useValue: 'COP'
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              'Replace-With-Facebook-App-ID'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig
     }
   ],
   bootstrap: [AppComponent]

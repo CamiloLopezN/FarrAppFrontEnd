@@ -57,6 +57,16 @@
                       [disabled]="!formUser.form.valid"
                       [class.spinner]="loaderService.isLoading | async">
                 <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Iniciar sesión</p></button>
+
+
+              <!--ACA INICIA EL DIV DE SESIÓN CON EL GACE-->
+              <div class="text-center mt-4" *ngIf="!isSignedin">
+                <button type="button" (click)="facebookLogIn()"
+                        class="btn btn-primary position-relative btn-custom-width">
+                  <p class="mar-pad-0" *ngIf="loaderService.hasShow | async">Inicia con Facebook</p>
+                </button>
+              </div>
+
               <p id="PassRemember" class="mt-4 mb-4" (click)="authService.inLog.next(false)">
                 ¿Olvidó su contraseña?
               </p>

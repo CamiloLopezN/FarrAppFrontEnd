@@ -4,8 +4,9 @@ import {ClientLogin} from '../model/client';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {NotificationService} from '../services/notification.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {SpinnerService} from '../services/spinner.service';
+import {SocialAuthService, FacebookLoginProvider, SocialUser} from 'angularx-social-login';
 
 
 declare var $: any;
@@ -31,7 +32,12 @@ export class LoginModalComponent implements OnInit {
   isError: boolean;
   rol;
 
-  isLogin: boolean;
+
+  myForm: FormGroup;
+  user: SocialUser;
+  isSignedin: boolean = null;
+
+  isLogin: boolean = null;
   errorMessage: string;
   isSub = false;
 
@@ -43,7 +49,9 @@ export class LoginModalComponent implements OnInit {
     public authService: AuthService,
     private notifyS: NotificationService,
     private changeDetectorRef: ChangeDetectorRef,
-    public loaderService: SpinnerService
+    public loaderService: SpinnerService,
+    private formBuilder: FormBuilder,
+    private socialAuthService: SocialAuthService
   ) {
     this.authService.isLog.subscribe(login => {
       this.isLogin = login;
@@ -70,6 +78,16 @@ export class LoginModalComponent implements OnInit {
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
       });
+    });
+    this.myForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+
+    this.socialAuthService.authState.subscribe((user) => {
+      this.user = user;
+      this.isSignedin = (user != null);
+      console.log(this.user);
     });
   }
 
@@ -104,6 +122,10 @@ export class LoginModalComponent implements OnInit {
         }
       }
     );
+  }
+
+  facebookLogIn(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   isUndefined(): boolean {

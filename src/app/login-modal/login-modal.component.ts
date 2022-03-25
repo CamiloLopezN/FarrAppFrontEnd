@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {faUserCircle, faLock, faExclamationTriangle, faUnlock, faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 import {ClientLogin} from '../model/client';
+import {ClientLoginWithFacebook} from '../model/client';
 import {Router} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {NotificationService} from '../services/notification.service';
@@ -24,6 +25,7 @@ export class LoginModalComponent implements OnInit {
   faUnlock = faUnlock;
   faChevronLeft = faChevronLeft;
   client: ClientLogin;
+  clientFacebook: ClientLoginWithFacebook;
   // tslint:disable-next-line:variable-name
   e_mail = '';
   password = '';
@@ -62,6 +64,9 @@ export class LoginModalComponent implements OnInit {
     this.authService.subscribe.subscribe(sub => {
       this.isSub = sub;
     });
+    this.socialAuthService.authState.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnInit(): void {
@@ -78,16 +83,6 @@ export class LoginModalComponent implements OnInit {
         this.formRecipe.reset();
         this.changeDetectorRef.detectChanges();
       });
-    });
-    this.myForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-
-    this.socialAuthService.authState.subscribe((user) => {
-      this.user = user;
-      this.isSignedin = (user != null);
-      console.log(this.user);
     });
   }
 
@@ -117,15 +112,47 @@ export class LoginModalComponent implements OnInit {
         } else if (this.rol === 'company') {
           this.notifyS.sucessLogin();
           this.redirectCompany();
-        } else {
-          this.redirect();
+        } else if (this.rol === 'client') {
+          this.notifyS.sucessLogin();
+          this.redirectClient();
         }
       }
     );
   }
 
   facebookLogIn(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(() => {
+      this.clientFacebook = {
+        token: this.user.authToken,
+        id: this.user.id
+      };
+      this.errorMessage = '';
+      this.authService.loginWithFacebook(this.clientFacebook).subscribe(() => {
+        },
+        error => {
+          if (error.status === 403) {
+            this.errorMessage = 'Primero debe verificar su correo';
+          } else if (error.status === 401 || error.status === 400) {
+            this.errorMessage = 'Usuario o contraseña incorrectos';
+          } else if (error.status === 500) {
+            this.errorMessage = 'Error en el servidor, intente más tarde';
+          }
+        }, () => {
+          $('#login-modal').modal('hide');
+          this.formRecipe.reset();
+          this.changeDetectorRef.detectChanges();
+          if (this.rol === 'admin') {
+            this.notifyS.sucessLogin();
+            this.redirectAdmin();
+          } else if (this.rol === 'company') {
+            this.notifyS.sucessLogin();
+            this.redirectCompany();
+          } else if (this.rol === 'client') {
+            this.notifyS.sucessLogin();
+            this.redirectClient();
+          }
+        });
+    });
   }
 
   isUndefined(): boolean {
@@ -150,7 +177,10 @@ export class LoginModalComponent implements OnInit {
 
   redirectAdmin(): void {
     this.router.navigate(['admin/dashboard']);
+  }
 
+  redirectClient(): void {
+    this.router.navigate(['client/landing-page']);
   }
 
   retrievePass(): void {

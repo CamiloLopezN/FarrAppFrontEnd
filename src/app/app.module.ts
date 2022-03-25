@@ -174,7 +174,7 @@ registerLocaleData(es);
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider(
-              'Replace-With-Facebook-App-ID'
+              '1426687474458779'
             )
           }
         ]

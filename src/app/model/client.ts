@@ -12,6 +12,12 @@ export interface ClientLogin {
   password: string;
 }
 
+export interface ClientLoginWithFacebook {
+  token: string;
+  id: string
+}
+
+
 export interface ClientAccount {
   email: string;
   password: string;
